@@ -248,3 +248,57 @@ export function Popover({
     </div>
   );
 }
+
+/* ─────────────────────── Popover trigger ───────────────────────── */
+
+export interface PopoverTriggerProps {
+  children: ReactNode;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  disabled?: boolean;
+  controls?: string;
+}
+
+/**
+ * RECOVERED FROM THE 8-ROW CAP. 10 variants = Type(button|rTL) x State(5); 8 rows
+ * present, missing rTL/Focused and rTL/Disabled. Every rTL row present carries the
+ * SAME single delta and nothing else — `type size/12` — three rows, one token, no
+ * exceptions. So the Type axis changes only the type size and the two missing rows
+ * are their Button counterparts at size/12.
+ *
+ * ⚠️ `rTL` IS NOT A VISUAL VARIANT. Right-to-left is a document direction, so in
+ * code it is dir="rtl" on an ancestor plus logical properties — never a prop. What
+ * the axis really documents is that RTL renders one type step smaller, which this
+ * component honours by inheriting rather than branching.
+ *
+ * ⚠️ Open and Hover bind IDENTICAL tokens, so the trigger looks the same whether
+ * the popover is open or merely hovered — the same gap as Dropdown Menu / Sub
+ * Trigger. And accent-foreground appears with no accent fill, the fourth component
+ * with that shape.
+ */
+export function PopoverTrigger({
+  children,
+  open,
+  onOpenChange,
+  disabled = false,
+  controls,
+}: PopoverTriggerProps) {
+  return (
+    <button
+      type="button"
+      aria-expanded={open}
+      aria-controls={open ? controls : undefined}
+      disabled={disabled}
+      onClick={() => onOpenChange(!open)}
+      className={cn(
+        'rounded-lg px-3 py-2 text-body-sm',
+        'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+        open ? 'text-accent-foreground' : 'text-foreground',
+        'hover:text-accent-foreground',
+        disabled && 'cursor-not-allowed text-muted-foreground',
+      )}
+    >
+      {children}
+    </button>
+  );
+}

@@ -422,8 +422,8 @@
     "Button Group": {
       "figmaNodeId": "77:111",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/button-group.tsx",
+      "codeExport": "ButtonGroup",
       "props": {
         "Orientation": {
           "kind": "prop",
@@ -442,8 +442,8 @@
     "Checkbox": {
       "figmaNodeId": "78:153",
       "variants": 9,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/checkbox.tsx",
+      "codeExport": "Checkbox",
       "props": {
         "Label#78:0": {
           "kind": "prop",
@@ -961,8 +961,8 @@
     "Navigation Menu": {
       "figmaNodeId": "90:311",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/navigation-menu.tsx",
+      "codeExport": "NavigationMenu",
       "props": {
         "Viewport": {
           "kind": "responsive-fixture",
@@ -1291,8 +1291,8 @@
     "Dropdown Menu / Item": {
       "figmaNodeId": "144:2112",
       "variants": 12,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/dropdown-menu.tsx",
+      "codeExport": "DropdownMenuItem",
       "props": {
         "Label#144:0": {
           "kind": "prop",
@@ -1360,8 +1360,8 @@
     "Dropdown Menu / Checkbox Item": {
       "figmaNodeId": "144:2164",
       "variants": 9,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/dropdown-menu.tsx",
+      "codeExport": "DropdownMenuCheckboxItem",
       "props": {
         "Label#144:52": {
           "kind": "prop",
@@ -1613,8 +1613,8 @@
     "Popover / Trigger": {
       "figmaNodeId": "178:4679",
       "variants": 10,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/popover.tsx",
+      "codeExport": "PopoverTrigger",
       "props": {
         "Type": {
           "kind": "prop",
@@ -1808,8 +1808,8 @@
     "Avatar": {
       "figmaNodeId": "111:708",
       "variants": 6,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/avatar.tsx",
+      "codeExport": "Avatar",
       "props": {
         "Initials#111:25": {
           "kind": "prop",
@@ -1834,8 +1834,8 @@
     "Badge": {
       "figmaNodeId": "111:741",
       "variants": 10,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/badge.tsx",
+      "codeExport": "Badge",
       "props": {
         "Label#111:32": {
           "kind": "prop",

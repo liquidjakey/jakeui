@@ -109,7 +109,15 @@
       "Chart",
       "Pagination",
       "Calendar",
-      "Data Table"
+      "Data Table",
+      "Avatar",
+      "Button Group",
+      "Navigation Menu",
+      "Checkbox",
+      "Badge",
+      "Dropdown Menu / Item",
+      "Dropdown Menu / Checkbox Item",
+      "Popover / Trigger"
     ],
     "meta": {
       "Input": {
@@ -188,7 +196,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:00:00Z",
+        "_note": "Implemented 9 Aug 2026. UNBLOCKED BY A CORRECTION, not new information: it had been flagged as carrying pre-rebind stale tokens, but the detection regex matched text primary-foreground while looking for text primary. Pairs its fill and text CORRECTLY (primary + primary-foreground) - notable because Navigation Menu binds that same primary-foreground on a card fill where it is invisible. Size is one of the few genuinely tokenised dimensions (radius/16, /24, /32). GAP: no presence-dot colour recorded despite the record calling status dots intentional; asserted from the semantic families."
       },
       "Badge": {
         "doc": {
@@ -203,7 +212,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:00:00Z",
+        "_note": "Implemented 9 Aug 2026. UNBLOCKED TWICE: wrongly flagged as stale by a regex error (text warning\\b matched text warning-foreground), and its cap gap proved recoverable - 8 of 10 rows present, the two missing BOTH Destructive, pattern-completed from four tones sharing one shape (fill <tone> + text <tone>-foreground). DEFECT FLAGGED: Success binds text info-foreground, not success-foreground, reaching across to Info. Both resolve identically today so nothing is visibly wrong - exactly the condition that made a planned contrast fix a no-op once before. Transcribed as recorded (unlike Card and Navigation Menu where following the record gave INVISIBLE text). Badge is also what makes info-foreground legitimate: on a SOLID info fill it is correct, which identified Card use of it as the anomaly."
       },
       "Breadcrumb": {
         "doc": {
@@ -249,7 +259,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:00:00Z",
+        "_note": "Implemented 9 Aug 2026. Unblocked by the same regex correction. LAYOUT-ONLY: the record binds two tokens and primary-foreground is a LEAKED BINDING - the group has no fill, so the text colour FOR the primary fill sits on whatever is beneath; it almost certainly belongs to the nested Button instances. Identical in shape to Toggle Group stray accent-foreground and given identical treatment. ITS MEMBERS ARE BUTTONS AND BUTTON IS STILL BLOCKED (32 variants, 8 rows), so callers supply their own until then. Attached has no border/radius tokens so the shared-edge treatment is raw."
       },
       "Calendar": {
         "doc": {
@@ -312,7 +323,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:00:00Z",
+        "_note": "Implemented 9 Aug 2026. RECOVERED FROM THE 8-ROW CAP: 9 variants = Value(3) x State(3), 4 rows present; all three Disabled rows are IDENTICAL so Value carries no text delta (three observations, no exceptions) and the two missing Default rows match Unchecked/Default. The three missing Focused rows have zero observations but this record is text-only and focus is drawn on the box. THE BOX HAS NO TOKENS AT ALL, exactly as Switch track has none - and unlike Switch there is no sibling asset holding it. Asserted: input for the resting border, primary/primary-foreground for the checked fill. Indeterminate has NO HTML attribute - DOM property only, applied via ref."
       },
       "Collapsible": {
         "doc": {
@@ -453,7 +465,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:00:00Z",
+        "_note": "Implemented 9 Aug 2026. RECOVERED FROM THE CAP: all three Highlighted rows bind identical tokens so Value is provably inert and the two missing Default rows match Unchecked/Default. AND THAT INERTNESS IS ITSELF THE DEFECT, same as the radio item: there is NO RECORDED WAY to tell a checked item from an unchecked one. For a multi-select control that is the state that must be visible, so an indicator is asserted; aria-checked carries it correctly so this is a sighted-user gap. The icon slot and the indicator compete for the leading position and the indicator wins when checked - forced by the missing token, not a design choice."
       },
       "Dropdown Menu / Content": {
         "doc": {
@@ -498,7 +511,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:00:00Z",
+        "_note": "Implemented 9 Aug 2026. RECOVERED FROM THE CAP: 12 variants = Tone(2) x State(3) x Inset(2), 8 rows present. Inset is PROVABLY INERT - all three pairs present bind identical tokens. The two Default/Disabled gaps rest on a WEAKER single-observation inference (Destructive/Disabled is identical to Destructive/Default), consistent with this family recording no disabled tokens anywhere; flagged as weaker than the Inset proof. Both Show icon and Show shortcut are slot-toggles so the booleans disappear. FLAGGED: destructive highlighted keeps destructive text on an accent fill - deliberate in the record but a pairing the token system does not define, so contrast is unverified."
       },
       "Dropdown Menu / Label": {
         "doc": {
@@ -732,7 +746,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:00:00Z",
+        "_note": "Implemented 9 Aug 2026. THE SECOND COMPONENT WHOSE CODE DELIBERATELY DIVERGES FROM ITS RECORD. It binds fill card + text primary-foreground; primary-foreground is blue/50 (near-white) in BOTH modes, so on a white card in Light the text is INVISIBLE. Dark survives, so this is a light-mode-only failure, narrower than Card which broke in both. Code binds foreground. Same cause as Card: a *-foreground token paired with a fill it does not belong to. FIGMA OWES A REBIND. Also flagged: compact/open binds accent-foreground with no accent fill - the fourth component with that shape (Sidebar collapsed, Dropdown Menu / Trigger avatar, Popover / Trigger)."
       },
       "Pagination": {
         "doc": {
@@ -902,7 +917,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:00:00Z",
+        "_note": "Implemented 9 Aug 2026. RECOVERED FROM THE CAP: 10 variants = Type(button|rTL) x State(5), 8 rows present. Every rTL row carries the SAME single delta and nothing else (type size/12) - three rows, one token, no exceptions - so the Type axis changes only the type size and the two missing rTL rows are their Button counterparts at size/12. NOTE: rTL is NOT a visual variant at all; direction is a document concern (dir=rtl plus logical properties), never a prop, so what the axis really documents is that RTL renders one type step smaller. FLAGGED: Open and Hover bind identical tokens so the trigger looks the same open or hovered - same gap as Dropdown Menu / Sub Trigger."
       },
       "Popover / Viewport": {
         "doc": {

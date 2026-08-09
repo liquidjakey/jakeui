@@ -10,12 +10,15 @@ import { cn } from '../lib/cn.js';
  *            dropdown-menu-label.md · dropdown-menu-radio-item.md ·
  *            dropdown-menu-sub-trigger.md · dropdown-menu-sub-content.md
  *
- * BLOCKED by the 8-row cap: / Content (24 variants, 1 state row), / Item (12, 8),
+ * / Item and / Checkbox Item were RECOVERED from the 8-row cap on 9 Aug 2026 — see
+ * their own doc blocks below for the proofs.
+ *
+ * STILL BLOCKED by the cap: / Content (24 variants, 1 state row) and
  * / Root Composition (24, 8). Nothing can be inferred from 1 of 24 — unlike
  * Table / Row, whose missing rows sat on a provably inert axis.
  *
- * NOT MAPPED to code at all: / Checkbox Item, / Group, / Radio Group, / Separator,
- * / Shortcut. They have doc records but no map entry, so they owe no codePath.
+ * NOT MAPPED to code at all: / Group, / Radio Group, / Separator, / Shortcut. They
+ * have doc records but no map entry, so they owe no codePath.
  *
  * PLACEMENT IS NOT COLLISION-AWARE, same limitation as Popover.
  */
@@ -296,6 +299,133 @@ export function DropdownMenuSubContent({
         'text-body-sm text-popover-foreground shadow-md',
       )}
     >
+      {children}
+    </div>
+  );
+}
+
+/* ───────────────────────────── Item ───────────────────────────── */
+
+export interface DropdownMenuItemProps {
+  children: ReactNode;
+  onSelect: () => void;
+  tone?: 'default' | 'destructive';
+  icon?: ReactNode;
+  shortcut?: string;
+  inset?: boolean;
+  disabled?: boolean;
+}
+
+/**
+ * RECOVERED FROM THE 8-ROW CAP. 12 variants = Tone(2) x State(3) x Inset(2); 8 rows
+ * present. Inset is PROVABLY INERT — all three pairs present bind identical tokens
+ * (Destructive/Default, Destructive/Highlighted, Default/Highlighted) — so the two
+ * Inset-only gaps carry nothing new.
+ *
+ * The two Default/Disabled gaps rest on a WEAKER inference: Destructive/Disabled is
+ * identical to Destructive/Default, so Disabled contributes no delta there, but that
+ * is one observation extended across the Tone axis rather than three. Consistent
+ * with this whole family recording no disabled tokens; flagged in the props table.
+ *
+ * Both `Show icon` and `Show shortcut` are kind: slot-toggle — the booleans
+ * disappear and the nullable slots are the API.
+ */
+export function DropdownMenuItem({
+  children,
+  onSelect,
+  tone = 'default',
+  icon,
+  shortcut,
+  inset = false,
+  disabled = false,
+}: DropdownMenuItemProps) {
+  return (
+    <div
+      role="menuitem"
+      aria-disabled={disabled || undefined}
+      tabIndex={disabled ? undefined : -1}
+      onClick={disabled ? undefined : onSelect}
+      className={cn(
+        'flex cursor-pointer items-center gap-2 px-2 py-1.5',
+        'rounded-[calc(var(--radius-4))]',
+        // Destructive keeps `destructive` text even when highlighted — deliberate in
+        // the record, but that pairing is not one the token system defines, so its
+        // contrast on `accent` is unverified.
+        tone === 'destructive' ? 'text-destructive' : 'text-popover-foreground',
+        tone === 'destructive'
+          ? 'hover:bg-accent'
+          : 'hover:bg-accent hover:text-accent-foreground',
+        inset && 'pl-8',
+        disabled && 'pointer-events-none text-muted-foreground',
+      )}
+    >
+      {icon ? (
+        <span aria-hidden="true" className="inline-flex w-4 shrink-0 justify-center">
+          {icon}
+        </span>
+      ) : null}
+      <span className="flex-1">{children}</span>
+      {shortcut ? (
+        // aria-hidden: the glyphs would be read as punctuation. Showing a shortcut
+        // here does not create the key binding.
+        <span aria-hidden="true" className="text-body-sm text-muted-foreground">
+          {shortcut}
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
+/* ───────────────────── Checkbox item ──────────────────────────── */
+
+export interface DropdownMenuCheckboxItemProps {
+  children: ReactNode;
+  checked?: boolean | 'indeterminate';
+  onCheckedChange: (checked: boolean) => void;
+  icon?: ReactNode;
+  disabled?: boolean;
+}
+
+/**
+ * RECOVERED FROM THE CAP: all three Highlighted rows (Unchecked, Checked,
+ * Indeterminate) bind identical tokens, so Value is provably inert and the two
+ * missing Default rows match Unchecked/Default.
+ *
+ * 🛑 AND THAT INERTNESS IS ITSELF THE DEFECT — the same one as the radio item.
+ * Value being inert means there is NO RECORDED WAY to tell a checked item from an
+ * unchecked one. For a multi-select control that is the state that must be visible,
+ * so an indicator is asserted. aria-checked carries it correctly regardless, so
+ * this is a sighted-user gap.
+ *
+ * The icon slot and the indicator compete for the leading position; the indicator
+ * wins when checked — forced by the missing token, not a design choice.
+ */
+export function DropdownMenuCheckboxItem({
+  children,
+  checked = false,
+  onCheckedChange,
+  icon,
+  disabled = false,
+}: DropdownMenuCheckboxItemProps) {
+  const indeterminate = checked === 'indeterminate';
+  return (
+    <div
+      role="menuitemcheckbox"
+      aria-checked={indeterminate ? 'mixed' : checked === true}
+      aria-disabled={disabled || undefined}
+      tabIndex={disabled ? undefined : -1}
+      // Unlike a radio item the menu stays open — that is the point of multi-select.
+      onClick={disabled ? undefined : () => onCheckedChange(!(checked === true))}
+      className={cn(
+        'flex cursor-pointer items-center gap-2 px-2 py-1.5',
+        'rounded-[calc(var(--radius-4))] text-popover-foreground',
+        'hover:bg-accent hover:text-accent-foreground',
+        disabled && 'pointer-events-none text-muted-foreground',
+      )}
+    >
+      <span aria-hidden="true" className="inline-flex w-4 shrink-0 justify-center">
+        {checked === true ? '✓' : indeterminate ? '–' : (icon ?? null)}
+      </span>
       {children}
     </div>
   );

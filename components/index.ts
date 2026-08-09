@@ -134,3 +134,24 @@ export type { CalendarProps } from './calendar.js';
 
 export { DataTable } from './data-table.js';
 export type { DataTableProps } from './data-table.js';
+
+export { Avatar } from './avatar.js';
+export type { AvatarProps } from './avatar.js';
+
+export { ButtonGroup } from './button-group.js';
+export type { ButtonGroupProps } from './button-group.js';
+
+export { NavigationMenu } from './navigation-menu.js';
+export type { NavigationMenuProps, NavItem } from './navigation-menu.js';
+
+export { Checkbox } from './checkbox.js';
+export type { CheckboxProps } from './checkbox.js';
+
+export { Badge } from './badge.js';
+export type { BadgeProps } from './badge.js';
+
+export { DropdownMenuItem, DropdownMenuCheckboxItem } from './dropdown-menu.js';
+export type { DropdownMenuItemProps, DropdownMenuCheckboxItemProps } from './dropdown-menu.js';
+
+export { PopoverTrigger } from './popover.js';
+export type { PopoverTriggerProps } from './popover.js';
