@@ -12,24 +12,28 @@
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
     "Always pair with a visible label.",
-    "Show format hints as helper text.",
-    "Reserve space for error text so validation does not shift the layout."
+    "Size the default height to the expected answer, so the field itself sets the expectation.",
+    "Reserve space for error text so validation does not shift the layout.",
+    "Show a character counter whenever a limit is enforced."
   ],
   "donts": [
     "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
     "Do not remove the ring border on focus. It is the only focus affordance.",
     "Do not use placeholder text as the only label.",
-    "Do not validate on every keystroke before the first blur."
+    "Do not silently truncate at a limit — say the limit before it is hit.",
+    "Do not make it so short that the user edits through a keyhole."
   ],
   "accessibility": {
     "notes": [
       "State=Error requires specific visible error text outside or below the editing surface and an assistive-technology error relationship; color alone is insufficient.",
       "State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Error · Disabled] → :focus-visible CSS-owned, dropped; invalid + disabled independent booleans",
-      "Every input has a programmatically associated label.",
-      "The error state sets aria-invalid and links its message via aria-describedby."
+      "Every textarea has a programmatically associated label.",
+      "The error state sets aria-invalid and links its message via aria-describedby.",
+      "A character counter is announced politely, not on every keystroke."
     ],
     "keyboard": [
-      "Standard text-editing keys."
+      "Standard text-editing keys.",
+      "Enter inserts a newline; it must not submit the form."
     ]
   },
   "tokensUsed": [
@@ -56,10 +60,10 @@
     "whenNotToUse": "best-practice"
   },
   "whenToUse": [
-    "Collect a single line of free-form text."
+    "Collect free-form text long enough to need more than one line."
   ],
   "whenNotToUse": [
-    "Choosing from a fixed set — use Select or Radio Group.",
-    "Long multi-line text — use Textarea."
+    "A single short value — use Input.",
+    "Rich or formatted content — use a rich-text editor, not a plain textarea."
   ]
 }

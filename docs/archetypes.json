@@ -210,6 +210,89 @@
         ]
       }
     },
+    "textarea": {
+      "whenToUse": ["Collect free-form text long enough to need more than one line."],
+      "whenNotToUse": [
+        "A single short value — use Input.",
+        "Rich or formatted content — use a rich-text editor, not a plain textarea."
+      ],
+      "dos": [
+        "Always pair with a visible label.",
+        "Size the default height to the expected answer, so the field itself sets the expectation.",
+        "Reserve space for error text so validation does not shift the layout.",
+        "Show a character counter whenever a limit is enforced."
+      ],
+      "donts": [
+        "Do not use placeholder text as the only label.",
+        "Do not silently truncate at a limit — say the limit before it is hit.",
+        "Do not make it so short that the user edits through a keyhole."
+      ],
+      "accessibility": {
+        "keyboard": [
+          "Standard text-editing keys.",
+          "Enter inserts a newline; it must not submit the form."
+        ],
+        "notes": [
+          "Every textarea has a programmatically associated label.",
+          "The error state sets aria-invalid and links its message via aria-describedby.",
+          "A character counter is announced politely, not on every keystroke."
+        ]
+      }
+    },
+    "nativeselect": {
+      "whenToUse": [
+        "Choose one option from a fixed, known list.",
+        "Prefer it over a custom control when the platform's own menu is acceptable — it is accessible for free and behaves correctly on mobile."
+      ],
+      "whenNotToUse": [
+        "Free-form input — use Input.",
+        "Two or three options that fit on screen — use Radio Group; the choices stay visible.",
+        "Multi-select, option search, or rich option content — the native control cannot do these."
+      ],
+      "dos": [
+        "Always pair with a visible label.",
+        "Order options meaningfully — frequency or alphabetically — not by database order.",
+        "Make the default either a real default or an explicit unselected prompt."
+      ],
+      "donts": [
+        "Do not use the first option as a de facto label.",
+        "Do not restyle the platform option menu — only the closed control is yours to style.",
+        "Do not use one for a boolean — that is a Checkbox or a Switch."
+      ],
+      "accessibility": {
+        "keyboard": [
+          "Arrow keys move through options; Enter or Space opens the menu.",
+          "Typing letters jumps to matching options.",
+          "Escape closes the menu without changing the value."
+        ],
+        "notes": [
+          "It is a native select element, so platform semantics come for free — do not re-implement them.",
+          "Programmatically associated label; the error state sets aria-invalid and links its message via aria-describedby."
+        ]
+      }
+    },
+    "field": {
+      "whenToUse": ["Wrap a form control with its label, helper text, and error message as one unit."],
+      "whenNotToUse": [
+        "A bare control that is already labelled by its surroundings.",
+        "Page layout — it composes one field, not a form."
+      ],
+      "dos": [
+        "Own the label-to-control association here, so no control has to do it itself.",
+        "Reserve space for the error message so validation does not shift the layout.",
+        "Keep helper text and error text in the same position."
+      ],
+      "donts": [
+        "Do not let the wrapped control render its own second label.",
+        "Do not replace helper text with the error — a user often needs both."
+      ],
+      "accessibility": {
+        "notes": [
+          "Generates the id and binds label-for, aria-describedby, and aria-invalid onto the control it wraps.",
+          "The error message is announced politely; it is not a role=\"alert\" per keystroke."
+        ]
+      }
+    },
     "choice": {
       "whenToUse": [
         "Checkbox or toggle for an independent on/off value.",
@@ -837,9 +920,10 @@
     "Button": "button",
     "Button Group": "button",
     "Input": "input",
-    "Textarea": "input",
-    "Native Select": "input",
-    "Field": "input",
+    "$inputFamilyComment": "Textarea, Native Select and Field were all mapped to 'input' until 9 Aug 2026. The seed text was self-contradictory on all three — it told Textarea 'collect a single line' and 'for long multi-line text use Textarea', and told Native Select not to be used for 'choosing from a fixed set'. Each now has its own archetype. Do not re-collapse them.",
+    "Textarea": "textarea",
+    "Native Select": "nativeselect",
+    "Field": "field",
     "Checkbox": "choice",
     "Radio Group": "choice",
     "Radio Group / Item": "choice",

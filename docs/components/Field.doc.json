@@ -9,24 +9,21 @@
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
-    "Always pair with a visible label.",
-    "Show format hints as helper text.",
-    "Reserve space for error text so validation does not shift the layout."
+    "Own the label-to-control association here, so no control has to do it itself.",
+    "Reserve space for the error message so validation does not shift the layout.",
+    "Keep helper text and error text in the same position."
   ],
   "donts": [
     "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
-    "Do not use placeholder text as the only label.",
-    "Do not validate on every keystroke before the first blur."
+    "Do not let the wrapped control render its own second label.",
+    "Do not replace helper text with the error — a user often needs both."
   ],
   "accessibility": {
     "notes": [
       "Error must not rely on color alone. The composed field must display a specific visible error message and runtime must expose invalid state plus the message relationship to assistive technology.",
       "State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Error · Disabled] → :focus-visible CSS-owned, dropped; invalid + disabled independent booleans",
-      "Every input has a programmatically associated label.",
-      "The error state sets aria-invalid and links its message via aria-describedby."
-    ],
-    "keyboard": [
-      "Standard text-editing keys."
+      "Generates the id and binds label-for, aria-describedby, and aria-invalid onto the control it wraps.",
+      "The error message is announced politely; it is not a role=\"alert\" per keystroke."
     ]
   },
   "tokensUsed": [
@@ -47,10 +44,10 @@
     "whenNotToUse": "best-practice"
   },
   "whenToUse": [
-    "Collect a single line of free-form text."
+    "Wrap a form control with its label, helper text, and error message as one unit."
   ],
   "whenNotToUse": [
-    "Choosing from a fixed set — use Select or Radio Group.",
-    "Long multi-line text — use Textarea."
+    "A bare control that is already labelled by its surroundings.",
+    "Page layout — it composes one field, not a form."
   ]
 }

@@ -577,7 +577,7 @@
       "Field": {
         "doc": {
           "path": "docs/components/Field.doc.json",
-          "fingerprint": "0f9ab36380da3e06",
+          "fingerprint": "576aec193a7b025a",
           "surfaces": {
             "figmaDescription": {
               "src": "1061378c678bf597",
@@ -637,7 +637,7 @@
       "Native Select": {
         "doc": {
           "path": "docs/components/Native-Select.doc.json",
-          "fingerprint": "ed3b8ce018f6b225",
+          "fingerprint": "e293bd72ea2a0229",
           "surfaces": {
             "figmaDescription": {
               "src": "8eb830db4eb799c5",
@@ -1297,7 +1297,7 @@
       "Textarea": {
         "doc": {
           "path": "docs/components/Textarea.doc.json",
-          "fingerprint": "652cff63476a5ccf",
+          "fingerprint": "bb7e4198160dbc59",
           "surfaces": {
             "figmaDescription": {
               "src": "e44a9589d98a9a54",

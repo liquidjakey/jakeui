@@ -1719,11 +1719,11 @@ Composed form field with label, control value, and helper or error message. Stat
 Accessibility contract: Error must not rely on color alone. The composed field must display a specific visible error message and runtime must expose invalid state plus the message relationship to assistive technology.
 
 **When to use**
-- Collect a single line of free-form text.
+- Wrap a form control with its label, helper text, and error message as one unit.
 
 **When not to use**
-- Choosing from a fixed set — use Select or Radio Group.
-- Long multi-line text — use Textarea.
+- A bare control that is already labelled by its surroundings.
+- Page layout — it composes one field, not a form.
 
 **State → tokens**
 
@@ -1735,25 +1735,24 @@ Accessibility contract: Error must not rely on color alone. The composed field m
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
-- Always pair with a visible label.
-- Show format hints as helper text.
-- Reserve space for error text so validation does not shift the layout.
+- Own the label-to-control association here, so no control has to do it itself.
+- Reserve space for the error message so validation does not shift the layout.
+- Keep helper text and error text in the same position.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
-- Do not use placeholder text as the only label.
-- Do not validate on every keystroke before the first blur.
+- Do not let the wrapped control render its own second label.
+- Do not replace helper text with the error — a user often needs both.
 
 **Accessibility**
-- Keyboard: Standard text-editing keys.
 - Error must not rely on color alone. The composed field must display a specific visible error message and runtime must expose invalid state plus the message relationship to assistive technology.
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Error · Disabled] → :focus-visible CSS-owned, dropped; invalid + disabled independent booleans
-- Every input has a programmatically associated label.
-- The error state sets aria-invalid and links its message via aria-describedby.
+- Generates the id and binds label-for, aria-describedby, and aria-invalid onto the control it wraps.
+- The error message is announced politely; it is not a role="alert" per keystroke.
 
 **Tokens used** — `foreground` · `muted-foreground` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `0f9ab36380da3e06` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `576aec193a7b025a` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -1949,11 +1948,13 @@ Accessibility contract: State=Error is only the control visual. A consuming Fiel
 Pipeline API classification: apply the Governance property-classification rule before code mapping. Visual State axes are QA/story states unless engineering explicitly approves a controlled runtime prop; Viewport is responsive test data; Pattern is composition/story data.
 
 **When to use**
-- Collect a single line of free-form text.
+- Choose one option from a fixed, known list.
+- Prefer it over a custom control when the platform's own menu is acceptable — it is accessible for free and behaves correctly on mobile.
 
 **When not to use**
-- Choosing from a fixed set — use Select or Radio Group.
-- Long multi-line text — use Textarea.
+- Free-form input — use Input.
+- Two or three options that fit on screen — use Radio Group; the choices stay visible.
+- Multi-select, option search, or rich option content — the native control cannot do these.
 
 **State → tokens**
 
@@ -1969,25 +1970,28 @@ Pipeline API classification: apply the Governance property-classification rule b
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
 - Always pair with a visible label.
-- Show format hints as helper text.
-- Reserve space for error text so validation does not shift the layout.
+- Order options meaningfully — frequency or alphabetically — not by database order.
+- Make the default either a real default or an explicit unselected prompt.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
 - Do not remove the ring border on focus. It is the only focus affordance.
-- Do not use placeholder text as the only label.
-- Do not validate on every keystroke before the first blur.
+- Do not use the first option as a de facto label.
+- Do not restyle the platform option menu — only the closed control is yours to style.
+- Do not use one for a boolean — that is a Checkbox or a Switch.
 
 **Accessibility**
-- Keyboard: Standard text-editing keys.
+- Keyboard: Arrow keys move through options; Enter or Space opens the menu.
+- Keyboard: Typing letters jumps to matching options.
+- Keyboard: Escape closes the menu without changing the value.
 - State=Error is only the control visual. A consuming Field or equivalent must add specific visible error text and expose invalid state plus the error-description relationship; a red border alone is insufficient.
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Open · Error · Disabled · Focused] → :focus-visible CSS-owned, dropped; invalid + disabled independent booleans; open controlled state
-- Every input has a programmatically associated label.
-- The error state sets aria-invalid and links its message via aria-describedby.
+- It is a native select element, so platform semantics come for free — do not re-implement them.
+- Programmatically associated label; the error state sets aria-invalid and links its message via aria-describedby.
 
 **Tokens used** — `card` · `destructive` · `foreground` · `input` · `muted` · `muted-foreground` · `radius/lg` · `ring` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `ed3b8ce018f6b225` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `e293bd72ea2a0229` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -3965,11 +3969,11 @@ Sizing exception: Textarea intentionally uses a fixed editing viewport height. L
 Accessibility contract: State=Error requires specific visible error text outside or below the editing surface and an assistive-technology error relationship; color alone is insufficient.
 
 **When to use**
-- Collect a single line of free-form text.
+- Collect free-form text long enough to need more than one line.
 
 **When not to use**
-- Choosing from a fixed set — use Select or Radio Group.
-- Long multi-line text — use Textarea.
+- A single short value — use Input.
+- Rich or formatted content — use a rich-text editor, not a plain textarea.
 
 **State → tokens**
 
@@ -3984,25 +3988,29 @@ Accessibility contract: State=Error requires specific visible error text outside
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
 - Always pair with a visible label.
-- Show format hints as helper text.
+- Size the default height to the expected answer, so the field itself sets the expectation.
 - Reserve space for error text so validation does not shift the layout.
+- Show a character counter whenever a limit is enforced.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
 - Do not remove the ring border on focus. It is the only focus affordance.
 - Do not use placeholder text as the only label.
-- Do not validate on every keystroke before the first blur.
+- Do not silently truncate at a limit — say the limit before it is hit.
+- Do not make it so short that the user edits through a keyhole.
 
 **Accessibility**
 - Keyboard: Standard text-editing keys.
+- Keyboard: Enter inserts a newline; it must not submit the form.
 - State=Error requires specific visible error text outside or below the editing surface and an assistive-technology error relationship; color alone is insufficient.
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Error · Disabled] → :focus-visible CSS-owned, dropped; invalid + disabled independent booleans
-- Every input has a programmatically associated label.
+- Every textarea has a programmatically associated label.
 - The error state sets aria-invalid and links its message via aria-describedby.
+- A character counter is announced politely, not on every keystroke.
 
 **Tokens used** — `card` · `destructive` · `foreground` · `input` · `muted` · `muted-foreground` · `radius/lg` · `ring` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `652cff63476a5ccf` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `bb7e4198160dbc59` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
