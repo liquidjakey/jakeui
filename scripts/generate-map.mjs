@@ -26,7 +26,7 @@
  *    Figma axis without API review."
  */
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -112,20 +112,42 @@ function main() {
     process.exit(1);
   }
 
+  // `codePath` / `codeExport` are hand-owned — the dump knows nothing about code.
+  // Carry them over from the previous manifest, or regenerating silently unbinds
+  // every implemented component (and the validator would only warn, not fail).
+  let previous = {};
+  if (existsSync(OUT)) {
+    try {
+      previous = JSON.parse(readFileSync(OUT, 'utf8')).components ?? {};
+    } catch {
+      console.warn(`Could not parse existing ${OUT}; hand-owned codePaths cannot be preserved.`);
+    }
+  }
+
   const components = {};
+  let carried = 0;
+  const dropped = [];
   for (const set of dump.sets) {
     const props = {};
     for (const [key, def] of Object.entries(set.componentPropertyDefinitions || {})) {
       props[key] = classify(key, def);
     }
+    const prior = previous[set.name];
+    if (prior?.codePath) carried++;
     components[set.name] = {
       figmaNodeId: set.id,
       variants: set.variantCount,
-      // Filled in by hand as components get implemented.
-      codePath: null,
-      codeExport: null,
+      // Filled in by hand as components get implemented; preserved across regeneration.
+      codePath: prior?.codePath ?? null,
+      codeExport: prior?.codeExport ?? null,
       props,
     };
+  }
+
+  // A component that had a codePath but is gone from the dump was renamed or
+  // deleted in Figma. Say so loudly — this is a real drift signal, not noise.
+  for (const [name, c] of Object.entries(previous)) {
+    if (c.codePath && !components[name]) dropped.push(`${name} → ${c.codePath}`);
   }
 
   const manifest = {
@@ -145,7 +167,13 @@ function main() {
   }
   console.log(`Wrote ${OUT}`);
   console.log(`  components: ${Object.keys(components).length}`);
+  console.log(`  codePaths preserved: ${carried}`);
   for (const [k, v] of Object.entries(tally)) console.log(`  ${k.padEnd(20)} ${v}`);
+  if (dropped.length) {
+    console.warn(`\n⚠ ${dropped.length} implemented component(s) no longer in the Figma dump —`);
+    console.warn('  renamed or deleted in Figma. Their code bindings were NOT carried over:');
+    for (const d of dropped) console.warn(`    · ${d}`);
+  }
 }
 
 main();
