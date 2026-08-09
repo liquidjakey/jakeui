@@ -54,7 +54,7 @@ const TYPE_RAMP = [
  * THIS IS NOW GATED. `npm run computed-type:check` renders every story in headless
  * Chrome and asserts the COMPUTED font-size/line-height/font-weight of every text
  * element against the ramp, so the defect above cannot return silently. Deleting
- * the `extend` block below and running it reports 164 off-ramp elements across 13
+ * the `extend` block below and running it reports 164 off-ramp elements across 25
  * components and exits 1. If this list falls out of sync with the ramp in
  * tokens/globals.css, that gate is what will tell you.
  */
