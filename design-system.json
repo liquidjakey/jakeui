@@ -73,7 +73,11 @@
       "Card",
       "Accordion",
       "Collapsible",
-      "Breadcrumb"
+      "Breadcrumb",
+      "Tabs",
+      "Segmented Tab",
+      "Toggle",
+      "Toggle Group"
     ],
     "meta": {
       "Input": {
@@ -985,7 +989,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:10:00Z",
+        "_note": "Implemented 9 Aug 2026. The item half of Tabs. Note the inversion: the SELECTED tab takes the lighter card fill and lifts out of the muted track rather than being highlighted, which only reads correctly inside the container. The map types Selected as a false|true string union; emitted as a real boolean. Focus ring is asserted from the record’s own prose (\"focus remains visually distinguishable using the shared ring treatment\") rather than transcribed from a binding. No disabled variant exists."
       },
       "Separator": {
         "doc": {
@@ -1317,7 +1322,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:10:00Z",
+        "_note": "Implemented 9 Aug 2026. TABS AND SEGMENTED TAB ARE TWO HALVES OF ONE CONTROL. Tabs binds only a container fill (muted) and has NO selected-state treatment at all; Segmented Tab binds exactly that treatment and no container. Segmented Tab’s own description confirms it: \"Place instances inside a secondary-colored segmented-control container.\" Neither is complete alone, so Tabs renders SegmentedTab items. Neither Orientation nor Density carries a token delta, so both are layout-only and Density uses raw padding (no spacing token is recorded). No focus token either; the shared ring is asserted."
       },
       "Textarea": {
         "doc": {
@@ -1338,7 +1344,7 @@
       "Toggle": {
         "doc": {
           "path": "docs/components/Toggle.doc.json",
-          "fingerprint": "e7a891cf665cb663",
+          "fingerprint": "5d6d32f30d9c6582",
           "surfaces": {
             "figmaDescription": {
               "src": "730a8b53fdc22b3c",
@@ -1348,12 +1354,13 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:10:00Z",
+        "_note": "Implemented 9 Aug 2026. THE RECORD’S ACCESSIBILITY CONTRACT WAS WRONG and was fixed: Toggle was mapped to the `choice` archetype, which told it to expose state via aria-checked and referenced radio-group arrow keys. A toggle button is the W3C APG Toggle Button pattern - aria-pressed, and both Space and Enter activate. Added a `togglebutton` archetype and remapped Toggle + Toggle Group, then re-enriched. THREE RECORDED ODDITIES, transcribed rather than corrected: (1) Pressed+hover binds the SAME tokens as pressed at rest, so a pressed toggle gives no hover feedback; (2) it binds radius/md where every other control in the system binds radius/lg; (3) Pressed+disabled loses the pressed state entirely and renders identically to unpressed+disabled - aria-pressed still reports it so assistive tech is correct, but a sighted user cannot tell. 8 variants is exactly at the 8-row cap, so nothing is truncated."
       },
       "Toggle Group": {
         "doc": {
           "path": "docs/components/Toggle-Group.doc.json",
-          "fingerprint": "74d51f5f083e3d4a",
+          "fingerprint": "b70f3b8951153ea0",
           "surfaces": {
             "figmaDescription": {
               "src": "2f5c902ff9899244",
@@ -1363,7 +1370,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:10:00Z",
+        "_note": "Implemented 9 Aug 2026. THE RECORD IS ALMOST EMPTY - one state row and two tokens (accent-foreground, size/14) for four variants, the thinnest of any component built so far. And accent-foreground looks like a stray binding: it is the foreground for the accent fill, but the group binds no fill of its own, so it is a foreground token with nothing to sit on. The items (Toggle) already carry accent/accent-foreground for their pressed state. Implemented as a LAYOUT-ONLY container with each Toggle owning its appearance, which is what the tokens actually support. Figma owes either a real container treatment or the removal of that binding. role=group NOT radiogroup even in single mode, since members are toggle buttons; single mode has no must-have-one guard because all members may legitimately be off when they are actions."
       },
       "Tooltip": {
         "doc": {

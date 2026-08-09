@@ -312,6 +312,40 @@
         "notes": ["State is exposed via aria-checked, never by colour alone."]
       }
     },
+    "togglebutton": {
+      "$comment": "W3C APG 'Toggle Button', NOT the checkbox/radio pattern. Toggle and Toggle Group were mapped to `choice` until 9 Aug 2026, which told them to expose state via aria-checked and mentioned radio-group arrow keys. A toggle button is a button: aria-pressed, Space AND Enter. Do not re-collapse into `choice`.",
+      "whenToUse": [
+        "A reversible on/off action that takes effect immediately — bold, mute, pin, show grid.",
+        "Use the group form when several such actions belong together in a toolbar."
+      ],
+      "whenNotToUse": [
+        "A form value that is only applied on Save — use Checkbox or Switch.",
+        "One-of-many where the options are the data, not actions — use Radio Group.",
+        "A one-way action that cannot be un-done — use a Button."
+      ],
+      "dos": [
+        "Keep the label constant and let the pressed state carry the change — a label that flips between 'Mute' and 'Unmute' is ambiguous when read alongside its own state.",
+        "Give an icon-only toggle an accessible name.",
+        "Apply the effect immediately; there is no Save step."
+      ],
+      "donts": [
+        "Do not use aria-checked — that is the checkbox and radio pattern.",
+        "Do not rely on colour alone to show pressed; the state must be in the accessibility tree.",
+        "Do not put a toggle in a group where only one may be active and call it single-select without also making it behave that way."
+      ],
+      "accessibility": {
+        "role": "button",
+        "keyboard": [
+          "Space and Enter both toggle — it is a button, so both must work.",
+          "Tab moves between toggles; arrow keys are not used."
+        ],
+        "notes": [
+          "Pressed state is exposed via aria-pressed, never aria-checked.",
+          "An icon-only toggle needs an aria-label that names the action, not the state.",
+          "A disabled toggle is not focusable."
+        ]
+      }
+    },
     "card": {
       "whenToUse": ["Group related content and actions about a single subject."],
       "whenNotToUse": ["Primary page layout scaffolding.", "A bare list of text."],
@@ -932,8 +966,9 @@
     "Switch": "choice",
     "Switch / Root": "choice",
     "Switch / Field Composition": "choice",
-    "Toggle": "choice",
-    "Toggle Group": "choice",
+    "$toggleComment": "Toggle and Toggle Group were mapped to choice until 9 Aug 2026. That told them to use aria-checked and referenced radio-group arrow keys; a toggle button is a button and uses aria-pressed. Do not re-collapse.",
+    "Toggle": "togglebutton",
+    "Toggle Group": "togglebutton",
     "Card": "card",
     "Dialog": "dialog",
     "Alert Dialog": "dialog",

@@ -39,3 +39,15 @@ export type { CollapsibleProps } from './collapsible.js';
 
 export { Breadcrumb } from './breadcrumb.js';
 export type { BreadcrumbProps, BreadcrumbItem } from './breadcrumb.js';
+
+export { Tabs } from './tabs.js';
+export type { TabsProps, TabItem } from './tabs.js';
+
+export { SegmentedTab } from './segmented-tab.js';
+export type { SegmentedTabProps } from './segmented-tab.js';
+
+export { Toggle } from './toggle.js';
+export type { ToggleProps } from './toggle.js';
+
+export { ToggleGroup } from './toggle-group.js';
+export type { ToggleGroupProps, ToggleGroupItem } from './toggle-group.js';

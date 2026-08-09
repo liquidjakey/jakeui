@@ -4023,12 +4023,13 @@ Two-state action button for formatting, view controls, or other reversible selec
 Pipeline API classification: apply the Governance property-classification rule before code mapping. Visual State axes are QA/story states unless engineering explicitly approves a controlled runtime prop; Viewport is responsive test data; Pattern is composition/story data.
 
 **When to use**
-- Checkbox or toggle for an independent on/off value.
-- Radio for one-of-many within a group.
+- A reversible on/off action that takes effect immediately — bold, mute, pin, show grid.
+- Use the group form when several such actions belong together in a toolbar.
 
 **When not to use**
-- A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.
-- A choice that only applies after a separate Save — prefer radio or checkbox over a toggle.
+- A form value that is only applied on Save — use Checkbox or Switch.
+- One-of-many where the options are the data, not actions — use Radio Group.
+- A one-way action that cannot be un-done — use a Button.
 
 **Variants**
 
@@ -4052,24 +4053,29 @@ Pipeline API classification: apply the Governance property-classification rule b
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
-- Label the control itself, not only the group.
-- Make the label clickable.
+- Keep the label constant and let the pressed state carry the change — a label that flips between 'Mute' and 'Unmute' is ambiguous when read alongside its own state.
+- Give an icon-only toggle an accessible name.
+- Apply the effect immediately; there is no Save step.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
 - Do not remove the ring border on focus. It is the only focus affordance.
-- Do not use a radio group for multi-select.
-- Do not use a toggle for choices that only apply after a separate Save.
+- Do not use aria-checked — that is the checkbox and radio pattern.
+- Do not rely on colour alone to show pressed; the state must be in the accessibility tree.
+- Do not put a toggle in a group where only one may be active and call it single-select without also making it behave that way.
 
 **Accessibility**
-- Keyboard: Space toggles.
-- Keyboard: Radio groups move between options with arrow keys.
+- Role: `button`
+- Keyboard: Space and Enter both toggle — it is a button, so both must work.
+- Keyboard: Tab moves between toggles; arrow keys are not used.
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Focused · Disabled] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean
-- State is exposed via aria-checked, never by colour alone.
+- Pressed state is exposed via aria-pressed, never aria-checked.
+- An icon-only toggle needs an aria-label that names the action, not the state.
+- A disabled toggle is not focusable.
 
 **Tokens used** — `accent` · `accent-foreground` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/md` · `ring` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `e7a891cf665cb663` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `5d6d32f30d9c6582` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -4080,12 +4086,13 @@ Pipeline API classification: apply the Governance property-classification rule b
 Grouped toggle controls for choosing one or multiple persistent options. Use single selection when options are mutually exclusive.
 
 **When to use**
-- Checkbox or toggle for an independent on/off value.
-- Radio for one-of-many within a group.
+- A reversible on/off action that takes effect immediately — bold, mute, pin, show grid.
+- Use the group form when several such actions belong together in a toolbar.
 
 **When not to use**
-- A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.
-- A choice that only applies after a separate Save — prefer radio or checkbox over a toggle.
+- A form value that is only applied on Save — use Checkbox or Switch.
+- One-of-many where the options are the data, not actions — use Radio Group.
+- A one-way action that cannot be un-done — use a Button.
 
 **Variants**
 
@@ -4105,21 +4112,26 @@ Grouped toggle controls for choosing one or multiple persistent options. Use sin
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
-- Label the control itself, not only the group.
-- Make the label clickable.
+- Keep the label constant and let the pressed state carry the change — a label that flips between 'Mute' and 'Unmute' is ambiguous when read alongside its own state.
+- Give an icon-only toggle an accessible name.
+- Apply the effect immediately; there is no Save step.
 
 **Do not**
-- Do not use a radio group for multi-select.
-- Do not use a toggle for choices that only apply after a separate Save.
+- Do not use aria-checked — that is the checkbox and radio pattern.
+- Do not rely on colour alone to show pressed; the state must be in the accessibility tree.
+- Do not put a toggle in a group where only one may be active and call it single-select without also making it behave that way.
 
 **Accessibility**
-- Keyboard: Space toggles.
-- Keyboard: Radio groups move between options with arrow keys.
-- State is exposed via aria-checked, never by colour alone.
+- Role: `button`
+- Keyboard: Space and Enter both toggle — it is a button, so both must work.
+- Keyboard: Tab moves between toggles; arrow keys are not used.
+- Pressed state is exposed via aria-pressed, never aria-checked.
+- An icon-only toggle needs an aria-label that names the action, not the state.
+- A disabled toggle is not focusable.
 
 **Tokens used** — `accent-foreground` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `74d51f5f083e3d4a` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `b70f3b8951153ea0` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 

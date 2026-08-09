@@ -27,8 +27,8 @@
     "Segmented Tab": {
       "figmaNodeId": "19:9",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/segmented-tab.tsx",
+      "codeExport": "SegmentedTab",
       "props": {
         "Label#19:0": {
           "kind": "prop",
@@ -553,8 +553,8 @@
     "Toggle": {
       "figmaNodeId": "82:170",
       "variants": 8,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/toggle.tsx",
+      "codeExport": "Toggle",
       "props": {
         "Label#82:0": {
           "kind": "prop",
@@ -592,8 +592,8 @@
     "Toggle Group": {
       "figmaNodeId": "82:485",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/toggle-group.tsx",
+      "codeExport": "ToggleGroup",
       "props": {
         "Selection": {
           "kind": "prop",
@@ -1007,8 +1007,8 @@
     "Tabs": {
       "figmaNodeId": "99:331",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/tabs.tsx",
+      "codeExport": "Tabs",
       "props": {
         "Orientation": {
           "kind": "prop",
