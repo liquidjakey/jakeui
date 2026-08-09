@@ -1,6 +1,7 @@
 import { useId, forwardRef } from 'react';
 import type { ChangeEvent, FocusEvent } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * NativeSelect — native select control styled with Jake UI semantics.
@@ -84,7 +85,7 @@ const BASE = [
   'rounded-lg border border-input bg-card',
   'pl-3 pr-8 py-[calc(var(--spacing)*2.25)]',
   'text-body-md text-foreground',
-  'transition-colors',
+  MOTION.colors,
 ].join(' ');
 
 /**

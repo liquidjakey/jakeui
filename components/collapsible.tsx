@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Collapsible — single disclosure region.
@@ -53,9 +54,12 @@ export function Collapsible({
         disabled={disabled}
         onClick={() => onOpenChange(!open)}
         className={cn(
-          'flex w-full items-center justify-between gap-2 px-4 py-3 text-left text-body-md',
+          // px is `space/3-5` (14px), not `space/4` (16px); the trigger binds
+          // Label/LG (14/20 medium), not Body/MD (14/20 regular).
+          'flex w-full items-center justify-between gap-2 px-[calc(var(--spacing)*3.5)] py-3 text-left text-label-lg',
           // Asserted, not transcribed: no focus token is recorded on this set.
           'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-inset',
+          MOTION.colors,
           disabled && 'cursor-not-allowed',
         )}
       >
@@ -67,6 +71,10 @@ export function Collapsible({
         The record: "The panel stays in the accessibility tree only while open."
         Unmounted when closed, not hidden with CSS — display:none would still be
         in the DOM for some tooling, and the record asks for absence.
+
+        ⚠️ No open/close height animation, for the reason documented at length in
+        accordion.tsx: the grid-row technique does not survive the transition in
+        Chrome, and the two components stay behaviour-identical.
       */}
       {open ? (
         <div id={panelId} className="px-4 pb-3 text-body-md">

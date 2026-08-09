@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Checkbox — labelled tri-state checkbox.
@@ -46,7 +47,8 @@ export function Checkbox({
   }, [indeterminate]);
 
   return (
-    <div className="flex items-start gap-2">
+    // gap is `space/2-5` (10px) in the file, not `space/2` (8px).
+    <div className="flex items-start gap-2.5">
       <span className="relative mt-0.5 inline-flex">
         <input
           ref={ref}
@@ -64,6 +66,7 @@ export function Checkbox({
           aria-hidden="true"
           className={cn(
             'inline-flex h-4 w-4 items-center justify-center rounded border text-[10px]',
+            MOTION.colors,
             // 🛑 ASSERTED — no box tokens are recorded anywhere for this component.
             checked === false ? 'border-input bg-card' : 'border-primary bg-primary text-primary-foreground',
             'peer-focus-visible:ring-1 peer-focus-visible:ring-ring',
@@ -75,7 +78,7 @@ export function Checkbox({
       </span>
 
       <label htmlFor={id} className="flex flex-col gap-0.5">
-        <span className={cn('text-body-md', disabled ? 'text-muted-foreground' : 'text-foreground')}>
+        <span className={cn('text-label-lg', disabled ? 'text-muted-foreground' : 'text-foreground')}>
           {label}
         </span>
         {description ? (

@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Accordion — vertically stacked disclosure sections.
@@ -60,8 +61,11 @@ export function Accordion({ items, openIds, onToggle }: AccordionProps) {
                 disabled={disabled}
                 onClick={() => onToggle(item.id)}
                 className={cn(
-                  'flex w-full items-center justify-between gap-2 px-4 py-3 text-left text-body-md',
+                  // py is `space/3-5` (14px), not `space/3` (12px); the trigger
+                  // binds Label/LG (14/20 medium), not Body/MD (14/20 regular).
+                  'flex w-full items-center justify-between gap-2 px-4 py-[calc(var(--spacing)*3.5)] text-left text-label-lg',
                   'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-inset',
+                  MOTION.colors,
                   disabled && 'cursor-not-allowed',
                 )}
               >
@@ -70,7 +74,27 @@ export function Accordion({ items, openIds, onToggle }: AccordionProps) {
               </button>
             </h3>
 
-            {/* Unmounted when closed: "the panel stays in the accessibility tree only while open." */}
+            {/*
+              Unmounted when closed: "the panel stays in the accessibility tree
+              only while open."
+
+              ⚠️ THERE IS DELIBERATELY NO OPEN/CLOSE HEIGHT ANIMATION, and this
+              is the one place in the system where motion was attempted and
+              backed out. A transition cannot animate an element that does not
+              exist when closed, so animating this means keeping it mounted. The
+              standard `grid-template-rows: 0fr -> 1fr` technique was tried, with
+              `aria-hidden` + `inert` preserving the record's contract. It does
+              not survive the transition in Chrome: measured in Storybook, an
+              opened panel settled at 0px against a 32px content height, because
+              an animating `fr` row is interpolated against zero free space in an
+              auto-height grid. Forcing `1fr` with the transition OFF resolved to
+              32px correctly, which isolates it to the animation, not the layout.
+
+              A max-height cap would work but needs a magic pixel number, which
+              the archetype's first do forbids. Revisit with `calc-size()` /
+              `interpolate-size: allow-keywords` once it can be emitted into the
+              generated stylesheet. The trigger still animates its colours.
+            */}
             {open ? (
               <div id={panelId} className="px-4 pb-3 text-body-md">
                 {item.content}

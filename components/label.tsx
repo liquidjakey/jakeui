@@ -36,7 +36,9 @@ export function Label({ children, htmlFor, requirement, disabled = false, classN
     <label
       htmlFor={htmlFor}
       className={cn(
-        'inline-flex items-center gap-1 text-body-md',
+        // Label/LG, read from the live binding. This was `text-body-md` — same
+        // 14/20 metrics but weight 400, where Figma binds Label/LG at weight 500.
+        'inline-flex items-center gap-1 text-label-lg',
         disabled ? 'text-muted-foreground' : 'text-foreground',
         className,
       )}
@@ -47,10 +49,28 @@ export function Label({ children, htmlFor, requirement, disabled = false, classN
         // through the control's own `required` / `aria-required`, not through
         // this glyph — announcing it here would say it twice.
         //
-        // Deliberately NOT tinted `destructive`: tokensUsed records no marker
-        // colour, and red reads as an error before the user has done anything
-        // wrong. The marker inherits the label's colour until Figma binds one.
-        <span aria-hidden="true">{requirement === 'required' ? '*' : '(optional)'}</span>
+        // The two markers are NOT the same shape in Figma, so they are not
+        // rendered the same way here. Read from the live bindings:
+        //   Required mark   Label/LG, fill `destructive`
+        //   Optional marker Caption/SM, fill `muted-foreground`, word "Optional"
+        //
+        // An earlier note here read "deliberately NOT tinted destructive:
+        // tokensUsed records no marker colour". That was true of the doc record
+        // and false of the file — Figma binds `destructive` on the required mark.
+        // Disabled dims both markers with the label.
+        <span
+          aria-hidden="true"
+          className={cn(
+            requirement === 'optional' && 'text-caption-sm',
+            disabled
+              ? 'text-muted-foreground'
+              : requirement === 'required'
+                ? 'text-destructive'
+                : 'text-muted-foreground',
+          )}
+        >
+          {requirement === 'required' ? '*' : 'Optional'}
+        </span>
       ) : null}
     </label>
   );

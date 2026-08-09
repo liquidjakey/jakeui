@@ -76,10 +76,11 @@ export function AlertDialog({
           same fill; they resolve identically today, so nothing is visibly wrong.
           See docs/components/dialog.md Table 3.
         */}
-        <h2 id={titleId} className="text-heading-md font-semibold text-card-foreground">
+        {/* Heading/LG (18/26) in the file, not Heading/MD (16/24). */}
+        <h2 id={titleId} className="text-heading-lg text-card-foreground">
           {title}
         </h2>
-        <p id={descId} className="text-body-sm text-muted-foreground">
+        <p id={descId} className="text-body-md text-muted-foreground">
           {description}
         </p>
       </div>

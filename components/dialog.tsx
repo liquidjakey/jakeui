@@ -1,7 +1,6 @@
 import { useId } from 'react';
 import type { ReactNode } from 'react';
 import { ModalSurface } from './modal-surface.js';
-import { cn } from '../lib/cn.js';
 
 /**
  * Dialog — general-purpose modal surface for focused tasks and forms.
@@ -61,19 +60,27 @@ export function Dialog({
       describedBy={description ? descId : undefined}
       className={WIDTH[size]}
     >
-      <div className="flex flex-col gap-1">
+      {/*
+        `type` no longer drives a title size (see the h2 below), but it stays in
+        the API because it is a real Figma axis and callers compose different
+        content under it. Surfaced as a data attribute so it remains observable
+        in tests and in the DOM rather than becoming a silently ignored prop.
+      */}
+      <div data-type={type} className="flex flex-col gap-1">
         <h2
           id={titleId}
-          className={cn(
-            'text-foreground font-semibold',
-            // Transcribed: Standard binds size/18, Form binds size/13.
-            type === 'form' ? 'text-body-sm' : 'text-heading-md',
-          )}
+          // Read from the live bindings: BOTH Standard and Form bind Heading/LG
+          // (18/26). The record said "Standard binds size/18, Form binds
+          // size/13", which was wrong on both branches — Standard was rendering
+          // 16/24 and Form 13/18. `type` therefore carries NO title-size delta;
+          // it is kept because it is a real Figma axis and drives content shape.
+          className="text-heading-lg text-foreground"
         >
           {title}
         </h2>
+        {/* Description binds Body/MD (14/20) in the file, not Body/SM (13/18). */}
         {description ? (
-          <p id={descId} className="text-body-sm text-muted-foreground">
+          <p id={descId} className="text-body-md text-muted-foreground">
             {description}
           </p>
         ) : null}

@@ -61,7 +61,8 @@ export function Sheet({
       className={WIDTH[width]}
     >
       <div className="flex flex-col gap-1">
-        <h2 id={titleId} className="text-heading-md font-semibold text-foreground">
+        {/* Heading/LG (18/26) in the file, not Heading/MD (16/24). */}
+        <h2 id={titleId} className="text-heading-lg text-foreground">
           {title}
         </h2>
         {description ? (

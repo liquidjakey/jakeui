@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * ModalSurface — INTERNAL. Not exported from components/index.ts.
@@ -47,11 +48,14 @@ export interface ModalSurfaceProps {
  */
 const BASE = [
   'bg-card border border-border rounded-lg',
+  MOTION.overlay,
   'p-6 shadow-lg',
   // The backdrop has no token in any of the four records. A neutral black at low
   // alpha stands in until Figma binds one. Recorded in every props table.
   'backdrop:bg-black/50',
-  'open:flex open:flex-col open:gap-4',
+  // gap is `space/5` (20px) on Dialog and Drawer; it was `space/4` (16px).
+  // Sheet binds `space/4-5` (18px) and overrides this through className.
+  'open:flex open:flex-col open:gap-5',
 ].join(' ');
 
 const LAYOUT = {

@@ -107,10 +107,10 @@ export const WithIcons: Story = {
   args: { title: 'Alert' },
   render: () => (
     <div className="flex max-w-lg flex-col gap-3">
-      <Alert tone="info" icon={<span aria-hidden="true">i</span>} title="Informational" />
-      <Alert tone="success" icon={<span aria-hidden="true">✓</span>} title="Succeeded" />
-      <Alert tone="warning" icon={<span aria-hidden="true">!</span>} title="Needs attention" />
-      <Alert tone="destructive" icon={<span aria-hidden="true">×</span>} title="Blocked" />
+      <Alert tone="info" title="Informational" />
+      <Alert tone="success" title="Succeeded" />
+      <Alert tone="warning" title="Needs attention" />
+      <Alert tone="destructive" title="Blocked" />
     </div>
   ),
 };

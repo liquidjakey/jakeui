@@ -27,7 +27,7 @@ import { Input } from './input.js';
  */
 
 const meta = {
-  title: 'App/Sidebar',
+  title: 'Navigation/Sidebar',
   component: Sidebar,
   parameters: {
     docs: {

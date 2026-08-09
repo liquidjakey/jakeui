@@ -26,7 +26,7 @@ import {
  */
 
 const meta = {
-  title: 'Data/Table',
+  title: 'Content/Table',
   component: Table,
   parameters: {
     docs: {

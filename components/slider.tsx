@@ -1,5 +1,6 @@
 import { useId } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Slider — range input.
@@ -50,9 +51,10 @@ export function Slider({
       <div className="relative h-5">
         {/* Track and range are decorative — the real control is the native input
             beneath them, which keeps all the platform keyboard behaviour. */}
-        <div aria-hidden="true" className="absolute inset-x-0 top-2 h-1 rounded-full bg-muted">
+        {/* Track is 6px tall in the file (space/1-5) and binds radius/lg; it was 4px. */}
+        <div aria-hidden="true" className="absolute inset-x-0 top-1.5 h-1.5 rounded-lg bg-muted">
           <div
-            className={cn('h-full rounded-full', disabled ? 'bg-muted-foreground' : 'bg-primary')}
+            className={cn('h-full rounded-lg', MOTION.colors, disabled ? 'bg-muted-foreground' : 'bg-primary')}
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -74,9 +76,12 @@ export function Slider({
         <span
           aria-hidden="true"
           className={cn(
-            'pointer-events-none absolute top-1 h-3 w-3 -translate-x-1/2 rounded-full border-2 bg-card',
+            // Thumb is 20x20 in the file with a stroke/2 border; it was 12x12.
+            // Focus swaps the stroke to `ring` at stroke/3.
+            'pointer-events-none absolute top-0 size-5 -translate-x-1/2 rounded-full border-2 bg-card',
+            MOTION.colors,
             disabled ? 'border-muted-foreground' : 'border-primary',
-            'peer-focus-visible:border-ring',
+            'peer-focus-visible:border-[length:var(--stroke-3)] peer-focus-visible:border-ring',
           )}
           style={{ left: `${pct}%` }}
         />

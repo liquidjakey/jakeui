@@ -1,6 +1,7 @@
 import { cloneElement, useId, useRef, useState } from 'react';
 import type { ReactElement } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Tooltip — brief non-interactive label revealed on hover or focus.
@@ -74,8 +75,12 @@ export function Tooltip({ label, children, side = 'top', delay = 400 }: TooltipP
           onMouseEnter={() => show(true)}
           onMouseLeave={hide}
           className={cn(
-            'absolute z-50 whitespace-nowrap rounded-lg bg-foreground px-2 py-1',
-            'text-body-xs text-card',
+            // Padding and type read from the live bindings: space/3 x,
+            // space/2-5 y, Label/SM. Previously px-2/py-1 with Body/XS, which
+            // was 8/4 against Figma's 12/10 and 12/18 against Figma's 12/16.
+            'absolute z-50 whitespace-nowrap rounded-lg bg-foreground px-3 py-2.5',
+            'text-label-sm text-card',
+            MOTION.overlay,
             SIDE[side],
           )}
         >

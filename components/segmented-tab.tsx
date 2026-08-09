@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * SegmentedTab — the ITEM half of the tab control.
@@ -53,12 +54,19 @@ export function SegmentedTab({
       disabled={disabled}
       onClick={onSelect}
       className={cn(
-        'inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-body-xs',
+        // padY is `space/1-75` (7px), not 6; type is Label/SM (12/16), not
+        // Body/XS (12/18). Both read from the live bindings.
+        'inline-flex items-center gap-1.5 rounded-lg px-3 py-[calc(var(--spacing)*1.75)] text-label-sm',
         // Unselected has NO fill — the container's `muted` shows through.
-        selected ? 'bg-card text-foreground' : 'text-muted-foreground',
+        // The selected tab carries a drop shadow in the file, exported as the
+        // `effect/selected-tab` token. It was missing entirely.
+        selected
+          ? 'bg-card text-foreground shadow-effect-selected-tab'
+          : 'text-muted-foreground',
         // Asserted from the record's own prose rather than a binding: "focus
         // remains visually distinguishable using the shared ring treatment."
         'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+        MOTION.colors,
         disabled && 'cursor-not-allowed opacity-50',
       )}
     >

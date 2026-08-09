@@ -1,6 +1,7 @@
 import { cloneElement, useId, useRef, useState } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * HoverCard — contextual preview revealed on hover or focus.
@@ -72,9 +73,12 @@ export function HoverCard({
           onMouseLeave={() => schedule(false, closeDelay)}
           className={cn(
             'absolute left-1/2 top-full z-50 mt-2 w-64 -translate-x-1/2',
-            'rounded-lg border border-border bg-popover text-body-md text-popover-foreground shadow-md',
+            'rounded-lg border border-border bg-popover text-body-sm text-popover-foreground shadow-md',
+            MOTION.overlay,
             // No spacing token is recorded for Density, so this is raw.
-            density === 'detailed' ? 'p-4' : 'p-3',
+            // Both densities bind padding `space/4` (16px) in the file; this
+            // was p-4 / p-3. Density changes what is IN the card, not its box.
+            'p-4',
           )}
         >
           <p className="font-semibold">{title}</p>
@@ -82,8 +86,9 @@ export function HoverCard({
             <p className="mt-1 text-body-sm text-muted-foreground">{description}</p>
           ) : null}
           {/* meta only appears at detailed density — the variant means "has more in it". */}
+          {/* Metadata binds Label/SM (12/16) with popover-foreground. */}
           {meta && density === 'detailed' ? (
-            <div className="mt-2 text-body-sm text-muted-foreground">{meta}</div>
+            <div className="mt-2 text-label-sm text-popover-foreground">{meta}</div>
           ) : null}
         </div>
       ) : null}

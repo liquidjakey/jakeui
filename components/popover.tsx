@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * The Popover family.
@@ -94,6 +95,7 @@ export function PopoverClose({ onClose, label = 'Close', disabled = false, icon 
         'inline-flex h-7 w-7 items-center justify-center bg-popover',
         'rounded-[calc(var(--radius-7))]',
         'hover:bg-accent',
+        MOTION.colors,
         'focus-visible:bg-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
         // No disabled tokens recorded on this asset; shared convention asserted.
         disabled && 'cursor-not-allowed text-muted-foreground hover:bg-popover',
@@ -220,6 +222,7 @@ export function Popover({
           aria-labelledby={title ? titleId : undefined}
           className={cn(
             'absolute z-50 rounded-lg border border-border bg-popover p-4',
+            MOTION.overlay,
             'text-body-md text-popover-foreground shadow-md',
             WIDTH[size],
             SIDE[side],
@@ -235,12 +238,13 @@ export function Popover({
           ) : null}
 
           {title ? (
-            <h3 id={titleId} className="font-semibold text-popover-foreground">
+            <h3 id={titleId} className="text-heading-xs text-popover-foreground">
               {title}
             </h3>
           ) : null}
+          {/* Description binds Body/XS (12/18) in the file. */}
           {description ? (
-            <p className="mt-1 text-body-sm text-muted-foreground">{description}</p>
+            <p className="mt-1 text-body-xs text-muted-foreground">{description}</p>
           ) : null}
           {children ? <div className="mt-2">{children}</div> : null}
         </div>

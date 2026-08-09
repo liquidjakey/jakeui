@@ -1,5 +1,6 @@
 import { useId } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Switch — labelled switch.
@@ -40,10 +41,19 @@ export function SwitchThumb({ checked = false, size = 'default' }: SwitchThumbPr
     <span
       aria-hidden="true"
       className={cn(
+        // 14x14 small, 16x16 default, fill `card` in EVERY state — read from the
+        // `Switch / Thumb` set, which is what figma.map.json binds this export to.
+        //
+        // ⚠️ FIGMA CONTRADICTS ITSELF HERE. The composed `Switch` set draws an
+        // 18x18 thumb filled `primary-foreground` when checked, on a 40x22 track.
+        // The atomic `Switch / Root` + `Switch / Thumb` sets draw 36x20 with a
+        // 16x16 `card` thumb. Both are internally coherent (2px inset) and they
+        // disagree with each other. The atoms win here because they are what the
+        // map binds for SwitchThumb and SwitchRoot. Logged in the findings doc.
         'pointer-events-none block rounded-full bg-card shadow-sm',
-        'motion-safe:transition-transform',
-        size === 'small' ? 'h-3 w-3' : 'h-4 w-4',
-        checked ? (size === 'small' ? 'translate-x-3' : 'translate-x-4') : 'translate-x-0.5',
+        MOTION.transform,
+        size === 'small' ? 'size-3.5' : 'size-4',
+        checked ? (size === 'small' ? 'translate-x-3.5' : 'translate-x-4') : 'translate-x-0.5',
       )}
     />
   );
@@ -68,7 +78,8 @@ export function Switch({
   const descId = `${id}-desc`;
 
   return (
-    <div className="flex items-start gap-3">
+    // gap is `space/2-5` (10px) in the file, not `space/3` (12px).
+    <div className="flex items-start gap-2.5">
       <button
         type="button"
         // role="switch" with aria-checked. NOT a checkbox: a switch takes effect
@@ -85,13 +96,18 @@ export function Switch({
           if (e.key === 'Enter') e.preventDefault();
         }}
         className={cn(
+          // 36x20 — `Switch / Root` at Size=Default. (Small is 32x18.)
           'mt-0.5 inline-flex h-5 w-9 shrink-0 items-center rounded-full',
-          'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
-          'motion-safe:transition-colors',
-          // 🛑 ASSERTED — see the block above. No track token exists on any
-          // readable asset; Switch / Root holds it and is blocked.
-          checked ? 'bg-primary' : 'bg-input',
-          disabled && 'cursor-not-allowed opacity-50',
+          // Focus binds a 2px `ring` stroke on Switch / Root, not 1px.
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+          MOTION.colors,
+          // Confirmed against Switch / Root: `input` unchecked, `primary` checked.
+          // Disabled binds `input` there — identical to Default, the documented
+          // "disabled is invisible" defect. `muted` is taken from the composed
+          // `Switch` set instead, which is the only place the file distinguishes
+          // a disabled track at all.
+          disabled ? 'bg-muted' : checked ? 'bg-primary' : 'bg-input',
+          disabled && 'cursor-not-allowed',
         )}
       >
         <SwitchThumb checked={checked} />
@@ -100,7 +116,8 @@ export function Switch({
       <span className="flex flex-col gap-0.5">
         <span
           id={id}
-          className={cn('text-body-md', disabled ? 'text-muted-foreground' : 'text-foreground')}
+          // Label/LG in the file (14/20 medium), not Body/MD (14/20 regular).
+          className={cn('text-label-lg', disabled ? 'text-muted-foreground' : 'text-foreground')}
         >
           {label}
         </span>
@@ -150,7 +167,7 @@ export function SwitchRoot({ checked, size = 'default', state = 'default', child
           : state === 'hover'
             ? 'bg-accent-hover'
             : 'bg-input',
-        state === 'focused' && 'ring-1 ring-ring',
+        state === 'focused' && 'ring-2 ring-ring',
         state === 'invalid' && 'border-destructive',
         (state === 'disabled' || state === 'readOnly') && 'opacity-50',
       )}

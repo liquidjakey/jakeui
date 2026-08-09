@@ -18,7 +18,7 @@ import { DatePicker } from './date-picker.js';
  */
 
 const meta = {
-  title: 'Feedback/Slider',
+  title: 'Controls/Slider',
   component: Slider,
   parameters: {
     docs: {

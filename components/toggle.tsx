@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Toggle — two-state action button.
@@ -48,7 +49,9 @@ export function Toggle({
       className={cn(
         // radius/md here, where every other control in this system binds radius/lg.
         // Transcribed faithfully; flagged in the props table as worth checking.
-        'inline-flex items-center gap-1.5 rounded-md border px-3 py-2 text-body-md',
+        // gap is `space/2` (8px) and the label binds Label/LG (14/20 medium).
+        'inline-flex items-center gap-2 rounded-md border px-3 py-2 text-label-lg',
+        MOTION.colors,
         'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
         pressed
           ? // Pressed + hover binds the SAME tokens as pressed at rest, so there is

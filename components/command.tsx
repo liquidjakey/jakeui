@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Command — command menu ITEM primitive (not the palette; Command Panel is a
@@ -38,8 +39,10 @@ export function Command({
       aria-selected={selected}
       onClick={onSelect}
       className={cn(
-        'flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-body-md',
+        // gap `space/3` (12px), py `space/2-5` (10px), label Label/LG.
+        'flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-label-lg',
         selected ? 'bg-accent text-accent-foreground' : 'text-foreground',
+        MOTION.colors,
       )}
     >
       {icon ? (
@@ -51,7 +54,7 @@ export function Command({
       {shortcut ? (
         // Decorative: screen readers announce the label, and the glyphs would be
         // read as punctuation. No token is recorded for it; muted asserted.
-        <span aria-hidden="true" className="text-body-sm text-muted-foreground">
+        <span aria-hidden="true" className="text-caption-sm text-muted-foreground">
           {shortcut}
         </span>
       ) : null}

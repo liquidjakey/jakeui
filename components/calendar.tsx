@@ -1,4 +1,6 @@
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
+import { CaretLeft, CaretRight } from '@phosphor-icons/react';
 
 /**
  * Calendar — month grid with single-date and range selection.
@@ -78,7 +80,8 @@ export function Calendar({
   };
 
   return (
-    <div className="inline-block rounded-lg border border-border bg-card p-3 text-body-sm text-foreground">
+    <div // padding `space/4` (16px), not `space/3` (12px).
+    className="inline-block rounded-lg border border-border bg-card p-4 text-body-sm text-foreground">
       <div className="mb-2 flex items-center justify-between gap-2">
         <button
           type="button"
@@ -86,7 +89,7 @@ export function Calendar({
           onClick={() => onMonthChange(new Date(year, monthIndex - 1, 1))}
           className="rounded-lg px-2 py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         >
-          <span aria-hidden="true">‹</span>
+          <CaretLeft size={14} weight="bold" aria-hidden="true" />
         </button>
         {/* aria-live so a month change is announced without moving focus. */}
         <span aria-live="polite" className="font-medium">
@@ -98,7 +101,7 @@ export function Calendar({
           onClick={() => onMonthChange(new Date(year, monthIndex + 1, 1))}
           className="rounded-lg px-2 py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         >
-          <span aria-hidden="true">›</span>
+          <CaretRight size={14} weight="bold" aria-hidden="true" />
         </button>
       </div>
 
@@ -137,6 +140,7 @@ export function Calendar({
                         'flex items-center justify-center rounded-lg',
                         density === 'comfortable' ? 'h-9 w-9' : 'h-8 w-8',
                         'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+                        MOTION.colors,
                         // 🛑 every line below is ASSERTED — see the block above.
                         sel && 'bg-primary text-primary-foreground',
                         !sel && range && 'bg-accent text-accent-foreground',

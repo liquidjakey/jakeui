@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * The Table family — eight Figma assets, seven code exports, one file.
@@ -79,7 +80,8 @@ export function TableCaption({ children, position = 'top' }: TableCaptionProps) 
   return (
     <caption
       className={cn(
-        'px-4 py-2 text-left text-body-xs text-muted-foreground',
+        // Head binds 12px Medium -> Label/SM (12/16); it was Body/XS (12/18 regular).
+        'px-4 py-2 text-left text-label-sm text-muted-foreground',
         position === 'bottom' ? 'caption-bottom' : 'caption-top',
       )}
     >
@@ -101,7 +103,7 @@ export function TableHead({ children, alignment = 'left', scope = 'col' }: Table
   return (
     <th
       scope={scope}
-      className={cn('px-4 py-2 font-medium text-body-xs text-muted-foreground', ALIGN[alignment])}
+      className={cn('px-4 py-2 text-label-sm text-muted-foreground', ALIGN[alignment])}
     >
       {children}
     </th>
@@ -129,6 +131,7 @@ export function TableCell({ children, alignment = 'left', emphasis = 'default' }
   return (
     <td
       className={cn(
+        // Cells bind Body/SM; Emphasis=Strong binds Value/Strong (handled by caller).
         'px-4 py-2 text-body-sm',
         emphasis === 'strong' ? 'text-foreground' : 'text-muted-foreground',
         ALIGN[alignment],
@@ -175,6 +178,7 @@ export function TableRow({
         // that looks like rest is almost certainly an oversight, so a muted tint
         // is ASSERTED here rather than transcribed.
         selectable && !selected && 'hover:bg-muted/50',
+        MOTION.colors,
         selected && 'bg-accent',
         selectable &&
           'cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',

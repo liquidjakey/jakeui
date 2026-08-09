@@ -1,6 +1,8 @@
 import { useId } from 'react';
+import { CaretRight } from '@phosphor-icons/react';
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * The Dropdown Menu family — six of eleven assets.
@@ -70,9 +72,10 @@ export function DropdownMenuTrigger({
         }
       }}
       className={cn(
-        'inline-flex items-center gap-2 rounded-lg px-3 py-2',
+        // py is `space/1-75` (7px) in the file, not `space/2` (8px).
+        'inline-flex items-center gap-2 rounded-lg px-3 py-[calc(var(--spacing)*1.75)]',
         'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
-        type === 'button' && 'border border-border bg-card text-body-sm text-foreground',
+        type === 'button' && 'border border-border bg-card text-label-md text-foreground',
         // Avatar/closed binds accent-foreground with NO fill. accent-foreground is
         // the text colour FOR the accent fill, so with nothing behind it it sits on
         // whatever is beneath — the same class of mismatch as Card's
@@ -111,9 +114,9 @@ export function DropdownMenu({
       role="menu"
       aria-label={label}
       className={cn(
-        'min-w-48 rounded-lg border border-border bg-popover text-body-sm text-popover-foreground shadow-md',
-        // No spacing token is recorded for Density — raw padding, the fourth
-        // component in this system with that gap.
+        'min-w-48 rounded-lg border border-border bg-popover text-label-md text-popover-foreground shadow-md',
+        // Density padding on the container is not itself bound in the file; the
+        // ITEMS are (px space/2, py space/1-5), and those are transcribed below.
         density === 'comfortable' ? 'p-2' : 'p-1',
       )}
     >
@@ -141,7 +144,11 @@ export function DropdownMenuLabel({ children, inset = false }: DropdownMenuLabel
   return (
     <div
       role="presentation"
-      className={cn('px-2 py-1.5 text-body-xs font-medium text-popover-foreground', inset && 'pl-8')}
+      // py `space/1-25` (5px); the label is 12/18 SEMI BOLD in the file, not medium.
+      className={cn(
+        'px-2 py-[calc(var(--spacing)*1.25)] text-body-xs font-semibold text-popover-foreground',
+        inset && 'pl-8',
+      )}
     >
       {children}
     </div>
@@ -186,6 +193,7 @@ export function DropdownMenuRadioItem({
         'flex cursor-pointer items-center gap-2 px-2 py-1.5',
         'rounded-[calc(var(--radius-4))] text-popover-foreground',
         'hover:bg-accent hover:text-accent-foreground',
+        MOTION.colors,
         'focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:outline-none',
         // No disabled tokens are recorded; shared convention asserted.
         disabled && 'pointer-events-none text-muted-foreground',
@@ -259,7 +267,7 @@ export function DropdownMenuSubTrigger({
       ) : null}
       <span className="flex-1">{children}</span>
       {/* No indicator token is recorded — inherits currentColor. */}
-      <span aria-hidden="true">›</span>
+      <CaretRight size={12} weight="bold" aria-hidden="true" />
     </div>
   );
 }
@@ -368,7 +376,7 @@ export function DropdownMenuItem({
       {shortcut ? (
         // aria-hidden: the glyphs would be read as punctuation. Showing a shortcut
         // here does not create the key binding.
-        <span aria-hidden="true" className="text-body-sm text-muted-foreground">
+        <span aria-hidden="true" className="text-caption-xs text-muted-foreground">
           {shortcut}
         </span>
       ) : null}

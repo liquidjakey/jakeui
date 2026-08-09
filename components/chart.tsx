@@ -34,9 +34,11 @@ export function Chart({ title, children, type = 'bar', description }: ChartProps
   return (
     <figure
       data-chart-type={type}
-      className="rounded-lg border border-border bg-card p-4 text-foreground"
+      // padding `space/5` (20px), not `space/4` (16px).
+      className="rounded-lg border border-border bg-card p-5 text-foreground"
     >
-      <figcaption className="text-heading-sm font-semibold">{title}</figcaption>
+      {/* Title binds Heading/MD (16/24) in the file, not Heading/SM (15/22). */}
+      <figcaption className="text-heading-md">{title}</figcaption>
       {description ? (
         <p className="mt-1 text-body-sm text-muted-foreground">{description}</p>
       ) : null}

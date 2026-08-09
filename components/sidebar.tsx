@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Sidebar and Sidebar Navigation Item.
@@ -38,10 +39,12 @@ export function SidebarNavigationItem({
       // Derived from the route, never set by hand. aria-current, not colour alone.
       aria-current={active ? 'page' : undefined}
       className={cn(
-        'flex items-center gap-2 rounded-lg px-3 py-2 text-body-md',
+        // gap is `space/2-5` (10px) and the label binds Label/LG (14/20 medium).
+        'flex items-center gap-2.5 rounded-lg px-3 py-2 text-label-lg',
         'text-sidebar-foreground',
         // No hover or focus token is recorded; shared ring asserted.
         'hover:bg-sidebar-accent/50',
+        MOTION.colors,
         'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
         active && 'bg-sidebar-accent text-sidebar-accent-foreground',
       )}

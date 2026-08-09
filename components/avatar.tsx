@@ -28,10 +28,27 @@ export interface AvatarProps {
   decorative?: boolean;
 }
 
+/**
+ * Diameters read from the file: 32 / 48 / 64, with radius/16, radius/24 and
+ * radius/32 — exactly half of each, so every size is a true circle. Medium was
+ * 40px and large was 56px, both a full step small.
+ *
+ * ⚠️ The Initials text is UNBOUND in Figma on all three sizes: 11/14, 14/18 and
+ * 18/22, all Semi Bold. None of those line-heights is in the ramp. The nearest
+ * semibold step is used for each so the avatar stays on the type system; the
+ * sizes match, the line-heights are 2-4px looser. Listed in the Figma fix list.
+ */
 const SIZE = {
-  small: 'h-8 w-8 text-body-xs rounded-[calc(var(--radius-16))]',
-  medium: 'h-10 w-10 text-body-md rounded-[calc(var(--radius-24))]',
-  large: 'h-14 w-14 text-heading-md rounded-[calc(var(--radius-32))]',
+  small: 'size-8 text-label-xs font-semibold rounded-[calc(var(--radius-16))]',
+  medium: 'size-12 text-heading-xs rounded-[calc(var(--radius-24))]',
+  large: 'size-16 text-heading-lg rounded-[calc(var(--radius-32))]',
+} as const;
+
+/** Status dot is 8px on small and 10px on medium and large. */
+const STATUS_SIZE = {
+  small: 'size-2',
+  medium: 'size-2.5',
+  large: 'size-2.5',
 } as const;
 
 // No presence colour is recorded — tokensUsed is eight entries and none is a status
@@ -58,7 +75,8 @@ export function Avatar({
         aria-hidden={decorative || undefined}
         className={cn(
           'inline-flex items-center justify-center overflow-hidden',
-          'bg-primary font-medium text-primary-foreground',
+          // The Initials are Semi Bold in the file; this was font-medium.
+          'bg-primary text-primary-foreground',
           SIZE[size],
         )}
       >
@@ -75,7 +93,8 @@ export function Avatar({
           <span
             aria-hidden="true"
             className={cn(
-              'absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full ring-2 ring-card',
+              'absolute bottom-0 right-0 rounded-full ring-2 ring-card',
+              STATUS_SIZE[size],
               STATUS[status],
             )}
           />

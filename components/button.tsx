@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Button — action button.
@@ -34,9 +35,16 @@ export interface ButtonProps {
 // Padding and gap are REAL TOKENS, read from the live bindings. space/1-5 and
 // space/2-25 are half-step ramp members, written as explicit calcs so they can never
 // degrade to a raw pixel value — the same treatment Input gives space/2-25.
+/**
+ * ⚠️ THE LABEL IS UNBOUND IN FIGMA on both sizes: 13/20 Medium and 14/22 Medium.
+ * Neither line-height is in the ramp (Label/MD is 13/18, Label/LG is 14/20), so
+ * the size and weight match but the leading is 2px tighter here. The semantic
+ * label styles are used rather than Body/* + font-medium, which is what this
+ * was: the weight was right by override, not by binding.
+ */
 const SIZE = {
-  small: 'gap-2 px-3 py-[calc(var(--spacing)*1.5)] text-body-sm',
-  medium: 'gap-2 px-4 py-[calc(var(--spacing)*2.25)] text-body-md',
+  small: 'gap-2 px-3 py-[calc(var(--spacing)*1.5)] text-label-md',
+  medium: 'gap-2 px-4 py-[calc(var(--spacing)*2.25)] text-label-lg',
 } as const;
 
 const STYLE = {
@@ -64,8 +72,9 @@ export function Button({
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        'inline-flex items-center justify-center rounded-lg font-medium',
-        'transition-colors',
+        // font-medium removed: the Label/* styles carry weight 500 themselves.
+        'inline-flex items-center justify-center rounded-lg',
+        MOTION.colors,
         SIZE[size],
         // Focus keeps the resting fill and adds a stroke/2 ring, consistently across
         // all four styles. Implemented as a ring rather than a border so there is no

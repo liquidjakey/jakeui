@@ -40,7 +40,8 @@ export function Progress({ value, label, max = 100 }: ProgressProps) {
       aria-valuemax={determinate ? max : undefined}
       // radius/lg on a thin bar reads as nearly square; radius/full would be the
       // usual choice. Transcribed as recorded.
-      className="h-2 w-full overflow-hidden rounded-lg bg-muted"
+      // The bar is 12px tall in the file (320x12), not 8.
+      className="h-3 w-full overflow-hidden rounded-lg bg-muted"
     >
       <div
         className={cn(

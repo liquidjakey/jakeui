@@ -1,4 +1,5 @@
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Breadcrumb — hierarchical location trail.
@@ -37,8 +38,9 @@ export function Breadcrumb({ items, collapsed = false, label = 'Breadcrumb' }: B
 
   return (
     // The record: "Wrap in a nav with an accessible name such as 'Breadcrumb'."
-    <nav aria-label={label} className="rounded-lg border border-border bg-card px-3 py-2">
-      <ol className="flex flex-wrap items-center gap-1 text-body-sm text-muted-foreground">
+    <nav aria-label={label} className="rounded-lg border border-border bg-card px-3 py-2.5">
+      {/* gap is `space/2` (8px) in the file, not `space/1` (4px). */}
+      <ol className="flex flex-wrap items-center gap-2 text-body-sm text-muted-foreground">
         {visible.map((item, i) => {
           const isLast = i === visible.length - 1;
           const insertOverflow = showOverflow && i === 1;
@@ -85,7 +87,11 @@ export function Breadcrumb({ items, collapsed = false, label = 'Breadcrumb' }: B
               ) : (
                 <a
                   href={item.href}
-                  className="rounded underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  className={cn(
+                    'rounded underline-offset-2 hover:underline',
+                    'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+                    MOTION.colors,
+                  )}
                 >
                   {item.label}
                 </a>

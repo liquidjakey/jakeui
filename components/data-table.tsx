@@ -40,9 +40,11 @@ export function DataTable({
   return (
     <section
       aria-label={title}
-      className="flex flex-col gap-3 rounded-lg border border-border bg-card p-4 text-foreground"
+      // padding and gap are both `space/5` (20px); they were 16 and 12.
+      className="flex flex-col gap-5 rounded-lg border border-border bg-card p-5 text-foreground"
     >
-      <h2 className="text-heading-sm font-semibold">{title}</h2>
+      {/* Title binds Heading/LG (18/26) in the file, not Heading/SM (15/22). */}
+      <h2 className="text-heading-lg">{title}</h2>
 
       {/* Controls precede the table in DOM order, so a keyboard user meets
           filters before results. */}

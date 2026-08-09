@@ -67,7 +67,8 @@ export function Field({
     undefined;
 
   return (
-    <div className="flex flex-col gap-1">
+    // gap is `space/1-5` (6px) in the live binding, not `space/1` (4px).
+    <div className="flex flex-col gap-1.5">
       <Label htmlFor={controlId} requirement={requirement} disabled={disabled}>
         {label}
       </Label>

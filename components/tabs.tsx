@@ -79,10 +79,15 @@ export function Tabs({
         aria-orientation={orientation}
         onKeyDown={onKeyDown}
         className={cn(
-          'inline-flex gap-1 rounded-lg bg-muted',
+          'inline-flex rounded-lg bg-muted',
           orientation === 'vertical' ? 'flex-col' : 'flex-row',
-          // No spacing token is recorded for Density, so these are raw.
-          density === 'compact' ? 'p-0.5' : 'p-1',
+          // Density IS tokenised in the file — the note that said otherwise was
+          // reading the doc record, not the bindings:
+          //   default  padding space/1    (4)  gap space/1   (4)
+          //   compact  padding space/0-75 (3)  gap space/0-5 (2)
+          density === 'compact'
+            ? 'gap-0.5 p-[calc(var(--spacing)*0.75)]'
+            : 'gap-1 p-1',
         )}
       >
         {items.map((item) => (

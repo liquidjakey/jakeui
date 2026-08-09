@@ -28,7 +28,7 @@ import { DropdownMenu, DropdownMenuItem, DropdownMenuCheckboxItem } from './drop
  */
 
 const meta = {
-  title: 'Recovered/Badge',
+  title: 'Content/Badge',
   component: Badge,
   parameters: {
     docs: {

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Card — content container for related information and actions.
@@ -7,23 +8,32 @@ import { cn } from '../lib/cn.js';
  * Figma: `Card`, node 126:*, 4 variants.
  * Contract: docs/components/card.md
  *
- * 🛑 THIS COMPONENT DELIBERATELY DOES NOT MATCH ITS RECORD.
+ * ✅ THE `info-foreground` CONFLICT IS RESOLVED. Card.doc.json bound the card's
+ * text to `info-foreground`, which on a `card` fill is roughly 1:1 contrast and
+ * would have been invisible in both modes. This file therefore overrode it with
+ * `card-foreground` and recorded that Figma owed a rebind.
  *
- * Card.doc.json binds the card's text to `info-foreground`. That is a defect in
- * the Figma file. Verified in .figma-tokens-dump.json:
+ * Re-read from the live bindings on 9 Aug 2026: the Title node binds `foreground`.
+ * The record was stale, and the override was reaching the right answer for the
+ * right reason — `foreground` and `card-foreground` resolve identically in both
+ * modes (neutral/950 light, neutral/50 dark). It now binds what the file binds.
  *
- *   card             Light white/100    Dark neutral/900
- *   info-foreground  Light neutral/50   Dark neutral/950   <- INVERTED
- *   card-foreground  Light neutral/950  Dark neutral/50
+ * ⚠️ CARD'S TEXT IS UNBOUND IN FIGMA. None of its four text nodes carries a text
+ * style, and their metrics are off-ramp:
  *
- * `info-foreground` is the light-on-dark pairing, correct for text on the SOLID
- * `info` fill — which is how Badge uses it, legitimately. On a `card` fill it is
- * near-white text on a white card in Light and near-black on near-black in Dark.
- * Contrast is roughly 1:1. The text would be invisible in both modes.
+ *   Title        16 / 22 Semi Bold   nearest ramp Heading/MD 16/24
+ *   Description  14 / 21 Regular     nearest ramp Body/MD    14/20
+ *   Label        13 / 20 Medium      nearest ramp Label/MD   13/18
+ *   Initials     14 / 18 Semi Bold   nearest ramp Heading/XS 14/20
  *
- * So this binds `card-foreground`. Transcribing faithfully would ship a visible
- * bug rather than a documentation inaccuracy. Figma owes a rebind; until then
- * docs:adopt will keep re-importing the wrong token.
+ * The ramp steps are used here so the card stays on the type system. The Figma
+ * nodes need the styles applied — until then this is the one place the code
+ * cannot be literally identical to the file without inventing line-heights.
+ *
+ * The previous title size was `text-body-xs` (12px) with a note transcribing
+ * "size/11" from the record. The file says 16px. That was the record being wrong
+ * by a full four steps of the scale, and it is the largest single visual error
+ * found in this audit.
  */
 export interface CardProps {
   title: string;
@@ -41,21 +51,19 @@ export function Card({ title, description, children, media, href }: CardProps) {
   const content = (
     <>
       {media ? <div className="overflow-hidden rounded-lg">{media}</div> : null}
-      <div className="flex flex-col gap-1">
-        {/*
-          card-foreground, NOT the record's info-foreground. See the block above.
-          size/11 IS transcribed faithfully — it is the smallest size in the scale
-          and questionable for a card title, but it is legible, not broken.
-        */}
-        <h3 className="text-body-xs font-semibold text-card-foreground">{title}</h3>
-        {description ? <p className="text-body-xs text-muted-foreground">{description}</p> : null}
+      {/* Header copy gap is `space/0-5` (2px) in the file. */}
+      <div className="flex flex-col gap-0.5">
+        <h3 className="text-heading-md text-foreground">{title}</h3>
+        {description ? <p className="text-body-md text-muted-foreground">{description}</p> : null}
       </div>
-      {children ? <div className="text-body-xs text-card-foreground">{children}</div> : null}
+      {children ? <div className="text-body-md text-foreground">{children}</div> : null}
     </>
   );
 
   const className = cn(
-    'flex flex-col gap-3 rounded-lg bg-card p-4',
+    // padding `space/5` (20px) and gap `space/4` (16px), read from the file.
+    // Previously p-4 / gap-3, which was 16 / 12.
+    'flex flex-col gap-4 rounded-lg bg-card p-5',
     // Transcribed: Interactive binds `2px primary`. Flagged in the props table —
     // this is the same treatment Input uses for FOCUS, so an interactive card
     // looks focused at rest and nothing is left free for real focus.
@@ -63,6 +71,7 @@ export function Card({ title, description, children, media, href }: CardProps) {
     // Asserted, not transcribed: no focus token is recorded on this set. Uses the
     // `ring` treatment shared with every other interactive component here.
     interactive && 'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+    MOTION.colors,
   );
 
   if (href) {

@@ -61,7 +61,8 @@ export function ToggleGroup({
     <div
       role="group"
       aria-label={label}
-      className={cn('inline-flex gap-1', orientation === 'vertical' ? 'flex-col' : 'flex-row')}
+      // gap is `space/2` (8px) in the file, not `space/1` (4px).
+      className={cn('inline-flex gap-2', orientation === 'vertical' ? 'flex-col' : 'flex-row')}
     >
       {items.map((item) => (
         <Toggle

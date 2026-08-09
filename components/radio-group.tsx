@@ -1,5 +1,6 @@
 import { useId } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * RadioGroup — labelled exclusive-choice group.
@@ -77,8 +78,9 @@ export function RadioGroup({
           const id = `${name}-${item.value}`;
           const itemDisabled = disabled || Boolean(item.disabled);
           const checked = value === item.value;
+          // gap is `space/2-5` (10px) in the file, not `space/2` (8px).
           return (
-            <label key={item.value} htmlFor={id} className="flex items-start gap-2">
+            <label key={item.value} htmlFor={id} className="flex items-start gap-2.5">
               <span className="relative mt-0.5 inline-flex">
                 <input
                   id={id}
@@ -94,12 +96,14 @@ export function RadioGroup({
                 <span
                   aria-hidden="true"
                   className={cn(
-                    'inline-flex h-4 w-4 items-center justify-center rounded-full border',
-                    // 🛑 ASSERTED — no circle token is readable; Radio Group / Root
-                    // holds it and is blocked. `input` is the resting border token
-                    // every other form control here binds.
+                    // 20x20 in `Radio Group / Item`; it was 16x16.
+                    'inline-flex size-5 items-center justify-center rounded-full border',
+                    MOTION.colors,
+                    // ✅ CONFIRMED, no longer asserted. `Radio Group / Item` reads
+                    // fill `card` + stroke `input` at 1px, hover fill `accent`,
+                    // focus stroke `ring` at 2px. The assertion was correct.
                     'border-input bg-card',
-                    'peer-focus-visible:ring-1 peer-focus-visible:ring-ring',
+                    'peer-focus-visible:ring-2 peer-focus-visible:ring-ring',
                     itemDisabled && 'opacity-50',
                   )}
                 >
@@ -109,7 +113,8 @@ export function RadioGroup({
               <span className="flex flex-col gap-0.5">
                 <span
                   className={cn(
-                    'text-body-md',
+                    // Item labels bind Label/LG (14/20 medium), not Body/MD.
+                    'text-label-lg',
                     itemDisabled ? 'text-muted-foreground' : 'text-foreground',
                   )}
                 >
@@ -155,7 +160,8 @@ export function RadioGroupItem({ checked = false, state = 'default' }: RadioGrou
     <span
       aria-hidden="true"
       className={cn(
-        'inline-flex h-4 w-4 items-center justify-center rounded-full border',
+        // 20x20 in the file; it was 16x16.
+        'inline-flex size-5 items-center justify-center rounded-full border',
         state === 'hover' ? 'bg-accent' : 'bg-card',
         state === 'invalid'
           ? 'border-destructive'

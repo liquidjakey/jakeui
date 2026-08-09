@@ -1,6 +1,7 @@
 import { useId, forwardRef } from 'react';
 import type { ChangeEvent, FocusEvent } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Textarea — multiline text input for longer freeform content.
@@ -64,10 +65,13 @@ export interface TextareaProps {
 const BASE = [
   'block w-full resize-none',
   'rounded-lg border border-input bg-card',
-  'px-3 py-[calc(var(--spacing)*2.25)]',
+  // Textarea binds py `space/3` (12px), NOT the `space/2-25` (9px) that Input
+  // and NativeSelect use. It is a taller control in the file and this was
+  // copied across from Input.
+  'px-3 py-3',
   'text-body-md text-foreground',
   'placeholder:text-muted-foreground',
-  'transition-colors',
+  MOTION.colors,
 ].join(' ');
 
 /**

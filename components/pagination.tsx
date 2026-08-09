@@ -1,4 +1,5 @@
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * Pagination — navigate paged datasets.
@@ -38,8 +39,10 @@ export function Pagination({
 
   const btn = (extra?: string) =>
     cn(
-      'rounded-lg px-3 py-1.5 text-body-sm text-foreground',
+      // Items bind Label/MD (13/18 medium), not Body/SM (13/18 regular).
+      'rounded-lg px-3 py-1.5 text-label-md text-foreground',
       'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+      MOTION.colors,
       // The archetype: "Disable rather than hide the controls at the first and last
       // page." Disabled buttons stay announced. No token recorded; muted asserted.
       'disabled:cursor-not-allowed disabled:text-muted-foreground',
@@ -47,18 +50,18 @@ export function Pagination({
     );
 
   return (
-    <nav aria-label={label} className="flex items-center gap-1 rounded-lg bg-card p-1">
+    <nav aria-label={label} className="flex items-center gap-2 rounded-lg bg-card px-2 py-1.5">
       <button type="button" className={btn()} disabled={atStart} onClick={() => onPageChange(page - 1)}>
         Previous
       </button>
 
       {compact ? (
         // Real text, so it is announced as-is.
-        <span className="px-2 text-body-sm text-foreground">
+        <span className="px-2 text-label-md text-foreground">
           Page {page} of {pageCount}
         </span>
       ) : (
-        <ol className="flex items-center gap-1">
+        <ol className="flex items-center gap-2">
           {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => (
             <li key={n}>
               <button

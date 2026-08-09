@@ -1,5 +1,6 @@
 import { useId } from 'react';
 import { cn } from '../lib/cn.js';
+import { MOTION } from '../lib/motion.js';
 
 /**
  * NavigationMenu — primary product navigation.
@@ -48,7 +49,8 @@ export function NavigationMenu({
   return (
     <nav
       aria-label={label}
-      className="rounded-lg border border-border bg-card p-2 text-body-sm text-foreground"
+      // px `space/3`, py `space/2`; item labels bind Label/MD (13/18 medium).
+      className="rounded-lg border border-border bg-card px-3 py-2 text-label-md text-foreground"
     >
       {onOpenChange ? (
         <button
@@ -62,6 +64,7 @@ export function NavigationMenu({
           className={cn(
             'rounded-lg px-3 py-2 sm:hidden',
             'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+            MOTION.colors,
             // Recorded: compact/open binds accent-foreground with no accent fill —
             // the fourth component with this shape. Transcribed and flagged.
             open && 'text-accent-foreground',

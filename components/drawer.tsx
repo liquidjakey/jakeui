@@ -56,11 +56,13 @@ export function Drawer({
       className={WIDTH[width]}
     >
       <div className="flex flex-col gap-1">
-        <h2 id={titleId} className="text-heading-md font-semibold text-foreground">
+        {/* Heading/LG (18/26) in the file, not Heading/MD (16/24). The style is
+            already semibold, so font-semibold is redundant. */}
+        <h2 id={titleId} className="text-heading-lg text-foreground">
           {title}
         </h2>
         {description ? (
-          <p id={descId} className="text-body-sm text-muted-foreground">
+          <p id={descId} className="text-body-md text-muted-foreground">
             {description}
           </p>
         ) : null}
