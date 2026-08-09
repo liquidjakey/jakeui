@@ -3,7 +3,7 @@
 Single-line text input primitive.
 
 - **Figma:** `Input` — node `70:51`, 4 variants
-- **Code:** `design-system/components/input.tsx` *(not yet implemented)*
+- **Code:** [`components/input.tsx`](../../components/input.tsx) — implemented 9 Aug 2026, exports `Input`
 - **Maturity:** Technical QA · source parity pending
 - **Format:** [props-table-format.md](../props-table-format.md)
 
@@ -40,7 +40,7 @@ Every token below is the **actual bound variable** read from the Figma file on 8
 |---|---|---|---|
 | `State` | Default · Focused · Error · Disabled | `invalid` + `disabled` booleans | **Yes.** One enum → two independent booleans. A field can be disabled *and* invalid; the Figma axis cannot express that. `Focused` is not a prop — it is `:focus-visible`. |
 | `Value#70:0` | string, default `"Enter text"` | `value` **and** `placeholder` | **Yes.** One Figma property standing in for two code props with different behavior and different color tokens. The Figma default reads like a placeholder but is bound to `--foreground`, the *filled* color. |
-| — | — | `leadingIcon`, `trailingIcon` | **Missing in Figma.** The master has no icon slots. Add INSTANCE_SWAP properties against the `Icon` set, or drop these props. |
+| — | — | `leadingIcon`, `trailingIcon` | **Missing in Figma.** The master has no icon slots. **Decided 9 Aug 2026: kept in code**, because Table 1 and the compiled interface both specify them and the container is already an auto-layout row with `gap-2`. Figma still owes `INSTANCE_SWAP` properties against the `Icon` set — until then these two slots exist only in code and cannot be reviewed in the design file. |
 | — | — | `onChange`, `onFocus`, `onBlur`, `name`, `id`, `type`, `required`, `errorMessage` | Behavior and a11y props with no Figma representation. Expected — recorded here so they are not dropped at codegen. |
 
 ---
@@ -54,13 +54,37 @@ Every token below is the **actual bound variable** read from the Figma file on 8
 | Focus | `:focus-visible` | border `2px` `ring` — replaces the 1px default border; the only focus affordance, do not remove |
 | Error | `invalid === true` | border `1px` `destructive` |
 | Disabled | `disabled === true` | fill `muted` · text `muted-foreground` · no focus ring |
-| Error + Disabled | both | fill `muted` · border `destructive` · text `muted-foreground` ⚠️ **no Figma variant exists** — resolve before implementing |
+| Error + Disabled | both | fill `muted` · border `destructive` · text `muted-foreground` — code-only, see decision 3 |
 
-⚠️ **Three build blockers, visible here rather than discovered at codegen:**
+### The three build blockers — resolved at implementation, 9 Aug 2026
 
-1. **`space/2-25` (9px vertical padding) is an exception token** — off the 4px ramp, added 8 Aug 2026 to eliminate a raw value. Reconcile to `space/2` (8) or `space/2-5` (10), or keep it and document why.
-2. **Placeholder colour is not in the Figma master.** All four variants bind the value text to `foreground`. The placeholder state exists only in code. Add a Figma representation or accept that Figma cannot show it.
-3. **`Error + Disabled` has no Figma variant.** The enum cannot express it. The code must; decide the visual now, not during implementation.
+1. **`space/2-25` (9px vertical padding) — kept.** It is not an exception token. The
+   8 Aug binding census promoted all 24 half-step tokens to first-class ramp members;
+   `space/2-25` carries live bindings and reconciling it to `space/2` (8px) or
+   `space/2-5` (10px) would change pixels across the library for no benefit. In code
+   it is written `py-[calc(var(--spacing)*2.25)]` rather than a bare `py-2.25`, so it
+   resolves identically in any Tailwind v4 setup and can never silently degrade to a
+   raw pixel value. See [`tokens/typography.md`](../tokens/typography.md).
+2. **Placeholder colour — code-only, Figma gap accepted.** All four Figma variants
+   bind the value text to `foreground`, so the placeholder state cannot be seen in
+   Figma. Code uses `placeholder:text-muted-foreground`. **Figma still owes a
+   representation**; until then the design file understates this state.
+3. **`Error + Disabled` — decided: `bg-muted` + `border-destructive` + `text-muted-foreground`.**
+   Disabled supplies the fill and text; invalid keeps its border so the error remains
+   legible while the control is inert. No Figma variant exists and the enum cannot
+   express it, so **Figma cannot review this state** — it is verifiable only in code.
+
+### One deliberate deviation from the Figma master
+
+The Focused variant draws a **2px** border. A literal `border-2` in CSS shrinks the
+content box and nudges the text 1px on focus. The implementation instead uses a 1px
+`border-ring` plus a 1px inset `ring-ring` — **2px of `ring` in total, zero layout
+shift.** Same token, same visual weight.
+
+It is keyed on `has-[:focus-visible]` rather than `focus-within`, because the ring
+sits on the container while focus lands on the inner `<input>`, and `focus-within`
+would also fire on mouse click. The contract in Table 4 is `:focus-visible` —
+keyboard only.
 
 ---
 

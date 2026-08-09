@@ -1,7 +1,7 @@
 {
   "$schema": "./figma.map.schema.json",
   "fileKey": "ovnLtL9xbX8SG5xDw673Un",
-  "generatedAt": "2026-08-08T04:29:56.016Z",
+  "generatedAt": "2026-08-09T06:58:03.860Z",
   "note": "Code Connect substitute — this plan has no Dev/Full seat. Hand-owned; CI-checked by validate-map.mjs.",
   "components": {
     "Sidebar Navigation Item": {
@@ -202,8 +202,8 @@
     "Input": {
       "figmaNodeId": "70:51",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/input.tsx",
+      "codeExport": "Input",
       "props": {
         "Value#70:0": {
           "kind": "prop",

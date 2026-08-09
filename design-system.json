@@ -4,7 +4,8 @@
     "codingLevel": "new"
   },
   "project": {
-    "uiFramework": null
+    "uiFramework": "shadcn",
+    "_uiFrameworkNote": "React 18/19 + Tailwind v4. globals.css is a shadcn-shaped token export, so component variant vocabulary follows shadcn naming."
   },
   "workspace": {
     "name": "Jake UI",
@@ -52,8 +53,16 @@
     "subset": []
   },
   "components": {
-    "built": [],
-    "meta": {},
+    "built": [
+      "Input"
+    ],
+    "meta": {
+      "Input": {
+        "status": "draft",
+        "updatedAt": "2026-08-09T06:05:00Z",
+        "_note": "Code implemented and CI-bound (figma.map.json codePath + codeExport, validator passing). Stays draft until Storybook stories exist and it is reviewed — promotion to stable is storybook-chromatic-builder's call. Two states are code-only and cannot be reviewed in Figma: placeholder colour, and Error+Disabled."
+      }
+    },
     "instanceSwapUpgradePending": []
   },
   "repo": {
@@ -89,9 +98,9 @@
       "tailwindColorClasses": 0,
       "jsColorsUsages": 0,
       "svgFills": 0,
-      "codeComponents": 0,
+      "codeComponents": 1,
       "figmaMapComponents": 74,
-      "figmaMapWithCodePath": 0,
+      "figmaMapWithCodePath": 1,
       "figmaMapDecomposeEntries": 23
     },
     "figmaInventory": {

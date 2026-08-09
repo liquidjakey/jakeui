@@ -11,26 +11,39 @@
   "files": [
     "tokens/globals.css",
     "icons/phosphor-map.ts",
+    "components",
+    "lib",
     "figma.map.json"
   ],
   "exports": {
     "./tokens.css": "./tokens/globals.css",
     "./icons": "./icons/phosphor-map.ts",
-    "./map": "./figma.map.json"
+    "./map": "./figma.map.json",
+    ".": "./components/index.ts"
   },
   "scripts": {
     "tokens:sync": "node scripts/export-tokens.mjs",
     "tokens:check": "node scripts/export-tokens.mjs --check",
     "map:sync": "node scripts/generate-map.mjs",
     "map:check": "node scripts/validate-map.mjs",
-    "check": "npm run tokens:check && npm run map:check"
+    "typecheck": "tsc --noEmit",
+    "check": "npm run tokens:check && npm run map:check && npm run typecheck"
   },
   "peerDependencies": {
-    "@phosphor-icons/react": "^2.1.10"
+    "@phosphor-icons/react": "^2.1.10",
+    "react": "^18.0.0 || ^19.0.0"
   },
   "peerDependenciesMeta": {
     "@phosphor-icons/react": {
       "optional": true
     }
+  },
+  "devDependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.2.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.2.8",
+    "typescript": "^5.7.0"
   }
 }

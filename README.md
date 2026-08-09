@@ -10,6 +10,8 @@ Figma Code Connect needs a Dev or Full seat on an Org/Enterprise plan. This acco
 
 ```
 design-system/
+  components/               React components. index.ts is the public barrel.
+  lib/cn.ts                 Class-name joiner
   tokens/globals.css        Tailwind v4 + shadcn token export (GENERATED — never hand-edit)
   tokens/annotations.json   Hand-written prose injected into globals.css
   icons/phosphor-map.ts     52 icons -> @phosphor-icons/react (generated)
@@ -29,9 +31,10 @@ design-system/
 ```bash
 npm run tokens:sync    # dump -> tokens/globals.css
 npm run tokens:check   # fail if globals.css is hand-edited or the dump is stale
-npm run map:sync       # dump -> figma.map.json
+npm run map:sync       # dump -> figma.map.json (preserves hand-set codePaths)
 npm run map:check      # fail if the map and the docs disagree
-npm run check          # both gates — this is the CI entry point
+npm run typecheck      # tsc --noEmit over components/, lib/, icons/
+npm run check          # all three gates — this is the CI entry point
 ```
 
 Two generators, same shape: query inside Figma (the Variables REST API is
@@ -58,10 +61,34 @@ counts are not current; do not build from it.** Current project state lives in
 ## Install
 
 ```bash
-npm i @phosphor-icons/react   # ^2.1.10
+npm i react @phosphor-icons/react   # react ^18 || ^19 · phosphor ^2.1.10
 ```
 
 Import `tokens/globals.css` once at the app root.
+
+```tsx
+import { Input } from 'jakeui';
+import { MagnifyingGlass } from '@phosphor-icons/react';
+
+<Input
+  value={q}
+  onChange={(e) => setQ(e.target.value)}
+  placeholder="Search patients"
+  leadingIcon={<MagnifyingGlass size={16} />}
+/>
+```
+
+## Components
+
+**1 of 74 implemented.** `Input` is the worked example that closes the loop from
+Figma variable to typed React prop; the rest are repetition of the same four steps.
+
+| Component | Code | Props table |
+|---|---|---|
+| `Input` | [`components/input.tsx`](./components/input.tsx) | [`docs/components/input.md`](./docs/components/input.md) |
+
+`npm run map:check` reports how many are mapped, and warns for every one that
+isn't.
 
 ## Icons
 
