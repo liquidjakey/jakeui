@@ -66,7 +66,7 @@
       "Input": {
         "status": "draft",
         "updatedAt": "2026-08-09T06:05:00Z",
-        "_note": "Code implemented and CI-bound (figma.map.json codePath + codeExport, validator passing). Stays draft until Storybook stories exist and it is reviewed — promotion to stable is storybook-chromatic-builder's call. Two states are code-only and cannot be reviewed in Figma: placeholder colour, and Error+Disabled."
+        "_note": "Code implemented, CI-bound, and now RENDERED and visually verified in Storybook across all five states in both modes. Still draft: promotion to stable is storybook-chromatic-builder's call and there is no Chromatic baseline. Rendering caught a real bug (see the cn/tailwind-merge fix) and disproved part of the focus-ring rationale."
       }
     },
     "instanceSwapUpgradePending": []
@@ -85,9 +85,10 @@
     "lastRun": null
   },
   "storybook": {
-    "initialized": false,
+    "initialized": true,
     "chromatic": false,
-    "codeConnect": false
+    "codeConnect": false,
+    "_note": "Storybook 9 + Vite + Tailwind v4 at the repo root, not in a monorepo. storybook-chromatic-builder expects a pnpm/Turborepo workspace with packages/tokens and packages/ui; this is the single-package equivalent. Chromatic deliberately deferred: it is a paid SaaS needing CI, and a baseline of one component carries little signal. Revisit once several components exist."
   },
   "audit": {
     "ranAt": "2026-08-08T00:00:00Z",
@@ -173,7 +174,8 @@
     "_rebindProgress": "Complete. Rebound 75 text fill bindings across 71 nodes: 71 primary -> primary-readable (Light unchanged at 6.82 since both resolve to blue/700; Dark 2.03 -> 9.89 on card/popover, 2.24 -> 10.93 on background), 2 warning -> warning-muted-foreground (3.07 -> 4.84), 2 success -> success-muted-foreground (3.15 -> 4.79). Deliberately NOT rebound: destructive (62 text bindings, passes at 4.76 Light / 6.19 Dark, and destructive-foreground is white so it is not a valid substitute) and info (4.82 / 4.88, passes). Binding total 65088 vs baseline 65045; the +43 is entirely the muted-foreground comparison frame created for the deferred grey decision (verified: total minus that frame == 65045 exactly). Zero text nodes ended up with multiple bound fills, so no over-application.",
     "_rebindOpenItems": "3 destructive-as-text nodes on accent in Light = 4.37 (below 4.5). 2 destructive-as-text nodes sit on a LITERAL (unbound) background and read 2.89 in Dark — the literal fill is itself a token violation and should be bound before the contrast can be fixed. Neither is addressable by rebinding alone.",
     "_phase4Declined": "token-sync-layer NOT adopted; export-tokens.mjs kept. It already satisfies 4 of the skill's hard rules (float32 rounding at the export boundary, semantic->primitive var() references preserved, --check gate against hand-edits, committed diffable dump), and adopting Phase 4 would require converting to a monorepo for packages/tokens while NOT removing the query-in-Figma step, since that exists because the Variables REST API is Enterprise-only on this plan. Ported the opacity rule immediately (it exposed a live 120-binding bug). Deferred: rename detection (revisit before scaling component count), channel-alpha (when a consumer exists), multi-platform adapters (when a non-web target is real). Full reasoning in docs/design-system/decisions/2026-08-09-phase-4-sync-declined.md.",
-    "_phase5and6Skipped": "baseline (5) blocked: no Storybook/Chromatic, and storybook-chromatic-builder requires a monorepo + packages/tokens. code (6) is N/A as a retrofit: no consuming application, scssColorVars/tailwindColorClasses/jsColorsUsages all 0, so there is nothing to swap and no consumer to keep working. Next actionable phase is 6.5 (docs)."
+    "_phase5and6Skipped": "baseline (5) blocked: no Storybook/Chromatic, and storybook-chromatic-builder requires a monorepo + packages/tokens. code (6) is N/A as a retrofit: no consuming application, scssColorVars/tailwindColorClasses/jsColorsUsages all 0, so there is nothing to swap and no consumer to keep working. Next actionable phase is 6.5 (docs).",
+    "_phase5Note": "baseline (Chromatic) still not captured and deliberately so. Storybook WAS set up, but for its own reasons rather than phase 5: globals.css had never been compiled (307 declarations, no Tailwind installed) and no component had ever been rendered. Phase 5 exists to protect a code retrofit that is N/A here."
   },
   "completedSkills": [
     "figma-environment-setup",

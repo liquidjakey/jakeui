@@ -21,6 +21,6 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["components", "icons", "lib"],
+  "include": ["components", "icons", "lib", ".storybook"],
   "exclude": ["node_modules", "dist"]
 }

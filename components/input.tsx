@@ -65,10 +65,14 @@ const BASE = [
  * A literal `border-2` would shrink the content box and nudge the text 1px on
  * focus. Same token, same visual weight, no jank.
  *
- * Keyed on `has-[:focus-visible]` rather than `focus-within` because the ring
- * belongs on the container while the focus lives on the inner `<input>`.
- * `focus-within` would also fire on mouse click; the contract is `:focus-visible`,
- * i.e. keyboard only.
+ * Keyed on `has-[:focus-visible]` because the ring belongs on the container while
+ * focus lands on the inner `<input>`.
+ *
+ * Note for anyone extending this: for a **text input** `:focus-visible` matches on
+ * mouse click too — browsers always match it where keyboard input is expected — so
+ * `focus-within` would look identical here. `:focus-visible` is still the right
+ * primitive, and the difference becomes real the moment this container holds a
+ * button or another non-text control. Verified rendered in Storybook.
  *
  * Do not remove: this is the only focus affordance.
  */

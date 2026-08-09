@@ -79,12 +79,19 @@ Every token below is the **actual bound variable** read from the Figma file on 8
 The Focused variant draws a **2px** border. A literal `border-2` in CSS shrinks the
 content box and nudges the text 1px on focus. The implementation instead uses a 1px
 `border-ring` plus a 1px inset `ring-ring` — **2px of `ring` in total, zero layout
-shift.** Same token, same visual weight.
+shift** (a `box-shadow` ring cannot affect layout). Same token, same visual weight.
+Verified rendered in Storybook.
 
-It is keyed on `has-[:focus-visible]` rather than `focus-within`, because the ring
-sits on the container while focus lands on the inner `<input>`, and `focus-within`
-would also fire on mouse click. The contract in Table 4 is `:focus-visible` —
-keyboard only.
+It is keyed on `has-[:focus-visible]` because the ring sits on the container while
+focus lands on the inner `<input>`.
+
+**One correction worth recording:** an earlier version of this note claimed
+`focus-visible` was chosen over `focus-within` because the latter "would also fire on
+mouse click." For a **text input** that is wrong — `:focus-visible` matches on mouse
+click too, since browsers always match it where keyboard input is expected, and the
+Storybook render confirms the ring appears on click. `:focus-visible` remains the
+correct primitive, and the distinction becomes real if this container ever holds a
+button or other non-text control, but the two behave identically for `Input` today.
 
 ---
 

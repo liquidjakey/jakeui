@@ -22,3 +22,4 @@ build/
 # ignored. They are the committed, diffable inputs to the two generators —
 # a token change should show up in review as a dump diff plus a globals.css
 # diff. Ignoring them would make the generated CSS unreproducible.
+storybook-static/
