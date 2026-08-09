@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Dialog } from './dialog.js';
-import { AlertDialog } from './alert-dialog.js';
-import { Drawer } from './drawer.js';
-import { Sheet } from './sheet.js';
 
 /**
- * Stories for the overlay family: `Dialog`, `AlertDialog`, `Drawer`, `Sheet`.
- * Contracts: docs/components/dialog.md · alert-dialog.md · drawer.md · sheet.md
+ * Stories for `Dialog`.
+ * Contract: docs/components/dialog.md
  *
- * All four share `modal-surface.tsx`, a native `<dialog>` driven by `showModal()`.
+ * Dialog, AlertDialog, Drawer and Sheet all share `modal-surface.tsx`, a native
+ * `<dialog>` driven by `showModal()`.
  * The focus trap, Escape-to-close, top layer and `::backdrop` are all supplied by
  * the platform rather than re-implemented.
  *
@@ -97,98 +95,5 @@ function FormDemo() {
         <p>Large size — a raw width, because no width tokens exist in the file.</p>
       </Dialog>
     </>
-  );
-}
-
-/**
- * **AlertDialog — the backdrop deliberately does not close it.**
- *
- * Try clicking outside: nothing happens. A Dialog is dismissible by clicking away;
- * an AlertDialog is a decision, and dismissing a decision by misclick is how
- * people lose data. Escape still cancels.
- *
- * Note also that focus lands on **Cancel**, not the action — so someone who
- * presses Enter reflexively takes the safe path.
- */
-export const AlertDestructive: Story = {
-  name: 'AlertDialog — destructive',
-  args: { open: false, onClose: () => {}, title: 'Dialog' },
-  render: () => <AlertDemo />,
-};
-
-function AlertDemo() {
-  const [open, setOpen] = useState(false);
-  const [result, setResult] = useState<string | null>(null);
-  return (
-    <div className="flex flex-col gap-3">
-      <Trigger label="Delete record…" onClick={() => setOpen(true)} />
-      {result ? <span className="text-body-sm text-muted-foreground">Result: {result}</span> : null}
-      <AlertDialog
-        open={open}
-        tone="destructive"
-        title="Delete this patient record?"
-        description="This removes all appointment history. It cannot be undone."
-        cancelLabel="Keep record"
-        actionLabel="Delete permanently"
-        onCancel={() => {
-          setResult('cancelled');
-          setOpen(false);
-        }}
-        onAction={() => {
-          setResult('deleted');
-          setOpen(false);
-        }}
-      />
-    </div>
-  );
-}
-
-/**
- * **Drawer and Sheet, side by side — they are identical.**
- *
- * This story exists to make the duplication visible. Identical tokens, identical
- * state rows, identical variants, identical props, identical accessibility. The
- * only difference is the axis name: Drawer calls it `Placement`, Sheet calls it
- * `Side`, with the same two values.
- *
- * Both were built as specified rather than merged, because collapsing them is a
- * design decision. See docs/components/drawer.md for the full comparison.
- */
-export const DrawerVsSheet: Story = {
-  name: 'Drawer vs Sheet (identical by design file)',
-  args: { open: false, onClose: () => {}, title: 'Dialog' },
-  render: () => <EdgeDemo />,
-};
-
-function EdgeDemo() {
-  const [drawer, setDrawer] = useState(false);
-  const [sheet, setSheet] = useState(false);
-  return (
-    <div className="flex gap-2">
-      <Trigger label="Drawer (right, compact)" onClick={() => setDrawer(true)} />
-      <Trigger label="Sheet (left, wide)" onClick={() => setSheet(true)} />
-
-      <Drawer
-        open={drawer}
-        onClose={() => setDrawer(false)}
-        placement="right"
-        width="compact"
-        title="Filters"
-        description="Axis is called Placement here."
-      >
-        <p>Transient filtering, per the description.</p>
-      </Drawer>
-
-      <Sheet
-        open={sheet}
-        onClose={() => setSheet(false)}
-        side="left"
-        width="wide"
-        title="Patient details"
-        description="Axis is called Side here. Everything else is the same."
-      >
-        <p>Persistent side task, per the description — but still a modal that traps focus.</p>
-      </Sheet>
-    </div>
   );
 }

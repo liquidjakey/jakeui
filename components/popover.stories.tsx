@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Popover, PopoverClose, PopoverViewport } from './popover.js';
-import { Tooltip } from './tooltip.js';
-import { HoverCard } from './hover-card.js';
+import { Popover, PopoverClose } from './popover.js';
 import { Input } from './input.js';
 import { Field } from './field.js';
 
 /**
- * Stories for the anchored-overlay family.
- * Contracts: docs/components/popover.md · popover-backdrop.md · popover-close.md ·
- * popover-viewport.md · tooltip.md · hover-card.md
+ * Stories for `Popover`.
+ * Contracts: docs/components/popover.md · popover-backdrop.md · popover-close.md
  *
  * **These stories are `Popover / Root Composition`** — that asset's `Pattern` axis
  * is `kind: story-only` ("Storybook story, never a prop"), so its four patterns
@@ -159,76 +156,3 @@ function RtlDemo() {
     </div>
   );
 }
-
-/**
- * `PopoverViewport` — the component whose vocabulary was the **last unresolved doc
- * block in the system**.
- *
- * `direction` is an *activation* direction (`data-activation-direction`), not
- * anchored placement — that distinction is exactly why it was left owed rather than
- * guessed: the `side` axis already owns top/right/bottom/left for placement. Reading
- * this asset's own description settled it.
- *
- * Note `State` did **not** become an enum: current and previous both render at once
- * during a transition, and an enum could only ever show one.
- */
-export const Viewport: Story = {
-  name: 'PopoverViewport — current + previous',
-  args: { open: false, onOpenChange: () => {}, trigger: null },
-  render: () => (
-    <div className="w-64 p-8">
-      <PopoverViewport direction="right" previous={<p className="p-3">Outgoing content</p>}>
-        <p className="p-3">Current content</p>
-      </PopoverViewport>
-    </div>
-  ),
-};
-
-/**
- * `Tooltip` — describes, never names.
- *
- * Its `label` is deliberately a **string**, not a node. A node slot would invite
- * buttons and links into a surface that is unreachable by keyboard and invisible on
- * touch. Tab to the button: the tooltip shows on focus immediately, and on hover
- * after a delay.
- */
-export const Tooltips: Story = {
-  name: 'Tooltip — four sides',
-  args: { open: false, onOpenChange: () => {}, trigger: null },
-  render: () => (
-    <div className="flex gap-6 p-16">
-      {(['top', 'bottom', 'left', 'right'] as const).map((s) => (
-        <Tooltip key={s} side={s} label={`Placed on the ${s}`}>
-          <TriggerButton>{s}</TriggerButton>
-        </Tooltip>
-      ))}
-    </div>
-  ),
-};
-
-/**
- * `HoverCard`. Opens on hover **and on focus** — hover alone would exclude keyboard
- * and touch users, which the record calls out explicitly.
- *
- * `closeDelay` lets the pointer travel from trigger into the card without it
- * vanishing. Density is not just spacing: `detailed` is what makes room for `meta`.
- */
-export const HoverCards: Story = {
-  name: 'HoverCard — compact vs detailed',
-  args: { open: false, onOpenChange: () => {}, trigger: null },
-  render: () => (
-    <div className="flex gap-8 p-16">
-      <HoverCard title="Ada Lovelace" description="Patient since 2019.">
-        <TriggerButton>Compact</TriggerButton>
-      </HoverCard>
-      <HoverCard
-        title="Ada Lovelace"
-        description="Patient since 2019."
-        density="detailed"
-        meta={<p>Last visit: 14 June · Next: 14 August</p>}
-      >
-        <TriggerButton>Detailed</TriggerButton>
-      </HoverCard>
-    </div>
-  ),
-};

@@ -4,12 +4,10 @@ import { Field } from './field.js';
 import { Input } from './input.js';
 import { Textarea } from './textarea.js';
 import { NativeSelect } from './native-select.js';
-import { Separator } from './separator.js';
-import { Label } from './label.js';
 
 /**
- * Stories for `Field`, `Label` and `Separator`. Contracts:
- * docs/components/field.md · label.md · separator.md
+ * Stories for `Field`.
+ * Contract: docs/components/field.md
  *
  * Field owns the accessibility wiring. Inspect any field below in the DOM and the
  * `<label for>`, `aria-describedby`, `aria-invalid` and `id` all line up without
@@ -138,68 +136,6 @@ export const Disabled: Story = {
       <Field label="Record ID" helperText="Assigned automatically." disabled>
         {(control) => <Input {...control} value="PT-004821" onChange={() => {}} />}
       </Field>
-    </div>
-  ),
-};
-
-/**
- * `Label` on its own, showing all three marker states.
- *
- * The third — no marker at all — has no Figma variant, and it is the default,
- * because the record's dont says to mark only whichever of required/optional is
- * rarer. The marker is `aria-hidden`: required state reaches assistive technology
- * through the control's own `required`, not through the glyph.
- */
-export const LabelVariants: Story = {
-  name: 'Label — marker states',
-  args: { label: 'n/a', children: () => null },
-  render: () => (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor="demo-a">No marker (default, no Figma variant)</Label>
-      <Label htmlFor="demo-b" requirement="required">
-        Required
-      </Label>
-      <Label htmlFor="demo-c" requirement="optional">
-        Optional
-      </Label>
-      <Label htmlFor="demo-d" disabled>
-        Disabled
-      </Label>
-    </div>
-  ),
-};
-
-/**
- * `Separator` in both orientations.
- *
- * Both bind the same single token, `border` — only the axis changes. The
- * `decorative` prop has no visual effect at all and no Figma variant; it decides
- * whether the rule is `aria-hidden` or a real `role="separator"`.
- */
-export const Separators: Story = {
-  name: 'Separator — orientations',
-  args: { label: 'n/a', children: () => null },
-  render: () => (
-    <div className="flex max-w-sm flex-col gap-4">
-      <div className="flex flex-col gap-3">
-        <span className="text-label-xs text-muted-foreground">Horizontal (decorative)</span>
-        <span className="text-body-md text-foreground">Above</span>
-        <Separator />
-        <span className="text-body-md text-foreground">Below</span>
-      </div>
-
-      <div className="flex h-10 items-center gap-3">
-        <span className="text-body-md text-foreground">Left</span>
-        <Separator orientation="vertical" />
-        <span className="text-body-md text-foreground">Right</span>
-      </div>
-
-      <div className="flex flex-col gap-3">
-        <span className="text-label-xs text-muted-foreground">
-          Semantic (role=&quot;separator&quot;, announced)
-        </span>
-        <Separator decorative={false} />
-      </div>
     </div>
   ),
 };
