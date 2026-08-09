@@ -27,9 +27,11 @@
     "map:sync": "node scripts/generate-map.mjs",
     "map:check": "node scripts/validate-map.mjs",
     "typecheck": "tsc --noEmit",
-    "check": "npm run tokens:check && npm run map:check && npm run typecheck",
+    "check": "npm run tokens:check && npm run map:check && npm run docs:check && npm run typecheck",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "docs:adopt": "node scripts/adopt-docs.mjs",
+    "docs:check": "node scripts/docs-check.mjs"
   },
   "peerDependencies": {
     "@phosphor-icons/react": "^2.1.10",

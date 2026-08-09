@@ -1,0 +1,41 @@
+{
+  "name": "Data Table",
+  "summary": "Data-management composition built from Input, Button, Table, and Pagination.",
+  "description": "Data-management composition built from Input, Button, Table, and Pagination. Supports desktop and compact viewports with populated and empty states. Fixed default width with Hug Contents height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "state": {
+      "populated": "",
+      "empty": ""
+    }
+  },
+  "states": {
+    "Viewport=Desktop, State=Populated": "fill card · border 1px border · radius radius/lg · text foreground · type size/18",
+    "Viewport=Desktop, State=Empty": "type size/15",
+    "Viewport=Compact, State=Empty": "type size/15"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not turn Viewport into a code prop."
+  ],
+  "tokensUsed": [
+    "border",
+    "card",
+    "foreground",
+    "radius/lg",
+    "size/15",
+    "size/18"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "tokensUsed": "imported"
+  }
+}

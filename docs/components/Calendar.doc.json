@@ -1,0 +1,44 @@
+{
+  "name": "Calendar",
+  "summary": "Month calendar supporting single-date and date-range selection in compact and comfortable densities.",
+  "description": "Month calendar supporting single-date and date-range selection in compact and comfortable densities. Includes today, selected, range, disabled, and outside-month states. Fixed default width with Hug Contents height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.\n\nAccessibility contract: month navigation controls require programmatic names such as Previous month and Next month; selected/today/range states require programmatic equivalents and must not rely on color alone.",
+  "variants": {
+    "mode": {
+      "single": "",
+      "range": ""
+    },
+    "density": {
+      "compact": "",
+      "comfortable": ""
+    }
+  },
+  "states": {
+    "Mode=Single, Density=Compact": "fill card · border 1px border · radius radius/lg · text foreground · type size/13"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "accessibility": {
+    "notes": [
+      "month navigation controls require programmatic names such as Previous month and Next month; selected/today/range states require programmatic equivalents and must not rely on color alone."
+    ]
+  },
+  "tokensUsed": [
+    "border",
+    "card",
+    "foreground",
+    "radius/lg",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "accessibility": "imported",
+    "tokensUsed": "imported"
+  }
+}

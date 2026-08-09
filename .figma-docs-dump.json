@@ -1,0 +1,52 @@
+{
+  "fileKey": "ovnLtL9xbX8SG5xDw673Un",
+  "generatedAt": "2026-08-09T08:15:21.966Z",
+  "total": 86,
+  "offset": 0,
+  "returned": 6,
+  "_note": "Validation slice: 6 of 86, chosen to exercise every parser branch — a plain set (Alert), decompose + slots + a governance warning (Button), a standalone component with no generated block at all (Command Panel), a design-only Viewport axis (Data Table), a 24-variant matrix (Dropdown Menu / Content), and an explicit accessibility paragraph (Calendar).",
+  "components": [
+    {
+      "name": "Alert",
+      "kind": "set",
+      "figmaNodeId": "103:475",
+      "variants": 4,
+      "description": "Inline feedback message for informational, successful, warning, and destructive states. Use semantic feedback variables; reserve destructive tone for errors that block progress. Sizing policy: fixed/default width with Hug Contents height.\n\n———\nANATOMY / STATE TOKENS\nTone=Info — fill info-muted · border 1px info · radius radius/lg · text info · type size/14\nTone=Success — fill success-muted · border 1px success · text success\nTone=Warning — fill warning-muted · border 1px warning · text warning\nTone=Destructive — fill card · border 1px destructive · text destructive\n\nCODE API — full contract: docs/state-decomposition.md\nProps — Title: string · Description: string · Tone: info | success | warning | destructive\n\nDO / DO NOT\n+ Reference variables for every value; never hardcode a hex or px.\n+ Change state through props, never by detaching the instance."
+    },
+    {
+      "name": "Button",
+      "kind": "set",
+      "figmaNodeId": "76:147",
+      "variants": 32,
+      "description": "Jake UI action button based on Watermelon/shadcn interaction patterns. Use semantic styles rather than hardcoded colors. Size and state are variant axes; label and leading icon are component properties.\n\nPipeline property contract: Leading icon is an INSTANCE_SWAP constrained to the local Icon component set; Show leading icon controls visibility. State=Focused documents focus-visible using the semantic ring token at 2px. Pointer-active/pressed behavior is runtime-only unless the code API later defines a distinct visual state.\n\n———\nANATOMY / STATE TOKENS\nStyle=Primary, Size=Small, State=Default — fill primary · radius radius/lg · text primary-foreground · type size/13\nStyle=Primary, Size=Small, State=Disabled — fill muted · text muted-foreground\nStyle=Primary, Size=Medium, State=Default — type size/14\nStyle=Primary, Size=Medium, State=Hover — type size/14\nStyle=Primary, Size=Medium, State=Disabled — fill muted · text muted-foreground · type size/14\nStyle=Secondary, Size=Small, State=Default — fill secondary · text secondary-foreground\nStyle=Secondary, Size=Small, State=Hover — fill accent · text secondary-foreground\nStyle=Secondary, Size=Small, State=Disabled — fill muted · text muted-foreground\n(+24 further variants share these tokens)\n\nCODE API — full contract: docs/state-decomposition.md\nProps — Label: string · Style: primary | secondary | outline | ghost · Size: small | medium\nSlots — Show leading icon → collapses into the nullable slot · Leading icon: ReactNode (Phosphor icon)\n! Decompose — State [Default · Hover · Disabled · Focused] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean\n\nDO / DO NOT\n+ Reference variables for every value; never hardcode a hex or px.\n+ Change state through props, never by detaching the instance.\n+ Pass icons as @phosphor-icons/react components through the slot, never as text glyphs.\n- Do not emit State as an enum prop. It packs states that co-occur at runtime.\n- Variant count (32) exceeds the 30-combination governance ceiling. Needs a documented exception."
+    },
+    {
+      "name": "Calendar",
+      "kind": "set",
+      "figmaNodeId": "132:1214",
+      "variants": 4,
+      "description": "Month calendar supporting single-date and date-range selection in compact and comfortable densities. Includes today, selected, range, disabled, and outside-month states. Fixed default width with Hug Contents height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.\n\nAccessibility contract: month navigation controls require programmatic names such as Previous month and Next month; selected/today/range states require programmatic equivalents and must not rely on color alone.\n\n———\nANATOMY / STATE TOKENS\nMode=Single, Density=Compact — fill card · border 1px border · radius radius/lg · text foreground · type size/13\n(+3 further variants share these tokens)\n\nCODE API — full contract: docs/state-decomposition.md\nProps — Month label: string · Mode: single | range · Density: compact | comfortable\n\nDO / DO NOT\n+ Reference variables for every value; never hardcode a hex or px.\n+ Change state through props, never by detaching the instance."
+    },
+    {
+      "name": "Command Panel",
+      "kind": "component",
+      "figmaNodeId": "20:5",
+      "variants": 1,
+      "description": "Watermelon package-manager command panel with editable Command text."
+    },
+    {
+      "name": "Data Table",
+      "kind": "set",
+      "figmaNodeId": "136:1974",
+      "variants": 4,
+      "description": "Data-management composition built from Input, Button, Table, and Pagination. Supports desktop and compact viewports with populated and empty states. Fixed default width with Hug Contents height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.\n\n———\nANATOMY / STATE TOKENS\nViewport=Desktop, State=Populated — fill card · border 1px border · radius radius/lg · text foreground · type size/18\nViewport=Desktop, State=Empty — type size/15\nViewport=Compact, State=Empty — type size/15\n(+1 further variants share these tokens)\n\nCODE API — full contract: docs/state-decomposition.md\nProps — Title: string · State: populated | empty\nDesign-only — Viewport (responsive fixture, never a prop)\n\nDO / DO NOT\n+ Reference variables for every value; never hardcode a hex or px.\n+ Change state through props, never by detaching the instance.\n- Do not turn Viewport into a code prop."
+    },
+    {
+      "name": "Dropdown Menu / Content",
+      "kind": "set",
+      "figmaNodeId": "146:2602",
+      "variants": 24,
+      "description": "Positioned menu content. Complete placement matrix: Side=Top/Right/Bottom/Left, Align=Start/Center/End, and optional Arrow. Content itself is open-only; closed behavior is represented at the Root Composition level. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.\n\n———\nANATOMY / STATE TOKENS\nSide=Top, Align=Start, Arrow=False — text popover-foreground · type size/13\n(+23 further variants share these tokens)\n\nCODE API — full contract: docs/state-decomposition.md\nProps — Side: top | right | bottom | left · Align: start | center | end · Arrow: false | true\n\nDO / DO NOT\n+ Reference variables for every value; never hardcode a hex or px.\n+ Change state through props, never by detaching the instance."
+    }
+  ]
+}

@@ -67,6 +67,90 @@
         "status": "draft",
         "updatedAt": "2026-08-09T06:05:00Z",
         "_note": "Code implemented, CI-bound, and now RENDERED and visually verified in Storybook across all five states in both modes. Still draft: promotion to stable is storybook-chromatic-builder's call and there is no Chromatic baseline. Rendering caught a real bug (see the cn/tailwind-merge fix) and disproved part of the focus-ring rationale."
+      },
+      "Alert": {
+        "doc": {
+          "path": "docs/components/Alert.doc.json",
+          "fingerprint": "76da86cc35ab49c4",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "76da86cc35ab49c4",
+              "render": "6c012f5c42967c9e"
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:18:32.898Z"
+      },
+      "Button": {
+        "doc": {
+          "path": "docs/components/Button.doc.json",
+          "fingerprint": "5fc358593db204dd",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "5fc358593db204dd",
+              "render": "3f09ab69d8f764eb"
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:18:32.898Z"
+      },
+      "Calendar": {
+        "doc": {
+          "path": "docs/components/Calendar.doc.json",
+          "fingerprint": "0b8ecd3aa017bf19",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "0b8ecd3aa017bf19",
+              "render": "7254ec6945d19939"
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:18:32.898Z"
+      },
+      "Command Panel": {
+        "doc": {
+          "path": "docs/components/Command-Panel.doc.json",
+          "fingerprint": "d10ca0fb5e0922ca",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "d10ca0fb5e0922ca",
+              "render": "8db48b95c5df8a19"
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:18:32.898Z"
+      },
+      "Data Table": {
+        "doc": {
+          "path": "docs/components/Data-Table.doc.json",
+          "fingerprint": "3ee1574e876a4639",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "3ee1574e876a4639",
+              "render": "381cc747a71c2fbd"
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:18:32.898Z"
+      },
+      "Dropdown Menu / Content": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Content.doc.json",
+          "fingerprint": "ac128105002b0057",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "ac128105002b0057",
+              "render": "c4307ec0cd18a05c"
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:18:32.898Z"
       }
     },
     "instanceSwapUpgradePending": []
@@ -155,7 +239,7 @@
         "codeJsdoc": 0,
         "mdx": 0
       },
-      "_note": "86 = 75 component sets + 11 standalone, all carrying verified Figma descriptions; 182/182 variables described too. The gap is code-side: only 1 of 86 (input.md) has a written code doc, and 0 code components exist. The retrofit docs phase adopts the Figma descriptions rather than authoring from scratch."
+      "_note": "86 = 75 component sets + 11 standalone, all carrying verified Figma descriptions; 189/189 variables described too. As of 9 Aug 2026, 6 of the 86 have been adopted into canonical docs/components/<Name>.doc.json records (provenance: imported). 80 remain. Code components: 1 (Input), which has both a props table (input.md) and a rendered Storybook story."
     }
   },
   "tokenCrosswalk": {
@@ -164,7 +248,7 @@
     "validatorPassing": null
   },
   "retrofit": {
-    "phase": "rebind",
+    "phase": "docs",
     "startedAt": "2026-08-09T06:20:00Z",
     "completedAt": null,
     "journalScaffolded": true,
@@ -175,7 +259,8 @@
     "_rebindOpenItems": "3 destructive-as-text nodes on accent in Light = 4.37 (below 4.5). 2 destructive-as-text nodes sit on a LITERAL (unbound) background and read 2.89 in Dark — the literal fill is itself a token violation and should be bound before the contrast can be fixed. Neither is addressable by rebinding alone.",
     "_phase4Declined": "token-sync-layer NOT adopted; export-tokens.mjs kept. It already satisfies 4 of the skill's hard rules (float32 rounding at the export boundary, semantic->primitive var() references preserved, --check gate against hand-edits, committed diffable dump), and adopting Phase 4 would require converting to a monorepo for packages/tokens while NOT removing the query-in-Figma step, since that exists because the Variables REST API is Enterprise-only on this plan. Ported the opacity rule immediately (it exposed a live 120-binding bug). Deferred: rename detection (revisit before scaling component count), channel-alpha (when a consumer exists), multi-platform adapters (when a non-web target is real). Full reasoning in docs/design-system/decisions/2026-08-09-phase-4-sync-declined.md.",
     "_phase5and6Skipped": "baseline (5) blocked: no Storybook/Chromatic, and storybook-chromatic-builder requires a monorepo + packages/tokens. code (6) is N/A as a retrofit: no consuming application, scssColorVars/tailwindColorClasses/jsColorsUsages all 0, so there is nothing to swap and no consumer to keep working. Next actionable phase is 6.5 (docs).",
-    "_phase5Note": "baseline (Chromatic) still not captured and deliberately so. Storybook WAS set up, but for its own reasons rather than phase 5: globals.css had never been compiled (307 declarations, no Tailwind installed) and no component had ever been rendered. Phase 5 exists to protect a code retrofit that is N/A here."
+    "_phase5Note": "baseline (Chromatic) still not captured and deliberately so. Storybook WAS set up, but for its own reasons rather than phase 5: globals.css had never been compiled (307 declarations, no Tailwind installed) and no component had ever been rendered. Phase 5 exists to protect a code retrofit that is N/A here.",
+    "_docsProgress": "IN PROGRESS. Adoption tooling built and validated: scripts/lib/doc-record.mjs (stableStringify + canonicalFingerprint, zero deps), scripts/figma-docs-query.js (dump, chunkable), scripts/adopt-docs.mjs (parse -> records + manifest pointers), scripts/docs-check.mjs (drift gate, wired into npm run check). 6 of 86 adopted as a validation slice chosen to exercise every parser branch. REMAINING: 80 components. The work is mechanical — run figma-docs-query.js in chunks, merge into .figma-docs-dump.json, re-run docs:adopt. The only cost is moving ~72KB of description text out of Figma; the parser needs no further changes."
   },
   "completedSkills": [
     "figma-environment-setup",

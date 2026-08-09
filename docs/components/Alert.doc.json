@@ -1,0 +1,44 @@
+{
+  "name": "Alert",
+  "summary": "Inline feedback message for informational, successful, warning, and destructive states.",
+  "description": "Inline feedback message for informational, successful, warning, and destructive states. Use semantic feedback variables; reserve destructive tone for errors that block progress. Sizing policy: fixed/default width with Hug Contents height.",
+  "variants": {
+    "tone": {
+      "info": "",
+      "success": "",
+      "warning": "",
+      "destructive": ""
+    }
+  },
+  "states": {
+    "Tone=Info": "fill info-muted · border 1px info · radius radius/lg · text info · type size/14",
+    "Tone=Success": "fill success-muted · border 1px success · text success",
+    "Tone=Warning": "fill warning-muted · border 1px warning · text warning",
+    "Tone=Destructive": "fill card · border 1px destructive · text destructive"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "card",
+    "destructive",
+    "info",
+    "info-muted",
+    "radius/lg",
+    "size/14",
+    "success",
+    "success-muted",
+    "warning",
+    "warning-muted"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

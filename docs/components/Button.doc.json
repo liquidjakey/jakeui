@@ -1,0 +1,64 @@
+{
+  "name": "Button",
+  "summary": "Jake UI action button based on Watermelon/shadcn interaction patterns.",
+  "description": "Jake UI action button based on Watermelon/shadcn interaction patterns. Use semantic styles rather than hardcoded colors. Size and state are variant axes; label and leading icon are component properties.\n\nPipeline property contract: Leading icon is an INSTANCE_SWAP constrained to the local Icon component set; Show leading icon controls visibility. State=Focused documents focus-visible using the semantic ring token at 2px. Pointer-active/pressed behavior is runtime-only unless the code API later defines a distinct visual state.",
+  "variants": {
+    "style": {
+      "primary": "",
+      "secondary": "",
+      "outline": "",
+      "ghost": ""
+    },
+    "size": {
+      "small": "",
+      "medium": ""
+    }
+  },
+  "states": {
+    "Style=Primary, Size=Small, State=Default": "fill primary · radius radius/lg · text primary-foreground · type size/13",
+    "Style=Primary, Size=Small, State=Disabled": "fill muted · text muted-foreground",
+    "Style=Primary, Size=Medium, State=Default": "type size/14",
+    "Style=Primary, Size=Medium, State=Hover": "type size/14",
+    "Style=Primary, Size=Medium, State=Disabled": "fill muted · text muted-foreground · type size/14",
+    "Style=Secondary, Size=Small, State=Default": "fill secondary · text secondary-foreground",
+    "Style=Secondary, Size=Small, State=Hover": "fill accent · text secondary-foreground",
+    "Style=Secondary, Size=Small, State=Disabled": "fill muted · text muted-foreground"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Pass icons as @phosphor-icons/react components through the slot, never as text glyphs."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
+    "Variant count (32) exceeds the 30-combination governance ceiling. Needs a documented exception."
+  ],
+  "accessibility": {
+    "notes": [
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Disabled · Focused] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean"
+    ]
+  },
+  "tokensUsed": [
+    "accent",
+    "muted",
+    "muted-foreground",
+    "primary",
+    "primary-foreground",
+    "radius/lg",
+    "secondary",
+    "secondary-foreground",
+    "size/13",
+    "size/14"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "accessibility": "imported",
+    "tokensUsed": "imported"
+  }
+}
