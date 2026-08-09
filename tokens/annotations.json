@@ -1,0 +1,60 @@
+{
+  "$comment": "Hand-written prose injected into the generated tokens/globals.css. Figma owns VALUES; this file owns EXPLANATION. Edit this, never globals.css — the generator overwrites globals.css on every run but reads this file verbatim. Keys that no longer match a token are reported by export-tokens.mjs as stale rather than silently dropped.",
+
+  "fontStack": "\"Inter\", ui-sans-serif, system-ui, sans-serif",
+
+  "semanticNotes": {
+    "primary-active": "= hover: blue ramp has no step between 700 and 800",
+    "destructive-hover": "inert: red ramp has no 700 step"
+  },
+
+  "textRampNotes": {
+    "heading-lg": "dialog, drawer, sheet titles",
+    "heading-md": "section titles",
+    "heading-sm": "brand marks, empty states",
+    "heading-xs": "card, popover, alert titles",
+    "label-lg": "button labels, primary actions",
+    "label-md": "DEFAULT UI label",
+    "label-sm": "table headers, badges, dates",
+    "label-xs": "sidebar section headers, overline",
+    "body-md": "field values, dialog descriptions",
+    "body-sm": "DEFAULT UI body",
+    "body-xs": "secondary copy, footnotes",
+    "caption-sm": "helper text, shortcuts",
+    "caption-xs": "micro captions in dense menus",
+    "value-strong": "emphasised table / data values"
+  },
+
+  "durationAliases": {
+    "fast": "duration/100",
+    "default": "duration/150",
+    "slow": "duration/300"
+  },
+
+  "blocks": {
+    "pairingRules": [
+      "Pairing rules",
+      "label-md + body-sm      dense UI (menus, rows, tables) — the default pair",
+      "label-lg + body-md      comfortable UI (forms, dialogs)",
+      "heading-xs + body-sm    cards, popovers, alerts",
+      "heading-lg + body-md    dialogs, drawers, sheets",
+      "Do not mix densities inside one surface: a 14px label above a 13px body",
+      "reads as a mistake, not a hierarchy."
+    ],
+    "halfStepRamp": [
+      "Half-step ramp members",
+      "Formerly labelled \"exception tokens pending reconciliation\". Resolved",
+      "9 Aug 2026: they are PROMOTED to first-class ramp members. Do not delete.",
+      "",
+      "A binding census over all 58 pages found 4,814 live bindings across 24 of",
+      "these 26 tokens. The two largest are not strays — they are the spine of the",
+      "type system: size/13 (1,345 bindings) and line-height/18 (1,359) together",
+      "are 13/18, which is Label/MD (\"THE default UI label\") and Body/SM (\"THE",
+      "default UI body\"). Snapping them to the coarse ramp would have shifted the",
+      "most-used type in the library. The ramp was incomplete; these values were",
+      "never the anomaly.",
+      "",
+      "size/20 and line-height/12 carried zero bindings and were deleted 9 Aug 2026."
+    ]
+  }
+}

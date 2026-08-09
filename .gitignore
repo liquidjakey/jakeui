@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+dist/
+build/
+*.log
+
+# Secrets — never commit. FIGMA_ACCESS_TOKEN belongs in your environment
+# (this machine sets it via `launchctl setenv`), never in a file here.
+.env
+.env.local
+.env.*.local
+
+# Editor
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# NOTE: .figma-dump.json and .figma-tokens-dump.json are deliberately NOT
+# ignored. They are the committed, diffable inputs to the two generators —
+# a token change should show up in review as a dump diff plus a globals.css
+# diff. Ignoring them would make the generated CSS unreproducible.

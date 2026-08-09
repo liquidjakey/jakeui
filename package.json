@@ -1,0 +1,36 @@
+{
+  "name": "jakeui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Jake UI — design tokens, icon map, and the Figma↔code contract.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "tokens/globals.css",
+    "icons/phosphor-map.ts",
+    "figma.map.json"
+  ],
+  "exports": {
+    "./tokens.css": "./tokens/globals.css",
+    "./icons": "./icons/phosphor-map.ts",
+    "./map": "./figma.map.json"
+  },
+  "scripts": {
+    "tokens:sync": "node scripts/export-tokens.mjs",
+    "tokens:check": "node scripts/export-tokens.mjs --check",
+    "map:sync": "node scripts/generate-map.mjs",
+    "map:check": "node scripts/validate-map.mjs",
+    "check": "npm run tokens:check && npm run map:check"
+  },
+  "peerDependencies": {
+    "@phosphor-icons/react": "^2.1.10"
+  },
+  "peerDependenciesMeta": {
+    "@phosphor-icons/react": {
+      "optional": true
+    }
+  }
+}

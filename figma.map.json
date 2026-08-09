@@ -1,0 +1,2208 @@
+{
+  "$schema": "./figma.map.schema.json",
+  "fileKey": "ovnLtL9xbX8SG5xDw673Un",
+  "generatedAt": "2026-08-08T04:29:56.016Z",
+  "note": "Code Connect substitute — this plan has no Dev/Full seat. Hand-owned; CI-checked by validate-map.mjs.",
+  "components": {
+    "Sidebar Navigation Item": {
+      "figmaNodeId": "17:13",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#17:0": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'default' | 'active'"
+        }
+      }
+    },
+    "Segmented Tab": {
+      "figmaNodeId": "19:9",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#19:0": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Selected": {
+          "kind": "prop",
+          "figma": "Selected",
+          "code": "selected",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Alert Dialog": {
+      "figmaNodeId": "66:22",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#66:0": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Description#66:3": {
+          "kind": "prop",
+          "figma": "Description",
+          "code": "description",
+          "type": "string"
+        },
+        "Cancel label#66:6": {
+          "kind": "prop",
+          "figma": "Cancel label",
+          "code": "cancelLabel",
+          "type": "string"
+        },
+        "Action label#66:9": {
+          "kind": "prop",
+          "figma": "Action label",
+          "code": "actionLabel",
+          "type": "string"
+        },
+        "Tone": {
+          "kind": "prop",
+          "figma": "Tone",
+          "code": "tone",
+          "type": "'default' | 'destructive'"
+        }
+      }
+    },
+    "Chart": {
+      "figmaNodeId": "67:287",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#67:0": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'bar' | 'line'"
+        }
+      }
+    },
+    "Command": {
+      "figmaNodeId": "67:319",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#67:3": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Shortcut#67:6": {
+          "kind": "prop",
+          "figma": "Shortcut",
+          "code": "shortcut",
+          "type": "string"
+        },
+        "Selected": {
+          "kind": "prop",
+          "figma": "Selected",
+          "code": "selected",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Field": {
+      "figmaNodeId": "67:347",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#67:9": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Value#67:14": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "string"
+        },
+        "Helper text#67:19": {
+          "kind": "prop",
+          "figma": "Helper text",
+          "code": "helperText",
+          "type": "string"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Focused",
+            "Error",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Focused"
+          ],
+          "booleans": [
+            "invalid",
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Hover Card": {
+      "figmaNodeId": "69:46",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#69:0": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Description#69:3": {
+          "kind": "prop",
+          "figma": "Description",
+          "code": "description",
+          "type": "string"
+        },
+        "Density": {
+          "kind": "prop",
+          "figma": "Density",
+          "code": "density",
+          "type": "'compact' | 'detailed'"
+        }
+      }
+    },
+    "Input": {
+      "figmaNodeId": "70:51",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Value#70:0": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "string"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Focused",
+            "Error",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Focused"
+          ],
+          "booleans": [
+            "invalid",
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Label": {
+      "figmaNodeId": "70:329",
+      "variants": 3,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#70:5": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'required' | 'optional'"
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'default' | 'disabled'"
+        }
+      }
+    },
+    "Native Select": {
+      "figmaNodeId": "70:355",
+      "variants": 5,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Value#70:9": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "string"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Open",
+            "Error",
+            "Disabled",
+            "Focused"
+          ],
+          "cssOwned": [
+            "Focused"
+          ],
+          "booleans": [
+            "invalid",
+            "disabled"
+          ],
+          "controlled": [
+            "open"
+          ],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Progress": {
+      "figmaNodeId": "70:373",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'determinate' | 'indeterminate'"
+        }
+      }
+    },
+    "Scroll Area": {
+      "figmaNodeId": "70:390",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Axis": {
+          "kind": "prop",
+          "figma": "Axis",
+          "code": "axis",
+          "type": "'vertical' | 'horizontal'"
+        }
+      }
+    },
+    "Separator": {
+      "figmaNodeId": "70:405",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Orientation": {
+          "kind": "prop",
+          "figma": "Orientation",
+          "code": "orientation",
+          "type": "'horizontal' | 'vertical'"
+        }
+      }
+    },
+    "Slider": {
+      "figmaNodeId": "70:424",
+      "variants": 3,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Focused",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Focused"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Button": {
+      "figmaNodeId": "76:147",
+      "variants": 32,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#76:0": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Show leading icon#76:25": {
+          "kind": "slot-toggle",
+          "figma": "Show leading icon",
+          "code": "leadingIcon",
+          "type": "React.ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+        },
+        "Leading icon#214:0": {
+          "kind": "slot",
+          "figma": "Leading icon",
+          "code": "leadingIcon",
+          "type": "React.ReactNode"
+        },
+        "Style": {
+          "kind": "prop",
+          "figma": "Style",
+          "code": "style",
+          "type": "'primary' | 'secondary' | 'outline' | 'ghost'"
+        },
+        "Size": {
+          "kind": "prop",
+          "figma": "Size",
+          "code": "size",
+          "type": "'small' | 'medium'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Hover",
+            "Disabled",
+            "Focused"
+          ],
+          "cssOwned": [
+            "Hover",
+            "Focused"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Button Group": {
+      "figmaNodeId": "77:111",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Orientation": {
+          "kind": "prop",
+          "figma": "Orientation",
+          "code": "orientation",
+          "type": "'horizontal' | 'vertical'"
+        },
+        "Attached": {
+          "kind": "prop",
+          "figma": "Attached",
+          "code": "attached",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Checkbox": {
+      "figmaNodeId": "78:153",
+      "variants": 9,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#78:0": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Value": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "'unchecked' | 'checked' | 'indeterminate'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Focused",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Focused"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Radio Group": {
+      "figmaNodeId": "78:452",
+      "variants": 6,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#78:10": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Value": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "'unselected' | 'selected'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Focused",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Focused"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Switch": {
+      "figmaNodeId": "81:172",
+      "variants": 6,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#81:0": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Value": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "'unchecked' | 'checked'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Focused",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Focused"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Toggle": {
+      "figmaNodeId": "82:170",
+      "variants": 8,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#82:0": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Pressed": {
+          "kind": "prop",
+          "figma": "Pressed",
+          "code": "pressed",
+          "type": "'false' | 'true'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Hover",
+            "Focused",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Hover",
+            "Focused"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Toggle Group": {
+      "figmaNodeId": "82:485",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Selection": {
+          "kind": "prop",
+          "figma": "Selection",
+          "code": "selection",
+          "type": "'single' | 'multiple'"
+        },
+        "Orientation": {
+          "kind": "prop",
+          "figma": "Orientation",
+          "code": "orientation",
+          "type": "'horizontal' | 'vertical'"
+        }
+      }
+    },
+    "Textarea": {
+      "figmaNodeId": "82:522",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Value#82:9": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "string"
+        },
+        "Helper#82:14": {
+          "kind": "prop",
+          "figma": "Helper",
+          "code": "helper",
+          "type": "string"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Focused",
+            "Error",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Focused"
+          ],
+          "booleans": [
+            "invalid",
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Switch / Thumb": {
+      "figmaNodeId": "167:4372",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Size": {
+          "kind": "prop",
+          "figma": "Size",
+          "code": "size",
+          "type": "'small' | 'default'"
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'default' | 'disabled'"
+        }
+      }
+    },
+    "Switch / Root": {
+      "figmaNodeId": "167:4421",
+      "variants": 24,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Size": {
+          "kind": "prop",
+          "figma": "Size",
+          "code": "size",
+          "type": "'small' | 'default'"
+        },
+        "Value": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "'unchecked' | 'checked'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Hover",
+            "Focused",
+            "Disabled",
+            "ReadOnly",
+            "Invalid"
+          ],
+          "cssOwned": [
+            "Hover",
+            "Focused"
+          ],
+          "booleans": [
+            "disabled",
+            "readOnly",
+            "invalid"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Switch / Field Composition": {
+      "figmaNodeId": "167:4479",
+      "variants": 7,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Pattern": {
+          "kind": "story-only",
+          "figma": "Pattern",
+          "figmaValues": [
+            "Basic",
+            "Description",
+            "Choice Card",
+            "Disabled",
+            "Invalid",
+            "Size",
+            "RTL"
+          ],
+          "note": "Storybook story, never a prop."
+        }
+      }
+    },
+    "Radio Group / Indicator": {
+      "figmaNodeId": "174:4446",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'default' | 'disabled'"
+        }
+      }
+    },
+    "Radio Group / Item": {
+      "figmaNodeId": "174:4465",
+      "variants": 12,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Value": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "'unchecked' | 'checked'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Hover",
+            "Focused",
+            "Disabled",
+            "ReadOnly",
+            "Invalid"
+          ],
+          "cssOwned": [
+            "Hover",
+            "Focused"
+          ],
+          "booleans": [
+            "disabled",
+            "readOnly",
+            "invalid"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Radio Group / Root": {
+      "figmaNodeId": "174:4722",
+      "variants": 24,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Option 1#174:0": {
+          "kind": "prop",
+          "figma": "Option 1",
+          "code": "option1",
+          "type": "string"
+        },
+        "Option 2#174:25": {
+          "kind": "prop",
+          "figma": "Option 2",
+          "code": "option2",
+          "type": "string"
+        },
+        "Option 3#174:50": {
+          "kind": "prop",
+          "figma": "Option 3",
+          "code": "option3",
+          "type": "string"
+        },
+        "Orientation": {
+          "kind": "prop",
+          "figma": "Orientation",
+          "code": "orientation",
+          "type": "'vertical' | 'horizontal'"
+        },
+        "Selection": {
+          "kind": "prop",
+          "figma": "Selection",
+          "code": "selection",
+          "type": "'first' | 'second' | 'none'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Disabled",
+            "ReadOnly",
+            "Invalid"
+          ],
+          "cssOwned": [],
+          "booleans": [
+            "disabled",
+            "readOnly",
+            "invalid"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Radio Group / Field Composition": {
+      "figmaNodeId": "174:4829",
+      "variants": 7,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Pattern": {
+          "kind": "story-only",
+          "figma": "Pattern",
+          "figmaValues": [
+            "Basic",
+            "Description",
+            "Choice Card",
+            "Fieldset",
+            "Disabled",
+            "Invalid",
+            "RTL"
+          ],
+          "note": "Storybook story, never a prop."
+        }
+      }
+    },
+    "Accordion": {
+      "figmaNodeId": "85:222",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#85:0": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Content#85:5": {
+          "kind": "prop",
+          "figma": "Content",
+          "code": "content",
+          "type": "string"
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'closed' | 'open'"
+        },
+        "Disabled": {
+          "kind": "prop",
+          "figma": "Disabled",
+          "code": "disabled",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Breadcrumb": {
+      "figmaNodeId": "88:222",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Home label#88:0": {
+          "kind": "prop",
+          "figma": "Home label",
+          "code": "homeLabel",
+          "type": "string"
+        },
+        "Parent label#88:3": {
+          "kind": "prop",
+          "figma": "Parent label",
+          "code": "parentLabel",
+          "type": "string"
+        },
+        "Current label#88:6": {
+          "kind": "prop",
+          "figma": "Current label",
+          "code": "currentLabel",
+          "type": "string"
+        },
+        "Collapsed": {
+          "kind": "prop",
+          "figma": "Collapsed",
+          "code": "collapsed",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Collapsible": {
+      "figmaNodeId": "89:240",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Trigger label#89:0": {
+          "kind": "prop",
+          "figma": "Trigger label",
+          "code": "triggerLabel",
+          "type": "string"
+        },
+        "Content#89:5": {
+          "kind": "prop",
+          "figma": "Content",
+          "code": "content",
+          "type": "string"
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'closed' | 'open'"
+        },
+        "Disabled": {
+          "kind": "prop",
+          "figma": "Disabled",
+          "code": "disabled",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Navigation Menu": {
+      "figmaNodeId": "90:311",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Viewport": {
+          "kind": "responsive-fixture",
+          "figma": "Viewport",
+          "figmaValues": [
+            "Desktop",
+            "Compact"
+          ],
+          "note": "Breakpoint fixture. Not a prop unless code deliberately exposes one."
+        },
+        "Open": {
+          "kind": "prop",
+          "figma": "Open",
+          "code": "open",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Pagination": {
+      "figmaNodeId": "91:318",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Viewport": {
+          "kind": "responsive-fixture",
+          "figma": "Viewport",
+          "figmaValues": [
+            "Desktop",
+            "Compact"
+          ],
+          "note": "Breakpoint fixture. Not a prop unless code deliberately exposes one."
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'default' | 'disabled'"
+        }
+      }
+    },
+    "Tabs": {
+      "figmaNodeId": "99:331",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Orientation": {
+          "kind": "prop",
+          "figma": "Orientation",
+          "code": "orientation",
+          "type": "'horizontal' | 'vertical'"
+        },
+        "Density": {
+          "kind": "prop",
+          "figma": "Density",
+          "code": "density",
+          "type": "'default' | 'compact'"
+        }
+      }
+    },
+    "Sidebar": {
+      "figmaNodeId": "101:413",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Viewport": {
+          "kind": "responsive-fixture",
+          "figma": "Viewport",
+          "figmaValues": [
+            "Desktop",
+            "Compact"
+          ],
+          "note": "Breakpoint fixture. Not a prop unless code deliberately exposes one."
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'expanded' | 'collapsed'"
+        }
+      }
+    },
+    "Alert": {
+      "figmaNodeId": "103:475",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#103:0": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Description#103:5": {
+          "kind": "prop",
+          "figma": "Description",
+          "code": "description",
+          "type": "string"
+        },
+        "Tone": {
+          "kind": "prop",
+          "figma": "Tone",
+          "code": "tone",
+          "type": "'info' | 'success' | 'warning' | 'destructive'"
+        }
+      }
+    },
+    "Dialog": {
+      "figmaNodeId": "105:521",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#105:0": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Description#105:5": {
+          "kind": "prop",
+          "figma": "Description",
+          "code": "description",
+          "type": "string"
+        },
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'standard' | 'form'"
+        },
+        "Size": {
+          "kind": "prop",
+          "figma": "Size",
+          "code": "size",
+          "type": "'small' | 'large'"
+        }
+      }
+    },
+    "Drawer": {
+      "figmaNodeId": "106:559",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#106:0": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Description#106:5": {
+          "kind": "prop",
+          "figma": "Description",
+          "code": "description",
+          "type": "string"
+        },
+        "Placement": {
+          "kind": "prop",
+          "figma": "Placement",
+          "code": "placement",
+          "type": "'left' | 'right'"
+        },
+        "Width": {
+          "kind": "prop",
+          "figma": "Width",
+          "code": "width",
+          "type": "'compact' | 'wide'"
+        }
+      }
+    },
+    "Dropdown Menu": {
+      "figmaNodeId": "109:607",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Primary item label#109:0": {
+          "kind": "prop",
+          "figma": "Primary item label",
+          "code": "primaryItemLabel",
+          "type": "string"
+        },
+        "Primary shortcut#109:5": {
+          "kind": "prop",
+          "figma": "Primary shortcut",
+          "code": "primaryShortcut",
+          "type": "string"
+        },
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'standard' | 'checkbox'"
+        },
+        "Density": {
+          "kind": "prop",
+          "figma": "Density",
+          "code": "density",
+          "type": "'compact' | 'comfortable'"
+        }
+      }
+    },
+    "Popover": {
+      "figmaNodeId": "111:589",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#111:0": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Description#111:5": {
+          "kind": "prop",
+          "figma": "Description",
+          "code": "description",
+          "type": "string"
+        },
+        "Size": {
+          "kind": "prop",
+          "figma": "Size",
+          "code": "size",
+          "type": "'small' | 'large'"
+        },
+        "Arrow": {
+          "kind": "prop",
+          "figma": "Arrow",
+          "code": "arrow",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Sheet": {
+      "figmaNodeId": "111:649",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#111:10": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Description#111:15": {
+          "kind": "prop",
+          "figma": "Description",
+          "code": "description",
+          "type": "string"
+        },
+        "Side": {
+          "kind": "prop",
+          "figma": "Side",
+          "code": "side",
+          "type": "'left' | 'right'"
+        },
+        "Width": {
+          "kind": "prop",
+          "figma": "Width",
+          "code": "width",
+          "type": "'compact' | 'wide'"
+        }
+      }
+    },
+    "Tooltip": {
+      "figmaNodeId": "111:684",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#111:20": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Side": {
+          "kind": "prop",
+          "figma": "Side",
+          "code": "side",
+          "type": "'top' | 'bottom' | 'left' | 'right'"
+        }
+      }
+    },
+    "Dropdown Menu / Trigger": {
+      "figmaNodeId": "144:2051",
+      "variants": 7,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'button' | 'avatar'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Closed",
+            "Open",
+            "Focused",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Focused"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [
+            "closed",
+            "open"
+          ],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Dropdown Menu / Item": {
+      "figmaNodeId": "144:2112",
+      "variants": 12,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#144:0": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Show icon#144:13": {
+          "kind": "slot-toggle",
+          "figma": "Show icon",
+          "code": "icon",
+          "type": "React.ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+        },
+        "Shortcut#144:26": {
+          "kind": "prop",
+          "figma": "Shortcut",
+          "code": "shortcut",
+          "type": "string"
+        },
+        "Show shortcut#144:39": {
+          "kind": "slot-toggle",
+          "figma": "Show shortcut",
+          "code": "shortcut",
+          "type": "React.ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+        },
+        "Icon#259:0": {
+          "kind": "slot",
+          "figma": "Icon",
+          "code": "icon",
+          "type": "React.ReactNode"
+        },
+        "Tone": {
+          "kind": "prop",
+          "figma": "Tone",
+          "code": "tone",
+          "type": "'default' | 'destructive'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Highlighted",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Highlighted"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        },
+        "Inset": {
+          "kind": "prop",
+          "figma": "Inset",
+          "code": "inset",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Dropdown Menu / Checkbox Item": {
+      "figmaNodeId": "144:2164",
+      "variants": 9,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#144:52": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Show icon#146:0": {
+          "kind": "slot-toggle",
+          "figma": "Show icon",
+          "code": "icon",
+          "type": "React.ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+        },
+        "Icon#259:13": {
+          "kind": "slot",
+          "figma": "Icon",
+          "code": "icon",
+          "type": "React.ReactNode"
+        },
+        "Value": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "'unchecked' | 'checked' | 'indeterminate'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Highlighted",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Highlighted"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Dropdown Menu / Radio Item": {
+      "figmaNodeId": "144:2198",
+      "variants": 6,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#144:62": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Show icon#146:20": {
+          "kind": "slot-toggle",
+          "figma": "Show icon",
+          "code": "icon",
+          "type": "React.ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+        },
+        "Icon#259:23": {
+          "kind": "slot",
+          "figma": "Icon",
+          "code": "icon",
+          "type": "React.ReactNode"
+        },
+        "Value": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "'unchecked' | 'checked'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Highlighted",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Highlighted"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Dropdown Menu / Label": {
+      "figmaNodeId": "144:2203",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#144:69": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Inset": {
+          "kind": "prop",
+          "figma": "Inset",
+          "code": "inset",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Dropdown Menu / Sub Trigger": {
+      "figmaNodeId": "144:2232",
+      "variants": 8,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#144:73": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Show icon#146:34": {
+          "kind": "slot-toggle",
+          "figma": "Show icon",
+          "code": "icon",
+          "type": "React.ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+        },
+        "Icon#259:30": {
+          "kind": "slot",
+          "figma": "Icon",
+          "code": "icon",
+          "type": "React.ReactNode"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Closed",
+            "Open",
+            "Highlighted",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Highlighted"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [
+            "closed",
+            "open"
+          ],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        },
+        "Inset": {
+          "kind": "prop",
+          "figma": "Inset",
+          "code": "inset",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Dropdown Menu / Content": {
+      "figmaNodeId": "146:2602",
+      "variants": 24,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Side": {
+          "kind": "prop",
+          "figma": "Side",
+          "code": "side",
+          "type": "'top' | 'right' | 'bottom' | 'left'"
+        },
+        "Align": {
+          "kind": "prop",
+          "figma": "Align",
+          "code": "align",
+          "type": "'start' | 'center' | 'end'"
+        },
+        "Arrow": {
+          "kind": "prop",
+          "figma": "Arrow",
+          "code": "arrow",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Dropdown Menu / Sub Content": {
+      "figmaNodeId": "146:2705",
+      "variants": 6,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Side": {
+          "kind": "prop",
+          "figma": "Side",
+          "code": "side",
+          "type": "'left' | 'right'"
+        },
+        "Align": {
+          "kind": "prop",
+          "figma": "Align",
+          "code": "align",
+          "type": "'start' | 'center' | 'end'"
+        }
+      }
+    },
+    "Dropdown Menu / Root Composition": {
+      "figmaNodeId": "147:3035",
+      "variants": 24,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Pattern": {
+          "kind": "story-only",
+          "figma": "Pattern",
+          "figmaValues": [
+            "Basic",
+            "Submenu",
+            "Shortcuts",
+            "Icons",
+            "Checkboxes",
+            "Checkbox Icons",
+            "Radio Group",
+            "Radio Icons",
+            "Destructive",
+            "Avatar",
+            "Complex",
+            "RTL"
+          ],
+          "note": "Storybook story, never a prop."
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'closed' | 'open'"
+        }
+      }
+    },
+    "Popover / Trigger": {
+      "figmaNodeId": "178:4679",
+      "variants": 10,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'button' | 'rTL'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Closed",
+            "Open",
+            "Hover",
+            "Focused",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Hover",
+            "Focused"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [
+            "closed",
+            "open"
+          ],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Popover / Backdrop": {
+      "figmaNodeId": "178:4684",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Mode": {
+          "kind": "prop",
+          "figma": "Mode",
+          "code": "mode",
+          "type": "'modal' | 'trapFocus'"
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'closed' | 'open'"
+        }
+      }
+    },
+    "Popover / Close": {
+      "figmaNodeId": "178:4704",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Hover",
+            "Focused",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Hover",
+            "Focused"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Popover / Arrow": {
+      "figmaNodeId": "178:4713",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Side": {
+          "kind": "prop",
+          "figma": "Side",
+          "code": "side",
+          "type": "'top' | 'right' | 'bottom' | 'left'"
+        }
+      }
+    },
+    "Popover / Viewport": {
+      "figmaNodeId": "178:4738",
+      "variants": 8,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'current' | 'previous'"
+        },
+        "Direction": {
+          "kind": "prop",
+          "figma": "Direction",
+          "code": "direction",
+          "type": "'top' | 'right' | 'bottom' | 'left'"
+        }
+      }
+    },
+    "Popover / Content": {
+      "figmaNodeId": "179:5406",
+      "variants": 48,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Show header#179:0": {
+          "kind": "slot-toggle",
+          "figma": "Show header",
+          "code": "header",
+          "type": "React.ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+        },
+        "Show close#179:49": {
+          "kind": "slot-toggle",
+          "figma": "Show close",
+          "code": "close",
+          "type": "React.ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+        },
+        "Body text#179:98": {
+          "kind": "prop",
+          "figma": "Body text",
+          "code": "bodyText",
+          "type": "string"
+        },
+        "Size": {
+          "kind": "prop",
+          "figma": "Size",
+          "code": "size",
+          "type": "'small' | 'large'"
+        },
+        "Side": {
+          "kind": "prop",
+          "figma": "Side",
+          "code": "side",
+          "type": "'top' | 'right' | 'bottom' | 'left'"
+        },
+        "Align": {
+          "kind": "prop",
+          "figma": "Align",
+          "code": "align",
+          "type": "'start' | 'center' | 'end'"
+        },
+        "Arrow": {
+          "kind": "prop",
+          "figma": "Arrow",
+          "code": "arrow",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Popover / Root Composition": {
+      "figmaNodeId": "179:5609",
+      "variants": 8,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Pattern": {
+          "kind": "story-only",
+          "figma": "Pattern",
+          "figmaValues": [
+            "Basic",
+            "Align",
+            "Form",
+            "RTL"
+          ],
+          "note": "Storybook story, never a prop."
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'closed' | 'open'"
+        }
+      }
+    },
+    "Avatar": {
+      "figmaNodeId": "111:708",
+      "variants": 6,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Initials#111:25": {
+          "kind": "prop",
+          "figma": "Initials",
+          "code": "initials",
+          "type": "string"
+        },
+        "Size": {
+          "kind": "prop",
+          "figma": "Size",
+          "code": "size",
+          "type": "'small' | 'medium' | 'large'"
+        },
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'initials' | 'status'"
+        }
+      }
+    },
+    "Badge": {
+      "figmaNodeId": "111:741",
+      "variants": 10,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#111:32": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Tone": {
+          "kind": "prop",
+          "figma": "Tone",
+          "code": "tone",
+          "type": "'neutral' | 'info' | 'success' | 'warning' | 'destructive'"
+        },
+        "Size": {
+          "kind": "prop",
+          "figma": "Size",
+          "code": "size",
+          "type": "'small' | 'medium'"
+        }
+      }
+    },
+    "Card": {
+      "figmaNodeId": "126:675",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#126:0": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Description#126:5": {
+          "kind": "prop",
+          "figma": "Description",
+          "code": "description",
+          "type": "string"
+        },
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'content' | 'media'"
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'default' | 'interactive'"
+        }
+      }
+    },
+    "Skeleton": {
+      "figmaNodeId": "128:679",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'text' | 'avatar' | 'card' | 'tableRow'"
+        }
+      }
+    },
+    "Table": {
+      "figmaNodeId": "130:917",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "First row label#130:0": {
+          "kind": "prop",
+          "figma": "First row label",
+          "code": "firstRowLabel",
+          "type": "string"
+        },
+        "Second row label#130:5": {
+          "kind": "prop",
+          "figma": "Second row label",
+          "code": "secondRowLabel",
+          "type": "string"
+        },
+        "Density": {
+          "kind": "prop",
+          "figma": "Density",
+          "code": "density",
+          "type": "'compact' | 'comfortable'"
+        },
+        "Selection": {
+          "kind": "prop",
+          "figma": "Selection",
+          "code": "selection",
+          "type": "'none' | 'selected'"
+        }
+      }
+    },
+    "Table / Container": {
+      "figmaNodeId": "161:3495",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Viewport": {
+          "kind": "responsive-fixture",
+          "figma": "Viewport",
+          "figmaValues": [
+            "Desktop",
+            "Compact"
+          ],
+          "note": "Breakpoint fixture. Not a prop unless code deliberately exposes one."
+        }
+      }
+    },
+    "Table / Caption": {
+      "figmaNodeId": "161:3500",
+      "variants": 2,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Caption#161:0": {
+          "kind": "prop",
+          "figma": "Caption",
+          "code": "caption",
+          "type": "string"
+        },
+        "Position": {
+          "kind": "prop",
+          "figma": "Position",
+          "code": "position",
+          "type": "'top' | 'bottom'"
+        }
+      }
+    },
+    "Table / Head": {
+      "figmaNodeId": "161:3507",
+      "variants": 3,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Label#161:3": {
+          "kind": "prop",
+          "figma": "Label",
+          "code": "label",
+          "type": "string"
+        },
+        "Alignment": {
+          "kind": "prop",
+          "figma": "Alignment",
+          "code": "alignment",
+          "type": "'left' | 'center' | 'right'"
+        }
+      }
+    },
+    "Table / Cell": {
+      "figmaNodeId": "161:3520",
+      "variants": 6,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Value#161:7": {
+          "kind": "prop",
+          "figma": "Value",
+          "code": "value",
+          "type": "string"
+        },
+        "Alignment": {
+          "kind": "prop",
+          "figma": "Alignment",
+          "code": "alignment",
+          "type": "'left' | 'center' | 'right'"
+        },
+        "Emphasis": {
+          "kind": "prop",
+          "figma": "Emphasis",
+          "code": "emphasis",
+          "type": "'default' | 'strong'"
+        }
+      }
+    },
+    "Table / Row": {
+      "figmaNodeId": "161:3611",
+      "variants": 10,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Type": {
+          "kind": "prop",
+          "figma": "Type",
+          "code": "type",
+          "type": "'header' | 'body' | 'footer'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Hover",
+            "Selected"
+          ],
+          "cssOwned": [
+            "Hover"
+          ],
+          "booleans": [],
+          "controlled": [
+            "selected"
+          ],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        },
+        "Density": {
+          "kind": "prop",
+          "figma": "Density",
+          "code": "density",
+          "type": "'compact' | 'comfortable'"
+        }
+      }
+    },
+    "Table / Action Trigger": {
+      "figmaNodeId": "161:3684",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Hover",
+            "Focused",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Hover",
+            "Focused"
+          ],
+          "booleans": [
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        }
+      }
+    },
+    "Table / Root Composition": {
+      "figmaNodeId": "162:4159",
+      "variants": 8,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Pattern": {
+          "kind": "story-only",
+          "figma": "Pattern",
+          "figmaValues": [
+            "Basic",
+            "Footer",
+            "Actions",
+            "RTL"
+          ],
+          "note": "Storybook story, never a prop."
+        },
+        "Viewport": {
+          "kind": "responsive-fixture",
+          "figma": "Viewport",
+          "figmaValues": [
+            "Desktop",
+            "Compact"
+          ],
+          "note": "Breakpoint fixture. Not a prop unless code deliberately exposes one."
+        }
+      }
+    },
+    "Calendar": {
+      "figmaNodeId": "132:1214",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Month label#132:0": {
+          "kind": "prop",
+          "figma": "Month label",
+          "code": "monthLabel",
+          "type": "string"
+        },
+        "Mode": {
+          "kind": "prop",
+          "figma": "Mode",
+          "code": "mode",
+          "type": "'single' | 'range'"
+        },
+        "Density": {
+          "kind": "prop",
+          "figma": "Density",
+          "code": "density",
+          "type": "'compact' | 'comfortable'"
+        }
+      }
+    },
+    "Date Picker": {
+      "figmaNodeId": "134:1704",
+      "variants": 14,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Mode": {
+          "kind": "prop",
+          "figma": "Mode",
+          "code": "mode",
+          "type": "'single' | 'range'"
+        },
+        "State": {
+          "kind": "decompose",
+          "figma": "State",
+          "figmaValues": [
+            "Default",
+            "Focused",
+            "Error",
+            "Disabled"
+          ],
+          "cssOwned": [
+            "Focused"
+          ],
+          "booleans": [
+            "invalid",
+            "disabled"
+          ],
+          "controlled": [],
+          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+        },
+        "Open": {
+          "kind": "prop",
+          "figma": "Open",
+          "code": "open",
+          "type": "'false' | 'true'"
+        }
+      }
+    },
+    "Data Table": {
+      "figmaNodeId": "136:1974",
+      "variants": 4,
+      "codePath": null,
+      "codeExport": null,
+      "props": {
+        "Title#136:0": {
+          "kind": "prop",
+          "figma": "Title",
+          "code": "title",
+          "type": "string"
+        },
+        "Viewport": {
+          "kind": "responsive-fixture",
+          "figma": "Viewport",
+          "figmaValues": [
+            "Desktop",
+            "Compact"
+          ],
+          "note": "Breakpoint fixture. Not a prop unless code deliberately exposes one."
+        },
+        "State": {
+          "kind": "prop",
+          "figma": "State",
+          "code": "state",
+          "type": "'populated' | 'empty'"
+        }
+      }
+    }
+  }
+}
