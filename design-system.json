@@ -62,7 +62,10 @@
     "built": [
       "Input",
       "Textarea",
-      "Native Select"
+      "Native Select",
+      "Label",
+      "Separator",
+      "Field"
     ],
     "meta": {
       "Input": {
@@ -589,7 +592,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T10:40:00Z",
+        "_note": "Implemented 9 Aug 2026. Owns the accessibility wiring (generates id, binds label-for/aria-describedby/aria-invalid) via a render prop rather than cloneElement, so injected props are type-checked at the call site. The Figma Value property has NO code equivalent — the control is a child, so Field owning a value would be a competing source of truth. KNOWN CONFLICT: Input/Textarea/NativeSelect each render their own errorMessage, so inside a Field the error must be passed to Field, not the control, or you get two messages and two live regions. KNOWN INCONSISTENCY, recorded not resolved: Field uses aria-live=polite per its record; Input uses role=alert. Both cannot be right; moving the three shipped controls needs its own review."
       },
       "Hover Card": {
         "doc": {
@@ -634,7 +638,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T10:40:00Z",
+        "_note": "Implemented 9 Aug 2026. Two deliberate divergences from figma.map.json, both in Table 2: State is a boolean not a two-value enum (the record's own governance rule keeps visual State axes as story states, and every other control here uses disabled: boolean); and Type has THREE code states because most labels carry no marker at all and Figma has no variant for that, which the record's own dont requires. The marker is aria-hidden and deliberately not tinted destructive — tokensUsed records no marker colour."
       },
       "Native Select": {
         "doc": {
@@ -980,7 +985,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T10:40:00Z",
+        "_note": "Implemented 9 Aug 2026. decorative has no Figma property and must exist: the record splits the component semantically with no visual difference, so Figma cannot express it. Defaults to decorative. A semantic vertical separator also sets aria-orientation, because role=separator implies horizontal."
       },
       "Sheet": {
         "doc": {

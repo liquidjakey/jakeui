@@ -131,8 +131,8 @@
     "Field": {
       "figmaNodeId": "67:347",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/field.tsx",
+      "codeExport": "Field",
       "props": {
         "Label#67:9": {
           "kind": "prop",
@@ -235,8 +235,8 @@
     "Label": {
       "figmaNodeId": "70:329",
       "variants": 3,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/label.tsx",
+      "codeExport": "Label",
       "props": {
         "Label#70:5": {
           "kind": "prop",
@@ -325,8 +325,8 @@
     "Separator": {
       "figmaNodeId": "70:405",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/separator.tsx",
+      "codeExport": "Separator",
       "props": {
         "Orientation": {
           "kind": "prop",
