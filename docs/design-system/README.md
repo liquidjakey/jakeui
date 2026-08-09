@@ -16,4 +16,6 @@ here is required reading to write code.
 | `spikes/` | Throwaway exploration, kept for what it taught. |
 | `handoffs/` | State at the end of a session, for whoever picks it up. |
 
+**Latest handoff:** [2026-08-09-session-handoff.md](./handoffs/2026-08-09-session-handoff.md) — read this first when picking the project up.
+
 Naming: `YYYY-MM-DD-short-slug.md`. Newest last when sorted.
