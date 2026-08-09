@@ -51,3 +51,24 @@ export type { ToggleProps } from './toggle.js';
 
 export { ToggleGroup } from './toggle-group.js';
 export type { ToggleGroupProps, ToggleGroupItem } from './toggle-group.js';
+
+export {
+  Table,
+  TableContainer,
+  TableCaption,
+  TableHead,
+  TableCell,
+  TableRow,
+  TableActionTrigger,
+} from './table.js';
+export type {
+  TableProps,
+  TableContainerProps,
+  TableCaptionProps,
+  TableHeadProps,
+  TableCellProps,
+  TableRowProps,
+  TableActionTriggerProps,
+  TableDensity,
+  TableAlignment,
+} from './table.js';

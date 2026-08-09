@@ -1906,8 +1906,8 @@
     "Table": {
       "figmaNodeId": "130:917",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/table.tsx",
+      "codeExport": "Table",
       "props": {
         "First row label#130:0": {
           "kind": "prop",
@@ -1938,8 +1938,8 @@
     "Table / Container": {
       "figmaNodeId": "161:3495",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/table.tsx",
+      "codeExport": "TableContainer",
       "props": {
         "Viewport": {
           "kind": "responsive-fixture",
@@ -1955,8 +1955,8 @@
     "Table / Caption": {
       "figmaNodeId": "161:3500",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/table.tsx",
+      "codeExport": "TableCaption",
       "props": {
         "Caption#161:0": {
           "kind": "prop",
@@ -1975,8 +1975,8 @@
     "Table / Head": {
       "figmaNodeId": "161:3507",
       "variants": 3,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/table.tsx",
+      "codeExport": "TableHead",
       "props": {
         "Label#161:3": {
           "kind": "prop",
@@ -1995,8 +1995,8 @@
     "Table / Cell": {
       "figmaNodeId": "161:3520",
       "variants": 6,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/table.tsx",
+      "codeExport": "TableCell",
       "props": {
         "Value#161:7": {
           "kind": "prop",
@@ -2021,8 +2021,8 @@
     "Table / Row": {
       "figmaNodeId": "161:3611",
       "variants": 10,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/table.tsx",
+      "codeExport": "TableRow",
       "props": {
         "Type": {
           "kind": "prop",
@@ -2058,8 +2058,8 @@
     "Table / Action Trigger": {
       "figmaNodeId": "161:3684",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/table.tsx",
+      "codeExport": "TableActionTrigger",
       "props": {
         "State": {
           "kind": "decompose",

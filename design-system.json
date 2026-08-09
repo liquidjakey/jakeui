@@ -77,7 +77,14 @@
       "Tabs",
       "Segmented Tab",
       "Toggle",
-      "Toggle Group"
+      "Toggle Group",
+      "Table",
+      "Table / Container",
+      "Table / Caption",
+      "Table / Head",
+      "Table / Cell",
+      "Table / Row",
+      "Table / Action Trigger"
     ],
     "meta": {
       "Input": {
@@ -1157,7 +1164,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:45:00Z",
+        "_note": "Implemented 9 Aug 2026. Figma's Selection axis is NOT a prop: selection belongs to a ROW (Table / Row carries State=Selected with a real accent fill), so a table-level selection prop would be a second source of truth. First/Second row label are example content, not API - same pattern as Breadcrumb's three fixed labels. DENSITY CARRIES NO TOKEN DELTA anywhere in this family, verified not assumed: Table / Row shows three Compact/Comfortable pairs and all three bind identical tokens, so row height is raw padding."
       },
       "Table / Action Trigger": {
         "doc": {
@@ -1172,7 +1180,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:45:00Z",
+        "_note": "Implemented 9 Aug 2026. `label` is REQUIRED in the type on purpose: the record's accessibility contract demands 'a programmatic accessible name that identifies the action context (for example, Open row actions)', and making it optional would make it forgettable. GAPS: no disabled tokens and no icon colour are recorded; shared conventions asserted."
       },
       "Table / Body": {
         "doc": {
@@ -1202,7 +1211,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:45:00Z",
+        "_note": "Implemented 9 Aug 2026. The record: 'Position is visual; code should preserve caption semantics and reading order.' A <caption> must be the FIRST CHILD of <table> wherever it appears, so bottom placement uses caption-side and never DOM reordering - moving it would break the naming relationship."
       },
       "Table / Cell": {
         "doc": {
@@ -1217,7 +1227,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:45:00Z",
+        "_note": "Implemented 9 Aug 2026. EMPHASIS CHANGES COLOUR, NOT WEIGHT, despite its name and despite the shared vocabulary calling it 'heavier weight'. The record binds foreground vs muted-foreground and no weight token; transcribed as bound, not as named. CONSEQUENCE WORTH REVIEWING: a DEFAULT cell is muted-foreground, so ordinary table data renders muted and only 'strong' cells get full contrast - backwards from the usual convention, and it affects every cell in every table."
       },
       "Table / Container": {
         "doc": {
@@ -1232,7 +1243,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:45:00Z",
+        "_note": "Implemented 9 Aug 2026. Figma's Viewport axis is kind: responsive-fixture - the map itself says 'Not a prop unless code deliberately exposes one' - so overflow is plain CSS and takes no input. The scroll region is focusable AND named, because a region that scrolls but cannot be focused is unreachable by keyboard. GAP: the record binds size/10 (smallest in the file) on a wrapper that renders no text of its own, almost certainly inherited from a nested example; deliberately not applied."
       },
       "Table / Footer": {
         "doc": {
@@ -1262,7 +1274,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:45:00Z",
+        "_note": "Implemented 9 Aug 2026. `scope` has no Figma property but is required by the record's own prose ('use scope/row-header semantics in code where applicable'); a th without scope is ambiguous in any table with both row and column headers. GAP: no fill is recorded on the head cell - the header band's muted fill lives on Table / Row (Type=Header) - so TableHead used outside a header row would be transparent."
       },
       "Table / Header": {
         "doc": {
@@ -1292,7 +1305,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:45:00Z",
+        "_note": "DELIBERATELY NOT BOUND TO CODE. Its map entry has no real properties - Pattern is kind: story-only (\"Storybook story, never a prop\") and Viewport is kind: responsive-fixture. It is a set of composition examples, so it ships as the four stories in components/table.stories.tsx (Basic, Footer, Actions, RTL). Binding it would claim it is a component."
       },
       "Table / Row": {
         "doc": {
@@ -1307,7 +1321,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T12:45:00Z",
+        "_note": "Implemented 9 Aug 2026. RECOVERED FROM THE 8-ROW CAP BY INFERENCE, not guesswork. 10 variants, 8 rows shown; the two missing are Header/Comfortable and Footer/Comfortable. Every Compact/Comfortable pair that IS present binds identical tokens (three pairs, three matches), so Density is proven inert in this record and the absent rows carry their Compact twins tokens. This does NOT generalise - it works because the missing rows sit on an axis proven inert by the rows that survived; Popover / Content shows 1 of 48 and stays blocked. ASSERTED: recorded hover binds only text, identical to resting, so a muted tint is added rather than transcribed. No focus token for a selectable row either."
       },
       "Tabs": {
         "doc": {
