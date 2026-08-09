@@ -9,7 +9,7 @@
   "workspace": {
     "name": "Jake UI",
     "localPath": ".",
-    "stage": "local-git",
+    "stage": "github",
     "origin": "existing-repo",
     "detectedLayers": {
       "monorepo": false,
@@ -54,10 +54,12 @@
     "instanceSwapUpgradePending": []
   },
   "repo": {
-    "stage": "local-git",
-    "packageManager": "pnpm",
-    "monorepo": "turborepo",
-    "remote": null
+    "stage": "github",
+    "packageManager": "npm",
+    "monorepo": null,
+    "remote": "https://github.com/liquidjakey/jakeui",
+    "visibility": "private",
+    "_note": "Single-package repo, not a monorepo. docs/02-design/ moved under design-system/ on 9 Aug 2026 so the repo is self-contained. Convert to a workspace only once component packages actually exist. No GitHub Actions workflow yet — `npm run check` runs both gates locally."
   },
   "sync": {
     "platforms": [],
