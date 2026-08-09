@@ -4,8 +4,9 @@
   "fontStack": "\"Inter\", ui-sans-serif, system-ui, sans-serif",
 
   "semanticNotes": {
-    "primary-active": "= hover: blue ramp has no step between 700 and 800",
-    "destructive-hover": "inert: red ramp has no 700 step"
+    "primary-readable": "bind TEXT to this, never to --primary (2.03:1 on popover in dark)",
+    "muted-foreground": "9 Aug 2026: light neutral/500 -> neutral/600 for AA on tinted surfaces; dark unchanged at neutral/400",
+    "accent-hover": "dark now steps to neutral/700, no longer borrowing zinc/800"
   },
 
   "textRampNotes": {
