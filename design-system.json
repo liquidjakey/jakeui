@@ -157,10 +157,12 @@
     "validatorPassing": null
   },
   "retrofit": {
-    "phase": null,
-    "startedAt": null,
+    "phase": "audit",
+    "startedAt": "2026-08-09T06:20:00Z",
     "completedAt": null,
-    "journalScaffolded": false
+    "journalScaffolded": true,
+    "_shape": "Brownfield in Figma, greenfield in code. Figma is mature (75 sets, 180 variables, 65045 bindings); the repo has no consuming application code (codeSurface: scssColorVars 0, tailwindColorClasses 0, jsColorsUsages 0). Phases 2 (refine), 3 (rebind) and 6.5 (docs) carry real work. Phase 4 (sync) conflicts with the existing working export-tokens.mjs pipeline. Phases 5 (baseline), 6 (code) and 7 (cleanup) are largely empty or blocked because there is no consuming code to protect — see the phase map in the handoff.",
+    "_outOfOrderNote": "components/input.tsx was written before entering this sequence (no skill loaded). Assessed low-harm: it binds tokens by name (card, input, ring, destructive, muted, muted-foreground, foreground), so Phase 2 value changes propagate automatically, and no Chromatic baseline existed to invalidate."
   },
   "completedSkills": [
     "figma-environment-setup",

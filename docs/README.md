@@ -89,5 +89,10 @@ format was derived from, the 8 Aug audit snapshot, and the Figma-side cleanup
 backlog. None of it is needed to build, and its token names and counts are not
 current. Don't build from it.
 
+[`design-system/`](./design-system/) is the **decision journal** — why things were
+decided, across sessions. It sits under `docs/` by convention, but it is a trail, not
+build documentation. The files listed above are the build set; everything in
+`design-system/` is optional reading.
+
 Current project state — what's built, what's audited — lives in
 [`../design-system.json`](../design-system.json).
