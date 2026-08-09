@@ -3,8 +3,8 @@
 Multiline text input for longer freeform content.
 
 - **Figma:** `Textarea` — node `82:522`, 4 variants
-- **Code:** not yet implemented — `codePath` is `null`
-- **Maturity:** Transcribed from `docs/components/Textarea.doc.json`, not yet rendered
+- **Code:** [`components/textarea.tsx`](../../components/textarea.tsx) — implemented 9 Aug 2026, exports `Textarea`
+- **Maturity:** `draft`. Transcribed from `docs/components/Textarea.doc.json`, implemented, built in Storybook — **not yet visually reviewed**
 - **Format:** [props-table-format.md](../props-table-format.md)
 
 Every token below is the **actual bound variable** read from the Figma file, transcribed
@@ -26,7 +26,7 @@ marked ⚠️ and its origin stated.
 | `placeholder` | `string` | `undefined` | | Shown when `value` is empty. Renders in `--muted-foreground` — **⚠️ not represented in Figma**, same gap as `Input`. |
 | `helper` | `string` | `undefined` | | Helper text below the field. Figma property `Helper#82:14`. |
 | `rows` | `number` | `4` | | Initial visible height. ⚠️ **Not a Figma property** — see the sizing note in Table 2. |
-| `maxLength` | `number` | `undefined` | | Character limit. When set, a counter must be rendered and announced. |
+| `maxLength` | `number` | `undefined` | | Character limit. When set, a counter is rendered and linked via `aria-describedby` — **not** a live region; see Table 4. |
 | `invalid` | `boolean` | `false` | | Applies the error border. **Independent of `disabled`.** |
 | `errorMessage` | `string` | `undefined` | | Announced to assistive tech. Required when `invalid` is `true`. |
 | `disabled` | `boolean` | `false` | | Blocks input. **Independent of `invalid`.** |
@@ -95,7 +95,7 @@ nothing is truncated.
 | Error | The record's contract: *"State=Error requires specific visible error text outside or below the editing surface and an assistive-technology error relationship; color alone is insufficient."* → `aria-invalid={invalid}`, `errorMessage` linked via `aria-describedby`. |
 | Disabled | Native `disabled`. Removed from tab order. |
 | Keyboard | Standard text-editing keys. **Enter inserts a newline and must not submit the form** — the one place Textarea's keyboard contract diverges from `Input`'s. |
-| Character count | When `maxLength` is set the counter is announced politely, not on every keystroke. |
+| Character count | **Decided at implementation, 9 Aug 2026: the counter is not a live region.** A polite live region on a counter fires on every keystroke, which is noise rather than help. It is linked through `aria-describedby` instead, so it is read when the field takes focus — when knowing the limit is actually useful. The tradeoff is that the count is not re-announced as it changes; if a product needs that, announce only near the limit rather than making the whole counter live. |
 
 ---
 

@@ -3,8 +3,8 @@
 Native select control styled with Jake UI semantics.
 
 - **Figma:** `Native Select` — node `70:355`, 5 variants
-- **Code:** not yet implemented — `codePath` is `null`
-- **Maturity:** Transcribed from `docs/components/Native-Select.doc.json`, not yet rendered
+- **Code:** [`components/native-select.tsx`](../../components/native-select.tsx) — implemented 9 Aug 2026, exports `NativeSelect`
+- **Maturity:** `draft`. Transcribed from `docs/components/Native-Select.doc.json`, implemented, built in Storybook — **not yet visually reviewed**
 - **Format:** [props-table-format.md](../props-table-format.md)
 
 Every token below is the **actual bound variable** read from the Figma file, transcribed
@@ -74,11 +74,19 @@ Transcribed verbatim from `Native-Select.doc.json` `states`. All five rows prese
 | Disabled | `disabled === true` | fill `muted` · text `muted-foreground` · no focus ring |
 | Error + Disabled | both | fill `muted` · border `destructive` · text `muted-foreground` — ⚠️ **code-only**, no Figma variant. Follows `Input` decision 3. |
 
-⚠️ **The chevron indicator has no token in the record.** `tokensUsed` lists nine tokens
-and none is an icon or chevron colour. A native select renders the platform's own
-indicator unless one is drawn, so **either** accept the platform chevron (recommended —
-it is what "native" means) **or** Figma owes an indicator binding. Do not invent a token
-at implementation time.
+⚠️ **The chevron indicator has no token in the record — RESOLVED at implementation,
+9 Aug 2026: the platform chevron is kept.** `tokensUsed` lists nine tokens and none is an
+icon or chevron colour, so drawing a custom indicator would have meant inventing a token
+that does not exist in the file.
+
+Concretely, `appearance-none` is **not** set. Suppressing the native indicator is exactly
+what would have forced the invented token. Keeping it costs nothing: `background-color`,
+`border`, `color`, `padding` and `font` all still apply to a `<select>`, so the entire
+token contract above is unaffected — only the arrow and the option menu are UA-drawn, and
+those were never ours. `pr-8` reserves room for it.
+
+Revisit only if Figma adds an indicator binding, at which point `appearance-none` plus a
+tokenised chevron becomes possible without inventing anything.
 
 **Inherited from `Input`, do not re-decide:** the 1px `border-ring` + 1px inset
 `ring-ring` focus treatment, `space/2-25` padding written as a `calc()`, and `cn()`

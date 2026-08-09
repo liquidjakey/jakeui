@@ -1,7 +1,7 @@
 {
   "$schema": "./figma.map.schema.json",
   "fileKey": "ovnLtL9xbX8SG5xDw673Un",
-  "generatedAt": "2026-08-09T06:58:03.860Z",
+  "generatedAt": "2026-08-09T10:05:51.276Z",
   "note": "Code Connect substitute — this plan has no Dev/Full seat. Hand-owned; CI-checked by validate-map.mjs.",
   "components": {
     "Sidebar Navigation Item": {
@@ -261,8 +261,8 @@
     "Native Select": {
       "figmaNodeId": "70:355",
       "variants": 5,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/native-select.tsx",
+      "codeExport": "NativeSelect",
       "props": {
         "Value#70:9": {
           "kind": "prop",
@@ -612,8 +612,8 @@
     "Textarea": {
       "figmaNodeId": "82:522",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/textarea.tsx",
+      "codeExport": "Textarea",
       "props": {
         "Value#82:9": {
           "kind": "prop",

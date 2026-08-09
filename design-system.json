@@ -60,7 +60,9 @@
   },
   "components": {
     "built": [
-      "Input"
+      "Input",
+      "Textarea",
+      "Native Select"
     ],
     "meta": {
       "Input": {
@@ -647,7 +649,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T10:10:00Z",
+        "_note": "Implemented 9 Aug 2026 from docs/components/native-select.md. The map lists controlled: [\"open\"] but Open was deliberately NOT emitted as a prop: a native select menu is platform-owned, cannot be opened programmatically, and Open binds tokens identical to Focus because the control is always focused while its menu is up. appearance-none is deliberately NOT set, so the platform draws its own indicator — tokensUsed carries no chevron colour and suppressing it would mean inventing a token that does not exist. Rendered and built in Storybook; not yet visually reviewed."
       },
       "Navigation Menu": {
         "doc": {
@@ -1307,7 +1310,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T10:10:00Z",
+        "_note": "Implemented 9 Aug 2026 from docs/components/textarea.md, which was transcribed rather than authored. Shares Input's visual contract token-for-token, so Input's three resolved build blockers were inherited, not re-decided. Focus is keyed on focus-visible: directly rather than has-[:focus-visible] because there is no wrapper — no slots means the focusable and bordered element are the same node. resize-none enforces the record's fixed-viewport sizing policy. The character counter is deliberately NOT a live region: polite announcement per keystroke is noise, so it is linked via aria-describedby and read on focus. Rendered and built in Storybook; not yet visually reviewed."
       },
       "Toggle": {
         "doc": {
