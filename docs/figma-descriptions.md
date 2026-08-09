@@ -54,7 +54,7 @@ DO / DO NOT
 
 ## Variable descriptions
 
-All 180 variables carry one. Two shapes, depending on tier.
+All 189 variables carry one. Two shapes, depending on tier.
 
 Semantic token — states its role and both mode values:
 

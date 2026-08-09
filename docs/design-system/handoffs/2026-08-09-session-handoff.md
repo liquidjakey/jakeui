@@ -149,9 +149,20 @@ be inferred; inventing a voice would be worse than a visible gap.
   Note: `docs:enrich` truncates its owed list at 8 entries, which is why the shape of
   the 105 was never visible. To see all of them, read the records rather than the
   script's output.
-- **`audit.percentSemantic` is internally inconsistent** — the field says `100`, its
-  own `_percentSemanticNote` says 99 for colour and 19% across all bindings. The note's
-  reasoning is sound; the headline field is the wrong one.
+- ~~**`audit.percentSemantic` is internally inconsistent.**~~ **Closed — and the
+  diagnosis above was wrong.** All three numbers are correct; they are three
+  *denominators*, not three estimates. `100` and `99` are the same measurement (99.728
+  truncated, and 30 documentation swatch frames excluded by design). `19` is the share
+  of *all* bindings in the semantic collection and is **not** a quality measure —
+  dimension and type bind to scale primitives by shadcn/Tailwind convention. Split into
+  three denominated keys. Decision record:
+  `decisions/2026-08-09-percent-semantic-denominators.md`.
+- **The whole `audit` block is a stale 8 Aug snapshot** — it says 180 variables; the
+  file holds **189**. The rebind phase moved 75 text fill bindings (which are colour
+  bindings) *after* the measurement. Numbers deliberately not retro-edited; the block
+  carries a `_supersededNote`. **A binding-level re-measure is owed** and needs the
+  Desktop Bridge plugin — the dump is variable-level and has no binding counts. Do it in
+  the same plugin session as the accessibility fixes below.
 
 ### Accessibility, still failing
 
@@ -179,8 +190,10 @@ be inferred; inventing a voice would be worse than a visible gap.
 
 ## 6. Recommended next actions, in order
 
-1. ~~**Resolve the 105 flagged blocks.**~~ **Done** — see §5. What is left for you is
-   the smaller `audit.percentSemantic` inconsistency, also in §5.
+1. ~~**Resolve the 105 flagged blocks.**~~ **Done** — see §5, along with
+   `audit.percentSemantic`. What is left needs a **Desktop Bridge plugin session**: the
+   binding-level audit re-measure and the accessibility fixes, which should be done
+   together.
 2. **Write props tables for the next batch of components.** `validate-map.mjs`
    requires one before a component may declare a `codePath`. This is now
    **transcription** from `docs/components/*.doc.json` (per-state token bindings,

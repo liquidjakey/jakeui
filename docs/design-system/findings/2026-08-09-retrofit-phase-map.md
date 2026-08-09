@@ -10,7 +10,7 @@ and a mature Figma file converging**. Jake UI is only half of that.
 
 | Side | State |
 |---|---|
-| Figma | Mature — 75 component sets, 680 components, 180 variables, 65,045 bindings, Light + Dark |
+| Figma | Mature — 75 component sets, 680 components, 180 variables (**189 after the 9 Aug refine phase** — this table is the 8 Aug audit state), 65,045 bindings, Light + Dark |
 | Code | Effectively empty — 1 component, no consuming application |
 
 Verified by explicit read, not inferred: `audit.codeSurface` reports `scssColorVars: 0`,
@@ -50,10 +50,49 @@ Every command the phases expect is absent: `build-storybook`, `chromatic`,
 Present: `tokens:sync`, `tokens:check`, `map:sync`, `map:check`, `typecheck`, `check`.
 Recorded rather than asserted.
 
-## Data inconsistency to resolve
+## Data inconsistency to resolve — RESOLVED 9 Aug 2026, and the diagnosis below was wrong
 
-`audit.percentSemantic` is `100`, but its own `_percentSemanticNote` says **99** for
-colour (11,015/11,045) and **19%** across all bindings (12,379/65,045). Three numbers for
-one metric, and it is the number the whole right-sizing rests on. The note's reasoning is
-sound — dimension and type bind to scale primitives by design — so the headline field is
-the one that is wrong.
+**Original finding, kept for the record:**
+
+> `audit.percentSemantic` is `100`, but its own `_percentSemanticNote` says **99** for
+> colour (11,015/11,045) and **19%** across all bindings (12,379/65,045). Three numbers for
+> one metric, and it is the number the whole right-sizing rests on. The note's reasoning is
+> sound — dimension and type bind to scale primitives by design — so the headline field is
+> the one that is wrong.
+
+**What checking it actually showed.** The headline field was not wrong. All three numbers
+are arithmetically correct; they are three *denominators*, not three estimates of one
+quantity:
+
+| Value | Denominator | Computation |
+|---|---|---|
+| 100 | colour bindings in product surfaces | 11,015 / 11,015 |
+| 99.7 | colour bindings incl. the 30 doc swatch frames | 11,015 / 11,045 |
+| 19 | **all** bindings, share in the semantic collection | 12,379 / 65,045 |
+
+`100` and `99` are the *same measurement* — the note truncated 99.73 to 99, and the field
+excluded the 30 documentation swatches, which `_findings.rawColorBindings` already
+documents as binding primitives by design. The real defect was narrower: **an unqualified
+field name carrying a qualified number.** Fixed by splitting it into three denominated
+keys.
+
+Two corrections to the original reasoning:
+
+- **19% is not a quality measure.** It is the share of bindings in the `Jake UI`
+  collection versus the four primitive collections. Dimension and type bind to scale
+  primitives by shadcn/Tailwind convention, so reading it as "81% unsemantic" is a
+  category error.
+- **The right-sizing does not rest on this metric.** It rests on
+  `figmaInventory.bindingsUnresolved: 0`, which the note states separately. The
+  conclusion holds under all three denominators.
+
+**Separately — and this matters more.** The whole `audit` block is a dated snapshot from
+8 Aug measured against **180 variables**; the file now holds **189**
+(`.figma-tokens-dump.json`, 9 Aug 07:30Z). The 9 Aug rebind phase repointed 75 text fill
+bindings onto readable tokens — those *are* colour bindings, so both the numerator and
+the denominator of the colour figures moved after the measurement. The numbers were
+deliberately **not** retro-edited; the block now carries an explicit `_supersededNote`.
+Re-measuring needs a node scan inside Figma via the Desktop Bridge: the dump is
+variable-level and carries no binding counts.
+
+Full reasoning: `decisions/2026-08-09-percent-semantic-denominators.md`.
