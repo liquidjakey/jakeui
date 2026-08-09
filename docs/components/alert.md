@@ -51,7 +51,7 @@ under the 8-row cap.
 | Warning | `tone === 'warning'` | fill `warning-muted` · border `1px` `warning` · text `warning` ⚠️ **see Open question 1** |
 | Destructive | `tone === 'destructive'` | fill `card` · border `1px` `destructive` · text `destructive` ⚠️ **see Open question 2** |
 
-### ⚠️ Open question 1 — the record's text tokens may be stale post-rebind
+### ⚠️ Open question 1 — RESOLVED: the record's text tokens ARE stale post-rebind
 
 The doc record says Success and Warning bind their **text** to `success` and `warning`.
 The 9 Aug rebind phase says otherwise. `design-system.json` `retrofit._rebindProgress`
@@ -63,15 +63,23 @@ and the retrofit phase map attributes exactly those to Alert text. Both
 `success-muted-foreground` and `warning-muted-foreground` exist as real variables and
 are exported to `globals.css`.
 
-**These two accounts disagree.** `npm run docs:verify` does not settle it — it proves the
-description text matches live Figma byte for byte, not that the description was
-*regenerated* after the rebind. If it was not, the dump and Figma carry the same stale
-text and verify still passes.
+**Settled locally on 9 Aug 2026 — no Figma query needed.** The descriptions were
+**never regenerated after the rebind.** `.figma-docs-dump.json` was captured at 17:41,
+1h41m *after* the rebind commit (`84c7c89`, 16:00), and contains **zero occurrences** of
+`primary-readable`, `success-muted-foreground` or `warning-muted-foreground` across all
+86 descriptions — the three tokens the rebind moved 75 bindings onto. Had the generator
+re-run, `primary-readable` alone would appear in the 71 nodes it now covers.
 
-**Resolve by re-querying the live bindings before implementing.** If the rebind is
-authoritative, these two rows are `text success-muted-foreground` and
-`text warning-muted-foreground`, and using `success`/`warning` for text would reintroduce
-a 3.07:1 contrast failure that was already fixed. Do not guess.
+`npm run docs:verify` does not catch this: it proves the description text matches live
+Figma byte for byte, not that the description was regenerated after the bindings changed.
+Dump and Figma carry the same stale text, so verify passes.
+
+**Therefore these two rows are `text success-muted-foreground` and
+`text warning-muted-foreground`.** Implementing from the record's `success`/`warning`
+would reintroduce the 3.07:1 and 3.15:1 contrast failures the rebind fixed.
+
+**The record is not authoritative until the Figma descriptions are regenerated and
+`docs:adopt` re-run.** Six records are affected in total — see the handoff §5.
 
 Related: the handoff records that this same fix was nearly a no-op —
 `warning-muted-foreground` originally resolved to the *same primitive* as `warning`, so

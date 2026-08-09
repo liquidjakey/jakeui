@@ -164,6 +164,30 @@ be inferred; inventing a voice would be worse than a visible gap.
   Desktop Bridge plugin — the dump is variable-level and has no binding counts. Do it in
   the same plugin session as the accessibility fixes below.
 
+### 6 doc records carry PRE-REBIND token bindings
+
+**The Figma descriptions were never regenerated after the rebind phase**, so every doc
+record adopted from them is stale wherever the rebind touched it. Evidence:
+`.figma-docs-dump.json` was captured at 17:41, 1h41m *after* the rebind commit
+(`84c7c89`, 16:00), and contains **zero occurrences** of `primary-readable`,
+`success-muted-foreground` or `warning-muted-foreground` across all 86 descriptions —
+the three tokens the rebind moved 75 bindings onto.
+
+| Description still says | Live binding should be | Components |
+|---|---|---|
+| `text primary` | `primary-readable` | Avatar, Button, Button Group, Navigation Menu |
+| `text success` / `text warning` | `success-muted-foreground` / `warning-muted-foreground` | Alert, Badge |
+
+**`docs:verify` does not catch this and never will** — it proves the dump matches live
+Figma byte for byte, not that a description was regenerated after its bindings changed.
+Dump and Figma carry the same stale text, so it passes. Do not read a green
+`docs:verify` as "the records are current."
+
+Fix: regenerate those descriptions in Figma, then re-run `npm run docs:adopt`. Until
+then, **do not implement Avatar, Button, Button Group, Navigation Menu, Alert or Badge
+from their records** — the text tokens would reintroduce fixed contrast failures.
+`Input`, `Textarea` and `Native Select` are unaffected and safe to build.
+
 ### Accessibility, still failing
 
 - **3 `destructive`-as-text nodes on `accent` in Light = 4.37:1** (below 4.5).
