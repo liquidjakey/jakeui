@@ -66,19 +66,6 @@ treatments."* `muted-foreground` is asserted for the message; the rest is a desi
 | Pagination | After the table, and it is a `<nav>` in its own right. |
 | Announcement | Row-count changes after filtering should be announced politely — the caller's job, since the filter lives in the toolbar slot. |
 
----
-
-## Compiled output
-
-```ts
-interface DataTableProps {
-  title: string;
-  children?: React.ReactNode;
-  toolbar?: React.ReactNode;
-  pagination?: React.ReactNode;
-  emptyMessage?: string;
-}
-```
 
 ---
 

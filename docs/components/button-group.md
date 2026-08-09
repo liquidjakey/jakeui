@@ -61,18 +61,6 @@ treatment is raw CSS.
 | Keyboard | Tab between members. Not a toolbar and not a radio group — no arrow-key navigation, since the members are independent actions. |
 | Attached | Visual only. Joining buttons must not imply they are one control to assistive technology. |
 
----
-
-## Compiled output
-
-```ts
-interface ButtonGroupProps {
-  children: React.ReactNode;
-  orientation?: 'horizontal' | 'vertical';
-  attached?: boolean;
-  label?: string;
-}
-```
 
 ---
 

@@ -50,17 +50,6 @@ demonstrably this system's checked-state colour.
 | Force-mounted | When `forceMount` is set and unchecked, it is hidden from both sight and assistive technology, not merely transparent. |
 | Motion | Scale/opacity only, so it cannot shift layout. |
 
----
-
-## Compiled output
-
-```ts
-interface RadioGroupIndicatorProps {
-  checked?: boolean;
-  disabled?: boolean;
-  forceMount?: boolean;
-}
-```
 
 ---
 

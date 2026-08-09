@@ -113,29 +113,6 @@ across every control in the system, whether or not it is wrapped in a Field.
 | Disabled | Passed to the control, which carries the real `disabled`. Field itself is never focusable. |
 | Keyboard | None of its own. All interaction belongs to the wrapped control. |
 
----
-
-## Compiled output
-
-```ts
-interface FieldControlProps {
-  id: string;
-  'aria-describedby': string | undefined;
-  'aria-invalid': true | undefined;
-  disabled: boolean;
-}
-
-interface FieldProps {
-  label: string;
-  children: (control: FieldControlProps) => React.ReactNode;
-  helperText?: string;
-  errorMessage?: string;
-  requirement?: 'required' | 'optional';
-  invalid?: boolean;
-  disabled?: boolean;
-  id?: string;
-}
-```
 
 ---
 

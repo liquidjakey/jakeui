@@ -88,19 +88,6 @@ popover is open or merely hovered — the same gap already recorded on
 | Disabled | Native `disabled`, leaves the tab order. |
 | RTL | Direction is inherited from the document, never set per component. |
 
----
-
-## Compiled output
-
-```ts
-interface PopoverTriggerProps {
-  children: React.ReactNode;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  disabled?: boolean;
-  controls?: string;
-}
-```
 
 ---
 

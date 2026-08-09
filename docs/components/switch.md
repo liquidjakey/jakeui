@@ -82,19 +82,6 @@ one, which is correct — the state belongs to the control, not the label.
 | State | `aria-checked`, never colour alone. |
 | Disabled | Native `disabled`, leaves the tab order. |
 
----
-
-## Compiled output
-
-```ts
-interface SwitchProps {
-  label: string;
-  checked: boolean;
-  onCheckedChange: (checked: boolean) => void;
-  disabled?: boolean;
-  description?: string;
-}
-```
 
 ---
 

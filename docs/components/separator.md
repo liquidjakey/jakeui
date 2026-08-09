@@ -15,6 +15,7 @@ Visual separator for grouping adjacent content.
 |---|---|---|---|---|
 | `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | | Axis the rule runs along. Figma axis `Orientation`, 1:1. |
 | `decorative` | `boolean` | `true` | | ⚠️ **Not a Figma property.** Required by the record's own accessibility contract — see Table 4. |
+| `className` | `string` | `undefined` | | Escape hatch for layout. ⚠️ Not a Figma property. |
 
 ---
 
@@ -52,16 +53,6 @@ colour position.
 | Keyboard | None. This component is never focusable and never interactive. |
 | Contrast | Not held to 4.5:1. `border` is a non-text, non-essential boundary; where a separator is the *only* thing conveying a grouping, use a heading instead. |
 
----
-
-## Compiled output
-
-```ts
-interface SeparatorProps {
-  orientation?: 'horizontal' | 'vertical';
-  decorative?: boolean;
-}
-```
 
 ---
 

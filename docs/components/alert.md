@@ -143,21 +143,6 @@ the least visually distinct. Code applies no fill, matching the file.
 | Stacking | The record's `donts`: *"Do not stack several alerts competing for attention."* Multiple live regions announcing at once is the accessibility form of the same problem. |
 | Contrast | Every tone's text-on-fill pairing must clear 4.5:1 in **both** modes. ⚠️ Blocked on Open question 1 — the pairing depends on which text token is actually bound. |
 
----
-
-## Compiled output
-
-```ts
-interface AlertProps {
-  title: string;
-  description?: string;
-  icon?: React.ReactNode;
-  action?: React.ReactNode;
-  tone?: 'info' | 'success' | 'warning' | 'destructive';
-  onDismiss?: () => void;
-  live?: 'off' | 'polite' | 'assertive';
-}
-```
 
 ---
 

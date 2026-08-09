@@ -22,6 +22,7 @@ Compact identity representation using initials and optional presence status.
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | | Figma axis `Size`. |
 | `status` | `'online' \| 'offline' \| 'busy'` | `undefined` | | Presence dot. Its presence is Figma's `Type=Status` — see Table 2. |
 | `src` | `string` | `undefined` | | Image, falling back to initials. ⚠️ Not a Figma property. |
+| `decorative` | `boolean` | `false` | | Set when a visible name sits beside it — avoids announcing the name twice. ⚠️ Not a Figma property. |
 
 ---
 
@@ -69,19 +70,6 @@ colour. The record notes *"Avatar status dots are intent[ional]"*, so the dot is
 | Image | `alt=""` when decorative beside a name; otherwise the name is the alt. |
 | Keyboard | None. Not interactive unless a caller wraps it. |
 
----
-
-## Compiled output
-
-```ts
-interface AvatarProps {
-  initials: string;
-  name: string;
-  size?: 'small' | 'medium' | 'large';
-  status?: 'online' | 'offline' | 'busy';
-  src?: string;
-}
-```
 
 ---
 

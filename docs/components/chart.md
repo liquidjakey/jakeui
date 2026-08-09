@@ -68,18 +68,6 @@ on these tokens.
 | Data | Offer the underlying data as a table. A chart alone is not accessible. |
 | Keyboard | None at this level. Interactive charts must make their own points reachable. |
 
----
-
-## Compiled output
-
-```ts
-interface ChartProps {
-  title: string;
-  children: React.ReactNode;
-  type?: 'bar' | 'line';
-  description?: string;
-}
-```
 
 ---
 

@@ -2,7 +2,7 @@
   "name": "jakeui",
   "version": "0.1.0",
   "private": true,
-  "description": "Jake UI — design tokens, icon map, and the Figma↔code contract.",
+  "description": "Jake UI \u2014 design tokens, icon map, and the Figma\u2194code contract.",
   "type": "module",
   "license": "UNLICENSED",
   "engines": {
@@ -31,10 +31,11 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "docs:adopt": "node scripts/adopt-docs.mjs",
-    "docs:check": "node scripts/docs-check.mjs && node scripts/docs-digest.mjs --check",
+    "docs:check": "node scripts/docs-check.mjs && node scripts/docs-digest.mjs --check && node scripts/props-table-check.mjs",
     "docs:enrich": "node scripts/enrich-docs.mjs",
     "docs:digest": "node scripts/docs-digest.mjs",
-    "docs:verify": "node scripts/verify-docs-dump.mjs --compare .figma-docs-hashes.json"
+    "docs:verify": "node scripts/verify-docs-dump.mjs --compare .figma-docs-hashes.json",
+    "docs:props-check": "node scripts/props-table-check.mjs"
   },
   "peerDependencies": {
     "@phosphor-icons/react": "^2.1.10",

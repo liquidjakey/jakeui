@@ -24,6 +24,7 @@ Menu content configurations — the basic content-pattern layer of the family.
 | `type` | `'standard' \| 'checkbox'` | `'standard'` | | Figma axis `Type`. ⚠️ No token delta. |
 | `density` | `'compact' \| 'comfortable'` | `'compact'` | | Figma axis `Density`. ⚠️ No token delta. |
 | `label` | `string` | `undefined` | | Accessible name for the menu. |
+| `id` | `string` | `undefined` | | Target for the trigger's `aria-controls`. |
 
 ---
 
@@ -56,18 +57,6 @@ Menu content configurations — the basic content-pattern layer of the family.
 | Focus | Moves into the menu on open, back to the trigger on close. |
 | Distinction | A menu fires **actions**. It does not hold form state — that is a `Select`. |
 
----
-
-## Compiled output
-
-```ts
-interface DropdownMenuProps {
-  children: React.ReactNode;
-  type?: 'standard' | 'checkbox';
-  density?: 'compact' | 'comfortable';
-  label?: string;
-}
-```
 
 ---
 

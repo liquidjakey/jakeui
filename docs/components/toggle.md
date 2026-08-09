@@ -24,6 +24,7 @@ Two-state action button for formatting, view controls, or other reversible selec
 | `onPressedChange` | `(pressed: boolean) => void` | — | ✓ | Fired on activation. |
 | `disabled` | `boolean` | `false` | | From the decomposed `State` axis. |
 | `icon` | `ReactNode` | `undefined` | | ⚠️ Not a Figma property. When icon-only, `label` becomes the `aria-label`. |
+| `iconOnly` | `boolean` | `false` | | Renders the icon alone and promotes `label` to `aria-label`. ⚠️ Not a Figma property. |
 
 ---
 
@@ -79,19 +80,6 @@ alone"* rule failing in the other direction: here there is no colour at all.
 | Disabled | Native `disabled`, so it leaves the tab order. |
 | State | Carried by `aria-pressed`, never by colour alone — which matters especially given the disabled ⚠️ above. |
 
----
-
-## Compiled output
-
-```ts
-interface ToggleProps {
-  label: string;
-  pressed: boolean;
-  onPressedChange: (pressed: boolean) => void;
-  disabled?: boolean;
-  icon?: React.ReactNode;
-}
-```
 
 ---
 

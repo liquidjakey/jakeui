@@ -97,19 +97,6 @@ free for focus.
 | Focus | ⚠️ Unresolved. `Interactive` already consumes `2px primary`, so there is no distinct focus affordance recorded. Code adds a `ring` focus treatment, matching every other interactive component here. |
 | Media | Decorative media is `aria-hidden`; meaningful media needs its own alternative text, supplied by the caller through the slot. |
 
----
-
-## Compiled output
-
-```ts
-interface CardProps {
-  title: string;
-  description?: string;
-  children?: React.ReactNode;
-  media?: React.ReactNode;
-  href?: string;
-}
-```
 
 ---
 

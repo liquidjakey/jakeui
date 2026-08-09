@@ -97,21 +97,6 @@ focus return, backdrop click closes.
 | Placement | Visual only. A left-opening drawer is not a different reading order — it stays after its trigger in the DOM. |
 | Motion | Slides from the named edge. Respects `prefers-reduced-motion` by fading rather than sliding. |
 
----
-
-## Compiled output
-
-```ts
-interface DrawerProps {
-  open: boolean;
-  onClose: () => void;
-  title: string;
-  description?: string;
-  children?: React.ReactNode;
-  placement?: 'left' | 'right';
-  width?: 'compact' | 'wide';
-}
-```
 
 ---
 

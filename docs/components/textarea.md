@@ -97,29 +97,6 @@ nothing is truncated.
 | Keyboard | Standard text-editing keys. **Enter inserts a newline and must not submit the form** — the one place Textarea's keyboard contract diverges from `Input`'s. |
 | Character count | **Decided at implementation, 9 Aug 2026: the counter is not a live region.** A polite live region on a counter fires on every keystroke, which is noise rather than help. It is linked through `aria-describedby` instead, so it is read when the field takes focus — when knowing the limit is actually useful. The tradeoff is that the count is not re-announced as it changes; if a product needs that, announce only near the limit rather than making the whole counter live. |
 
----
-
-## Compiled output
-
-```ts
-interface TextareaProps {
-  value: string;
-  placeholder?: string;
-  helper?: string;
-  rows?: number;
-  maxLength?: number;
-  invalid?: boolean;
-  errorMessage?: string;
-  disabled?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-  name?: string;
-  id?: string;
-  required?: boolean;
-  'aria-label'?: string;
-}
-```
 
 ---
 

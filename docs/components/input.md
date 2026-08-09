@@ -107,29 +107,6 @@ button or other non-text control, but the two behave identically for `Input` tod
 | Keyboard | Standard text-input behavior. A trailing clear button must be independently reachable by Tab. |
 | Target size | Control height ≥ 24 CSS px (Governance a11y gate). At `size/14` text + `space/2-25` padding the computed height is 38px. ✓ |
 
----
-
-## Compiled output
-
-```ts
-interface InputProps {
-  value: string;
-  placeholder?: string;
-  leadingIcon?: React.ReactNode;
-  trailingIcon?: React.ReactNode;
-  invalid?: boolean;
-  errorMessage?: string;
-  disabled?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  name?: string;
-  id?: string;
-  type?: 'text' | 'email' | 'password' | 'tel' | 'url';
-  required?: boolean;
-  'aria-label'?: string;
-}
-```
 
 ---
 

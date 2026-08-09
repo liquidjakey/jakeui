@@ -85,21 +85,6 @@ As [`dialog.md`](./dialog.md) Table 4.
 | Motion | Slides from the named edge; fades instead under `prefers-reduced-motion`. |
 | Persistent use | The description calls this the *persistent* side surface. It is still a modal `<dialog>`, so it still traps focus. **If a genuinely persistent, non-blocking panel is wanted, this is the wrong component** — that is a layout region, not an overlay. |
 
----
-
-## Compiled output
-
-```ts
-interface SheetProps {
-  open: boolean;
-  onClose: () => void;
-  title: string;
-  description?: string;
-  children?: React.ReactNode;
-  side?: 'left' | 'right';
-  width?: 'compact' | 'wide';
-}
-```
 
 ---
 

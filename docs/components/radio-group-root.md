@@ -53,16 +53,6 @@ recorded behaviour; it reads as "this group is wrong", not "this option is wrong
 | Invalid | The group needs a message, not just red strokes — colour alone fails 1.4.1. |
 | Keyboard | Arrows move and select; only the selected radio is tabbable. |
 
-## Compiled output
-
-```ts
-interface RadioGroupRootProps {
-  children: React.ReactNode;
-  label: string;
-  orientation?: 'vertical' | 'horizontal';
-  state?: 'default' | 'disabled' | 'readOnly' | 'invalid';
-}
-```
 
 ## Authoring checklist
 

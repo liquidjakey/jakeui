@@ -75,19 +75,6 @@ forced by the missing token, not a design choice.
 | Checked | Must be visible, not only in the accessibility tree — see the 🛑 above. |
 | Disabled | Skipped by arrow-key navigation. |
 
----
-
-## Compiled output
-
-```ts
-interface DropdownMenuCheckboxItemProps {
-  children: React.ReactNode;
-  checked?: boolean | 'indeterminate';
-  onCheckedChange: (checked: boolean) => void;
-  icon?: React.ReactNode;
-  disabled?: boolean;
-}
-```
 
 ---
 

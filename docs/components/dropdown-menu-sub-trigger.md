@@ -68,21 +68,6 @@ gives no feedback that the submenu opened. Transcribed as recorded; flagged.
 | Highlighted | Active-descendant state, driven by the menu. |
 | Disabled | Skipped by arrow-key navigation. |
 
----
-
-## Compiled output
-
-```ts
-interface DropdownMenuSubTriggerProps {
-  children: React.ReactNode;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  icon?: React.ReactNode;
-  inset?: boolean;
-  disabled?: boolean;
-  controls?: string;
-}
-```
 
 ---
 

@@ -57,18 +57,6 @@ inverts correctly; as a **full-screen scrim** it inverts backwards.
 | Escape | Dismisses without moving focus. |
 | Content | Never interactive, never essential. If it needs a link or a button it is a `Popover`. |
 
----
-
-## Compiled output
-
-```ts
-interface TooltipProps {
-  label: string;
-  children: React.ReactElement;
-  side?: 'top' | 'bottom' | 'left' | 'right';
-  delay?: number;
-}
-```
 
 ---
 

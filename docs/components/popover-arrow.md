@@ -39,14 +39,6 @@ popover rather than a separate shape.
 | Semantics | `aria-hidden`. Decorative in every case. |
 | Keyboard | None. Never focusable. |
 
-## Compiled output
-
-```ts
-interface PopoverArrowProps {
-  side?: 'top' | 'right' | 'bottom' | 'left';
-  className?: string;
-}
-```
 
 ## Authoring checklist
 

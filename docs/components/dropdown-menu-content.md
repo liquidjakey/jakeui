@@ -59,17 +59,6 @@ had to assert. That assertion is now confirmed.
 | Keyboard | Arrows move, Enter activates, Escape closes, type-ahead jumps. Owned by the menu. |
 | Placement | Not collision-aware — same limitation as `Popover`. |
 
-## Compiled output
-
-```ts
-interface DropdownMenuContentProps {
-  children: React.ReactNode;
-  side?: 'top' | 'right' | 'bottom' | 'left';
-  align?: 'start' | 'center' | 'end';
-  arrow?: boolean;
-  label?: string;
-}
-```
 
 ## Authoring checklist
 

@@ -23,6 +23,9 @@ Compact option tab, placed inside a segmented-control container.
 | `onSelect` | `() => void` | — | ✓ | Fired on activation. |
 | `controls` | `string` | `undefined` | | Id of the panel this tab controls. Needed for `aria-controls`. |
 | `disabled` | `boolean` | `false` | | ⚠️ Not a Figma property; no disabled variant exists. |
+| `icon` | `ReactNode` | `undefined` | | Leading slot. ⚠️ Not a Figma property. |
+| `id` | `string` | `undefined` | | Needed by the parent for `aria-controls`. |
+| `tabIndex` | `number` | derived | | Roving tabindex, set by the parent — a standalone tab cannot know its siblings. |
 
 ---
 
@@ -68,19 +71,6 @@ binding.
 | Keyboard | Arrow keys, Home and End are the **parent's** responsibility. This component handles activation only. |
 | Focus | Visible ring, per the record's own promise. See the ⚠️ in Table 3. |
 
----
-
-## Compiled output
-
-```ts
-interface SegmentedTabProps {
-  label: string;
-  selected?: boolean;
-  onSelect: () => void;
-  controls?: string;
-  disabled?: boolean;
-}
-```
 
 ---
 

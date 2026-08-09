@@ -93,22 +93,6 @@ re-implemented.
 | Backdrop click | Closes. **Not** platform: `<dialog>` has no backdrop-click behaviour, so it is implemented by comparing the click target to the dialog element. |
 | Scroll lock | The top layer prevents interaction behind, but the page can still scroll — locked explicitly while open. |
 
----
-
-## Compiled output
-
-```ts
-interface DialogProps {
-  open: boolean;
-  onClose: () => void;
-  title: string;
-  description?: string;
-  children?: React.ReactNode;
-  footer?: React.ReactNode;
-  type?: 'standard' | 'form';
-  size?: 'small' | 'large';
-}
-```
 
 ---
 

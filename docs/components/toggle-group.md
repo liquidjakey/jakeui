@@ -70,27 +70,6 @@ concerns only.
 | Single mode | Pressing a member unpresses the others. There is no "empty" guard: unlike a radio group, all members may be off, which is legitimate for actions. |
 | Disabled | Per member, natively. |
 
----
-
-## Compiled output
-
-```ts
-interface ToggleGroupItem {
-  id: string;
-  label: string;
-  icon?: React.ReactNode;
-  disabled?: boolean;
-}
-
-interface ToggleGroupProps {
-  items: ToggleGroupItem[];
-  pressedIds: string[];
-  onPressedChange: (ids: string[]) => void;
-  selection?: 'single' | 'multiple';
-  orientation?: 'horizontal' | 'vertical';
-  label: string;
-}
-```
 
 ---
 

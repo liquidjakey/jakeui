@@ -73,24 +73,6 @@ of scope for a token-level component and is recorded here rather than half-built
 | Outside click | Closes. |
 | Role | `role="dialog"` when `modal`, otherwise a plain labelled region — a non-modal surface announced as a dialog misleads. |
 
----
-
-## Compiled output
-
-```ts
-interface PopoverProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  trigger: React.ReactNode;
-  title?: string;
-  description?: string;
-  children?: React.ReactNode;
-  size?: 'small' | 'large';
-  arrow?: boolean;
-  side?: 'top' | 'right' | 'bottom' | 'left';
-  modal?: boolean;
-}
-```
 
 ---
 

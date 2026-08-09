@@ -46,16 +46,6 @@ Not applied in code — the wrapper sets no type — and flagged here.
 | Scroll region | A region that scrolls must be **focusable and named**, or a keyboard user cannot scroll it. `tabIndex={0}` plus `role="region"` and `aria-label`. |
 | Readability | The record: *"Runtime implementation should expose the scroll region without collapsing column readability."* Columns are not squeezed to fit; the table scrolls instead. |
 
----
-
-## Compiled output
-
-```ts
-interface TableContainerProps {
-  children: React.ReactNode;
-  label?: string;
-}
-```
 
 ---
 

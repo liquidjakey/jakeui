@@ -76,17 +76,6 @@ variants.
 | Motion | Direction drives a transform. Under `prefers-reduced-motion` the transition becomes a cross-fade with no travel. |
 | Focus | Focus must not land in the outgoing half — it is `inert` as well as hidden. |
 
----
-
-## Compiled output
-
-```ts
-interface PopoverViewportProps {
-  children: React.ReactNode;
-  previous?: React.ReactNode;
-  direction?: 'top' | 'right' | 'bottom' | 'left';
-}
-```
 
 ---
 

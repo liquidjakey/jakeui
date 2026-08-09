@@ -106,33 +106,6 @@ through `tailwind-merge`. See [`input.md`](./input.md) §3.
 | Keyboard | Platform-owned and **must not be re-implemented**: arrow keys move through options, Enter or Space opens the menu, typing letters jumps to matching options, Escape closes without changing the value. |
 | Styling limit | Only the closed control is yours to style. The open option menu is drawn by the OS and cannot be themed — do not promise a design that styles it. |
 
----
-
-## Compiled output
-
-```ts
-interface NativeSelectOption {
-  value: string;
-  label: string;
-  disabled?: boolean;
-}
-
-interface NativeSelectProps {
-  value: string;
-  options: NativeSelectOption[];
-  placeholder?: string;
-  invalid?: boolean;
-  errorMessage?: string;
-  disabled?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLSelectElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
-  name?: string;
-  id?: string;
-  required?: boolean;
-  'aria-label'?: string;
-}
-```
 
 ---
 

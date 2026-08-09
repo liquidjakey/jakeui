@@ -67,19 +67,6 @@ As [`accordion.md`](./accordion.md) Table 4, with one difference:
 |---|---|
 | Heading | **The trigger is not wrapped in a heading here.** An Accordion's items are peers in a list and benefit from heading navigation; a lone Collapsible usually sits inside content that already has its own heading, and adding another would pollute the document outline. |
 
----
-
-## Compiled output
-
-```ts
-interface CollapsibleProps {
-  triggerLabel: string;
-  children: React.ReactNode;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  disabled?: boolean;
-}
-```
 
 ---
 

@@ -53,18 +53,6 @@ limitation recorded for `Popover`. A submenu near the viewport edge will not fli
 | Nesting | The archetype's dont applies: do not nest submenus more than one level deep. |
 | Focus | Moves in on open, back to the sub trigger on close. |
 
----
-
-## Compiled output
-
-```ts
-interface DropdownMenuSubContentProps {
-  children: React.ReactNode;
-  side?: 'left' | 'right';
-  align?: 'start' | 'center' | 'end';
-  label?: string;
-}
-```
 
 ---
 

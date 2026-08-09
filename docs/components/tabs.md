@@ -71,26 +71,6 @@ be read together.
 | Orientation | A vertical tablist sets `aria-orientation="vertical"` and uses Up/Down instead of Left/Right. |
 | Panel | Labelled by its tab via `aria-labelledby`, and focusable so keyboard users can reach its content. |
 
----
-
-## Compiled output
-
-```ts
-interface TabItem {
-  id: string;
-  label: string;
-  content: React.ReactNode;
-}
-
-interface TabsProps {
-  items: TabItem[];
-  selectedId: string;
-  onSelect: (id: string) => void;
-  orientation?: 'horizontal' | 'vertical';
-  density?: 'default' | 'compact';
-  label?: string;
-}
-```
 
 ---
 

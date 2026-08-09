@@ -83,24 +83,6 @@ slips.
 | Keyboard | Tab through links. No arrow-key handling — these are links, not a menu. |
 | Panel | When open, Escape closes it and returns focus to the trigger. |
 
----
-
-## Compiled output
-
-```ts
-interface NavItem {
-  href: string;
-  label: string;
-  current?: boolean;
-}
-
-interface NavigationMenuProps {
-  items: NavItem[];
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-  label?: string;
-}
-```
 
 ---
 

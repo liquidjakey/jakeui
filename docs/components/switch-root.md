@@ -56,16 +56,6 @@ cannot be used.
 | Semantics | None — decorative. All state lives on the parent `role="switch"`. |
 | Disabled | Must be conveyed by more than the track; see the 🛑 above. |
 
-## Compiled output
-
-```ts
-interface SwitchRootProps {
-  checked: boolean;
-  size?: 'small' | 'default';
-  state?: 'default' | 'hover' | 'focused' | 'disabled' | 'readOnly' | 'invalid';
-  children?: React.ReactNode;
-}
-```
 
 ## Authoring checklist
 

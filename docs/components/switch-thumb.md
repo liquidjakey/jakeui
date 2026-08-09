@@ -49,17 +49,6 @@ with the record's own statement that both are inherited from Root.
 | Semantics | None. The thumb is decorative — `aria-hidden`. All state lives on the parent `role="switch"`. |
 | Motion | Travel is a transform, so it cannot affect layout. Respects `prefers-reduced-motion`. |
 
----
-
-## Compiled output
-
-```ts
-interface SwitchThumbProps {
-  checked?: boolean;
-  size?: 'small' | 'default';
-  disabled?: boolean;
-}
-```
 
 ---
 

@@ -90,19 +90,6 @@ which is why it stays blocked.
 | Activation | A selectable row must not swallow clicks on interactive cells. Selection is driven by an explicit control, not by a click anywhere on the row. |
 | Keyboard | Reading order only. This is a table, not a grid — no arrow-key navigation. |
 
----
-
-## Compiled output
-
-```ts
-interface TableRowProps {
-  children: React.ReactNode;
-  type?: 'header' | 'body' | 'footer';
-  selected?: boolean;
-  onSelect?: () => void;
-  density?: 'compact' | 'comfortable';
-}
-```
 
 ---
 

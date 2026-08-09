@@ -62,20 +62,6 @@ Both variants carry a delta.
 | Shortcut | Decorative — `aria-hidden`. Screen readers announce the label; the glyphs would be read as punctuation. |
 | Keyboard | Arrow keys move the highlight, Enter runs the highlighted item. Owned by the palette, not by this item. |
 
----
-
-## Compiled output
-
-```ts
-interface CommandProps {
-  children: React.ReactNode;
-  shortcut?: string;
-  selected?: boolean;
-  onSelect: () => void;
-  icon?: React.ReactNode;
-  id?: string;
-}
-```
 
 ---
 

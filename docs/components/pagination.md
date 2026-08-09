@@ -58,19 +58,6 @@ asserted, and the current page uses the `accent` pairing already proven elsewher
 | Compact | The summary ("Page 2 of 9") is text, so it is announced as-is. |
 | Keyboard | Standard tab order. No arrow-key handling — these are buttons, not a composite widget. |
 
----
-
-## Compiled output
-
-```ts
-interface PaginationProps {
-  page: number;
-  pageCount: number;
-  onPageChange: (page: number) => void;
-  compact?: boolean;
-  label?: string;
-}
-```
 
 ---
 

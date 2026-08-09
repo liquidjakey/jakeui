@@ -6,6 +6,19 @@ A documentation format for Figma design systems intended to be read by an AI or 
 
 Each component page carries four tables in this order. Table 1 and 3 are mandatory. Table 2 is mandatory wherever the Figma and code APIs diverge. Table 4 is mandatory for any interactive component.
 
+**There is deliberately no "compiled output" section.** These pages used to end by
+reproducing the TypeScript interface. That was removed on 9 Aug 2026 after a check
+found **10 of 77 reproduced interfaces had already drifted from the source** — in a
+single day, written by one author. Duplicating something the compiler already
+guarantees does not document it; it creates a second, unverified copy that quietly
+goes wrong. Link to the `.tsx` instead.
+
+Table 1 stays, because it carries three things the interface does not: **default
+values**, **grouping by role**, and the ⚠️ annotations that explain *why* a prop looks
+the way it does. That duplication is real but load-bearing — and it is now **gated**
+by `scripts/props-table-check.mjs`, which fails the build if Table 1 and the exported
+interface disagree.
+
 ---
 
 ## Table 1 — Code API

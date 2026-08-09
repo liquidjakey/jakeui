@@ -82,22 +82,6 @@ Identical to [`dialog.md`](./dialog.md) Table 4, with two deliberate differences
 | Escape | Routes to `onCancel`, never `onAction`. |
 | Tone | Destructive tone is carried by the action button's label and colour together, never colour alone. |
 
----
-
-## Compiled output
-
-```ts
-interface AlertDialogProps {
-  open: boolean;
-  onCancel: () => void;
-  onAction: () => void;
-  title: string;
-  description: string;
-  cancelLabel?: string;
-  actionLabel: string;
-  tone?: 'default' | 'destructive';
-}
-```
 
 ---
 

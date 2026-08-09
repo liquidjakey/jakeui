@@ -51,17 +51,6 @@ be transparent. That is consistent, but it means the two must be used together.
 | Alignment | Right-align numeric columns so digits line up — matches the `alignment` vocabulary. |
 | Sorting | Not implemented; no sorting is recorded on this asset. When added, the record requires `aria-sort` on the `th` and a **button inside it**, not a click handler on the cell. |
 
----
-
-## Compiled output
-
-```ts
-interface TableHeadProps {
-  children: React.ReactNode;
-  alignment?: 'left' | 'center' | 'right';
-  scope?: 'col' | 'row';
-}
-```
 
 ---
 

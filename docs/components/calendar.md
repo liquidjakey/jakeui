@@ -81,22 +81,6 @@ the build, and its checklist box stays unticked.
 | Disabled | `aria-disabled` and skipped by arrow keys, per the `datepicker` archetype: disable out-of-range dates rather than rejecting them after submit. |
 | Colour | With every day state asserted rather than bound, contrast must be re-checked once Figma provides real values. |
 
----
-
-## Compiled output
-
-```ts
-interface CalendarProps {
-  month: Date;
-  monthLabel: string;
-  onMonthChange: (month: Date) => void;
-  mode?: 'single' | 'range';
-  selected?: Date | [Date, Date];
-  onSelect: (value: Date) => void;
-  density?: 'compact' | 'comfortable';
-  isDisabled?: (date: Date) => boolean;
-}
-```
 
 ---
 

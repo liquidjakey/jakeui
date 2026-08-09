@@ -106,21 +106,6 @@ shift — the same treatment `Input` uses and for the same reason.
 | Focus | `ring` at `stroke/2`, never removed. |
 | Type | Defaults to `"button"`, so a button inside a form does not submit it by accident. |
 
----
-
-## Compiled output
-
-```ts
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-  style?: 'primary' | 'secondary' | 'outline' | 'ghost';
-  size?: 'small' | 'medium';
-  leadingIcon?: React.ReactNode;
-  disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
-}
-```
 
 ---
 

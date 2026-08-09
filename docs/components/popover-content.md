@@ -62,19 +62,6 @@ the action colour it had no value for.
 | Escape | Closes, returning focus to the trigger. |
 | Close control | Named "Close"; the glyph is decorative. |
 
-## Compiled output
-
-```ts
-interface PopoverContentProps {
-  title?: string; description?: string;
-  children?: React.ReactNode; action?: React.ReactNode;
-  onClose?: () => void;
-  size?: 'small' | 'large';
-  side?: PopoverSide;
-  align?: 'start' | 'center' | 'end';
-  arrow?: boolean;
-}
-```
 
 ## Authoring checklist
 

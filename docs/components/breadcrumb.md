@@ -60,22 +60,6 @@ transcribed. **Figma owes a binding for the current item.**
 | Collapsed | The overflow affordance is a real button with an accessible name, not an inert ellipsis glyph. Collapsing must never hide levels from assistive technology that a sighted user could reach. |
 | Keyboard | Standard link navigation. No custom key handling. |
 
----
-
-## Compiled output
-
-```ts
-interface BreadcrumbItem {
-  label: string;
-  href?: string;
-}
-
-interface BreadcrumbProps {
-  items: BreadcrumbItem[];
-  collapsed?: boolean;
-  label?: string;
-}
-```
 
 ---
 

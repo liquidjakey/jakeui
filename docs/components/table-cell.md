@@ -62,17 +62,6 @@ cell in every table.
 | Alignment | Right for numbers. |
 | Contrast | ⚠️ `muted-foreground` on `card` is the default body text here. It passes AA per the refine phase (7.48 Light), but it is the muted pairing doing full-time duty. |
 
----
-
-## Compiled output
-
-```ts
-interface TableCellProps {
-  children: React.ReactNode;
-  alignment?: 'left' | 'center' | 'right';
-  emphasis?: 'default' | 'strong';
-}
-```
 
 ---
 

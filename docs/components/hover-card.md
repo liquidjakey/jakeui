@@ -56,21 +56,6 @@ this record, the same gap as Tabs' density and Table's density.
 | Content | Everything in it must be an enhancement of the trigger's own destination. Never the only copy of an action — that is a `Popover`. |
 | Announcement | Not a live region. It appears on an intentional interaction, so it does not interrupt. |
 
----
-
-## Compiled output
-
-```ts
-interface HoverCardProps {
-  title: string;
-  description?: string;
-  children: React.ReactElement;
-  meta?: React.ReactNode;
-  density?: 'compact' | 'detailed';
-  openDelay?: number;
-  closeDelay?: number;
-}
-```
 
 ---
 

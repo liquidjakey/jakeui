@@ -59,17 +59,6 @@ that would close this and the four overlay-family gaps at once.
 | Dismiss | Clicking it closes in `modal` mode. In `trapFocus` mode it does not — focus is held deliberately. |
 | Motion | Fades. Respects `prefers-reduced-motion`. |
 
----
-
-## Compiled output
-
-```ts
-interface PopoverBackdropProps {
-  open: boolean;
-  mode?: 'modal' | 'trapFocus';
-  onClick?: () => void;
-}
-```
 
 ---
 

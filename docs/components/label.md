@@ -17,6 +17,7 @@ Form control label primitive.
 | `htmlFor` | `string` | `undefined` | ✓ | The id of the control this labels. Required in practice — see Table 4. |
 | `requirement` | `'required' \| 'optional'` | `undefined` | | Appends a marker. **Undefined means no marker at all** — see Table 2. |
 | `disabled` | `boolean` | `false` | | Dims the label to match a disabled control. |
+| `className` | `string` | `undefined` | | Escape hatch for layout. ⚠️ Not a Figma property. |
 
 ---
 
@@ -60,18 +61,6 @@ anything wrong. If a distinct marker colour is ever wanted, Figma owes the bindi
 | Disabled | Visual only. A label is never focusable, so nothing is removed from the tab order; the *control* carries the real disabled state. |
 | Keyboard | None of its own. Clicking or activating it moves focus to the associated control. |
 
----
-
-## Compiled output
-
-```ts
-interface LabelProps {
-  children: React.ReactNode;
-  htmlFor: string;
-  requirement?: 'required' | 'optional';
-  disabled?: boolean;
-}
-```
 
 ---
 

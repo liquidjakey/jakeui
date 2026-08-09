@@ -48,12 +48,6 @@ a one-off.
 | Semantics | Decorative. State lives on the `<input type="radio">`. |
 | Disabled | Needs more than the circle to convey; see the 🛑. |
 
-## Compiled output
-
-```ts
-type RadioState = 'default' | 'hover' | 'focused' | 'disabled' | 'readOnly' | 'invalid';
-interface RadioGroupItemProps { checked?: boolean; state?: RadioState; }
-```
 
 ## Authoring checklist
 

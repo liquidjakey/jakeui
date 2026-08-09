@@ -66,20 +66,6 @@ full-strength while the value beside it goes muted. Transcribed as bound.
 | Calendar | Full grid semantics — see [`calendar.md`](./calendar.md) Table 4. |
 | Typing | ⚠️ The archetype asks that a date be typeable as well as picked. This asset records only a button trigger, so typing is **not** implemented — a real gap against the archetype, recorded rather than invented. |
 
-## Compiled output
-
-```ts
-interface DatePickerProps {
-  value: Date | undefined;
-  onChange: (date: Date) => void;
-  label: string;
-  mode?: 'single' | 'range';
-  invalid?: boolean;
-  errorMessage?: string;
-  disabled?: boolean;
-  format?: (d: Date) => string;
-}
-```
 
 ## Authoring checklist
 

@@ -68,19 +68,6 @@ height is therefore raw padding in code.
 | Keyboard | The record: *"Interactive cells are reachable in reading order."* No grid navigation — this is a table, not a grid. |
 | Overflow | The scroll region is focusable and named, so a keyboard user can scroll it. See [`table-container.md`](./table-container.md). |
 
----
-
-## Compiled output
-
-```ts
-interface TableProps {
-  children: React.ReactNode;
-  caption?: string;
-  captionPosition?: 'top' | 'bottom';
-  density?: 'compact' | 'comfortable';
-  label?: string;
-}
-```
 
 ---
 

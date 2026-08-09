@@ -58,17 +58,6 @@ usual choice for a progress track. Transcribed as recorded.
 | Motion | The indeterminate animation respects `prefers-reduced-motion`. |
 | Keyboard | None. Never focusable — it reports, it does not accept input. |
 
----
-
-## Compiled output
-
-```ts
-interface ProgressProps {
-  value?: number;
-  label: string;
-  max?: number;
-}
-```
 
 ---
 

@@ -61,18 +61,6 @@ same treatment `space/2-25` gets in `Input`.
 | Keyboard | Enter and Space — it is a native `<button>`. |
 | Redundancy | Escape already closes the popover. This control exists for pointer and touch users, who have no Escape key. |
 
----
-
-## Compiled output
-
-```ts
-interface PopoverCloseProps {
-  onClose: () => void;
-  label?: string;
-  disabled?: boolean;
-  icon?: React.ReactNode;
-}
-```
 
 ---
 

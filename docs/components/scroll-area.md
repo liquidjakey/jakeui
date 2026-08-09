@@ -59,17 +59,6 @@ behaviour intact, which is the point of a scroll area.
 | Nesting | Do not nest scroll areas on the same axis. |
 | Overflow cue | The native scrollbar is the cue. Suppressing it hides the fact that there is more to see. |
 
----
-
-## Compiled output
-
-```ts
-interface ScrollAreaProps {
-  children: React.ReactNode;
-  axis?: 'vertical' | 'horizontal';
-  label: string;
-}
-```
 
 ---
 

@@ -66,21 +66,6 @@ in review.
 | Keyboard | Enter, Space and Down Arrow all open — Down Arrow is the APG convention for menu buttons. |
 | Focus | Returns here when the menu closes. |
 
----
-
-## Compiled output
-
-```ts
-interface DropdownMenuTriggerProps {
-  children: React.ReactNode;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  type?: 'button' | 'avatar';
-  disabled?: boolean;
-  controls?: string;
-  label?: string;
-}
-```
 
 ---
 

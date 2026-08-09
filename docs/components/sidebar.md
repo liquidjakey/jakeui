@@ -61,18 +61,6 @@ both widths are raw. Same gap as Dialog and Drawer.
 | Persistence | The collapsed choice should survive navigation. That is app state, not component state, hence the controlled prop. |
 | Narrow screens | The record's `Viewport=Compact` is a breakpoint fixture. At true mobile widths a sidebar should become an overlay `Drawer` — that is a layout decision, not this component's. |
 
----
-
-## Compiled output
-
-```ts
-interface SidebarProps {
-  children: React.ReactNode;
-  collapsed?: boolean;
-  onCollapsedChange?: (collapsed: boolean) => void;
-  label?: string;
-}
-```
 
 ---
 

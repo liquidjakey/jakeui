@@ -49,17 +49,6 @@ root-level records are not.
 | Name | `label`, associated by id. The archetype also asks the current value be shown as text. |
 | Value | `aria-valuenow` etc. come from the native input. |
 
-## Compiled output
-
-```ts
-interface SliderProps {
-  value: number;
-  onValueChange: (value: number) => void;
-  label: string;
-  min?: number; max?: number; step?: number;
-  disabled?: boolean;
-}
-```
 
 ## Authoring checklist
 

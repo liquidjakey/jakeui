@@ -57,19 +57,6 @@ The icon inherits `currentColor` from the row.
 | Disabled | Native `disabled`, leaves the tab order. |
 | Target size | An icon-only control in a dense row is the most likely place to fall under the 24px minimum. Padding keeps it above. |
 
----
-
-## Compiled output
-
-```ts
-interface TableActionTriggerProps {
-  label: string;
-  onClick: () => void;
-  icon?: React.ReactNode;
-  disabled?: boolean;
-  expanded?: boolean;
-}
-```
 
 ---
 

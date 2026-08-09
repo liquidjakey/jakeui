@@ -85,17 +85,6 @@ a `card` fill identifiable as the anomaly.
 | Announcement | Not a live region. A badge whose value changes in place should be inside one the caller owns. |
 | Contrast | Every tone's text-on-fill pairing must clear 4.5:1 in both modes. ⚠️ Success's cross-family pairing needs re-checking if the two foregrounds ever diverge. |
 
----
-
-## Compiled output
-
-```ts
-interface BadgeProps {
-  children: React.ReactNode;
-  tone?: 'neutral' | 'info' | 'success' | 'warning' | 'destructive';
-  size?: 'small' | 'medium';
-}
-```
 
 ---
 

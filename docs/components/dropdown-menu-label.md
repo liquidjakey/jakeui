@@ -51,16 +51,6 @@ flagged.
 | Role | `role="presentation"` on the element, with the group it names carrying `aria-labelledby` pointing here. A label that is announced as an item is a dead end for keyboard users. |
 | Keyboard | None of its own. |
 
----
-
-## Compiled output
-
-```ts
-interface DropdownMenuLabelProps {
-  children: React.ReactNode;
-  inset?: boolean;
-}
-```
 
 ---
 

@@ -87,21 +87,6 @@ so its contrast is unverified.
 | Destructive | Tone is not a warning on its own. A destructive item that cannot be undone needs a confirmation step. |
 | Disabled | Skipped by arrow-key navigation, not merely dimmed. |
 
----
-
-## Compiled output
-
-```ts
-interface DropdownMenuItemProps {
-  children: React.ReactNode;
-  onSelect: () => void;
-  tone?: 'default' | 'destructive';
-  icon?: React.ReactNode;
-  shortcut?: string;
-  inset?: boolean;
-  disabled?: boolean;
-}
-```
 
 ---
 

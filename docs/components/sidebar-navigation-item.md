@@ -17,6 +17,7 @@ Sidebar route item.
 | `href` | `string` | — | ✓ | Destination. It navigates; it is not a button. |
 | `active` | `boolean` | `false` | | Figma axis `State`, as a boolean. |
 | `icon` | `ReactNode` | `undefined` | | ⚠️ Not a Figma property; needed for the collapsed sidebar. |
+| `collapsed` | `boolean` | `false` | | Set by `Sidebar`. Hides the label visually while keeping the accessible name. ⚠️ Not a Figma property. |
 
 ---
 
@@ -61,18 +62,6 @@ intentional"*. No dimension token exists, so it is raw.
 | Collapsed | With no visible label, the icon needs an accessible name — supplied by the still-rendered label, visually hidden. |
 | Hit target | The whole row, not just the text. |
 
----
-
-## Compiled output
-
-```ts
-interface SidebarNavigationItemProps {
-  children: React.ReactNode;
-  href: string;
-  active?: boolean;
-  icon?: React.ReactNode;
-}
-```
 
 ---
 

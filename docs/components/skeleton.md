@@ -45,14 +45,6 @@ default anyway and respects `prefers-reduced-motion`.
 | Motion | Pulse only under `motion-safe`. |
 | Duration | Not for waits short enough to flash, and never left up when a request fails. |
 
-## Compiled output
-
-```ts
-interface SkeletonProps {
-  type?: 'text' | 'avatar' | 'card' | 'tableRow';
-  label?: string;
-}
-```
 
 ## Authoring checklist
 

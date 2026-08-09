@@ -70,24 +70,6 @@ interactive component here, asserted rather than transcribed.
 | Disabled | The trigger is a disabled `<button>`, so it leaves the tab order. |
 | Focus | Visible ring on the trigger. See the ⚠️ in Table 3. |
 
----
-
-## Compiled output
-
-```ts
-interface AccordionItem {
-  id: string;
-  title: string;
-  content: React.ReactNode;
-  disabled?: boolean;
-}
-
-interface AccordionProps {
-  items: AccordionItem[];
-  openIds: string[];
-  onToggle: (id: string) => void;
-}
-```
 
 ---
 

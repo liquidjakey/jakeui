@@ -68,19 +68,6 @@ this is a sighted-user gap. **Figma owes a checked indicator.**
 | Checked | Must be visible, not only in the accessibility tree — see the 🛑 above. |
 | Disabled | Skipped by arrow-key navigation, not merely dimmed. |
 
----
-
-## Compiled output
-
-```ts
-interface DropdownMenuRadioItemProps {
-  children: React.ReactNode;
-  checked?: boolean;
-  onSelect: () => void;
-  icon?: React.ReactNode;
-  disabled?: boolean;
-}
-```
 
 ---
 

@@ -45,16 +45,6 @@ Two variants, one row — `Position=Bottom` carries no token delta, only placeme
 | Position | CSS `caption-side`, never DOM reordering. |
 | Keyboard | None. Not interactive. |
 
----
-
-## Compiled output
-
-```ts
-interface TableCaptionProps {
-  children: React.ReactNode;
-  position?: 'top' | 'bottom';
-}
-```
 
 ---
 

@@ -67,27 +67,6 @@ Indicator` records `fill primary` — so only the ring is asserted, not the stat
 | Disabled | Per item or whole-group. A disabled group is still announced. |
 | Required | A group with no selection is valid HTML; requiredness belongs to the consuming `Field`. |
 
----
-
-## Compiled output
-
-```ts
-interface RadioItem {
-  value: string;
-  label: string;
-  description?: string;
-  disabled?: boolean;
-}
-
-interface RadioGroupProps {
-  items: RadioItem[];
-  value: string;
-  onValueChange: (value: string) => void;
-  label: string;
-  disabled?: boolean;
-  orientation?: 'vertical' | 'horizontal';
-}
-```
 
 ---
 

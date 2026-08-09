@@ -84,19 +84,6 @@ Asserted on the established precedent: `input` for the resting border, `primary`
 | Disabled | Native `disabled`, leaves the tab order. |
 | Tri-state | Clicking an indeterminate checkbox resolves to checked. It never cycles back to mixed — mixed is derived from children, not chosen. |
 
----
-
-## Compiled output
-
-```ts
-interface CheckboxProps {
-  label: string;
-  checked: boolean | 'indeterminate';
-  onCheckedChange: (checked: boolean) => void;
-  disabled?: boolean;
-  description?: string;
-}
-```
 
 ---
 
