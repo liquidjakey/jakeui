@@ -180,8 +180,25 @@ function interactionPrimitives() {
   const out = [];
   const inter = byCollection('Interaction');
 
+  // Opacity is stored in Figma on the 0-100 scale, because Figma divides a
+  // variable bound to a node's `opacity` field by 100 — `opacity/50` must hold
+  // 50 to render 0.5. CSS opacity is 0-1, so divide by 100 on emit. Figma and
+  // this exporter are a matched pair here: change one and the other must follow.
   for (const v of inter.filter((v) => v.n.startsWith('opacity/'))) {
-    out.push(`  --opacity-${tail(v.n)}: ${num(v.m[Object.keys(v.m)[0]])};`);
+    const figmaValue = v.m[Object.keys(v.m)[0]];
+    if (figmaValue > 1) {
+      out.push(`  --opacity-${tail(v.n)}: ${num(figmaValue / 100)};`);
+    } else if (figmaValue === 0) {
+      out.push(`  --opacity-${tail(v.n)}: 0;`);
+    } else {
+      // A 0-1 value means Figma is still on the old scale and is rendering this
+      // 100x too transparent. Emit the correct CSS but make the drift loud.
+      console.warn(
+        `⚠ opacity/${tail(v.n)} holds ${figmaValue} (0-1 scale). Figma renders that as ` +
+        `${figmaValue / 100} — 100x too transparent. Set it to ${Number(tail(v.n))} in Figma.`
+      );
+      out.push(`  --opacity-${tail(v.n)}: ${num(figmaValue)};`);
+    }
   }
   out.push('');
 

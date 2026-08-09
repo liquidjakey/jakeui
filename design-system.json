@@ -32,15 +32,21 @@
   "tokens": {
     "intakeMode": "retrofit",
     "tiers": 2,
-    "primitivesBuilt": false,
-    "semanticBuilt": false,
-    "stylesBuilt": false,
-    "collections": [],
+    "primitivesBuilt": true,
+    "semanticBuilt": true,
+    "stylesBuilt": true,
+    "collections": [
+      "Jake UI",
+      "Color Primitives",
+      "Dimensions",
+      "Interaction",
+      "Typography Primitives"
+    ],
     "styleGroups": [
       "Text",
       "Elevation"
     ],
-    "lastSync": "2026-08-09T05:11:19Z"
+    "lastSync": "2026-08-09T07:30:00Z"
   },
   "sheets": {
     "built": false
@@ -165,7 +171,9 @@
     "_outOfOrderNote": "components/input.tsx was written before entering this sequence (no skill loaded). Assessed low-harm: it binds tokens by name (card, input, ring, destructive, muted, muted-foreground, foreground), so Phase 2 value changes propagate automatically, and no Chromatic baseline existed to invalidate.",
     "_refineProgress": "COMPLETE. muted-foreground darkened 9 Aug 2026 after visual review: Light neutral/500 -> neutral/600 across 2206 bindings; Dark unchanged at neutral/400. All Light pairings now pass AA (card 7.81, muted 7.48, accent 7.16, secondary 7.10, sidebar 7.48); Dark 5.74-6.91. Binding count 65088 -> 65088 (delta 0), baseline taken in the same execution as the write this time. The comparison frame was deleted afterwards (it read 'now - neutral/500', which had become false) and the file returned to exactly 65045 bindings. Added 8 primitives (neutral/300,600,700; red/300,700; green/700; amber/700; blue/900) + primary-readable. Realigned 5 semantic tokens in place: destructive-hover (was inert), primary-active (collided with hover in Light), accent-hover (was borrowing zinc/800), success-muted-foreground and warning-muted-foreground (both resolved to the same primitive as their solid token, so the audit's 'rebind Alert text' fix would have been a no-op). Binding-survival audit PASSED: 65045 before, 65045 after, delta 0; style-level refs 42 -> 42; 0 unresolved aliases; 189/189 described. Zero renames were needed. OPEN: muted-foreground -> neutral/600 (2206 bindings) awaiting visual review; comparison frame rendered on the '↳ Color' page.",
     "_rebindProgress": "Complete. Rebound 75 text fill bindings across 71 nodes: 71 primary -> primary-readable (Light unchanged at 6.82 since both resolve to blue/700; Dark 2.03 -> 9.89 on card/popover, 2.24 -> 10.93 on background), 2 warning -> warning-muted-foreground (3.07 -> 4.84), 2 success -> success-muted-foreground (3.15 -> 4.79). Deliberately NOT rebound: destructive (62 text bindings, passes at 4.76 Light / 6.19 Dark, and destructive-foreground is white so it is not a valid substitute) and info (4.82 / 4.88, passes). Binding total 65088 vs baseline 65045; the +43 is entirely the muted-foreground comparison frame created for the deferred grey decision (verified: total minus that frame == 65045 exactly). Zero text nodes ended up with multiple bound fills, so no over-application.",
-    "_rebindOpenItems": "3 destructive-as-text nodes on accent in Light = 4.37 (below 4.5). 2 destructive-as-text nodes sit on a LITERAL (unbound) background and read 2.89 in Dark — the literal fill is itself a token violation and should be bound before the contrast can be fixed. Neither is addressable by rebinding alone."
+    "_rebindOpenItems": "3 destructive-as-text nodes on accent in Light = 4.37 (below 4.5). 2 destructive-as-text nodes sit on a LITERAL (unbound) background and read 2.89 in Dark — the literal fill is itself a token violation and should be bound before the contrast can be fixed. Neither is addressable by rebinding alone.",
+    "_phase4Declined": "token-sync-layer NOT adopted; export-tokens.mjs kept. It already satisfies 4 of the skill's hard rules (float32 rounding at the export boundary, semantic->primitive var() references preserved, --check gate against hand-edits, committed diffable dump), and adopting Phase 4 would require converting to a monorepo for packages/tokens while NOT removing the query-in-Figma step, since that exists because the Variables REST API is Enterprise-only on this plan. Ported the opacity rule immediately (it exposed a live 120-binding bug). Deferred: rename detection (revisit before scaling component count), channel-alpha (when a consumer exists), multi-platform adapters (when a non-web target is real). Full reasoning in docs/design-system/decisions/2026-08-09-phase-4-sync-declined.md.",
+    "_phase5and6Skipped": "baseline (5) blocked: no Storybook/Chromatic, and storybook-chromatic-builder requires a monorepo + packages/tokens. code (6) is N/A as a retrofit: no consuming application, scssColorVars/tailwindColorClasses/jsColorsUsages all 0, so there is nothing to swap and no consumer to keep working. Next actionable phase is 6.5 (docs)."
   },
   "completedSkills": [
     "figma-environment-setup",
