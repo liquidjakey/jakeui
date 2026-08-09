@@ -50,6 +50,13 @@ const TYPE_RAMP = [
  *
  * Registering the ramp under `font-size` puts each step back in the size group,
  * where it no longer conflicts with a colour and both survive the merge.
+ *
+ * THIS IS NOW GATED. `npm run computed-type:check` renders every story in headless
+ * Chrome and asserts the COMPUTED font-size/line-height/font-weight of every text
+ * element against the ramp, so the defect above cannot return silently. Deleting
+ * the `extend` block below and running it reports 164 off-ramp elements across 13
+ * components and exits 1. If this list falls out of sync with the ramp in
+ * tokens/globals.css, that gate is what will tell you.
  */
 const twMerge = extendTailwindMerge({
   extend: {

@@ -1,0 +1,48 @@
+{
+  "_why": [
+    "Components that deliberately compute OFF the type ramp, and are allowed to.",
+    "",
+    "Every entry here traces to the SAME Figma-side defect: a text node that carries",
+    "no text style, so the file's metrics land between ramp steps and the component",
+    "cannot bind a step and match the file at the same time. Nothing in this list is",
+    "a code defect, and nothing in it may be 'fixed' without the Figma decision it is",
+    "waiting on — see docs/design-system/findings/2026-08-09-figma-side-defects.md,",
+    "item 2, the unbound text nodes.",
+    "",
+    "HOW AN ENTRY IS KEYED, AND WHY IT CANNOT HIDE A DELETION",
+    "Each entry requires BOTH an exact computed triple AND the continued presence of",
+    "every class in `requireClasses`. tailwind-merge deleting a ramp class removes it",
+    "from the DOM, so `requireClasses` stops matching, the exception stops applying,",
+    "and the element fails like any other. An exception can only ever excuse the exact",
+    "composition it names.",
+    "",
+    "NOT IN THIS FILE, and deliberately so: <option>/<optgroup> (drawn by the platform",
+    "inside the native select popup, where Chrome forces line-height:normal), anything",
+    "inside .sr-only (clipped to 1px, never seen), and classless text (which merely",
+    "inherits). Those are structural exclusions in computed-type-check.mjs, reported",
+    "as warnings rather than silently dropped."
+  ],
+  "documented": [
+    {
+      "component": "Avatar",
+      "source": "components/avatar.tsx",
+      "requireClasses": ["text-label-xs", "font-semibold"],
+      "triple": "11/16/600",
+      "reason": "Figma binds the Initials text 11/14 Semi Bold with NO text style. The ramp has no 11px semibold step — label-xs is 11/16/500 — so the component takes the nearest step and overrides the weight. Size matches the file, leading is 2px looser. The source comment records this and lists it in the Figma fix list."
+    },
+    {
+      "component": "Dropdown Menu / Label",
+      "source": "components/dropdown-menu.tsx",
+      "requireClasses": ["text-body-xs", "font-semibold"],
+      "triple": "12/18/600",
+      "reason": "The label is 12/18 SEMI BOLD in the file, not medium, and carries no text style. body-xs is 12/18/400, so the metrics match the file exactly and only the weight is an override. Transcribed as bound rather than snapped to label-sm, which would have changed the leading."
+    },
+    {
+      "component": "Checkbox",
+      "source": "components/checkbox.tsx",
+      "requireClasses": ["text-[10px]"],
+      "triple": "10/15/400",
+      "reason": "The check glyph inside the 16px box. Marked ASSERTED in source: no box tokens are recorded anywhere for this component and no ramp step is 10px. The repo rule is to flag rather than invent a token, so the raw value stands and is flagged here."
+    }
+  ]
+}

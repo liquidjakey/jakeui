@@ -22,6 +22,9 @@ design-system/
   scripts/export-tokens.mjs     Token dump -> globals.css   (+ --check CI gate)
   scripts/generate-map.mjs      Component dump -> manifest
   scripts/validate-map.mjs      CI gate
+  scripts/computed-type-check.mjs      CI gate — measures the BROWSER, not the source
+  scripts/computed-type-exceptions.json  Documented off-ramp divergences, with reasons
+  scripts/lib/type-ramp.mjs     Parses the 14-step ramp out of the generated CSS
   docs/                     Build documentation — start at docs/README.md
   notes/                    Historical working notes (do not build from these)
 ```
@@ -34,8 +37,28 @@ npm run tokens:check   # fail if globals.css is hand-edited or the dump is stale
 npm run map:sync       # dump -> figma.map.json (preserves hand-set codePaths)
 npm run map:check      # fail if the map and the docs disagree
 npm run typecheck      # tsc --noEmit over components/, lib/, icons/
-npm run check          # all three gates — this is the CI entry point
+npm run computed-type:check    # render every story, measure what the BROWSER computes
+npm run computed-type:explore  # same pass, but dump the metric distribution instead
+npm run check          # every gate — this is the CI entry point
 ```
+
+### The one gate that does not read source
+
+`tokens:check`, `map:check`, `docs:check` and `props-table-check` all compare
+NAMES. That is a real blind spot, and it cost a full audit to find: a
+`tailwind-merge` misconfiguration classified the custom type ramp as text-COLOUR
+utilities, so `cn('text-label-lg', 'text-primary-foreground')` returned only the
+colour and the typography was **deleted from the DOM** in 38 components and 130
+class occurrences. Every name-based gate stayed green throughout, because the
+source was correct — only the rendered output was wrong.
+
+`computed-type:check` closes that hole. It builds Storybook, renders all 91
+stories in headless Chrome, and asserts that every element which renders text
+computes to a font-size/line-height/font-weight triple that exists in the 14-step
+ramp — parsed from the generated `tokens/globals.css`, never hardcoded. It also
+asserts Inter genuinely loads at all four weights, which was the second defect
+found the same day. See the header of `scripts/computed-type-check.mjs` for why it
+asserts the converse of the obvious thing.
 
 Two generators, same shape: query inside Figma (the Variables REST API is
 Enterprise-only and this account is not), commit the dump, transform with Node,
