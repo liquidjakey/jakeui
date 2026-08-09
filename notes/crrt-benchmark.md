@@ -1,8 +1,17 @@
-# Description Standard — benchmarked against CRRT
+# CRRT benchmark — historical working notes
 
-The Figma `description` field is the only documentation an agent reads through MCP. A screenshot is not readable; a doc frame on the canvas is barely readable; the description is structured text delivered with the component. **It is the API surface for AI.**
+> **Not build documentation.** This is the competitive-benchmark analysis that the
+> Jake UI description standard and the props-table format were derived from, kept
+> for provenance. Nothing here describes Jake UI's own tokens or components.
+>
+> **Do not build from this file.** The token names quoted below (`cobalt/400`,
+> `surface/muted`, `text/disabled`, `border/focus`) are **CRRT's**, not Jake UI's,
+> and none of them exist in `tokens/globals.css`. For what to actually build
+> against, see `docs/` — start at `docs/README.md`.
 
-This standard is benchmarked against the [CRRT Design System](https://www.figma.com/design/vRN249HEjNvQA5Yu2pKx9B/CRRT-Design-System--Copy-), which is the file the [props-table format](./props-table-format.md) was derived from.
+Reference file: [CRRT Design System](https://www.figma.com/design/vRN249HEjNvQA5Yu2pKx9B/CRRT-Design-System--Copy-)
+Extracted from `docs/02-design/description-standard.md` on 9 Aug 2026, when `docs/`
+was narrowed to build-relevant content only.
 
 ---
 
@@ -30,7 +39,7 @@ This standard is benchmarked against the [CRRT Design System](https://www.figma.
 
 ---
 
-## Where CRRT falls short — and Jake UI should not copy it
+## Where CRRT falls short
 
 | CRRT gap | Why it matters |
 |---|---|
@@ -48,74 +57,15 @@ Recorded so the benchmark is honest in both directions:
 
 - **Governance page** — release policy, contribution workflow, naming rules, token policy, accessibility gate, responsive gate, deprecation, ownership, QA evidence requirements. CRRT has none of this.
 - **Library Index** — a per-family maturity matrix (Draft → Technical QA → Source Parity → Published). CRRT has a flat "Done / Next" list.
-- **Scale** — 74 component sets vs roughly 20.
+- **Scale** — 75 component sets vs roughly 20.
 - **Light + Dark by variable mode.**
 - **100% token binding** on fills, strokes, radii, gaps and padding.
 
 ---
 
-## The Jake UI standard
+## Coverage comparison, as measured 8 Aug 2026
 
-Every component set description is: **authored lead** + `———` + **generated block**. The lead is human prose. Everything below the rule is derived from the file, so it cannot drift.
-
-```
-{Authored lead — purpose, role in the system, when to use which variant,
- accessibility contract. Written by a human. Preserved across regeneration.}
-
-———
-ANATOMY / STATE TOKENS
-State=Default — fill card · border 1px input · radius radius/lg · text foreground · type size/14
-State=Focused — border 2px ring
-State=Error — border 1px destructive
-State=Disabled — fill muted · text muted-foreground
-
-CODE API — full contract: docs/02-design/state-decomposition.md
-Props — Value: string
-Slots — Leading icon: ReactNode (Phosphor icon)
-! Decompose — State [Default · Focused · Error · Disabled] → :focus-visible CSS-owned, dropped; invalid + disabled independent booleans
-Design-only — Pattern (Storybook stories, never a prop)
-
-DO / DO NOT
-+ Reference variables for every value; never hardcode a hex or px.
-+ Change state through props, never by detaching the instance.
-- Do not emit State as an enum prop. It packs states that co-occur at runtime.
-- Do not remove the ring border on focus. It is the only focus affordance.
-```
-
-### Rules
-
-1. **Below the `———` is generated.** Regenerating re-reads the live bindings; it never invents. Edits there are overwritten — put authored content in the lead.
-2. **Token names, never hex.** `border 2px ring`, not `#737373`.
-3. **State rows are deltas.** The first variant prints in full; the rest print only what changed. Capped at 8 rows.
-4. **CODE API states the divergence.** This is what CRRT is missing and what makes the description safe to hand to a codegen step.
-5. **Do / Do-not rules must be true for that component.** Generated only from facts: has a `decompose` axis, has slots, uses `ring`, breaches the 30-variant ceiling. **Component-specific UX guidance is authored, never generated** — inventing it would be worse than omitting it.
-6. **No `&`, `<`, `>`.** Figma escapes them.
-
-### Variables
-
-Every one of the 178 carries a description.
-
-```
-Semantic role token. Bind components to this, never to a primitive.
-Light #737373 (neutral/500)  ·  Dark #737373 (neutral/500)
-CSS var(--ring)
-```
-
-```
-Primitive value: #0a0a0a.  CSS var(--color-neutral-950)
-Referenced by semantic tokens: background, card-foreground, destructive-foreground,
-foreground, info-foreground, popover-foreground, sidebar-foreground.
-```
-
-The reverse-reference list is the part CRRT lacks: it tells an agent the blast radius of changing a primitive.
-
-The 26 exception tokens keep their own note and are excluded from regeneration.
-
----
-
-## Coverage
-
-| | CRRT | Jake UI before | Jake UI now |
+| | CRRT | Jake UI before | Jake UI at the time |
 |---|---|---|---|
 | Component sets with a description | ~20 | 74 | 74 |
 | …with exact per-state tokens | yes | no | **74** |
@@ -124,9 +74,12 @@ The 26 exception tokens keep their own note and are excluded from regeneration.
 | Variables with a description | 31 / 108 | 58 / 178 | **178 / 178** |
 | Read me states the extraction contract | yes | no | **yes** |
 
+Counts are as-of that date and have since moved — the live numbers live in
+`design-system.json` under `audit`, which is the current source of truth.
+
 ---
 
-## Still authored by hand
+## The remaining human gap
 
 Generation cannot produce these, and they are what CRRT does best:
 
@@ -136,4 +89,6 @@ Generation cannot produce these, and they are what CRRT does best:
 - **Content rules.** "Labels are verb-first (Save, Add patient)."
 - **Failure-mode don'ts.** "Don't place two Primary buttons side by side; it flattens the action hierarchy."
 
-Most Jake UI leads currently describe *what the component is*. Bringing them to CRRT's bar means adding *which variant to pick and why*. That is the remaining gap, and it is genuinely human work.
+Most Jake UI authored leads describe *what the component is*. Bringing them to
+CRRT's bar means adding *which variant to pick and why*. That remains genuinely
+human work.

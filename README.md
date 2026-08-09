@@ -20,7 +20,8 @@ design-system/
   scripts/export-tokens.mjs     Token dump -> globals.css   (+ --check CI gate)
   scripts/generate-map.mjs      Component dump -> manifest
   scripts/validate-map.mjs      CI gate
-  docs/02-design/               Format specs, per-component tables, the audit
+  docs/                     Build documentation — start at docs/README.md
+  notes/                    Historical working notes (do not build from these)
 ```
 
 ## Scripts
@@ -37,12 +38,22 @@ Two generators, same shape: query inside Figma (the Variables REST API is
 Enterprise-only and this account is not), commit the dump, transform with Node,
 gate in CI.
 
-Docs live in `docs/02-design/` (moved under this directory 9 Aug 2026 so the
-repo is self-contained):
+## Docs
+
+`docs/` holds exactly what is needed to build a component, and nothing else.
+**Start at [`docs/README.md`](./docs/README.md)** — it gives the reading order.
+
 - `props-table-format.md` — the four-table format every component must document
-- `state-decomposition.md` — Table 2 for all 23 conflated sets
-- `components/input.md` — worked example
-- `design-system-audit.md` — current readiness
+- `components/input.md` — the worked example, real tokens read from the live file
+- `state-decomposition.md` — Table 2 for all 23 conflated sets; the binding contract
+- `tokens/color.md` — which color token to bind, plus the open contrast constraints
+- `tokens/typography.md` — the 14-style ramp and its Tailwind utilities
+- `figma-descriptions.md` — the format of the descriptions an agent reads via MCP
+
+`notes/` holds historical material — the CRRT benchmark the format was derived from,
+the 8 Aug audit snapshot, and the Figma-side cleanup backlog. **Its token names and
+counts are not current; do not build from it.** Current project state lives in
+`design-system.json`.
 
 ## Install
 
@@ -75,7 +86,7 @@ A Figma variant axis is mutually exclusive. Runtime state is not.
 
 Twenty-three components encode co-occurring states — `disabled`, `invalid`, `readOnly`, `:hover`, `:focus-visible` — as a single `State` enum. **Never emit that enum as a prop.** A field can be disabled *and* invalid; the enum cannot say so.
 
-`docs/02-design/state-decomposition.md` gives the split for every one. The validator fails the build if a `decompose` entry acquires a `type`.
+`docs/state-decomposition.md` gives the split for every one. The validator fails the build if a `decompose` entry acquires a `type`.
 
 ## Workflow
 
@@ -84,7 +95,7 @@ Adding or changing a component:
 1. Update the Figma master.
 2. Refresh `.figma-dump.json` (see the header of `generate-map.mjs`).
 3. `node design-system/scripts/generate-map.mjs`
-4. Write the four tables in `docs/02-design/components/<slug>.md`.
+4. Write the four tables in `docs/components/<slug>.md`.
 5. Implement, then set `codePath` and `codeExport` in `figma.map.json`.
 6. `node design-system/scripts/validate-map.mjs`
 

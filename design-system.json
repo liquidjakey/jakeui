@@ -22,7 +22,7 @@
     "mechanism": "console-mcp",
     "fileKey": "ovnLtL9xbX8SG5xDw673Un",
     "connected": true,
-    "lastVerified": "2026-08-08T09:48:35Z",
+    "lastVerified": "2026-08-09T05:49:04Z",
     "coverPageBuilt": false,
     "canPublish": null,
     "libraryPublished": false,
@@ -35,7 +35,10 @@
     "semanticBuilt": false,
     "stylesBuilt": false,
     "collections": [],
-    "styleGroups": ["Text", "Elevation"],
+    "styleGroups": [
+      "Text",
+      "Elevation"
+    ],
     "lastSync": "2026-08-09T05:11:19Z"
   },
   "sheets": {
@@ -59,7 +62,7 @@
     "monorepo": null,
     "remote": "https://github.com/liquidjakey/jakeui",
     "visibility": "private",
-    "_note": "Single-package repo, not a monorepo. docs/02-design/ moved under design-system/ on 9 Aug 2026 so the repo is self-contained. Convert to a workspace only once component packages actually exist. No GitHub Actions workflow yet — `npm run check` runs both gates locally."
+    "_note": "Single-package repo, not a monorepo. Docs were moved out of the bkit-style docs/02-design/ path to a flat docs/ on 9 Aug 2026 and narrowed to build-relevant content only; historical material (CRRT benchmark, the 8 Aug audit snapshot, the Figma cleanup backlog) moved to notes/. Convert to a workspace only once component packages actually exist. No GitHub Actions workflow yet — `npm run check` runs both gates locally."
   },
   "sync": {
     "platforms": [],
@@ -111,7 +114,10 @@
       "componentSets": 75,
       "components": 680,
       "instances": 2278,
-      "modes": ["Light", "Dark"],
+      "modes": [
+        "Light",
+        "Dark"
+      ],
       "_modesNote": "Light/Dark on the 'Jake UI' collection only; the four primitive collections are single-mode ('Value')"
     },
     "percentSemantic": 100,
@@ -147,5 +153,8 @@
     "completedAt": null,
     "journalScaffolded": false
   },
-  "completedSkills": ["figma-environment-setup", "design-system-audit"]
+  "completedSkills": [
+    "figma-environment-setup",
+    "design-system-audit"
+  ]
 }

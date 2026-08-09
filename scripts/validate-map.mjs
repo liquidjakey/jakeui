@@ -10,7 +10,7 @@
  *   2. No `decompose` axis was quietly turned into an enum prop.
  *   3. Every mapped `codePath` exists on disk and exports `codeExport`.
  *   4. Every implemented component has a props-table doc.
- *   5. Every `decompose` entry appears in docs/02-design/state-decomposition.md.
+ *   5. Every `decompose` entry appears in docs/state-decomposition.md.
  *   6. Icon slots reference the Phosphor map, not text glyphs.
  *
  * Exit code 1 on any error. Warnings do not fail the build.
@@ -25,8 +25,8 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const MAP = resolve(ROOT, 'figma.map.json');
 // Docs moved under design-system/ on 9 Aug 2026 so the repo is self-contained.
-const DECOMP = resolve(ROOT, 'docs/02-design/state-decomposition.md');
-const DOCS_DIR = resolve(ROOT, 'docs/02-design/components');
+const DECOMP = resolve(ROOT, 'docs/state-decomposition.md');
+const DOCS_DIR = resolve(ROOT, 'docs/components');
 
 const errors = [];
 const warnings = [];
@@ -92,7 +92,7 @@ function main() {
       // 4. implemented components need a props-table doc
       const doc = resolve(DOCS_DIR, `${slug(name)}.md`);
       if (!existsSync(doc)) {
-        err(`${where} is implemented but has no props table at docs/02-design/components/${slug(name)}.md`);
+        err(`${where} is implemented but has no props table at docs/components/${slug(name)}.md`);
       }
     } else {
       warn(`${where} not yet mapped to code (codePath is null).`);

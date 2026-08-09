@@ -394,7 +394,7 @@ ${themeDimensions()}
    * a var() onto a Typography Primitive, so Figma and code cannot drift.
    * Tailwind generates \`text-label-md\` etc. from these.
    * Usage guidance lives in each Figma style's description and in
-   * docs/02-design/typography.md.
+   * docs/tokens/typography.md.
    * -------------------------------------------------------------------- */
 
 ${themeTypeRamp()}
