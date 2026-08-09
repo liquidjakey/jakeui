@@ -69,9 +69,16 @@ Dark it resolves to `blue/800` (`#193cb8`) against `popover` at `neutral/900`
 passes in Light (6.82), so it is invisible unless you check Dark.
 
 `primary-readable` was added 9 Aug 2026 for exactly this: `blue/700` in Light,
-`blue/300` in Dark. **The 52 existing nodes have not been rebound yet** — that is
-the retrofit's `rebind` phase. New work should bind `primary-readable` from the
-start.
+`blue/300` in Dark. **All 75 existing text bindings were rebound the same day** —
+Dark went from 2.03:1 to 9.89:1, and Light did not change at all, because
+`primary-readable` aliases the same primitive as `primary` in Light.
+
+**Red text is the exception to rule 1.** 62 text nodes bind `destructive`, and they
+were deliberately left alone: they pass (4.76:1 Light, 6.19:1 Dark), and
+`destructive-foreground` is near-white — it is the colour for text *on* a destructive
+fill, not for destructive-coloured text. There is no `destructive-readable` yet. Two
+pairings still fail and rebinding cannot fix them: 3 nodes on `accent` in Light
+(4.37:1), and 2 nodes on an unbound literal fill (2.89:1 in Dark).
 
 **`muted-foreground` was darkened on 9 Aug 2026 and now passes everywhere.** Light
 moved from `neutral/500` (`#737373`) to `neutral/600` (`#525252`); Dark is unchanged
