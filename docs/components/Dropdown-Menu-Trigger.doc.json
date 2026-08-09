@@ -1,0 +1,57 @@
+{
+  "name": "Dropdown Menu / Trigger",
+  "summary": "Visual trigger patterns for the Dropdown Menu root.",
+  "description": "Visual trigger patterns for the Dropdown Menu root. Covers button and avatar triggers plus closed, open, focused, and disabled states where applicable. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.\n\nAccessibility contract: avatar-only menu triggers require a programmatic accessible name that communicates the menu action. Decorative trigger icons/avatars must not become the accessible name by themselves.",
+  "variants": {
+    "type": {
+      "button": "",
+      "avatar": ""
+    }
+  },
+  "states": {
+    "Type=Button, State=Closed": "fill card · border 1px border · radius radius/lg · text foreground · type size/13",
+    "Type=Button, State=Open": "fill accent · text accent-foreground",
+    "Type=Button, State=Focused": "border 2px ring",
+    "Type=Button, State=Disabled": "text muted-foreground",
+    "Type=Avatar, State=Closed": "text accent-foreground · type size/12",
+    "Type=Avatar, State=Open": "fill accent · text accent-foreground · type size/12",
+    "Type=Avatar, State=Focused": "border 2px ring · text accent-foreground · type size/12"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
+    "Do not remove the ring border on focus. It is the only focus affordance."
+  ],
+  "accessibility": {
+    "notes": [
+      "avatar-only menu triggers require a programmatic accessible name that communicates the menu action. Decorative trigger icons/avatars must not become the accessible name by themselves.",
+      "State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean; closed/open controlled state"
+    ]
+  },
+  "tokensUsed": [
+    "accent",
+    "accent-foreground",
+    "border",
+    "card",
+    "foreground",
+    "muted-foreground",
+    "radius/lg",
+    "ring",
+    "size/12",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "accessibility": "imported",
+    "tokensUsed": "imported"
+  }
+}

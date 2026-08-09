@@ -1,0 +1,31 @@
+{
+  "name": "Table / Caption",
+  "summary": "Accessible descriptive caption for a table.",
+  "description": "Accessible descriptive caption for a table. Position is visual; code should preserve caption semantics and reading order.",
+  "variants": {
+    "position": {
+      "top": "",
+      "bottom": ""
+    }
+  },
+  "states": {
+    "Position=Top": "text muted-foreground · type size/12"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "muted-foreground",
+    "size/12"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

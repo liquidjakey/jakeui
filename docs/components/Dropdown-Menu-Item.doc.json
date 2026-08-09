@@ -1,0 +1,58 @@
+{
+  "name": "Dropdown Menu / Item",
+  "summary": "Standard command item.",
+  "description": "Standard command item. Supports default and destructive tones, default/highlighted/disabled interaction states, inset alignment, optional leading icon, and keyboard shortcut. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.\n\nPipeline exception: Icon is a legacy design-only text-glyph control with existing overrides. Do not map it to a production code prop. Migration to an Icon INSTANCE_SWAP requires an approved glyph-to-icon map and consumer update test.",
+  "variants": {
+    "tone": {
+      "default": "Standard treatment with no semantic weight.",
+      "destructive": "An error that blocks progress."
+    },
+    "inset": {
+      "false": "",
+      "true": ""
+    }
+  },
+  "states": {
+    "Tone=Default, State=Default, Inset=False": "fill popover · radius radius/4 · text popover-foreground · type size/13",
+    "Tone=Default, State=Highlighted, Inset=False": "fill accent · text accent-foreground",
+    "Tone=Default, State=Highlighted, Inset=True": "fill accent · text accent-foreground",
+    "Tone=Destructive, State=Default, Inset=False": "text destructive",
+    "Tone=Destructive, State=Default, Inset=True": "text destructive",
+    "Tone=Destructive, State=Highlighted, Inset=False": "fill accent · text destructive",
+    "Tone=Destructive, State=Highlighted, Inset=True": "fill accent · text destructive",
+    "Tone=Destructive, State=Disabled, Inset=False": "text destructive"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Pass icons as @phosphor-icons/react components through the slot, never as text glyphs."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime."
+  ],
+  "accessibility": {
+    "notes": [
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Highlighted · Disabled] → :highlighted CSS-owned, dropped; disabled independent boolean"
+    ]
+  },
+  "tokensUsed": [
+    "accent",
+    "accent-foreground",
+    "destructive",
+    "popover",
+    "popover-foreground",
+    "radius/4",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "accessibility": "imported",
+    "tokensUsed": "imported"
+  }
+}

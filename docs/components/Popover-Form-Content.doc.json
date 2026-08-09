@@ -1,0 +1,10 @@
+{
+  "name": "Popover / Form Content",
+  "summary": "Source form-content composition using Header, Close, Arrow, and two linked Field instances.",
+  "description": "Source form-content composition using Header, Close, Arrow, and two linked Field instances. Represents the “With Form” example.",
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported"
+  }
+}

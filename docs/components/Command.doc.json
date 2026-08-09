@@ -1,0 +1,35 @@
+{
+  "name": "Command",
+  "summary": "Command menu item primitive.",
+  "description": "Command menu item primitive. Use Selected=True for the currently highlighted result.\n\nInteraction contract: Selected=True is the highlighted command option used for pointer or keyboard roving selection. DOM focus remains on the command input/list controller, so a separate item focus variant is not required.",
+  "variants": {
+    "selected": {
+      "false": "",
+      "true": ""
+    }
+  },
+  "states": {
+    "Selected=False": "radius radius/lg · text foreground · type size/14",
+    "Selected=True": "fill accent · text accent-foreground"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "accent",
+    "accent-foreground",
+    "foreground",
+    "radius/lg",
+    "size/14"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

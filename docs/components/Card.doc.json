@@ -1,0 +1,64 @@
+{
+  "name": "Card",
+  "summary": "Content container for related information and actions.",
+  "description": "Content container for related information and actions. Uses a fixed default width with Hug Contents height. Content and Media structures support default and interactive states.\n\nPipeline API classification: apply the Governance property-classification rule before code mapping. Visual State axes are QA/story states unless engineering explicitly approves a controlled runtime prop; Viewport is responsive test data; Pattern is composition/story data.",
+  "variants": {
+    "type": {
+      "content": "Text and actions only.",
+      "media": "Leads with an image or media block."
+    },
+    "state": {
+      "default": "Resting state.",
+      "interactive": "The whole surface responds to pointer and keyboard."
+    }
+  },
+  "states": {
+    "Type=Content, State=Default": "fill card · border 1px border · radius radius/lg · text info-foreground · type size/11",
+    "Type=Content, State=Interactive": "border 2px primary",
+    "Type=Media, State=Interactive": "border 2px primary"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Make the primary action obvious.",
+    "Keep one main call-to-action per card."
+  ],
+  "tokensUsed": [
+    "border",
+    "card",
+    "info-foreground",
+    "primary",
+    "radius/lg",
+    "size/11"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Group related content and actions about a single subject."
+  ],
+  "whenNotToUse": [
+    "Primary page layout scaffolding.",
+    "A bare list of text."
+  ],
+  "donts": [
+    "Do not nest cards more than one level.",
+    "Do not make the whole card and an inner button separately clickable in conflicting ways."
+  ],
+  "accessibility": {
+    "notes": [
+      "If the whole card is a link or button it needs an accessible name.",
+      "Do not bury interactive controls where keyboard users reach them out of order."
+    ]
+  }
+}

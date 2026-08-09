@@ -1,0 +1,65 @@
+{
+  "name": "Input",
+  "summary": "Single-line text input primitive.",
+  "description": "Single-line text input primitive. Use State variants to document focus, validation, and disabled behavior.\n\nAccessibility contract: State=Error is only the control visual. A consuming Field or equivalent must add specific visible error text and expose invalid state plus the error-description relationship; a red border alone is insufficient.\n\nPipeline API classification: apply the Governance property-classification rule before code mapping. Visual State axes are QA/story states unless engineering explicitly approves a controlled runtime prop; Viewport is responsive test data; Pattern is composition/story data.",
+  "states": {
+    "State=Default": "fill card · border 1px input · radius radius/lg · text foreground · type size/14",
+    "State=Focused": "border 2px ring",
+    "State=Error": "border 1px destructive",
+    "State=Disabled": "fill muted · text muted-foreground"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Always pair with a visible label.",
+    "Show format hints as helper text.",
+    "Reserve space for error text so validation does not shift the layout."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
+    "Do not remove the ring border on focus. It is the only focus affordance.",
+    "Do not use placeholder text as the only label.",
+    "Do not validate on every keystroke before the first blur."
+  ],
+  "accessibility": {
+    "notes": [
+      "State=Error is only the control visual. A consuming Field or equivalent must add specific visible error text and expose invalid state plus the error-description relationship; a red border alone is insufficient.",
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Error · Disabled] → :focus-visible CSS-owned, dropped; invalid + disabled independent booleans",
+      "Every input has a programmatically associated label.",
+      "The error state sets aria-invalid and links its message via aria-describedby."
+    ],
+    "keyboard": [
+      "Standard text-editing keys."
+    ]
+  },
+  "tokensUsed": [
+    "card",
+    "destructive",
+    "foreground",
+    "input",
+    "muted",
+    "muted-foreground",
+    "radius/lg",
+    "ring",
+    "size/14"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "states": "imported",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "accessibility": "imported+w3c-apg",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice"
+  },
+  "whenToUse": [
+    "Collect a single line of free-form text."
+  ],
+  "whenNotToUse": [
+    "Choosing from a fixed set — use Select or Radio Group.",
+    "Long multi-line text — use Textarea."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "Tabs",
+  "summary": "Grouped navigation for switching between peer views without leaving the current context.",
+  "description": "Grouped navigation for switching between peer views without leaving the current context. Orientation controls horizontal or vertical layout; Density supports default and compact applications.",
+  "variants": {
+    "orientation": {
+      "horizontal": "Lays out along the inline axis.",
+      "vertical": "Lays out along the block axis."
+    },
+    "density": {
+      "default": "",
+      "compact": "Tighter spacing for information-dense screens."
+    }
+  },
+  "states": {
+    "Orientation=Horizontal, Density=Default": "fill muted · radius radius/lg · text foreground · type size/12"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "foreground",
+    "muted",
+    "radius/lg",
+    "size/12"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

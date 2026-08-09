@@ -1,0 +1,10 @@
+{
+  "name": "Popover / Header",
+  "summary": "Popover heading group containing Title and Description.",
+  "description": "Popover heading group containing Title and Description. Both text nodes are editable component properties and should be associated with the popup for accessible naming and description.",
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported"
+  }
+}

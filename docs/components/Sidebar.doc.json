@@ -1,0 +1,42 @@
+{
+  "name": "Sidebar",
+  "summary": "Application sidebar with desktop and compact structures.",
+  "description": "Application sidebar with desktop and compact structures. Expanded variants use nested Sidebar Navigation Item instances; collapsed variants reduce navigation to an icon rail or compact menu trigger.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "state": {
+      "expanded": "",
+      "collapsed": ""
+    }
+  },
+  "states": {
+    "Viewport=Desktop, State=Expanded": "fill sidebar · border 1px sidebar-border · radius radius/lg · text sidebar-foreground · type size/15",
+    "Viewport=Desktop, State=Collapsed": "text sidebar-accent-foreground · type size/13",
+    "Viewport=Compact, State=Collapsed": "type size/13"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not turn Viewport into a code prop."
+  ],
+  "tokensUsed": [
+    "radius/lg",
+    "sidebar",
+    "sidebar-accent-foreground",
+    "sidebar-border",
+    "sidebar-foreground",
+    "size/13",
+    "size/15"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "tokensUsed": "imported"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "name": "Popover / Trigger",
+  "summary": "Popover trigger visual states for standard Button and RTL presentation.",
+  "description": "Popover trigger visual states for standard Button and RTL presentation. Covers closed, open, hover, focus-visible, and disabled states; hover/detached/multiple-trigger behavior is documented at the Root API level.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "type": {
+      "button": "",
+      "rTL": ""
+    }
+  },
+  "states": {
+    "Type=Button, State=Closed": "text foreground · type size/13",
+    "Type=Button, State=Open": "text accent-foreground",
+    "Type=Button, State=Hover": "text accent-foreground",
+    "Type=Button, State=Focused": "border 2px ring · radius radius/lg",
+    "Type=Button, State=Disabled": "text muted-foreground",
+    "Type=RTL, State=Closed": "type size/12",
+    "Type=RTL, State=Open": "type size/12",
+    "Type=RTL, State=Hover": "type size/12"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
+    "Do not remove the ring border on focus. It is the only focus affordance."
+  ],
+  "accessibility": {
+    "notes": [
+      "State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Hover · Focused · Disabled] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean; closed/open controlled state"
+    ]
+  },
+  "tokensUsed": [
+    "accent-foreground",
+    "foreground",
+    "muted-foreground",
+    "radius/lg",
+    "ring",
+    "size/12",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "accessibility": "imported",
+    "tokensUsed": "imported"
+  }
+}

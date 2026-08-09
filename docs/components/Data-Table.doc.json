@@ -4,8 +4,8 @@
   "description": "Data-management composition built from Input, Button, Table, and Pagination. Supports desktop and compact viewports with populated and empty states. Fixed default width with Hug Contents height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
   "variants": {
     "state": {
-      "populated": "",
-      "empty": ""
+      "populated": "Has content to show.",
+      "empty": "No content — show an empty state, not a blank area."
     }
   },
   "states": {
@@ -32,7 +32,7 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
     "dos": "imported",
     "donts": "imported",

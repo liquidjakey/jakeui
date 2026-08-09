@@ -1,0 +1,35 @@
+{
+  "name": "Sidebar Navigation Item",
+  "summary": "Watermelon docs sidebar route item.",
+  "description": "Watermelon docs sidebar route item. Use State=Active for the current route. Sizing exception: fixed width and fixed height are intentional so each item aligns to the sidebar column and preserves a 36px target.\n\nInteraction contract: State=Active is the persistent current-route state. Hover and focus-visible are transient runtime link states rather than additional persistent variants; runtime focus must use the shared ring treatment.",
+  "variants": {
+    "state": {
+      "default": "Resting state.",
+      "active": ""
+    }
+  },
+  "states": {
+    "State=Default": "radius radius/lg · text sidebar-foreground · type size/14",
+    "State=Active": "fill sidebar-accent · text sidebar-accent-foreground"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "radius/lg",
+    "sidebar-accent",
+    "sidebar-accent-foreground",
+    "sidebar-foreground",
+    "size/14"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

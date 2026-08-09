@@ -1,0 +1,29 @@
+{
+  "name": "Slider",
+  "summary": "Continuous value selection primitive.",
+  "description": "Continuous value selection primitive. State variants document default, keyboard focus, and disabled behavior.\n\nLayout exception: Slider uses coordinate-based track, fill, and thumb geometry so the control can represent a continuous value. Do not infer absolute pixel positions as code API values; runtime width and value positioning are behavioral.",
+  "states": {
+    "State=Default": "no root-level bindings"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime."
+  ],
+  "accessibility": {
+    "notes": [
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean"
+    ]
+  },
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "accessibility": "imported"
+  }
+}

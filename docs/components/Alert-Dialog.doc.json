@@ -1,0 +1,62 @@
+{
+  "name": "Alert Dialog",
+  "summary": "Modal confirmation surface for consequential actions.",
+  "description": "Modal confirmation surface for consequential actions. Use Tone=Destructive only when the primary action causes irreversible loss.",
+  "variants": {
+    "tone": {
+      "default": "Standard treatment with no semantic weight.",
+      "destructive": "An error that blocks progress."
+    }
+  },
+  "states": {
+    "Tone=Default": "fill card · border 1px border · radius radius/lg · text card-foreground · type size/18"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Trap focus while open.",
+    "Return focus to the trigger on close.",
+    "Provide an explicit close affordance."
+  ],
+  "tokensUsed": [
+    "border",
+    "card",
+    "card-foreground",
+    "radius/lg",
+    "size/18"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Interrupt for a focused task, or a decision that blocks the flow."
+  ],
+  "whenNotToUse": [
+    "Non-critical messages — use an inline alert or a toast."
+  ],
+  "donts": [
+    "Do not stack dialogs.",
+    "Do not put long scrolling forms in a small dialog."
+  ],
+  "accessibility": {
+    "role": "dialog",
+    "keyboard": [
+      "Escape closes.",
+      "Tab cycles within the dialog only."
+    ],
+    "notes": [
+      "aria-modal=\"true\", labelled by its title via aria-labelledby.",
+      "Focus is trapped within while open."
+    ]
+  }
+}

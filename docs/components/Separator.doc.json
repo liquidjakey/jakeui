@@ -1,0 +1,30 @@
+{
+  "name": "Separator",
+  "summary": "Visual separator for grouping adjacent content.",
+  "description": "Visual separator for grouping adjacent content. Horizontal is the default for stacked regions; vertical is used between inline groups.",
+  "variants": {
+    "orientation": {
+      "horizontal": "Lays out along the inline axis.",
+      "vertical": "Lays out along the block axis."
+    }
+  },
+  "states": {
+    "Orientation=Horizontal": "fill border"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "border"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

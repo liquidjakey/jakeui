@@ -4,14 +4,14 @@
   "description": "Jake UI action button based on Watermelon/shadcn interaction patterns. Use semantic styles rather than hardcoded colors. Size and state are variant axes; label and leading icon are component properties.\n\nPipeline property contract: Leading icon is an INSTANCE_SWAP constrained to the local Icon component set; Show leading icon controls visibility. State=Focused documents focus-visible using the semantic ring token at 2px. Pointer-active/pressed behavior is runtime-only unless the code API later defines a distinct visual state.",
   "variants": {
     "style": {
-      "primary": "",
-      "secondary": "",
-      "outline": "",
-      "ghost": ""
+      "primary": "Highest-emphasis action. One per view.",
+      "secondary": "Supporting action alongside a primary.",
+      "outline": "Medium emphasis; a bordered alternative to secondary.",
+      "ghost": "Lowest emphasis, for inline or toolbar actions."
     },
     "size": {
-      "small": "",
-      "medium": ""
+      "small": "Dense contexts — tables, toolbars, compact rows.",
+      "medium": "The default in forms and dialogs."
     }
   },
   "states": {
@@ -27,15 +27,27 @@
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
-    "Pass icons as @phosphor-icons/react components through the slot, never as text glyphs."
+    "Pass icons as @phosphor-icons/react components through the slot, never as text glyphs.",
+    "Lead the label with a verb.",
+    "Keep one primary (highest-emphasis) button per view.",
+    "Keep labels short — around three words or fewer."
   ],
   "donts": [
     "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
-    "Variant count (32) exceeds the 30-combination governance ceiling. Needs a documented exception."
+    "Variant count (32) exceeds the 30-combination governance ceiling. Needs a documented exception.",
+    "Do not use a button for navigation.",
+    "Do not stack multiple primary buttons.",
+    "Do not disable a button without telling the user why."
   ],
   "accessibility": {
     "notes": [
-      "State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Disabled · Focused] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean"
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Disabled · Focused] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean",
+      "An icon-only button needs an aria-label.",
+      "Disabled buttons are not focusable."
+    ],
+    "role": "button",
+    "keyboard": [
+      "Enter and Space activate."
     ]
   },
   "tokensUsed": [
@@ -54,11 +66,19 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "donts": "imported",
-    "accessibility": "imported",
-    "tokensUsed": "imported"
-  }
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "accessibility": "imported+w3c-apg",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice"
+  },
+  "whenToUse": [
+    "Trigger an action or event — submit, confirm, open a dialog."
+  ],
+  "whenNotToUse": [
+    "Navigating between pages or URLs — use a Link."
+  ]
 }

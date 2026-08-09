@@ -1,0 +1,38 @@
+{
+  "name": "Popover",
+  "summary": "Jake UI Popover content extension with Small/Large size and optional arrow.",
+  "description": "Jake UI Popover content extension with Small/Large size and optional arrow. Exact source anatomy, placement, behaviors, and examples are implemented by the Popover / * parity assets.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "size": {
+      "small": "Dense contexts — tables, toolbars, compact rows.",
+      "large": "Prominent or touch-first contexts."
+    },
+    "arrow": {
+      "false": "",
+      "true": ""
+    }
+  },
+  "states": {
+    "Size=Small, Arrow=False": "fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/15"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "border",
+    "popover",
+    "popover-foreground",
+    "radius/lg",
+    "size/15"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

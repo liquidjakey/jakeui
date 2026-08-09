@@ -1,0 +1,74 @@
+{
+  "name": "Radio Group / Item",
+  "summary": "Pure Radio Group item with Value and State axes.",
+  "description": "Pure Radio Group item with Value and State axes. Supports unchecked/checked plus default, hover, focus-visible, disabled, read-only, and invalid states; checked items nest the Indicator.\n\nAccessibility contract: the 20×20 radio visual is not the runtime target box. Runtime must provide at least a 24×24 CSS px target or satisfy the permitted spacing exception, typically through the associated label/hit wrapper. Invalid state must be paired with visible field/group error text and programmatic invalid/error description.",
+  "variants": {
+    "value": {
+      "unchecked": "Not selected.",
+      "checked": "Selected."
+    }
+  },
+  "states": {
+    "Value=Unchecked, State=Default": "fill card · border 1px input · radius radius/full",
+    "Value=Unchecked, State=Hover": "fill accent",
+    "Value=Unchecked, State=Focused": "border 2px ring",
+    "Value=Unchecked, State=Invalid": "border 2px destructive",
+    "Value=Checked, State=Default": "border 1px primary",
+    "Value=Checked, State=Hover": "fill accent · border 1px primary",
+    "Value=Checked, State=Focused": "border 2px ring",
+    "Value=Checked, State=Disabled": "border 1px primary"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Label the control itself, not only the group.",
+    "Make the label clickable."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
+    "Do not remove the ring border on focus. It is the only focus affordance.",
+    "Do not use a radio group for multi-select.",
+    "Do not use a toggle for choices that only apply after a separate Save."
+  ],
+  "accessibility": {
+    "notes": [
+      "the 20×20 radio visual is not the runtime target box. Runtime must provide at least a 24×24 CSS px target or satisfy the permitted spacing exception, typically through the associated label/hit wrapper. Invalid state must be paired with visible field/group error text and programmatic invalid/error description.",
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Focused · Disabled · ReadOnly · Invalid] → :hover + :focus-visible CSS-owned, dropped; disabled + readOnly + invalid independent booleans",
+      "State is exposed via aria-checked, never by colour alone."
+    ],
+    "keyboard": [
+      "Space toggles.",
+      "Radio groups move between options with arrow keys."
+    ]
+  },
+  "tokensUsed": [
+    "accent",
+    "card",
+    "destructive",
+    "input",
+    "primary",
+    "radius/full",
+    "ring"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "accessibility": "imported+w3c-apg",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice"
+  },
+  "whenToUse": [
+    "Checkbox or toggle for an independent on/off value.",
+    "Radio for one-of-many within a group."
+  ],
+  "whenNotToUse": [
+    "A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.",
+    "A choice that only applies after a separate Save — prefer radio or checkbox over a toggle."
+  ]
+}

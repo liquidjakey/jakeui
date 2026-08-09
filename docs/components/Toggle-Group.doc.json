@@ -1,0 +1,62 @@
+{
+  "name": "Toggle Group",
+  "summary": "Grouped toggle controls for choosing one or multiple persistent options.",
+  "description": "Grouped toggle controls for choosing one or multiple persistent options. Use single selection when options are mutually exclusive.",
+  "variants": {
+    "selection": {
+      "single": "",
+      "multiple": ""
+    },
+    "orientation": {
+      "horizontal": "Lays out along the inline axis.",
+      "vertical": "Lays out along the block axis."
+    }
+  },
+  "states": {
+    "Selection=Single, Orientation=Horizontal": "text accent-foreground · type size/14"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Label the control itself, not only the group.",
+    "Make the label clickable."
+  ],
+  "tokensUsed": [
+    "accent-foreground",
+    "size/14"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Checkbox or toggle for an independent on/off value.",
+    "Radio for one-of-many within a group."
+  ],
+  "whenNotToUse": [
+    "A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.",
+    "A choice that only applies after a separate Save — prefer radio or checkbox over a toggle."
+  ],
+  "donts": [
+    "Do not use a radio group for multi-select.",
+    "Do not use a toggle for choices that only apply after a separate Save."
+  ],
+  "accessibility": {
+    "keyboard": [
+      "Space toggles.",
+      "Radio groups move between options with arrow keys."
+    ],
+    "notes": [
+      "State is exposed via aria-checked, never by colour alone."
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Table / Body",
+  "summary": "Table body section containing data rows.",
+  "description": "Table body section containing data rows. Use the Row component states for hover and selection.",
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Date Picker",
+  "summary": "Date-selection composition built from Input and Calendar.",
+  "description": "Date-selection composition built from Input and Calendar. Supports single and range modes, open and closed states, and default, focused, error, and disabled trigger states. Fixed default width with Hug Contents height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.\n\nLayout exception: Date Picker Trigger overlays a fixed semantic Calendar icon on the nested Input. The trigger frame intentionally uses coordinate positioning for this adornment; the icon is a canonical Icon instance, not a text glyph.",
+  "variants": {
+    "mode": {
+      "single": "Selects one value.",
+      "range": "Selects a start and end pair."
+    },
+    "open": {
+      "false": "",
+      "true": ""
+    }
+  },
+  "states": {
+    "Mode=Single, State=Default, Open=False": "text foreground · type size/14",
+    "Mode=Single, State=Disabled, Open=False": "text muted-foreground",
+    "Mode=Range, State=Disabled, Open=False": "text muted-foreground"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime."
+  ],
+  "accessibility": {
+    "notes": [
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Error · Disabled] → :focus-visible CSS-owned, dropped; invalid + disabled independent booleans"
+    ]
+  },
+  "tokensUsed": [
+    "foreground",
+    "muted-foreground",
+    "size/14"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "accessibility": "imported",
+    "tokensUsed": "imported"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "Table / Root Composition",
+  "summary": "Source-parity Table compositions covering the basic invoice example, explicit footer example, row actions with a Dropdown Menu trigger, RTL content, desktop fit, and compact horizontal overflow.",
+  "description": "Source-parity Table compositions covering the basic invoice example, explicit footer example, row actions with a Dropdown Menu trigger, RTL content, desktop fit, and compact horizontal overflow. The original Table set remains the Jake UI density and selection extension.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "states": {
+    "Pattern=Basic, Viewport=Desktop": "text muted-foreground · type size/12",
+    "Pattern=Basic, Viewport=Compact": "type size/11",
+    "Pattern=Footer, Viewport=Compact": "type size/11",
+    "Pattern=Actions, Viewport=Compact": "type size/11",
+    "Pattern=RTL, Viewport=Compact": "type size/11"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not turn Pattern/Viewport into a code prop."
+  ],
+  "tokensUsed": [
+    "muted-foreground",
+    "size/11",
+    "size/12"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "tokensUsed": "imported"
+  }
+}

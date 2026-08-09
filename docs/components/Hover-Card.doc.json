@@ -1,0 +1,34 @@
+{
+  "name": "Hover Card",
+  "summary": "Contextual preview surface revealed on pointer hover or keyboard focus.",
+  "description": "Contextual preview surface revealed on pointer hover or keyboard focus. Use compact density for brief descriptions and detailed density when supporting metadata is needed. Sizing policy: fixed/default width with Hug Contents height.",
+  "variants": {
+    "density": {
+      "compact": "Tighter spacing for information-dense screens.",
+      "detailed": ""
+    }
+  },
+  "states": {
+    "Density=Compact": "fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/14"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "border",
+    "popover",
+    "popover-foreground",
+    "radius/lg",
+    "size/14"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

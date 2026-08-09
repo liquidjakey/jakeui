@@ -1,0 +1,42 @@
+{
+  "name": "Navigation Menu",
+  "summary": "Primary product navigation with desktop and compact structures.",
+  "description": "Primary product navigation with desktop and compact structures. Open=True reveals the navigation panel; compact mode replaces the link row with a menu trigger. Sizing policy: open states use fixed width plus Hug height; closed states intentionally preserve the standard 56px navigation-bar height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "open": {
+      "false": "",
+      "true": ""
+    }
+  },
+  "states": {
+    "Viewport=Desktop, Open=False": "fill card · border 1px border · radius radius/lg · text primary-foreground · type size/13",
+    "Viewport=Compact, Open=False": "text foreground",
+    "Viewport=Compact, Open=True": "text accent-foreground"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not turn Viewport into a code prop."
+  ],
+  "tokensUsed": [
+    "accent-foreground",
+    "border",
+    "card",
+    "foreground",
+    "primary-foreground",
+    "radius/lg",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "tokensUsed": "imported"
+  }
+}

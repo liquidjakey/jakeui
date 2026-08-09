@@ -1,0 +1,34 @@
+{
+  "name": "Chart",
+  "summary": "Token-bound chart container for compact documentation and dashboard examples.",
+  "description": "Token-bound chart container for compact documentation and dashboard examples. Use Type to switch between bar and line representations.\n\nLayout exception: chart plot geometry is intentionally coordinate-based because bars and line points represent data positions. Surrounding chart content may use auto layout, but plot marks are excluded from structural auto-layout linting.",
+  "variants": {
+    "type": {
+      "bar": "Categorical comparison.",
+      "line": "Change over a continuous axis."
+    }
+  },
+  "states": {
+    "Type=Bar": "fill card · border 1px border · radius radius/lg · text foreground · type size/16"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "border",
+    "card",
+    "foreground",
+    "radius/lg",
+    "size/16"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

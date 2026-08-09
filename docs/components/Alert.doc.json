@@ -4,10 +4,10 @@
   "description": "Inline feedback message for informational, successful, warning, and destructive states. Use semantic feedback variables; reserve destructive tone for errors that block progress. Sizing policy: fixed/default width with Hug Contents height.",
   "variants": {
     "tone": {
-      "info": "",
-      "success": "",
-      "warning": "",
-      "destructive": ""
+      "info": "Informational, no action required.",
+      "success": "A completed or healthy state.",
+      "warning": "Needs attention but is not blocking.",
+      "destructive": "An error that blocks progress."
     }
   },
   "states": {
@@ -36,7 +36,7 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
     "dos": "imported",
     "tokensUsed": "imported"

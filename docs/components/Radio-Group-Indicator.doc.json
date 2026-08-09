@@ -1,0 +1,31 @@
+{
+  "name": "Radio Group / Indicator",
+  "summary": "Checked-state indicator nested inside Radio Group / Item.",
+  "description": "Checked-state indicator nested inside Radio Group / Item. Runtime may force-mount the indicator for animation or measurement.",
+  "variants": {
+    "state": {
+      "default": "Resting state.",
+      "disabled": ""
+    }
+  },
+  "states": {
+    "State=Default": "fill primary · radius radius/full"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "primary",
+    "radius/full"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

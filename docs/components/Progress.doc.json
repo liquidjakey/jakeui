@@ -1,0 +1,31 @@
+{
+  "name": "Progress",
+  "summary": "Linear progress primitive.",
+  "description": "Linear progress primitive. Determinate indicates known completion; indeterminate communicates ongoing work without a measurable endpoint.",
+  "variants": {
+    "type": {
+      "determinate": "",
+      "indeterminate": ""
+    }
+  },
+  "states": {
+    "Type=Determinate": "fill muted · radius radius/lg"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "muted",
+    "radius/lg"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

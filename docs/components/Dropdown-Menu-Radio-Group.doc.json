@@ -1,0 +1,10 @@
+{
+  "name": "Dropdown Menu / Radio Group",
+  "summary": "Structural single-selection wrapper for Radio Item instances.",
+  "description": "Structural single-selection wrapper for Radio Item instances. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.",
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported"
+  }
+}

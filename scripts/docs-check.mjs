@@ -43,6 +43,7 @@ function main() {
   const files = readdirSync(DOCS_DIR).filter((f) => f.endsWith('.doc.json'));
   let surfaceCount = 0;
   let unverified = 0;
+  let partial = 0;
 
   for (const file of files) {
     const abs = resolve(DOCS_DIR, file);
@@ -74,9 +75,19 @@ function main() {
 
     for (const [name, surface] of Object.entries(pointer.surfaces || {})) {
       surfaceCount++;
-      // stale
+      // stale — but an adopted surface is the SOURCE, not a rendering, so a
+      // fingerprint difference there means "the record has grown beyond what the
+      // surface carries", which is the intended brownfield end state, not drift.
       if (surface.src && surface.src !== fp) {
-        errors.push(`${record.name} / ${name}: stale — rendered from ${surface.src}, record is now ${fp}.`);
+        if (surface.adopted) {
+          partial++;
+          notes.push(
+            `${record.name} / ${name}: partial-projection — record ${fp} has enriched blocks the ` +
+              `adopted surface does not carry. Expected; verify the source with npm run docs:verify.`,
+          );
+        } else {
+          errors.push(`${record.name} / ${name}: stale — rendered from ${surface.src}, record is now ${fp}.`);
+        }
       }
       // code surfaces are re-readable; Figma surfaces are not
       if (surface.file) {
@@ -102,7 +113,8 @@ function main() {
   }
 
   console.log(
-    `Jake UI docs — ${files.length} record(s), ${surfaceCount} projected surface(s), ${unverified} edit-unverified.`,
+    `Jake UI docs — ${files.length} record(s), ${surfaceCount} surface(s), ` +
+    `${unverified} edit-unverified, ${partial} partial-projection.`,
   );
 
   if (warnings.length) {

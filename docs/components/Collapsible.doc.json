@@ -1,0 +1,42 @@
+{
+  "name": "Collapsible",
+  "summary": "Single disclosure region for optional controls or secondary information.",
+  "description": "Single disclosure region for optional controls or secondary information. Use Accordion instead when multiple related items are grouped together. Sizing policy: fixed/default width with Hug Contents height.\n\nInteraction contract: open/closed and disabled are persistent disclosure states. Hover, pressed, and focus-visible belong to the disclosure trigger at runtime and are not separate root variants.",
+  "variants": {
+    "state": {
+      "closed": "",
+      "open": ""
+    },
+    "disabled": {
+      "false": "",
+      "true": ""
+    }
+  },
+  "states": {
+    "State=Closed, Disabled=False": "fill card · border 1px border · radius radius/lg · text foreground · type size/14",
+    "State=Closed, Disabled=True": "fill muted · text muted-foreground",
+    "State=Open, Disabled=True": "fill muted · text muted-foreground"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "border",
+    "card",
+    "foreground",
+    "muted",
+    "muted-foreground",
+    "radius/lg",
+    "size/14"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

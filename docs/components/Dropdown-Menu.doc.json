@@ -1,0 +1,38 @@
+{
+  "name": "Dropdown Menu",
+  "summary": "Basic Dropdown Menu content configurations preserved from the original core build.",
+  "description": "Basic Dropdown Menu content configurations preserved from the original core build. This set is now the basic content-pattern layer within the full source-parity architecture; use the dedicated Trigger, Item, Checkbox Item, Radio Item, Label, Separator, Shortcut, Sub Trigger, Content, Sub Content, and Root Composition assets for complete implementation coverage. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "type": {
+      "standard": "Default composition.",
+      "checkbox": "Items are multi-selectable."
+    },
+    "density": {
+      "compact": "Tighter spacing for information-dense screens.",
+      "comfortable": "Default spacing, easier to scan and tap."
+    }
+  },
+  "states": {
+    "Type=Standard, Density=Compact": "fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/13"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "border",
+    "popover",
+    "popover-foreground",
+    "radius/lg",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

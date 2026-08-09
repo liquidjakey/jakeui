@@ -31,7 +31,10 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "docs:adopt": "node scripts/adopt-docs.mjs",
-    "docs:check": "node scripts/docs-check.mjs"
+    "docs:check": "node scripts/docs-check.mjs && node scripts/docs-digest.mjs --check",
+    "docs:enrich": "node scripts/enrich-docs.mjs",
+    "docs:digest": "node scripts/docs-digest.mjs",
+    "docs:verify": "node scripts/verify-docs-dump.mjs --compare .figma-docs-hashes.json"
   },
   "peerDependencies": {
     "@phosphor-icons/react": "^2.1.10",

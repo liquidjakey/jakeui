@@ -1,0 +1,10 @@
+{
+  "name": "Table / Header",
+  "summary": "Table header section containing semantic column headers.",
+  "description": "Table header section containing semantic column headers. This wrapper has no independent visual fill beyond its rows.",
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported"
+  }
+}

@@ -4,15 +4,15 @@
   "description": "Positioned menu content. Complete placement matrix: Side=Top/Right/Bottom/Left, Align=Start/Center/End, and optional Arrow. Content itself is open-only; closed behavior is represented at the Root Composition level. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
   "variants": {
     "side": {
-      "top": "",
-      "right": "",
-      "bottom": "",
-      "left": ""
+      "top": "Opens above the trigger.",
+      "right": "Opens to the right of the trigger.",
+      "bottom": "Opens below the trigger.",
+      "left": "Opens to the left of the trigger."
     },
     "align": {
-      "start": "",
-      "center": "",
-      "end": ""
+      "start": "Aligns to the trigger's start edge.",
+      "center": "Centres on the trigger.",
+      "end": "Aligns to the trigger's end edge."
     },
     "arrow": {
       "false": "",
@@ -34,7 +34,7 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
     "dos": "imported",
     "tokensUsed": "imported"

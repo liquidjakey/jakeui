@@ -1,0 +1,28 @@
+{
+  "name": "Skeleton",
+  "summary": "Loading placeholders for text, avatar rows, cards, and table rows.",
+  "description": "Loading placeholders for text, avatar rows, cards, and table rows. Dimensions are intentionally fixed to reserve layout space and prevent content shift.",
+  "variants": {
+    "type": {
+      "text": "",
+      "avatar": "",
+      "card": "",
+      "tableRow": ""
+    }
+  },
+  "states": {
+    "Type=Text": "no root-level bindings"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported"
+  }
+}

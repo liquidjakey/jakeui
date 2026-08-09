@@ -1,0 +1,69 @@
+{
+  "name": "Dialog",
+  "summary": "General-purpose modal surface for focused tasks and forms.",
+  "description": "General-purpose modal surface for focused tasks and forms. Use Type=Standard for concise decisions and Type=Form for editable content; Size controls available content width. Sizing policy: fixed/default width with Hug Contents height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "type": {
+      "standard": "Default composition.",
+      "form": "Contains editable fields; needs submit and cancel affordances."
+    },
+    "size": {
+      "small": "Dense contexts — tables, toolbars, compact rows.",
+      "large": "Prominent or touch-first contexts."
+    }
+  },
+  "states": {
+    "Type=Standard, Size=Small": "fill card · border 1px border · radius radius/lg · text foreground · type size/18",
+    "Type=Form, Size=Small": "type size/13",
+    "Type=Form, Size=Large": "type size/13"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Trap focus while open.",
+    "Return focus to the trigger on close.",
+    "Provide an explicit close affordance."
+  ],
+  "tokensUsed": [
+    "border",
+    "card",
+    "foreground",
+    "radius/lg",
+    "size/13",
+    "size/18"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Interrupt for a focused task, or a decision that blocks the flow."
+  ],
+  "whenNotToUse": [
+    "Non-critical messages — use an inline alert or a toast."
+  ],
+  "donts": [
+    "Do not stack dialogs.",
+    "Do not put long scrolling forms in a small dialog."
+  ],
+  "accessibility": {
+    "role": "dialog",
+    "keyboard": [
+      "Escape closes.",
+      "Tab cycles within the dialog only."
+    ],
+    "notes": [
+      "aria-modal=\"true\", labelled by its title via aria-labelledby.",
+      "Focus is trapped within while open."
+    ]
+  }
+}

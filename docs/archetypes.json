@@ -1,0 +1,221 @@
+{
+  "$comment": "Best-practice seeds for the documentation enrichment layer (component-builder Step 4.5, layers 2-3). Sources: W3C ARIA Authoring Practices Guide (roles + keyboard), Material 3, Shopify Polaris, IBM Carbon. These are SEEDS, NOT GOSPEL — they are generic to the archetype, not specific to Jake UI, and any of them may be wrong for a given component. Enrichment only ever fills a block that adoption left absent or empty, and never overwrites imported content. Edit this file rather than the generated records; re-run `npm run docs:enrich`.",
+
+  "frameworkVocabulary": {
+    "$comment": "Layer 3 — variant-meaning wording specialized to project.uiFramework (shadcn). Keyed by variant axis, then value. Only used to fill a meaning that adoption imported as an empty string.",
+    "style": {
+      "primary": "Highest-emphasis action. One per view.",
+      "secondary": "Supporting action alongside a primary.",
+      "outline": "Medium emphasis; a bordered alternative to secondary.",
+      "ghost": "Lowest emphasis, for inline or toolbar actions.",
+      "destructive": "Irreversible or data-losing action."
+    },
+    "tone": {
+      "neutral": "No semantic weight — a plain label or count.",
+      "info": "Informational, no action required.",
+      "success": "A completed or healthy state.",
+      "warning": "Needs attention but is not blocking.",
+      "destructive": "An error that blocks progress.",
+      "default": "Standard treatment with no semantic weight."
+    },
+    "size": {
+      "small": "Dense contexts — tables, toolbars, compact rows.",
+      "medium": "The default in forms and dialogs.",
+      "large": "Prominent or touch-first contexts.",
+      "sm": "Dense contexts — tables, toolbars, compact rows.",
+      "md": "The default in forms and dialogs.",
+      "lg": "Prominent or touch-first contexts."
+    },
+    "density": {
+      "compact": "Tighter spacing for information-dense screens.",
+      "comfortable": "Default spacing, easier to scan and tap."
+    },
+    "state": {
+      "default": "Resting state.",
+      "populated": "Has content to show.",
+      "empty": "No content — show an empty state, not a blank area.",
+      "interactive": "The whole surface responds to pointer and keyboard."
+    },
+    "mode": {
+      "single": "Selects one value.",
+      "range": "Selects a start and end pair."
+    },
+    "type": {
+      "standard": "Default composition.",
+      "form": "Contains editable fields; needs submit and cancel affordances.",
+      "content": "Text and actions only.",
+      "media": "Leads with an image or media block.",
+      "initials": "Falls back to initials when no image is available.",
+      "status": "Carries a presence or status indicator.",
+      "bar": "Categorical comparison.",
+      "line": "Change over a continuous axis.",
+      "checkbox": "Items are multi-selectable."
+    },
+    "placement": {
+      "left": "Opens from the left edge.",
+      "right": "Opens from the right edge."
+    },
+    "side": {
+      "top": "Opens above the trigger.",
+      "right": "Opens to the right of the trigger.",
+      "bottom": "Opens below the trigger.",
+      "left": "Opens to the left of the trigger."
+    },
+    "align": {
+      "start": "Aligns to the trigger's start edge.",
+      "center": "Centres on the trigger.",
+      "end": "Aligns to the trigger's end edge."
+    },
+    "orientation": {
+      "horizontal": "Lays out along the inline axis.",
+      "vertical": "Lays out along the block axis."
+    },
+    "width": {
+      "compact": "Narrow — for filters and short forms.",
+      "wide": "Roomier — for tables and dense content."
+    },
+    "value": {
+      "unchecked": "Not selected.",
+      "checked": "Selected.",
+      "indeterminate": "Partially selected — some children selected, some not."
+    }
+  },
+
+  "archetypes": {
+    "button": {
+      "whenToUse": ["Trigger an action or event — submit, confirm, open a dialog."],
+      "whenNotToUse": ["Navigating between pages or URLs — use a Link."],
+      "dos": [
+        "Lead the label with a verb.",
+        "Keep one primary (highest-emphasis) button per view.",
+        "Keep labels short — around three words or fewer."
+      ],
+      "donts": [
+        "Do not use a button for navigation.",
+        "Do not stack multiple primary buttons.",
+        "Do not disable a button without telling the user why."
+      ],
+      "accessibility": {
+        "role": "button",
+        "keyboard": ["Enter and Space activate."],
+        "notes": [
+          "An icon-only button needs an aria-label.",
+          "Disabled buttons are not focusable."
+        ]
+      }
+    },
+    "input": {
+      "whenToUse": ["Collect a single line of free-form text."],
+      "whenNotToUse": [
+        "Choosing from a fixed set — use Select or Radio Group.",
+        "Long multi-line text — use Textarea."
+      ],
+      "dos": [
+        "Always pair with a visible label.",
+        "Show format hints as helper text.",
+        "Reserve space for error text so validation does not shift the layout."
+      ],
+      "donts": [
+        "Do not use placeholder text as the only label.",
+        "Do not validate on every keystroke before the first blur."
+      ],
+      "accessibility": {
+        "keyboard": ["Standard text-editing keys."],
+        "notes": [
+          "Every input has a programmatically associated label.",
+          "The error state sets aria-invalid and links its message via aria-describedby."
+        ]
+      }
+    },
+    "choice": {
+      "whenToUse": [
+        "Checkbox or toggle for an independent on/off value.",
+        "Radio for one-of-many within a group."
+      ],
+      "whenNotToUse": [
+        "A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.",
+        "A choice that only applies after a separate Save — prefer radio or checkbox over a toggle."
+      ],
+      "dos": ["Label the control itself, not only the group.", "Make the label clickable."],
+      "donts": [
+        "Do not use a radio group for multi-select.",
+        "Do not use a toggle for choices that only apply after a separate Save."
+      ],
+      "accessibility": {
+        "keyboard": ["Space toggles.", "Radio groups move between options with arrow keys."],
+        "notes": ["State is exposed via aria-checked, never by colour alone."]
+      }
+    },
+    "card": {
+      "whenToUse": ["Group related content and actions about a single subject."],
+      "whenNotToUse": ["Primary page layout scaffolding.", "A bare list of text."],
+      "dos": ["Make the primary action obvious.", "Keep one main call-to-action per card."],
+      "donts": [
+        "Do not nest cards more than one level.",
+        "Do not make the whole card and an inner button separately clickable in conflicting ways."
+      ],
+      "accessibility": {
+        "notes": [
+          "If the whole card is a link or button it needs an accessible name.",
+          "Do not bury interactive controls where keyboard users reach them out of order."
+        ]
+      }
+    },
+    "dialog": {
+      "whenToUse": ["Interrupt for a focused task, or a decision that blocks the flow."],
+      "whenNotToUse": ["Non-critical messages — use an inline alert or a toast."],
+      "dos": [
+        "Trap focus while open.",
+        "Return focus to the trigger on close.",
+        "Provide an explicit close affordance."
+      ],
+      "donts": ["Do not stack dialogs.", "Do not put long scrolling forms in a small dialog."],
+      "accessibility": {
+        "role": "dialog",
+        "keyboard": ["Escape closes.", "Tab cycles within the dialog only."],
+        "notes": [
+          "aria-modal=\"true\", labelled by its title via aria-labelledby.",
+          "Focus is trapped within while open."
+        ]
+      }
+    },
+    "badge": {
+      "whenToUse": ["A short status, count, or category label."],
+      "whenNotToUse": ["Interactive primary actions — use a Button."],
+      "dos": ["Keep text to a word or two.", "Bind colour to a semantic tone token."],
+      "donts": ["Do not rely on colour alone to convey status — include text or an icon."],
+      "accessibility": {
+        "notes": [
+          "Status is conveyed with text, not colour only (WCAG 1.4.1).",
+          "A removable chip's remove control needs an accessible name, e.g. \"Remove <label>\"."
+        ]
+      }
+    }
+  },
+
+  "mapping": {
+    "$comment": "Jake UI component name -> archetype. Anything unlisted takes the documented fallback: no dos/donts are invented, and only the accessibility block is seeded where the W3C APG pattern is unambiguous. `null` means deliberately unmapped.",
+    "Button": "button",
+    "Button Group": "button",
+    "Input": "input",
+    "Textarea": "input",
+    "Native Select": "input",
+    "Field": "input",
+    "Checkbox": "choice",
+    "Radio Group": "choice",
+    "Radio Group / Item": "choice",
+    "Radio Group / Root": "choice",
+    "Radio Group / Field Composition": "choice",
+    "Switch": "choice",
+    "Switch / Root": "choice",
+    "Switch / Field Composition": "choice",
+    "Toggle": "choice",
+    "Toggle Group": "choice",
+    "Card": "card",
+    "Dialog": "dialog",
+    "Alert Dialog": "dialog",
+    "Drawer": "dialog",
+    "Sheet": "dialog",
+    "Badge": "badge"
+  }
+}

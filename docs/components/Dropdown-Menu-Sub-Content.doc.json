@@ -1,0 +1,39 @@
+{
+  "name": "Dropdown Menu / Sub Content",
+  "summary": "Nested submenu content with Side=Left/Right and Align=Start/Center/End.",
+  "description": "Nested submenu content with Side=Left/Right and Align=Start/Center/End. The anchor marker indicates the edge and alignment relative to the Sub Trigger. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.\n\nLayout exception: Anchor marker is an absolute-positioned documentation/placement reference for submenu alignment. It is not a runtime content layer and is excluded from structural auto-layout linting.",
+  "variants": {
+    "side": {
+      "left": "Opens to the left of the trigger.",
+      "right": "Opens to the right of the trigger."
+    },
+    "align": {
+      "start": "Aligns to the trigger's start edge.",
+      "center": "Centres on the trigger.",
+      "end": "Aligns to the trigger's end edge."
+    }
+  },
+  "states": {
+    "Side=Left, Align=Start": "fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/13"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "border",
+    "popover",
+    "popover-foreground",
+    "radius/lg",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

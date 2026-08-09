@@ -1,0 +1,74 @@
+{
+  "name": "Badge",
+  "summary": "Compact status label.",
+  "description": "Compact status label. Tone communicates semantic state; size adapts to dense or standard layouts.",
+  "variants": {
+    "tone": {
+      "neutral": "No semantic weight — a plain label or count.",
+      "info": "Informational, no action required.",
+      "success": "A completed or healthy state.",
+      "warning": "Needs attention but is not blocking.",
+      "destructive": "An error that blocks progress."
+    },
+    "size": {
+      "small": "Dense contexts — tables, toolbars, compact rows.",
+      "medium": "The default in forms and dialogs."
+    }
+  },
+  "states": {
+    "Tone=Neutral, Size=Small": "fill secondary · radius radius/lg · text secondary-foreground · type size/11",
+    "Tone=Neutral, Size=Medium": "type size/12",
+    "Tone=Info, Size=Small": "fill info · text info-foreground",
+    "Tone=Info, Size=Medium": "fill info · text info-foreground · type size/12",
+    "Tone=Success, Size=Small": "fill success · text info-foreground",
+    "Tone=Success, Size=Medium": "fill success · text info-foreground · type size/12",
+    "Tone=Warning, Size=Small": "fill warning · text warning-foreground",
+    "Tone=Warning, Size=Medium": "fill warning · text warning-foreground · type size/12"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Keep text to a word or two.",
+    "Bind colour to a semantic tone token."
+  ],
+  "tokensUsed": [
+    "info",
+    "info-foreground",
+    "radius/lg",
+    "secondary",
+    "secondary-foreground",
+    "size/11",
+    "size/12",
+    "success",
+    "warning",
+    "warning-foreground"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "A short status, count, or category label."
+  ],
+  "whenNotToUse": [
+    "Interactive primary actions — use a Button."
+  ],
+  "donts": [
+    "Do not rely on colour alone to convey status — include text or an icon."
+  ],
+  "accessibility": {
+    "notes": [
+      "Status is conveyed with text, not colour only (WCAG 1.4.1).",
+      "A removable chip's remove control needs an accessible name, e.g. \"Remove <label>\"."
+    ]
+  }
+}

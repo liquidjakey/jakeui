@@ -1,0 +1,43 @@
+{
+  "name": "Dropdown Menu / Root Composition",
+  "summary": "Complete source-parity compositions.",
+  "description": "Complete source-parity compositions. Patterns: Basic, Submenu, Shortcuts, Icons, Checkboxes, Checkbox Icons, Radio Group, Radio Icons, Destructive, Avatar, Complex, and RTL. Each pattern has Closed and Open states. Placement is controlled by Dropdown Menu / Content. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "state": {
+      "closed": "",
+      "open": ""
+    }
+  },
+  "states": {
+    "Pattern=Basic, State=Closed": "text foreground · type size/13",
+    "Pattern=Basic, State=Open": "text accent-foreground",
+    "Pattern=Submenu, State=Open": "text accent-foreground",
+    "Pattern=Shortcuts, State=Open": "text accent-foreground",
+    "Pattern=Icons, State=Open": "text accent-foreground",
+    "Pattern=Checkboxes, State=Open": "text accent-foreground",
+    "Pattern=Checkbox Icons, State=Open": "text accent-foreground",
+    "Pattern=Radio Group, State=Open": "text accent-foreground"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not turn Pattern into a code prop."
+  ],
+  "tokensUsed": [
+    "accent-foreground",
+    "foreground",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "tokensUsed": "imported"
+  }
+}

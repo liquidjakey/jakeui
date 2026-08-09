@@ -1,0 +1,77 @@
+{
+  "name": "Switch / Root",
+  "summary": "Pure Switch control with Size, Value, and State axes.",
+  "description": "Pure Switch control with Size, Value, and State axes. States cover default, hover, focus-visible, disabled, readOnly, and invalid. Anatomy: Root + nested Thumb; hidden form input remains a documented nonvisual runtime part.\n\nAccessibility contract: the switch track is intentionally smaller than a 24px pointer target. Runtime must provide a target of at least 24×24 CSS px or satisfy the permitted spacing exception. State=Invalid must be paired with visible field/group error text and programmatic invalid/error description.",
+  "variants": {
+    "size": {
+      "small": "Dense contexts — tables, toolbars, compact rows.",
+      "default": ""
+    },
+    "value": {
+      "unchecked": "Not selected.",
+      "checked": "Selected."
+    }
+  },
+  "states": {
+    "Size=Small, Value=Unchecked, State=Default": "fill input · radius radius/full",
+    "Size=Small, Value=Unchecked, State=Hover": "fill accent",
+    "Size=Small, Value=Unchecked, State=Focused": "border 2px ring",
+    "Size=Small, Value=Unchecked, State=Invalid": "border 2px destructive",
+    "Size=Small, Value=Checked, State=Default": "fill primary",
+    "Size=Small, Value=Checked, State=Hover": "fill primary",
+    "Size=Small, Value=Checked, State=Focused": "fill primary · border 2px ring",
+    "Size=Small, Value=Checked, State=Disabled": "fill primary"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Label the control itself, not only the group.",
+    "Make the label clickable."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
+    "Do not remove the ring border on focus. It is the only focus affordance.",
+    "Do not use a radio group for multi-select.",
+    "Do not use a toggle for choices that only apply after a separate Save."
+  ],
+  "accessibility": {
+    "notes": [
+      "the switch track is intentionally smaller than a 24px pointer target. Runtime must provide a target of at least 24×24 CSS px or satisfy the permitted spacing exception. State=Invalid must be paired with visible field/group error text and programmatic invalid/error description.",
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Focused · Disabled · ReadOnly · Invalid] → :hover + :focus-visible CSS-owned, dropped; disabled + readOnly + invalid independent booleans",
+      "State is exposed via aria-checked, never by colour alone."
+    ],
+    "keyboard": [
+      "Space toggles.",
+      "Radio groups move between options with arrow keys."
+    ]
+  },
+  "tokensUsed": [
+    "accent",
+    "destructive",
+    "input",
+    "primary",
+    "radius/full",
+    "ring"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "accessibility": "imported+w3c-apg",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice"
+  },
+  "whenToUse": [
+    "Checkbox or toggle for an independent on/off value.",
+    "Radio for one-of-many within a group."
+  ],
+  "whenNotToUse": [
+    "A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.",
+    "A choice that only applies after a separate Save — prefer radio or checkbox over a toggle."
+  ]
+}

@@ -66,49 +66,228 @@
       "Input": {
         "status": "draft",
         "updatedAt": "2026-08-09T06:05:00Z",
-        "_note": "Code implemented, CI-bound, and now RENDERED and visually verified in Storybook across all five states in both modes. Still draft: promotion to stable is storybook-chromatic-builder's call and there is no Chromatic baseline. Rendering caught a real bug (see the cn/tailwind-merge fix) and disproved part of the focus-ring rationale."
+        "_note": "Code implemented, CI-bound, and now RENDERED and visually verified in Storybook across all five states in both modes. Still draft: promotion to stable is storybook-chromatic-builder's call and there is no Chromatic baseline. Rendering caught a real bug (see the cn/tailwind-merge fix) and disproved part of the focus-ring rationale.",
+        "doc": {
+          "path": "docs/components/Input.doc.json",
+          "fingerprint": "c04354397c92cbfb",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "e36cf3e10c9e6b74",
+              "render": "0e7af8ca2c94dd24",
+              "adopted": true
+            }
+          }
+        }
+      },
+      "Accordion": {
+        "doc": {
+          "path": "docs/components/Accordion.doc.json",
+          "fingerprint": "07cd5431c6e43415",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "07cd5431c6e43415",
+              "render": "50b9da048585ff8e",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
       },
       "Alert": {
         "doc": {
           "path": "docs/components/Alert.doc.json",
-          "fingerprint": "76da86cc35ab49c4",
+          "fingerprint": "ed414a88baefb901",
           "surfaces": {
             "figmaDescription": {
               "src": "76da86cc35ab49c4",
-              "render": "6c012f5c42967c9e"
+              "render": "6c012f5c42967c9e",
+              "adopted": true
             }
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:18:32.898Z"
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Alert Dialog": {
+        "doc": {
+          "path": "docs/components/Alert-Dialog.doc.json",
+          "fingerprint": "1207477704891b2c",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "f06f688e478d6aeb",
+              "render": "47c6030eba3df426",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Avatar": {
+        "doc": {
+          "path": "docs/components/Avatar.doc.json",
+          "fingerprint": "084005172b71856a",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "46553972ead2d87d",
+              "render": "31d776a67e39f9db",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Badge": {
+        "doc": {
+          "path": "docs/components/Badge.doc.json",
+          "fingerprint": "136f6dc031fa1df3",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "b0fd54d2d40498c8",
+              "render": "aaa7dcccc4e70378",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Breadcrumb": {
+        "doc": {
+          "path": "docs/components/Breadcrumb.doc.json",
+          "fingerprint": "0a5ce504c04d54ba",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "0a5ce504c04d54ba",
+              "render": "a595bfde8ff0eaba",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
       },
       "Button": {
         "doc": {
           "path": "docs/components/Button.doc.json",
-          "fingerprint": "5fc358593db204dd",
+          "fingerprint": "b312af55ad9bad9b",
           "surfaces": {
             "figmaDescription": {
               "src": "5fc358593db204dd",
-              "render": "3f09ab69d8f764eb"
+              "render": "3f09ab69d8f764eb",
+              "adopted": true
             }
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:18:32.898Z"
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Button Group": {
+        "doc": {
+          "path": "docs/components/Button-Group.doc.json",
+          "fingerprint": "4ca12e3bcd866fdc",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "50a63dc389ca2c3d",
+              "render": "0b7771dd8fe57d9b",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
       },
       "Calendar": {
         "doc": {
           "path": "docs/components/Calendar.doc.json",
-          "fingerprint": "0b8ecd3aa017bf19",
+          "fingerprint": "ed271d9472925285",
           "surfaces": {
             "figmaDescription": {
               "src": "0b8ecd3aa017bf19",
-              "render": "7254ec6945d19939"
+              "render": "7254ec6945d19939",
+              "adopted": true
             }
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:18:32.898Z"
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Card": {
+        "doc": {
+          "path": "docs/components/Card.doc.json",
+          "fingerprint": "9fe82e7c0bdc0914",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "4a2e5dccf4ee1004",
+              "render": "b6d0222896a96d5d",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Chart": {
+        "doc": {
+          "path": "docs/components/Chart.doc.json",
+          "fingerprint": "60a16c7b14bcb5e5",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "4af63fc77c35ce84",
+              "render": "729e45f59efb74c5",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Checkbox": {
+        "doc": {
+          "path": "docs/components/Checkbox.doc.json",
+          "fingerprint": "0d1f6fdeda171066",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "267080d80c9621e7",
+              "render": "cef945829485b07a",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Collapsible": {
+        "doc": {
+          "path": "docs/components/Collapsible.doc.json",
+          "fingerprint": "2ebcc305068dc984",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "2ebcc305068dc984",
+              "render": "dc6937369295d726",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Command": {
+        "doc": {
+          "path": "docs/components/Command.doc.json",
+          "fingerprint": "ca4707ccd4bf32f5",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "ca4707ccd4bf32f5",
+              "render": "85b163e4986b7795",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
       },
       "Command Panel": {
         "doc": {
@@ -117,40 +296,1063 @@
           "surfaces": {
             "figmaDescription": {
               "src": "d10ca0fb5e0922ca",
-              "render": "8db48b95c5df8a19"
+              "render": "8db48b95c5df8a19",
+              "adopted": true
             }
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:18:32.898Z"
+        "updatedAt": "2026-08-09T08:43:23.438Z"
       },
       "Data Table": {
         "doc": {
           "path": "docs/components/Data-Table.doc.json",
-          "fingerprint": "3ee1574e876a4639",
+          "fingerprint": "23167dae8852b907",
           "surfaces": {
             "figmaDescription": {
               "src": "3ee1574e876a4639",
-              "render": "381cc747a71c2fbd"
+              "render": "381cc747a71c2fbd",
+              "adopted": true
             }
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:18:32.898Z"
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Date Picker": {
+        "doc": {
+          "path": "docs/components/Date-Picker.doc.json",
+          "fingerprint": "316c9879cf57f7bf",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "4e715b49ad129173",
+              "render": "b68c474ff7ee0fcd",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dialog": {
+        "doc": {
+          "path": "docs/components/Dialog.doc.json",
+          "fingerprint": "d9717bb83f70289a",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "1923255135159189",
+              "render": "843fe132936bcbf4",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Drawer": {
+        "doc": {
+          "path": "docs/components/Drawer.doc.json",
+          "fingerprint": "4e1c3500a010bb6a",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "d66ef945fdba6212",
+              "render": "75aef0dfddbdaace",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu.doc.json",
+          "fingerprint": "650f6fffa37a5444",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "aa05884cacce5ec7",
+              "render": "0556c08a8ee44f5e",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Checkbox Item": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Checkbox-Item.doc.json",
+          "fingerprint": "b8d0a4ee2868e274",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "3a1aff206fb316a2",
+              "render": "9f84a18927ab8ea2",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
       },
       "Dropdown Menu / Content": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Content.doc.json",
-          "fingerprint": "ac128105002b0057",
+          "fingerprint": "ef8bc6cb467d2642",
           "surfaces": {
             "figmaDescription": {
               "src": "ac128105002b0057",
-              "render": "c4307ec0cd18a05c"
+              "render": "c4307ec0cd18a05c",
+              "adopted": true
             }
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:18:32.898Z"
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Group": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Group.doc.json",
+          "fingerprint": "e0e6a55dae667040",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "e0e6a55dae667040",
+              "render": "928553aad4305d87",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Item": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Item.doc.json",
+          "fingerprint": "4c705648eecfd6a7",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "47dbafef514aa3a3",
+              "render": "725cfdba48a86ef9",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Label": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Label.doc.json",
+          "fingerprint": "7f96fbc7beb86287",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "7f96fbc7beb86287",
+              "render": "012bba64b39fb10b",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Radio Group": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Radio-Group.doc.json",
+          "fingerprint": "76d83f0bdbe6071b",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "76d83f0bdbe6071b",
+              "render": "701138dd016e7349",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Radio Item": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Radio-Item.doc.json",
+          "fingerprint": "a18512acb77a7b43",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "3a74f3e310f7aa01",
+              "render": "e5bffe37e2007d12",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Root Composition": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Root-Composition.doc.json",
+          "fingerprint": "d6a866d412cbefb8",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "d6a866d412cbefb8",
+              "render": "0729f252f5ca3290",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Separator": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Separator.doc.json",
+          "fingerprint": "5f0128077732ec5f",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "5f0128077732ec5f",
+              "render": "9fdb778308c93dcb",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Shortcut": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Shortcut.doc.json",
+          "fingerprint": "53639eda45a2b486",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "53639eda45a2b486",
+              "render": "4e7f78d97c64afa7",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Sub Content": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Sub-Content.doc.json",
+          "fingerprint": "1a0c2ae558ce1564",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "4829791946c92a47",
+              "render": "6a2106b68e647d6b",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Sub Trigger": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Sub-Trigger.doc.json",
+          "fingerprint": "3000d7e5a566a847",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "3000d7e5a566a847",
+              "render": "d9887d87043388ac",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Dropdown Menu / Trigger": {
+        "doc": {
+          "path": "docs/components/Dropdown-Menu-Trigger.doc.json",
+          "fingerprint": "9e163642a5e6b483",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "9e163642a5e6b483",
+              "render": "76bfa05f3d3b3cde",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Field": {
+        "doc": {
+          "path": "docs/components/Field.doc.json",
+          "fingerprint": "0f9ab36380da3e06",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "1061378c678bf597",
+              "render": "e6b10651ba465c49",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Hover Card": {
+        "doc": {
+          "path": "docs/components/Hover-Card.doc.json",
+          "fingerprint": "506fb4f07842e5e4",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "d30d1af9cfcb2f5b",
+              "render": "6de308a1e3b6e68d",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Icon": {
+        "doc": {
+          "path": "docs/components/Icon.doc.json",
+          "fingerprint": "2cd75e24451d6944",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "2cd75e24451d6944",
+              "render": "4d2acb4c68595a12",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Label": {
+        "doc": {
+          "path": "docs/components/Label.doc.json",
+          "fingerprint": "b29a26aa771ce8c7",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "90c12b3620c52c91",
+              "render": "bf34f62efee7bcb3",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Native Select": {
+        "doc": {
+          "path": "docs/components/Native-Select.doc.json",
+          "fingerprint": "ed3b8ce018f6b225",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "8eb830db4eb799c5",
+              "render": "c0fb996ea1733bdc",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Navigation Menu": {
+        "doc": {
+          "path": "docs/components/Navigation-Menu.doc.json",
+          "fingerprint": "825f5301138cd976",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "825f5301138cd976",
+              "render": "494d7e1a5ad5fa21",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Pagination": {
+        "doc": {
+          "path": "docs/components/Pagination.doc.json",
+          "fingerprint": "c5a1c6598c066684",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "8f36ca7e1ce309d0",
+              "render": "0be837a04a3ae6b8",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover": {
+        "doc": {
+          "path": "docs/components/Popover.doc.json",
+          "fingerprint": "a151efad94f64ed1",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "08a3307635c300e3",
+              "render": "bb1d48141ee593a8",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover / Arrow": {
+        "doc": {
+          "path": "docs/components/Popover-Arrow.doc.json",
+          "fingerprint": "860e05913ae3b071",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "f985bf5cc4a10141",
+              "render": "763eb1f89897985c",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover / Backdrop": {
+        "doc": {
+          "path": "docs/components/Popover-Backdrop.doc.json",
+          "fingerprint": "5fd2238afd637f42",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "5fd2238afd637f42",
+              "render": "87cca89e9bfb6581",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover / Close": {
+        "doc": {
+          "path": "docs/components/Popover-Close.doc.json",
+          "fingerprint": "426521796f6bd687",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "426521796f6bd687",
+              "render": "0aa00168771d4e34",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover / Content": {
+        "doc": {
+          "path": "docs/components/Popover-Content.doc.json",
+          "fingerprint": "fef340aa8a4673c1",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "3a0122757d23209f",
+              "render": "55bdb9b227b1d6ab",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover / Form Content": {
+        "doc": {
+          "path": "docs/components/Popover-Form-Content.doc.json",
+          "fingerprint": "098e70d278a10050",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "098e70d278a10050",
+              "render": "c02158208506a70b",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover / Header": {
+        "doc": {
+          "path": "docs/components/Popover-Header.doc.json",
+          "fingerprint": "57369100f883ec80",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "57369100f883ec80",
+              "render": "f76e40318ec75083",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover / Root Composition": {
+        "doc": {
+          "path": "docs/components/Popover-Root-Composition.doc.json",
+          "fingerprint": "d4da77934d9e2527",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "d4da77934d9e2527",
+              "render": "84d75a6af6587db8",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover / RTL Content": {
+        "doc": {
+          "path": "docs/components/Popover-RTL-Content.doc.json",
+          "fingerprint": "2964a3754defb082",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "2964a3754defb082",
+              "render": "75c90363b95ce2a4",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover / Trigger": {
+        "doc": {
+          "path": "docs/components/Popover-Trigger.doc.json",
+          "fingerprint": "5d2e08da34bf0718",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "5d2e08da34bf0718",
+              "render": "1d95b02ff69f140d",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Popover / Viewport": {
+        "doc": {
+          "path": "docs/components/Popover-Viewport.doc.json",
+          "fingerprint": "dcb106ae899a1e5b",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "dcb106ae899a1e5b",
+              "render": "0afe896b84689af6",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Progress": {
+        "doc": {
+          "path": "docs/components/Progress.doc.json",
+          "fingerprint": "cab249f5c37e56f6",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "cab249f5c37e56f6",
+              "render": "588253f32dc41067",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Radio Group": {
+        "doc": {
+          "path": "docs/components/Radio-Group.doc.json",
+          "fingerprint": "567b9fdbe3063c91",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "b58f523b184d581e",
+              "render": "7cf65334d24844c8",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Radio Group / Field Composition": {
+        "doc": {
+          "path": "docs/components/Radio-Group-Field-Composition.doc.json",
+          "fingerprint": "c37f618eacb512ea",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "e08f179d3a93e504",
+              "render": "535f89a1dce0fe59",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Radio Group / Indicator": {
+        "doc": {
+          "path": "docs/components/Radio-Group-Indicator.doc.json",
+          "fingerprint": "d56f2d23552b3fcf",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "6a58cfd18ac18670",
+              "render": "5ca061f775892166",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Radio Group / Item": {
+        "doc": {
+          "path": "docs/components/Radio-Group-Item.doc.json",
+          "fingerprint": "9bc517eabe244a9b",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "e29e5569b0d8605d",
+              "render": "e0ddaf79d57428fb",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Radio Group / Root": {
+        "doc": {
+          "path": "docs/components/Radio-Group-Root.doc.json",
+          "fingerprint": "8f2b507cbc129484",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "b05bf4a6b1ca97df",
+              "render": "ddcaf91e15f1e7bc",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Scroll Area": {
+        "doc": {
+          "path": "docs/components/Scroll-Area.doc.json",
+          "fingerprint": "1b51b3cf949ad08b",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "1b51b3cf949ad08b",
+              "render": "1bc04db679ccfc2c",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Segmented Tab": {
+        "doc": {
+          "path": "docs/components/Segmented-Tab.doc.json",
+          "fingerprint": "0df17400dc598663",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "0df17400dc598663",
+              "render": "9ff4853930b3dd51",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Separator": {
+        "doc": {
+          "path": "docs/components/Separator.doc.json",
+          "fingerprint": "53f7b8f62699fcc0",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "1c3edcb7737544ee",
+              "render": "e9b65860076c25a8",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Sheet": {
+        "doc": {
+          "path": "docs/components/Sheet.doc.json",
+          "fingerprint": "91bcc9a95fed6e57",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "4e48b41f21a8c492",
+              "render": "260c78a5df1035ae",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Sidebar": {
+        "doc": {
+          "path": "docs/components/Sidebar.doc.json",
+          "fingerprint": "05c7760825c38979",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "05c7760825c38979",
+              "render": "e34713f8e2478e20",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Sidebar Navigation Item": {
+        "doc": {
+          "path": "docs/components/Sidebar-Navigation-Item.doc.json",
+          "fingerprint": "885c4ef7f08f23af",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "5fb522d8a772b9ce",
+              "render": "bcb285872cdf0702",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Skeleton": {
+        "doc": {
+          "path": "docs/components/Skeleton.doc.json",
+          "fingerprint": "b50699a07aaec9d0",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "b50699a07aaec9d0",
+              "render": "1c92bdd1aa00d7e5",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Slider": {
+        "doc": {
+          "path": "docs/components/Slider.doc.json",
+          "fingerprint": "7fc42199fc479671",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "7fc42199fc479671",
+              "render": "3ad6565efb645bb0",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Switch": {
+        "doc": {
+          "path": "docs/components/Switch.doc.json",
+          "fingerprint": "e861d034e760a004",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "471b30fb11ee3f70",
+              "render": "c8ba7213e5ee8d82",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Switch / Field Composition": {
+        "doc": {
+          "path": "docs/components/Switch-Field-Composition.doc.json",
+          "fingerprint": "0d9a6bfa1702d1c5",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "6ee6aa28b9f64179",
+              "render": "b93e6840160ec521",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Switch / Root": {
+        "doc": {
+          "path": "docs/components/Switch-Root.doc.json",
+          "fingerprint": "1463c44c74fa0e88",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "d00e88ecd3b6d286",
+              "render": "84cbd5f62a1e426a",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Switch / Thumb": {
+        "doc": {
+          "path": "docs/components/Switch-Thumb.doc.json",
+          "fingerprint": "8839b7facf9f9bc8",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "a497564c26713c05",
+              "render": "49edaea2a6941e6a",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table": {
+        "doc": {
+          "path": "docs/components/Table.doc.json",
+          "fingerprint": "67ef76ce48707fff",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "e50139f9d92278d0",
+              "render": "62f46577d5941c7b",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table / Action Trigger": {
+        "doc": {
+          "path": "docs/components/Table-Action-Trigger.doc.json",
+          "fingerprint": "523ee0949e226990",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "523ee0949e226990",
+              "render": "1253b4ed8a6dc125",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table / Body": {
+        "doc": {
+          "path": "docs/components/Table-Body.doc.json",
+          "fingerprint": "c1c350933c9fcee4",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "c1c350933c9fcee4",
+              "render": "5bb7fc57b60dba68",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table / Caption": {
+        "doc": {
+          "path": "docs/components/Table-Caption.doc.json",
+          "fingerprint": "0fce061a561961d0",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "0fce061a561961d0",
+              "render": "2323d3d987011181",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table / Cell": {
+        "doc": {
+          "path": "docs/components/Table-Cell.doc.json",
+          "fingerprint": "11f8f26c97a6c467",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "11f8f26c97a6c467",
+              "render": "7832c22ca0fbac23",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table / Container": {
+        "doc": {
+          "path": "docs/components/Table-Container.doc.json",
+          "fingerprint": "c303b7583edc240b",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "c303b7583edc240b",
+              "render": "0ec6187b6d9ca287",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table / Footer": {
+        "doc": {
+          "path": "docs/components/Table-Footer.doc.json",
+          "fingerprint": "d51b2461aa40f7a2",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "d51b2461aa40f7a2",
+              "render": "54cdfc943db2273e",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table / Head": {
+        "doc": {
+          "path": "docs/components/Table-Head.doc.json",
+          "fingerprint": "e273bdb28c89623c",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "e273bdb28c89623c",
+              "render": "cdda3587464a14d9",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table / Header": {
+        "doc": {
+          "path": "docs/components/Table-Header.doc.json",
+          "fingerprint": "edcc9f4c27fa2316",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "edcc9f4c27fa2316",
+              "render": "3744132739160ced",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table / Root Composition": {
+        "doc": {
+          "path": "docs/components/Table-Root-Composition.doc.json",
+          "fingerprint": "3efdf2ea191b60dc",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "3efdf2ea191b60dc",
+              "render": "83819a2b230acbdf",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Table / Row": {
+        "doc": {
+          "path": "docs/components/Table-Row.doc.json",
+          "fingerprint": "5c64312cd8eaf10b",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "ba666e85a0c737e1",
+              "render": "3d28799bbb085caf",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Tabs": {
+        "doc": {
+          "path": "docs/components/Tabs.doc.json",
+          "fingerprint": "b36246c0029c440d",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "2975d9f3dc2be42c",
+              "render": "934f7389b0897f70",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Textarea": {
+        "doc": {
+          "path": "docs/components/Textarea.doc.json",
+          "fingerprint": "652cff63476a5ccf",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "e44a9589d98a9a54",
+              "render": "ca09f800a0d91e15",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Toggle": {
+        "doc": {
+          "path": "docs/components/Toggle.doc.json",
+          "fingerprint": "7688d749d59b616a",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "730a8b53fdc22b3c",
+              "render": "8c3cb99cf2da527a",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Toggle Group": {
+        "doc": {
+          "path": "docs/components/Toggle-Group.doc.json",
+          "fingerprint": "561f34b8578477ce",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "2f5c902ff9899244",
+              "render": "4822ae6432b0492b",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
+      },
+      "Tooltip": {
+        "doc": {
+          "path": "docs/components/Tooltip.doc.json",
+          "fingerprint": "91a04caa95840f0b",
+          "surfaces": {
+            "figmaDescription": {
+              "src": "dfaaa1edfaa74f58",
+              "render": "208c298ff8552556",
+              "adopted": true
+            }
+          }
+        },
+        "status": "draft",
+        "updatedAt": "2026-08-09T08:43:23.438Z"
       }
     },
     "instanceSwapUpgradePending": []
@@ -234,12 +1436,13 @@
       "undocumented": 0,
       "sources": {
         "figmaDescription": 86,
+        "docRecord": 86,
         "markdown": 1,
         "readme": 1,
-        "codeJsdoc": 0,
+        "codeJsdoc": 1,
         "mdx": 0
       },
-      "_note": "86 = 75 component sets + 11 standalone, all carrying verified Figma descriptions; 189/189 variables described too. As of 9 Aug 2026, 6 of the 86 have been adopted into canonical docs/components/<Name>.doc.json records (provenance: imported). 80 remain. Code components: 1 (Input), which has both a props table (input.md) and a rendered Storybook story."
+      "_note": "All 86 now carry a canonical doc record in docs/components/, adopted from their Figma descriptions and verified byte-for-byte against the live file. 1 has a code doc (input.md) and 1 has code + Storybook stories (Input). 105 blocks across the records are flagged as owed to human review (mostly whenToUse/whenNotToUse on the 26 components with no archetype match)."
     }
   },
   "tokenCrosswalk": {
@@ -260,10 +1463,12 @@
     "_phase4Declined": "token-sync-layer NOT adopted; export-tokens.mjs kept. It already satisfies 4 of the skill's hard rules (float32 rounding at the export boundary, semantic->primitive var() references preserved, --check gate against hand-edits, committed diffable dump), and adopting Phase 4 would require converting to a monorepo for packages/tokens while NOT removing the query-in-Figma step, since that exists because the Variables REST API is Enterprise-only on this plan. Ported the opacity rule immediately (it exposed a live 120-binding bug). Deferred: rename detection (revisit before scaling component count), channel-alpha (when a consumer exists), multi-platform adapters (when a non-web target is real). Full reasoning in docs/design-system/decisions/2026-08-09-phase-4-sync-declined.md.",
     "_phase5and6Skipped": "baseline (5) blocked: no Storybook/Chromatic, and storybook-chromatic-builder requires a monorepo + packages/tokens. code (6) is N/A as a retrofit: no consuming application, scssColorVars/tailwindColorClasses/jsColorsUsages all 0, so there is nothing to swap and no consumer to keep working. Next actionable phase is 6.5 (docs).",
     "_phase5Note": "baseline (Chromatic) still not captured and deliberately so. Storybook WAS set up, but for its own reasons rather than phase 5: globals.css had never been compiled (307 declarations, no Tailwind installed) and no component had ever been rendered. Phase 5 exists to protect a code retrofit that is N/A here.",
-    "_docsProgress": "IN PROGRESS. Adoption tooling built and validated: scripts/lib/doc-record.mjs (stableStringify + canonicalFingerprint, zero deps), scripts/figma-docs-query.js (dump, chunkable), scripts/adopt-docs.mjs (parse -> records + manifest pointers), scripts/docs-check.mjs (drift gate, wired into npm run check). 6 of 86 adopted as a validation slice chosen to exercise every parser branch. REMAINING: 80 components. The work is mechanical — run figma-docs-query.js in chunks, merge into .figma-docs-dump.json, re-run docs:adopt. The only cost is moving ~72KB of description text out of Figma; the parser needs no further changes."
+    "_docsProgress": "COMPLETE for parts 1-3. 86/86 adopted into docs/components/<Name>.doc.json (provenance: imported), 48 enriched from docs/archetypes.json, 124 variant meanings filled, docs/DIGEST.md generated (3215 lines). Every description verified byte-for-byte against live Figma via docs:verify (FNV-1a over UTF-16 code units, because the Figma sandbox has no TextEncoder/crypto.subtle). 105 blocks flagged as owed to human review rather than invented. Layer 4 (interview for brand-specific intent) deliberately NOT done - it cannot be inferred. Fingerprint markers deliberately NOT appended to Figma descriptions: it would invalidate the byte-verified dump, and docs:verify already does that job with more information. Full reasoning: docs/design-system/decisions/2026-08-09-docs-phase-adoption.md"
   },
   "completedSkills": [
     "figma-environment-setup",
-    "design-system-audit"
+    "design-system-audit",
+    "token-builder",
+    "component-builder"
   ]
 }

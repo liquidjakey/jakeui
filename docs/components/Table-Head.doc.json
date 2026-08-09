@@ -1,0 +1,32 @@
+{
+  "name": "Table / Head",
+  "summary": "Semantic table column header.",
+  "description": "Semantic table column header. Alignment controls presentation only; use scope/row-header semantics in code where applicable.",
+  "variants": {
+    "alignment": {
+      "left": "",
+      "center": "",
+      "right": ""
+    }
+  },
+  "states": {
+    "Alignment=Left": "text muted-foreground · type size/12"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "muted-foreground",
+    "size/12"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

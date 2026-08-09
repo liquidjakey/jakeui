@@ -1,0 +1,64 @@
+{
+  "name": "Switch",
+  "summary": "Jake UI labeled Switch extension with checked/unchecked and default/focused/disabled states.",
+  "description": "Jake UI labeled Switch extension with checked/unchecked and default/focused/disabled states. Exact source anatomy and examples are implemented by Switch / Thumb, Switch / Root, and Switch / Field Composition.\n\nAccessibility contract: visual height is 22px. Runtime target area must be at least 24×24 CSS px or satisfy the permitted spacing exception; do not shrink the clickable label/target to the visual track height.",
+  "variants": {
+    "value": {
+      "unchecked": "Not selected.",
+      "checked": "Selected."
+    }
+  },
+  "states": {
+    "Value=Unchecked, State=Default": "text foreground · type size/14",
+    "Value=Unchecked, State=Disabled": "text muted-foreground",
+    "Value=Checked, State=Disabled": "text muted-foreground"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Label the control itself, not only the group.",
+    "Make the label clickable."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
+    "Do not use a radio group for multi-select.",
+    "Do not use a toggle for choices that only apply after a separate Save."
+  ],
+  "accessibility": {
+    "notes": [
+      "visual height is 22px. Runtime target area must be at least 24×24 CSS px or satisfy the permitted spacing exception; do not shrink the clickable label/target to the visual track height.",
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean",
+      "State is exposed via aria-checked, never by colour alone."
+    ],
+    "keyboard": [
+      "Space toggles.",
+      "Radio groups move between options with arrow keys."
+    ]
+  },
+  "tokensUsed": [
+    "foreground",
+    "muted-foreground",
+    "size/14"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "accessibility": "imported+w3c-apg",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice"
+  },
+  "whenToUse": [
+    "Checkbox or toggle for an independent on/off value.",
+    "Radio for one-of-many within a group."
+  ],
+  "whenNotToUse": [
+    "A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.",
+    "A choice that only applies after a separate Save — prefer radio or checkbox over a toggle."
+  ]
+}

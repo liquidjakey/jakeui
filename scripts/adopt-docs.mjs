@@ -207,15 +207,30 @@ function main() {
     if (existsSync(file)) {
       const current = readFileSync(file, 'utf8');
       if (current === next) { skipped.push({ name: entry.name, why: 'unchanged' }); continue; }
-      // Adoption must never clobber a block a human already owns.
       let existing;
       try { existing = JSON.parse(current); } catch { existing = null; }
-      const guarded = existing && Object.entries(existing.provenance || {})
-        .filter(([, v]) => isProtected(v))
-        .map(([k]) => k)
-        .filter((k) => JSON.stringify(existing[k]) !== JSON.stringify(record[k]));
-      if (guarded && guarded.length) {
-        drift.push({ name: entry.name, protectedBlocks: guarded });
+
+      // A record that enrichment has touched will legitimately differ from a fresh
+      // adoption — it carries best-practice / framework / w3c-apg blocks the Figma
+      // description never had. That is not drift. What matters is that the
+      // IMPORTED blocks still match the source.
+      if (existing) {
+        // Only a block whose provenance is PURELY "imported" must still match the
+        // source exactly. A mixed block like "imported+framework" (variant keys
+        // imported, meanings added by enrichment) is expected to differ — testing
+        // it for equality would flag enrichment as drift.
+        const importedKeys = Object.entries(existing.provenance || {})
+          .filter(([, v]) => String(v).trim() === 'imported')
+          .map(([k]) => k);
+        const importedDiffer = importedKeys.filter(
+          (k) => JSON.stringify(existing[k]) !== JSON.stringify(record[k]),
+        );
+        if (!importedDiffer.length) {
+          skipped.push({ name: entry.name, why: 'enriched — imported blocks still match source' });
+          continue;
+        }
+        // Imported content genuinely diverges: refuse rather than clobber.
+        drift.push({ name: entry.name, protectedBlocks: importedDiffer });
         continue;
       }
       drift.push({ name: entry.name, protectedBlocks: [] });
@@ -232,7 +247,16 @@ function main() {
       path: `docs/components/${recordFileName(entry.name)}`,
       fingerprint: fp,
       surfaces: {
-        figmaDescription: { src: fp, render: renderHash(entry.description || '') },
+        figmaDescription: {
+          src: fp,
+          render: renderHash(entry.description || ''),
+          // The Figma description is the SOURCE this record was adopted from, not a
+          // rendering of it. Once enrichment adds archetype/framework blocks the
+          // description no longer carries the whole record — that is a partial
+          // projection by design, and the brownfield rule forbids re-rendering it.
+          // docs:check reports that as informational rather than as drift.
+          adopted: true,
+        },
       },
     };
   }

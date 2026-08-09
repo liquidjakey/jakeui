@@ -4,12 +4,12 @@
   "description": "Month calendar supporting single-date and date-range selection in compact and comfortable densities. Includes today, selected, range, disabled, and outside-month states. Fixed default width with Hug Contents height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.\n\nAccessibility contract: month navigation controls require programmatic names such as Previous month and Next month; selected/today/range states require programmatic equivalents and must not rely on color alone.",
   "variants": {
     "mode": {
-      "single": "",
-      "range": ""
+      "single": "Selects one value.",
+      "range": "Selects a start and end pair."
     },
     "density": {
-      "compact": "",
-      "comfortable": ""
+      "compact": "Tighter spacing for information-dense screens.",
+      "comfortable": "Default spacing, easier to scan and tap."
     }
   },
   "states": {
@@ -35,7 +35,7 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
     "dos": "imported",
     "accessibility": "imported",

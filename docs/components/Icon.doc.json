@@ -1,0 +1,10 @@
+{
+  "name": "Icon",
+  "summary": "Jake UI production icons — Phosphor Icons (regular weight, @phosphor-icons/react v2).",
+  "description": "Jake UI production icons — Phosphor Icons (regular weight, @phosphor-icons/react v2). Variant axes: Name and Size (16/20/24). Fill binds to the foreground variable; in code the icon inherits currentColor. Name values match Phosphor React component names exactly, except SidebarSimpleRight which renders as <SidebarSimple mirrored />. Swap Name rather than copying vectors.",
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported"
+  }
+}

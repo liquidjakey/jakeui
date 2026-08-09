@@ -1,0 +1,59 @@
+{
+  "name": "Table / Row",
+  "summary": "Table row patterns for header, body, and footer sections.",
+  "description": "Table row patterns for header, body, and footer sections. Body rows include default, hover, and selected states. Density controls row height without changing semantic structure.\n\nPipeline API classification: apply the Governance property-classification rule before code mapping. Visual State axes are QA/story states unless engineering explicitly approves a controlled runtime prop; Viewport is responsive test data; Pattern is composition/story data.",
+  "variants": {
+    "type": {
+      "header": "",
+      "body": "",
+      "footer": ""
+    },
+    "density": {
+      "compact": "Tighter spacing for information-dense screens.",
+      "comfortable": "Default spacing, easier to scan and tap."
+    }
+  },
+  "states": {
+    "Type=Header, State=Default, Density=Compact": "fill muted · border border · text muted-foreground · type size/12",
+    "Type=Body, State=Default, Density=Compact": "fill card · text foreground · type size/13",
+    "Type=Body, State=Hover, Density=Compact": "text foreground · type size/13",
+    "Type=Body, State=Selected, Density=Compact": "fill accent · text foreground · type size/13",
+    "Type=Footer, State=Default, Density=Compact": "text foreground · type size/13",
+    "Type=Body, State=Default, Density=Comfortable": "fill card · text foreground · type size/13",
+    "Type=Body, State=Hover, Density=Comfortable": "text foreground · type size/13",
+    "Type=Body, State=Selected, Density=Comfortable": "fill accent · text foreground · type size/13"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime."
+  ],
+  "accessibility": {
+    "notes": [
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Selected] → :hover CSS-owned, dropped; selected controlled state"
+    ]
+  },
+  "tokensUsed": [
+    "accent",
+    "border",
+    "card",
+    "foreground",
+    "muted",
+    "muted-foreground",
+    "size/12",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "accessibility": "imported",
+    "tokensUsed": "imported"
+  }
+}

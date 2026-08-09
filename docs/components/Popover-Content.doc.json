@@ -1,0 +1,51 @@
+{
+  "name": "Popover / Content",
+  "summary": "Complete Popover Content matrix: Size × Side × Align × Arrow.",
+  "description": "Complete Popover Content matrix: Size × Side × Align × Arrow. Uses nested Header, Close, and Arrow assets. Positioner, collision, offset, focus, outside-interaction, and portal behavior are documented in the specification.\n\nVariant-matrix exception: the 48-variant Arrow axis is retained for current consumer compatibility. Refactoring Arrow to a boolean property is a breaking migration and requires consumer-file validation.",
+  "variants": {
+    "size": {
+      "small": "Dense contexts — tables, toolbars, compact rows.",
+      "large": "Prominent or touch-first contexts."
+    },
+    "side": {
+      "top": "Opens above the trigger.",
+      "right": "Opens to the right of the trigger.",
+      "bottom": "Opens below the trigger.",
+      "left": "Opens to the left of the trigger."
+    },
+    "align": {
+      "start": "Aligns to the trigger's start edge.",
+      "center": "Centres on the trigger.",
+      "end": "Aligns to the trigger's end edge."
+    },
+    "arrow": {
+      "false": "",
+      "true": ""
+    }
+  },
+  "states": {
+    "Size=Small, Side=Top, Align=Start, Arrow=False": "text popover-foreground · type size/14"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Pass icons as @phosphor-icons/react components through the slot, never as text glyphs."
+  ],
+  "donts": [
+    "Variant count (48) exceeds the 30-combination governance ceiling. Needs a documented exception."
+  ],
+  "tokensUsed": [
+    "popover-foreground",
+    "size/14"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "tokensUsed": "imported"
+  }
+}

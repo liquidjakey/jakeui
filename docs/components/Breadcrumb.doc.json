@@ -1,0 +1,34 @@
+{
+  "name": "Breadcrumb",
+  "summary": "Hierarchical location trail.",
+  "description": "Hierarchical location trail. Use Collapsed=True when intermediate levels must be condensed at narrower widths. Sizing policy: Hug Contents width with fixed standard control height.",
+  "variants": {
+    "collapsed": {
+      "false": "",
+      "true": ""
+    }
+  },
+  "states": {
+    "Collapsed=False": "fill card · border 1px border · radius radius/lg · text muted-foreground · type size/13"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "border",
+    "card",
+    "muted-foreground",
+    "radius/lg",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "Pagination",
+  "summary": "Navigate paged datasets or long collections.",
+  "description": "Navigate paged datasets or long collections. Desktop exposes page numbers; Compact uses a concise page summary. Sizing policy: Hug Contents width with fixed standard control height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "state": {
+      "default": "Resting state.",
+      "disabled": ""
+    }
+  },
+  "states": {
+    "Viewport=Desktop, State=Default": "fill card · text foreground · type size/13"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "donts": [
+    "Do not turn Viewport into a code prop."
+  ],
+  "tokensUsed": [
+    "card",
+    "foreground",
+    "size/13"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "donts": "imported",
+    "tokensUsed": "imported"
+  }
+}

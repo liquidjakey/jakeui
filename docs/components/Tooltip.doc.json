@@ -1,0 +1,35 @@
+{
+  "name": "Tooltip",
+  "summary": "Brief non-interactive label revealed on hover or focus.",
+  "description": "Brief non-interactive label revealed on hover or focus. Side controls preferred placement relative to the trigger.",
+  "variants": {
+    "side": {
+      "top": "Opens above the trigger.",
+      "bottom": "Opens below the trigger.",
+      "left": "Opens to the left of the trigger.",
+      "right": "Opens to the right of the trigger."
+    }
+  },
+  "states": {
+    "Side=Top": "fill foreground · radius radius/lg · text card · type size/12"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "card",
+    "foreground",
+    "radius/lg",
+    "size/12"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

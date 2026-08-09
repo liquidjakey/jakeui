@@ -1,0 +1,66 @@
+{
+  "name": "Drawer",
+  "summary": "Edge-aligned overlay panel for filters, supplemental tasks, and contextual controls.",
+  "description": "Edge-aligned overlay panel for filters, supplemental tasks, and contextual controls. Placement selects the opening edge; Width controls information density.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "placement": {
+      "left": "Opens from the left edge.",
+      "right": "Opens from the right edge."
+    },
+    "width": {
+      "compact": "Narrow — for filters and short forms.",
+      "wide": "Roomier — for tables and dense content."
+    }
+  },
+  "states": {
+    "Placement=Left, Width=Compact": "fill card · border 1px border · radius radius/lg · text foreground · type size/18"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance.",
+    "Trap focus while open.",
+    "Return focus to the trigger on close.",
+    "Provide an explicit close affordance."
+  ],
+  "tokensUsed": [
+    "border",
+    "card",
+    "foreground",
+    "radius/lg",
+    "size/18"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Interrupt for a focused task, or a decision that blocks the flow."
+  ],
+  "whenNotToUse": [
+    "Non-critical messages — use an inline alert or a toast."
+  ],
+  "donts": [
+    "Do not stack dialogs.",
+    "Do not put long scrolling forms in a small dialog."
+  ],
+  "accessibility": {
+    "role": "dialog",
+    "keyboard": [
+      "Escape closes.",
+      "Tab cycles within the dialog only."
+    ],
+    "notes": [
+      "aria-modal=\"true\", labelled by its title via aria-labelledby.",
+      "Focus is trapped within while open."
+    ]
+  }
+}

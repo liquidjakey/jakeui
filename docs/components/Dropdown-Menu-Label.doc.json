@@ -1,0 +1,32 @@
+{
+  "name": "Dropdown Menu / Label",
+  "summary": "Non-focusable group label with standard or inset alignment.",
+  "description": "Non-focusable group label with standard or inset alignment. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.",
+  "variants": {
+    "inset": {
+      "false": "",
+      "true": ""
+    }
+  },
+  "states": {
+    "Inset=False": "fill popover · text popover-foreground · type size/12"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "popover",
+    "popover-foreground",
+    "size/12"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

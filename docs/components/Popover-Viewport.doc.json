@@ -1,0 +1,40 @@
+{
+  "name": "Popover / Viewport",
+  "summary": "Transition Viewport documenting current and previous content for four activation directions.",
+  "description": "Transition Viewport documenting current and previous content for four activation directions. This asset represents data-activation-direction and data-previous states without prescribing runtime animation duration.",
+  "variants": {
+    "state": {
+      "current": "",
+      "previous": ""
+    },
+    "direction": {
+      "top": "",
+      "right": "",
+      "bottom": "",
+      "left": ""
+    }
+  },
+  "states": {
+    "State=Current, Direction=Top": "fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/11"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "border",
+    "popover",
+    "popover-foreground",
+    "radius/lg",
+    "size/11"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}

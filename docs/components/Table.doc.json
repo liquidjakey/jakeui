@@ -1,0 +1,38 @@
+{
+  "name": "Table",
+  "summary": "Jake UI extension for structured tabular data with compact and comfortable density variants plus optional selected-row treatment.",
+  "description": "Jake UI extension for structured tabular data with compact and comfortable density variants plus optional selected-row treatment. Source-parity anatomy and examples are implemented by the Table / * assets and Table / Root Composition.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
+  "variants": {
+    "density": {
+      "compact": "Tighter spacing for information-dense screens.",
+      "comfortable": "Default spacing, easier to scan and tap."
+    },
+    "selection": {
+      "none": "",
+      "selected": ""
+    }
+  },
+  "states": {
+    "Density=Compact, Selection=None": "fill card · border 1px border · radius radius/lg · text muted-foreground · type size/12"
+  },
+  "dos": [
+    "Reference variables for every value; never hardcode a hex or px.",
+    "Change state through props, never by detaching the instance."
+  ],
+  "tokensUsed": [
+    "border",
+    "card",
+    "muted-foreground",
+    "radius/lg",
+    "size/12"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-08-09",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "states": "imported",
+    "dos": "imported",
+    "tokensUsed": "imported"
+  }
+}
