@@ -189,6 +189,70 @@ Fix is unchanged: regenerate the Figma descriptions, then re-run `npm run docs:a
 Until then **do not implement Alert** from its record — its Success and Warning text
 tokens would reintroduce the 3.07:1 and 3.15:1 contrast failures the rebind fixed.
 
+### What is left, and exactly why — 9 Aug 2026
+
+**58 of 74 assets are bound to code.** The other 16 break down as follows, and none
+is an oversight.
+
+**5 are correctly unbound by design.** Their `Pattern` axis is `kind: story-only`
+(*"Storybook story, never a prop"*), so they ship as stories, not components. Binding
+them would claim they are something they are not:
+`Switch / Field Composition`, `Radio Group / Field Composition`,
+`Dropdown Menu / Root Composition`, `Popover / Root Composition`,
+`Table / Root Composition`.
+
+**11 need a Desktop Bridge session.** Run
+`scripts/figma-query-blocked-variants.js` — it is **read-only**, writes nothing, and
+returns every variant's full bindings including child nodes. That one query unblocks
+ten of the eleven:
+
+| Blocked by | Components |
+|---|---|
+| 8-row state cap, not recoverable by inference | `Button` (8 of 32 rows), `Switch / Root` (8/24), `Radio Group / Root` (7/24), `Radio Group / Item` (8/12 — `ReadOnly` has zero observations), `Dropdown Menu / Content` (1/24), `Popover / Content` (1/48), `Date Picker` (3/14) |
+| tokens on child nodes the generator does not read | `Slider`, `Skeleton`, `Popover / Arrow` |
+| pre-rebind stale tokens | `Alert` — needs the description **regenerated**, not just re-read |
+
+**Five capped components were recovered without any Figma query**, by proving the
+missing rows sat on an axis the surviving rows showed to be inert: `Table / Row`,
+`Popover / Trigger`, `Checkbox`, `Dropdown Menu / Item`,
+`Dropdown Menu / Checkbox Item`. That is why the cap list is 7 and not 12. The test
+is always the same — can the missing combinations be *named*, and does a present pair
+prove the axis contributes nothing? `Popover / Content` shows 1 of 48 rows, so
+nothing follows from it.
+
+### Two components whose code deliberately diverges from its record
+
+Both are the same defect: a `*-foreground` token paired with a fill it does not
+belong to. Following either would ship a visible bug rather than a documentation
+inaccuracy, which is the line.
+
+- **`Card`** binds `info-foreground` on a `card` fill — inverted, roughly 1:1
+  contrast, **invisible in both modes**. Code binds `card-foreground`.
+  Fix: `scripts/figma-fix-card-text-binding.js`.
+- **`Navigation Menu`** binds `primary-foreground` on a `card` fill —
+  near-white in both modes, so **invisible in light mode only**. Code binds
+  `foreground`.
+
+Two more of the same family were transcribed rather than deviated, because they are
+wrong without being broken: **`Badge`'s** Success reaches across to
+`info-foreground`, and **`Button Group`'s** `primary-foreground` is a leaked binding
+from its nested Buttons. Four instances is a pattern worth a sweep, not four
+accidents.
+
+### The token gaps worth one decision each
+
+- **No width or container tokens exist anywhere.** Every `size/*` is a type size, so
+  Dialog's `Size`, Drawer/Sheet's `Width`, Popover's `Size` and Sidebar's widths are
+  all raw.
+- **No scrim token.** The only one is `Popover / Backdrop`'s `foreground`, which
+  inverts — a near-white overlay in dark mode. One `overlay` token closes five gaps.
+- **No `destructive-muted` / `destructive-muted-foreground`**, while info, success
+  and warning all have both. That is why Alert's most severe tone is its least
+  distinct.
+- **No categorical series palette**, which is why `Chart` is a frame rather than a
+  chart.
+- **No day-state tokens for `Calendar`**, whose description names five.
+
 ### Accessibility, still failing
 
 - **3 `destructive`-as-text nodes on `accent` in Light = 4.37:1** (below 4.5).
