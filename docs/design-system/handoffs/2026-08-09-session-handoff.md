@@ -164,29 +164,30 @@ be inferred; inventing a voice would be worse than a visible gap.
   Desktop Bridge plugin — the dump is variable-level and has no binding counts. Do it in
   the same plugin session as the accessibility fixes below.
 
-### 6 doc records carry PRE-REBIND token bindings
+### 1 doc record carries pre-rebind token bindings — CORRECTED 9 Aug 2026
 
-**The Figma descriptions were never regenerated after the rebind phase**, so every doc
-record adopted from them is stale wherever the rebind touched it. Evidence:
-`.figma-docs-dump.json` was captured at 17:41, 1h41m *after* the rebind commit
-(`84c7c89`, 16:00), and contains **zero occurrences** of `primary-readable`,
-`success-muted-foreground` or `warning-muted-foreground` across all 86 descriptions —
-the three tokens the rebind moved 75 bindings onto.
+**This section previously claimed six records. That was wrong, and the error was
+mine: the detection regex used `\b`, so `text warning\b` matched
+`text warning-foreground` and `text primary\b` matched
+`text primary-foreground`.** Those are the *correct* foregrounds for their fills and
+were never touched by the rebind.
 
-| Description still says | Live binding should be | Components |
+Re-tested with `text (primary|success|warning)(?![-a-z])`:
+
+| Component | Reads | Verdict |
 |---|---|---|
-| `text primary` | `primary-readable` | Avatar, Button, Button Group, Navigation Menu |
-| `text success` / `text warning` | `success-muted-foreground` / `warning-muted-foreground` | Alert, Badge |
+| **Alert** | `text success`, `text warning` | **genuinely stale** |
+| Badge | `text warning-foreground` | fine — false positive |
+| Avatar, Button, Button Group, Navigation Menu | `text primary-foreground` | fine — false positives |
 
-**`docs:verify` does not catch this and never will** — it proves the dump matches live
-Figma byte for byte, not that a description was regenerated after its bindings changed.
-Dump and Figma carry the same stale text, so it passes. Do not read a green
-`docs:verify` as "the records are current."
+**The underlying finding still stands:** the descriptions were never regenerated
+after the rebind. `primary-readable`, `success-muted-foreground` and
+`warning-muted-foreground` appear **nowhere** in a dump captured 1h41m after the
+rebind commit. Only the blast radius was overstated — **one record, not six.**
 
-Fix: regenerate those descriptions in Figma, then re-run `npm run docs:adopt`. Until
-then, **do not implement Avatar, Button, Button Group, Navigation Menu, Alert or Badge
-from their records** — the text tokens would reintroduce fixed contrast failures.
-`Input`, `Textarea` and `Native Select` are unaffected and safe to build.
+Fix is unchanged: regenerate the Figma descriptions, then re-run `npm run docs:adopt`.
+Until then **do not implement Alert** from its record — its Success and Warning text
+tokens would reintroduce the 3.07:1 and 3.15:1 contrast failures the rebind fixed.
 
 ### Accessibility, still failing
 

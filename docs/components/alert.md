@@ -79,7 +79,9 @@ Dump and Figma carry the same stale text, so verify passes.
 would reintroduce the 3.07:1 and 3.15:1 contrast failures the rebind fixed.
 
 **The record is not authoritative until the Figma descriptions are regenerated and
-`docs:adopt` re-run.** Six records are affected in total — see the handoff §5.
+`docs:adopt` re-run.** Alert is the ONLY record affected — an earlier claim of six was a
+regex error (`text warning\b` matched `text warning-foreground`), corrected in the
+handoff §5.
 
 Related: the handoff records that this same fix was nearly a no-op —
 `warning-muted-foreground` originally resolved to the *same primitive* as `warning`, so
