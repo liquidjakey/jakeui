@@ -89,13 +89,15 @@ it still points at the message — Field just owns the rendering.
 This is the existing dont generalised: *"Do not let the wrapped control render its own
 second label."* The same applies to its error.
 
-⚠️ **An inconsistency to reconcile, not resolved here.** Field's record says the error
-*"is announced politely; it is not a `role="alert"` per keystroke"*, and Field implements
-`aria-live="polite"`. But `Input`'s inline error uses `role="alert"`, which is an
-assertive live region. Both cannot be right. Field's record is the only one that states a
-contract, so Field follows it — but `Input`, `Textarea` and `NativeSelect` should
-probably move to polite too. That is a change to three shipped components and needs its
-own review, so it is recorded rather than done.
+✅ **The announcement inconsistency is RESOLVED (9 Aug 2026).** Field's record says the
+error *"is announced politely; it is not a `role="alert"` per keystroke"*. `Input`,
+`Textarea` and `NativeSelect` originally used `role="alert"`, which is an assertive live
+region — it interrupts the user mid-keystroke on every validation pass. All three were
+moved to `aria-live="polite"`, matching Field.
+
+Field's record was the only one that stated a contract, so it set the standard for the
+other three rather than the other way round. There is now one announcement behaviour
+across every control in the system, whether or not it is wrapped in a Field.
 
 ---
 

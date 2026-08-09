@@ -102,7 +102,7 @@ button or other non-text control, but the two behave identically for `Input` tod
 | Element | Native `<input>`. Never a styled `<div>`. |
 | Label | Visible `<label for={id}>`, or `aria-label` when none exists. Placeholder is **not** a label. |
 | Focus | 2px `ring` border on `:focus-visible`. Must survive any custom styling. Contrast ≥ 3:1 against `card` and `muted` (Governance a11y gate). |
-| Error | `aria-invalid={invalid}`; `errorMessage` linked via `aria-describedby` and rendered in a live region. |
+| Error | `aria-invalid={invalid}`; `errorMessage` linked via `aria-describedby` and rendered in a **polite** live region. Changed from `role="alert"` on 9 Aug 2026 to match Field's recorded contract — an assertive region interrupts mid-keystroke on every validation pass. |
 | Disabled | Native `disabled`. Removed from tab order. |
 | Keyboard | Standard text-input behavior. A trailing clear button must be independently reachable by Tab. |
 | Target size | Control height ≥ 24 CSS px (Governance a11y gate). At `size/14` text + `space/2-25` padding the computed height is 38px. ✓ |

@@ -173,7 +173,15 @@ export const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(fun
       </select>
 
       {showError ? (
-        <p id={errorId} role="alert" className="mt-1 text-caption-sm text-destructive">
+        <p
+          id={errorId}
+          // aria-live="polite", NOT role="alert". Aligned across every control on
+          // 9 Aug 2026 to Field's recorded contract: the error "is announced
+          // politely; it is not a role='alert' per keystroke." An assertive region
+          // interrupts the user mid-keystroke on every validation pass.
+          aria-live="polite"
+          className="mt-1 text-caption-sm text-destructive"
+        >
           {errorMessage}
         </p>
       ) : null}
