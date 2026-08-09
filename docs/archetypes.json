@@ -24,21 +24,32 @@
       "large": "Prominent or touch-first contexts.",
       "sm": "Dense contexts — tables, toolbars, compact rows.",
       "md": "The default in forms and dialogs.",
-      "lg": "Prominent or touch-first contexts."
+      "lg": "Prominent or touch-first contexts.",
+      "default": "The standard size — use unless there is a reason not to."
     },
     "density": {
       "compact": "Tighter spacing for information-dense screens.",
-      "comfortable": "Default spacing, easier to scan and tap."
+      "comfortable": "Default spacing, easier to scan and tap.",
+      "default": "Standard spacing.",
+      "detailed": "Roomier, for richer content than the default carries."
     },
     "state": {
       "default": "Resting state.",
       "populated": "Has content to show.",
       "empty": "No content — show an empty state, not a blank area.",
-      "interactive": "The whole surface responds to pointer and keyboard."
+      "interactive": "The whole surface responds to pointer and keyboard.",
+      "closed": "Collapsed — the content is hidden.",
+      "open": "Expanded — the content is revealed.",
+      "disabled": "Not available; not focusable and does not respond to input.",
+      "active": "The currently selected item in its group.",
+      "expanded": "Shown at full width, with labels visible.",
+      "collapsed": "Reduced to a minimal rail."
     },
     "mode": {
       "single": "Selects one value.",
-      "range": "Selects a start and end pair."
+      "range": "Selects a start and end pair.",
+      "modal": "Blocks the page behind it until dismissed.",
+      "trapFocus": "Keeps keyboard focus inside while open."
     },
     "type": {
       "standard": "Default composition.",
@@ -49,7 +60,20 @@
       "status": "Carries a presence or status indicator.",
       "bar": "Categorical comparison.",
       "line": "Change over a continuous axis.",
-      "checkbox": "Items are multi-selectable."
+      "checkbox": "Items are multi-selectable.",
+      "button": "A conventional button triggers it.",
+      "avatar": "Avatar shape — a circular image, or initials when no image is available.",
+      "required": "Marks a field that must be filled before submit.",
+      "optional": "Marks a field that may be left empty.",
+      "determinate": "Progress is known and reported as a proportion of a total.",
+      "indeterminate": "Progress is unknown — show activity, not a percentage.",
+      "text": "Placeholder for a line or block of text.",
+      "card": "Placeholder shaped like a card.",
+      "tableRow": "Placeholder shaped like a table row.",
+      "header": "The heading region, above the body.",
+      "body": "The main content region.",
+      "footer": "The summary or totals region, below the body.",
+      "rTL": "Right-to-left layout — mirrored for RTL locales."
     },
     "placement": {
       "left": "Opens from the left edge.",
@@ -77,7 +101,66 @@
     "value": {
       "unchecked": "Not selected.",
       "checked": "Selected.",
-      "indeterminate": "Partially selected — some children selected, some not."
+      "indeterminate": "Partially selected — some children selected, some not.",
+      "unselected": "Not selected.",
+      "selected": "Selected."
+    },
+    "disabled": {
+      "false": "Available and interactive.",
+      "true": "Not available; not focusable and does not respond to input."
+    },
+    "open": {
+      "false": "Closed — the content is hidden.",
+      "true": "Open — the content is revealed."
+    },
+    "collapsed": {
+      "false": "Every item is shown in full.",
+      "true": "Middle items are folded behind an overflow affordance."
+    },
+    "selected": {
+      "false": "Not selected.",
+      "true": "Selected — the active choice in its group."
+    },
+    "pressed": {
+      "false": "Off — the toggle is not engaged.",
+      "true": "On — the toggle is engaged."
+    },
+    "attached": {
+      "false": "Members keep their own borders and are separated by a gap.",
+      "true": "Members are joined into one continuous control, sharing inner borders."
+    },
+    "arrow": {
+      "false": "No pointer — the surface floats free of its trigger.",
+      "true": "Shows a pointer aimed at the trigger."
+    },
+    "inset": {
+      "false": "Aligned to the container's leading edge.",
+      "true": "Indented to line up with items that have a leading icon."
+    },
+    "alignment": {
+      "left": "Text aligned to the leading edge — the default for labels and prose.",
+      "center": "Text centred in the cell.",
+      "right": "Text aligned to the trailing edge — use for numbers, so digits line up."
+    },
+    "position": {
+      "top": "Placed above the content.",
+      "bottom": "Placed below the content."
+    },
+    "axis": {
+      "vertical": "Scrolls along the block axis.",
+      "horizontal": "Scrolls along the inline axis."
+    },
+    "emphasis": {
+      "default": "Normal weight — the standard treatment.",
+      "strong": "Heavier weight, to mark the row's key value."
+    },
+    "selection": {
+      "none": "Nothing is currently selected.",
+      "selected": "At least one item is selected.",
+      "single": "One item at a time may be selected.",
+      "multiple": "Several items may be selected at once.",
+      "first": "The first option in the group is selected.",
+      "second": "The second option in the group is selected."
     }
   },
 
@@ -190,6 +273,562 @@
           "A removable chip's remove control needs an accessible name, e.g. \"Remove <label>\"."
         ]
       }
+    },
+    "subpart": {
+      "$comment": "Compound-component children (Table / Cell, Popover / Arrow, …). These are not standalone components; the parent is named in the record's own name. Deliberately generic — anything more specific belongs to layer 4.",
+      "whenToUse": ["Only inside its parent component's composition — this is a part, not a standalone component."],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "dos": ["Compose it through the parent rather than reaching for it directly."],
+      "donts": ["Do not re-implement the parent's keyboard or focus behaviour on the part."]
+    },
+    "disclosure": {
+      "whenToUse": ["Let the reader collapse secondary content so the page stays scannable."],
+      "whenNotToUse": [
+        "Content the reader almost always needs — show it instead of hiding it.",
+        "Switching between peer views — use Tabs."
+      ],
+      "dos": [
+        "Make the trigger the whole header row, not just the chevron.",
+        "Write triggers that say what is inside."
+      ],
+      "donts": [
+        "Do not hide validation errors or required form fields behind a collapsed section.",
+        "Do not animate so slowly that opening feels unresponsive."
+      ],
+      "accessibility": {
+        "keyboard": ["Enter and Space toggle the section.", "Tab moves between triggers."],
+        "notes": [
+          "The trigger is a button carrying aria-expanded and aria-controls.",
+          "The panel stays in the accessibility tree only while open."
+        ]
+      }
+    },
+    "alert": {
+      "whenToUse": ["Deliver an in-page message about the state of the view or a task."],
+      "whenNotToUse": [
+        "A decision that must block the flow — use a Dialog.",
+        "Transient confirmation of a completed action — use a toast."
+      ],
+      "dos": [
+        "Say what happened and what to do next.",
+        "Place it next to what it refers to."
+      ],
+      "donts": [
+        "Do not stack several alerts competing for attention.",
+        "Do not signal severity with colour alone — pair it with an icon and text."
+      ],
+      "accessibility": {
+        "role": "alert",
+        "notes": [
+          "Only an urgent, interrupting message should use role=\"alert\"; a static one uses role=\"status\" or no live region at all.",
+          "A dismissible alert's close control needs an accessible name."
+        ]
+      }
+    },
+    "avatar": {
+      "whenToUse": ["Represent a person, account, or organisation compactly."],
+      "whenNotToUse": ["Decorative imagery, or a general-purpose image container."],
+      "dos": [
+        "Fall back to initials, then to a generic placeholder, when no image loads.",
+        "Keep the shape consistent across the product."
+      ],
+      "donts": ["Do not put meaning in the avatar alone — pair it with a name where identity matters."],
+      "accessibility": {
+        "notes": [
+          "A decorative avatar beside a visible name is alt=\"\"; a standalone one needs the name as its accessible name.",
+          "A status dot needs a text equivalent, not colour alone."
+        ]
+      }
+    },
+    "breadcrumb": {
+      "whenToUse": ["Show where the current page sits in a hierarchy, and offer a way back up."],
+      "whenNotToUse": [
+        "Flat sites with no hierarchy.",
+        "Step-by-step progress through a flow — use a stepper."
+      ],
+      "dos": [
+        "Render the current page as plain text, not a link.",
+        "Collapse the middle rather than wrapping to a second line."
+      ],
+      "donts": ["Do not use it to record visit history — it reflects hierarchy, not the back button."],
+      "accessibility": {
+        "notes": [
+          "Wrap in a nav with an accessible name such as \"Breadcrumb\".",
+          "Mark the current page with aria-current=\"page\".",
+          "Separators are decorative and hidden from assistive technology."
+        ]
+      }
+    },
+    "datepicker": {
+      "whenToUse": ["Pick a date, or a start and end pair, where the calendar context matters."],
+      "whenNotToUse": [
+        "A date the user knows by heart, such as a birthdate — a plain text field is faster.",
+        "Coarse periods like a month or quarter — offer a Select."
+      ],
+      "dos": [
+        "Allow typing the date as well as picking it.",
+        "State the expected format next to the field.",
+        "Disable out-of-range dates rather than rejecting them after submit."
+      ],
+      "donts": [
+        "Do not force calendar navigation for dates far from today.",
+        "Do not assume a locale's week start or date order."
+      ],
+      "accessibility": {
+        "keyboard": [
+          "Arrow keys move by day, PageUp and PageDown by month.",
+          "Escape closes the calendar and returns focus to the field."
+        ],
+        "notes": [
+          "The grid is a table with aria-selected on the chosen day.",
+          "Announce the focused date in full, not just the day number."
+        ]
+      }
+    },
+    "chart": {
+      "whenToUse": ["Reveal a pattern, comparison, or trend that a table would bury."],
+      "whenNotToUse": [
+        "Precise values the reader needs to read off exactly — use a table.",
+        "A single number — use a stat or a Badge."
+      ],
+      "dos": [
+        "Label axes and units directly.",
+        "Order categories meaningfully, not alphabetically by accident.",
+        "Bind series colour to semantic tokens so themes carry through."
+      ],
+      "donts": [
+        "Do not distinguish series by colour alone — vary shape, pattern, or direct labels.",
+        "Do not truncate a bar chart's value axis away from zero."
+      ],
+      "accessibility": {
+        "role": "img",
+        "notes": [
+          "Give the chart a text alternative that states the takeaway, not just the chart type.",
+          "Offer the underlying data as a table for screen-reader and keyboard users."
+        ]
+      }
+    },
+    "commandpalette": {
+      "whenToUse": ["Give keyboard-first users a fast path to any command or destination."],
+      "whenNotToUse": [
+        "The primary means of discovering features — it supplements navigation, it does not replace it.",
+        "A small fixed set of options — use a Select or a menu."
+      ],
+      "dos": [
+        "Show recent or suggested items before the user types.",
+        "Group results and label the groups.",
+        "Show the keyboard shortcut that opens it somewhere discoverable."
+      ],
+      "donts": [
+        "Do not hide destructive commands in it without a confirmation step.",
+        "Do not leave an empty result set unexplained."
+      ],
+      "accessibility": {
+        "keyboard": [
+          "Arrow keys move through results, Enter runs the highlighted one.",
+          "Escape closes and returns focus to the trigger."
+        ],
+        "notes": [
+          "The input owns focus and points at the list via aria-controls and aria-activedescendant.",
+          "Announce the result count as it changes."
+        ]
+      }
+    },
+    "datatable": {
+      "whenToUse": ["Present records across shared columns, for comparison, scanning, or exact reading."],
+      "whenNotToUse": [
+        "Page layout — use a grid.",
+        "A handful of key-value pairs — use a description list."
+      ],
+      "dos": [
+        "Right-align numbers so digits line up.",
+        "Keep the header visible while the body scrolls.",
+        "Give empty, loading, and error states real treatments."
+      ],
+      "donts": [
+        "Do not hide the only route to an action behind row hover.",
+        "Do not let a wide table break the page — let the table itself scroll."
+      ],
+      "accessibility": {
+        "role": "table",
+        "keyboard": ["Interactive cells are reachable in reading order."],
+        "notes": [
+          "Header cells are th with the right scope; a caption names the table.",
+          "Sortable headers carry aria-sort, and the control is a button inside the th."
+        ]
+      }
+    },
+    "menu": {
+      "whenToUse": ["Offer a list of actions from a trigger, when showing them all would crowd the view."],
+      "whenNotToUse": [
+        "Choosing a form value — use a Select; a menu fires actions, it does not hold state.",
+        "Primary navigation — use a navigation menu."
+      ],
+      "dos": [
+        "Group related items and separate the groups.",
+        "Put destructive items last and mark them.",
+        "Show shortcuts alongside the items that have them."
+      ],
+      "donts": [
+        "Do not nest submenus more than one level deep.",
+        "Do not hide the only route to a critical action inside a menu."
+      ],
+      "accessibility": {
+        "role": "menu",
+        "keyboard": [
+          "Arrow keys move between items, Enter activates.",
+          "Escape closes and returns focus to the trigger.",
+          "Typing a letter jumps to the next item starting with it."
+        ],
+        "notes": [
+          "The trigger carries aria-haspopup and aria-expanded.",
+          "Focus moves into the menu on open and back to the trigger on close."
+        ]
+      }
+    },
+    "tooltip": {
+      "whenToUse": ["Name or clarify a control whose purpose is not obvious from its label alone."],
+      "whenNotToUse": [
+        "Content the user must read to proceed — a tooltip is unreachable on touch and easy to miss.",
+        "Anything interactive: links, buttons, or text to copy — use a Popover."
+      ],
+      "dos": [
+        "Keep it to a short phrase.",
+        "Attach it to the control itself, so it is reachable by keyboard focus."
+      ],
+      "donts": [
+        "Do not put a tooltip on a non-focusable element.",
+        "Do not repeat the visible label verbatim.",
+        "Do not place essential or interactive content inside one."
+      ],
+      "accessibility": {
+        "role": "tooltip",
+        "keyboard": ["Shows on focus as well as hover.", "Escape dismisses it."],
+        "notes": [
+          "Referenced by the control via aria-describedby.",
+          "Stays visible long enough to read, and while the pointer is over it."
+        ]
+      }
+    },
+    "popover": {
+      "whenToUse": ["Show secondary content or a small task in context, anchored to its trigger."],
+      "whenNotToUse": [
+        "A decision that must block the flow — use a Dialog.",
+        "A plain text hint — use a Tooltip.",
+        "A list of actions — use a menu."
+      ],
+      "dos": [
+        "Anchor it to the trigger and flip it when it would overflow the viewport.",
+        "Give it an explicit close affordance.",
+        "Return focus to the trigger on close."
+      ],
+      "donts": [
+        "Do not open one from inside another.",
+        "Do not put a long scrolling form in one."
+      ],
+      "accessibility": {
+        "role": "dialog",
+        "keyboard": ["Escape closes.", "Tab moves through the content, then out."],
+        "notes": [
+          "The trigger carries aria-expanded and aria-controls.",
+          "A popover holding a form should trap focus; a non-modal one should not."
+        ]
+      }
+    },
+    "hovercard": {
+      "whenToUse": ["Preview the thing behind a link on hover, without making the reader navigate."],
+      "whenNotToUse": [
+        "Content the user needs — hover is unavailable on touch and to many keyboard users.",
+        "Anything required to complete a task."
+      ],
+      "dos": [
+        "Open and close on a delay, so passing the pointer over does not trigger it.",
+        "Keep it open while the pointer travels into it.",
+        "Treat everything in it as an enhancement of the link's own destination."
+      ],
+      "donts": [
+        "Do not place the only copy of an action inside one.",
+        "Do not open it on click — that is a Popover."
+      ],
+      "accessibility": {
+        "notes": [
+          "Reachable on keyboard focus, or its content must exist elsewhere.",
+          "Escape dismisses it."
+        ]
+      }
+    },
+    "icon": {
+      "whenToUse": ["Reinforce a label, or stand in for one where the metaphor is unambiguous and repeated."],
+      "whenNotToUse": [
+        "Carrying meaning that has no text anywhere near it.",
+        "Illustration — use an image."
+      ],
+      "dos": [
+        "Take icons from the mapped set rather than pasting one-off SVG.",
+        "Size and colour them from tokens so they track the text they sit beside.",
+        "Keep one metaphor for one meaning across the product."
+      ],
+      "donts": [
+        "Do not use an icon alone for a destructive or unusual action.",
+        "Do not rotate or recolour an icon to mean something new."
+      ],
+      "accessibility": {
+        "notes": [
+          "A decorative icon beside text is aria-hidden=\"true\".",
+          "A meaningful standalone icon needs a text alternative on it or on its control."
+        ]
+      }
+    },
+    "label": {
+      "whenToUse": ["Name a form control, so it is identifiable before and after it is filled."],
+      "whenNotToUse": [
+        "Helper text, format hints, or validation messages — those are separate elements.",
+        "A section heading — use a heading."
+      ],
+      "dos": [
+        "Keep the label visible; do not swap it for a placeholder.",
+        "Mark required fields consistently, and say what the marker means once.",
+        "Write it as a noun phrase, in sentence case."
+      ],
+      "donts": [
+        "Do not mark both required and optional fields — pick whichever is rarer.",
+        "Do not truncate a label; shorten the wording instead."
+      ],
+      "accessibility": {
+        "notes": [
+          "Bound to its control by for/id, so clicking the label focuses the control.",
+          "Its text is the control's accessible name — keep it stable."
+        ]
+      }
+    },
+    "navmenu": {
+      "whenToUse": ["Present the product's top-level destinations, with room for grouped sub-items."],
+      "whenNotToUse": [
+        "Firing actions — use a menu.",
+        "A single flat list of two or three links — plain links are enough."
+      ],
+      "dos": [
+        "Mark the current destination.",
+        "Keep the order stable between sessions and roles."
+      ],
+      "donts": [
+        "Do not hide a whole section behind hover alone.",
+        "Do not nest destinations deeper than two levels."
+      ],
+      "accessibility": {
+        "role": "navigation",
+        "keyboard": ["Arrow keys move within a group; Tab moves between groups."],
+        "notes": [
+          "Wrapped in a nav with an accessible name.",
+          "The current destination carries aria-current=\"page\"."
+        ]
+      }
+    },
+    "sidebar": {
+      "whenToUse": ["Keep navigation persistently in view alongside the main content."],
+      "whenNotToUse": [
+        "Fewer than about five destinations — a horizontal bar reads faster.",
+        "Page content or filters that belong in the main column."
+      ],
+      "dos": [
+        "Remember the expanded or collapsed choice across sessions.",
+        "Keep icons meaningful when collapsed, and add tooltips for their labels.",
+        "Move to an overlay drawer at narrow widths."
+      ],
+      "donts": [
+        "Do not collapse to icons alone where the metaphors are ambiguous.",
+        "Do not let the sidebar scroll the whole page."
+      ],
+      "accessibility": {
+        "role": "navigation",
+        "keyboard": ["The collapse control is focusable and labelled."],
+        "notes": [
+          "The collapse toggle carries aria-expanded.",
+          "When collapsed, each item still needs an accessible name."
+        ]
+      }
+    },
+    "navitem": {
+      "whenToUse": ["A single destination within sidebar navigation."],
+      "whenNotToUse": ["Firing an action rather than navigating — use a Button."],
+      "dos": [
+        "Make the whole row the hit target, not just the text.",
+        "Show the active state from the route, not from click state."
+      ],
+      "donts": ["Do not signal the active item by colour alone."],
+      "accessibility": {
+        "notes": [
+          "It is a link; the active one carries aria-current=\"page\".",
+          "Its icon is decorative when the label is visible."
+        ]
+      }
+    },
+    "pagination": {
+      "whenToUse": ["Break a long result set into pages the reader can move through and return to."],
+      "whenNotToUse": [
+        "A feed meant to be browsed continuously — use infinite scroll or a load-more control.",
+        "Result sets short enough to show at once."
+      ],
+      "dos": [
+        "Show the current page and the total.",
+        "Keep previous and next in the same place as the page count changes.",
+        "Disable rather than hide the controls at the first and last page."
+      ],
+      "donts": [
+        "Do not reset filters or sort when the page changes.",
+        "Do not make the hit targets smaller than the surrounding controls."
+      ],
+      "accessibility": {
+        "role": "navigation",
+        "keyboard": ["Every control is reachable in reading order."],
+        "notes": [
+          "Wrapped in a nav named e.g. \"Pagination\".",
+          "The current page carries aria-current=\"page\"; disabled controls stay announced."
+        ]
+      }
+    },
+    "progress": {
+      "whenToUse": ["Show that work is underway, and how far along it is when that is known."],
+      "whenNotToUse": [
+        "Waits short enough that the indicator flashes — show nothing.",
+        "Content-shaped placeholders while a view loads — use Skeleton."
+      ],
+      "dos": [
+        "Use the determinate form whenever a total is known.",
+        "Say what is happening in text beside the bar.",
+        "Keep it in place until the work actually finishes."
+      ],
+      "donts": [
+        "Do not fake determinate progress.",
+        "Do not let a bar sit at 100% without resolving."
+      ],
+      "accessibility": {
+        "role": "progressbar",
+        "notes": [
+          "Determinate sets aria-valuenow, aria-valuemin, and aria-valuemax.",
+          "Indeterminate omits aria-valuenow.",
+          "Named by aria-labelledby, or aria-label when no visible label exists."
+        ]
+      }
+    },
+    "scrollarea": {
+      "whenToUse": ["Confine overflow to one region so the page itself does not scroll."],
+      "whenNotToUse": [
+        "The main page scroll — leave that to the browser.",
+        "Hiding content the reader is unlikely to look for."
+      ],
+      "dos": [
+        "Leave a visible cue that there is more to see.",
+        "Keep native keyboard and wheel scrolling working."
+      ],
+      "donts": [
+        "Do not nest scroll areas along the same axis.",
+        "Do not hide the scrollbar so thoroughly that the overflow is invisible."
+      ],
+      "accessibility": {
+        "keyboard": ["The region is focusable so it can be scrolled by keyboard."],
+        "notes": [
+          "A scrollable region needs a tabindex and an accessible name.",
+          "Do not suppress the native scrollbar on platforms that always show one."
+        ]
+      }
+    },
+    "tabs": {
+      "whenToUse": ["Switch between peer views of the same subject, within one context."],
+      "whenNotToUse": [
+        "Steps in a sequence — use a stepper.",
+        "Content the reader needs to compare side by side, or to find with the browser's search.",
+        "Navigating to a different page — use links."
+      ],
+      "dos": [
+        "Keep one tab selected at all times.",
+        "Keep labels short enough to fit on one line without wrapping.",
+        "Preserve each panel's state when switching away and back."
+      ],
+      "donts": [
+        "Do not scroll or wrap tabs into a second row — reconsider the grouping.",
+        "Do not hide required form fields in an unselected tab."
+      ],
+      "accessibility": {
+        "role": "tablist",
+        "keyboard": [
+          "Arrow keys move between tabs; Home and End jump to the first and last.",
+          "Tab moves from the tab list into the active panel."
+        ],
+        "notes": [
+          "Each tab carries aria-selected and aria-controls; each panel is labelled by its tab.",
+          "Only the selected tab is in the tab order."
+        ]
+      }
+    },
+    "separator": {
+      "whenToUse": ["Mark a boundary between groups that spacing alone does not make clear."],
+      "whenNotToUse": [
+        "Where whitespace already separates the groups.",
+        "Decoration, or as a border around a region."
+      ],
+      "dos": ["Bind it to a border token so it tracks the theme."],
+      "donts": ["Do not use a run of separators to create rhythm."],
+      "accessibility": {
+        "role": "separator",
+        "notes": [
+          "Purely visual separators are aria-hidden=\"true\".",
+          "One that genuinely divides groups keeps role=\"separator\" and its orientation."
+        ]
+      }
+    },
+    "skeleton": {
+      "whenToUse": ["Hold the shape of content that is loading, so the layout does not jump when it arrives."],
+      "whenNotToUse": [
+        "Waits short enough that it flashes.",
+        "Work with a known duration or total — use Progress.",
+        "An error or an empty result — those need their own states."
+      ],
+      "dos": [
+        "Match the real content's dimensions closely.",
+        "Show a small representative number of placeholders, not a full page of them."
+      ],
+      "donts": [
+        "Do not leave skeletons up indefinitely when a request fails.",
+        "Do not animate so strongly that the page appears to be moving."
+      ],
+      "accessibility": {
+        "notes": [
+          "Hidden from assistive technology with aria-hidden=\"true\"; announce loading once, in a live region.",
+          "Respects prefers-reduced-motion by dropping the shimmer."
+        ]
+      }
+    },
+    "slider": {
+      "whenToUse": ["Pick from a continuous or coarsely stepped range where the relative position matters more than the exact figure."],
+      "whenNotToUse": [
+        "A precise value the user knows — use a number input.",
+        "Ranges so wide that a pixel is worth many units.",
+        "Fewer than about five discrete options — use radios or a segmented control."
+      ],
+      "dos": [
+        "Show the current value as text next to the track.",
+        "Make the thumb large enough to hit on touch.",
+        "Pair it with a number input when precision matters."
+      ],
+      "donts": [
+        "Do not use one for a value with a required exact entry.",
+        "Do not hide the minimum and maximum."
+      ],
+      "accessibility": {
+        "role": "slider",
+        "keyboard": [
+          "Arrow keys move by one step; PageUp and PageDown by a larger one.",
+          "Home and End jump to the minimum and maximum."
+        ],
+        "notes": [
+          "Carries aria-valuenow, aria-valuemin, aria-valuemax, and aria-valuetext where a raw number would not read well.",
+          "The thumb is the focusable element and carries the accessible name."
+        ]
+      }
     }
   },
 
@@ -216,6 +855,73 @@
     "Alert Dialog": "dialog",
     "Drawer": "dialog",
     "Sheet": "dialog",
-    "Badge": "badge"
+    "Badge": "badge",
+
+    "Accordion": "disclosure",
+    "Collapsible": "disclosure",
+    "Alert": "alert",
+    "Avatar": "avatar",
+    "Breadcrumb": "breadcrumb",
+    "Calendar": "datepicker",
+    "Date Picker": "datepicker",
+    "Chart": "chart",
+    "Command": "commandpalette",
+    "Command Panel": "commandpalette",
+    "Data Table": "datatable",
+    "Table": "datatable",
+    "Table / Root Composition": "datatable",
+    "Dropdown Menu": "menu",
+    "Dropdown Menu / Root Composition": "menu",
+    "Tooltip": "tooltip",
+    "Popover": "popover",
+    "Popover / Root Composition": "popover",
+    "Hover Card": "hovercard",
+    "Icon": "icon",
+    "Label": "label",
+    "Navigation Menu": "navmenu",
+    "Sidebar": "sidebar",
+    "Sidebar Navigation Item": "navitem",
+    "Pagination": "pagination",
+    "Progress": "progress",
+    "Scroll Area": "scrollarea",
+    "Tabs": "tabs",
+    "Segmented Tab": "tabs",
+    "Separator": "separator",
+    "Skeleton": "skeleton",
+    "Slider": "slider",
+
+    "$subpartComment": "Compound-component children. A `/ Root Composition` is NOT listed here — it is the assembled component, so it takes the parent's archetype above.",
+    "Dropdown Menu / Checkbox Item": "subpart",
+    "Dropdown Menu / Content": "subpart",
+    "Dropdown Menu / Group": "subpart",
+    "Dropdown Menu / Item": "subpart",
+    "Dropdown Menu / Label": "subpart",
+    "Dropdown Menu / Radio Group": "subpart",
+    "Dropdown Menu / Radio Item": "subpart",
+    "Dropdown Menu / Separator": "subpart",
+    "Dropdown Menu / Shortcut": "subpart",
+    "Dropdown Menu / Sub Content": "subpart",
+    "Dropdown Menu / Sub Trigger": "subpart",
+    "Dropdown Menu / Trigger": "subpart",
+    "Popover / Arrow": "subpart",
+    "Popover / Backdrop": "subpart",
+    "Popover / Close": "subpart",
+    "Popover / Content": "subpart",
+    "Popover / Form Content": "subpart",
+    "Popover / Header": "subpart",
+    "Popover / RTL Content": "subpart",
+    "Popover / Trigger": "subpart",
+    "Popover / Viewport": "subpart",
+    "Radio Group / Indicator": "subpart",
+    "Switch / Thumb": "subpart",
+    "Table / Action Trigger": "subpart",
+    "Table / Body": "subpart",
+    "Table / Caption": "subpart",
+    "Table / Cell": "subpart",
+    "Table / Container": "subpart",
+    "Table / Footer": "subpart",
+    "Table / Head": "subpart",
+    "Table / Header": "subpart",
+    "Table / Row": "subpart"
   }
 }

@@ -5,7 +5,7 @@
   "variants": {
     "density": {
       "compact": "Tighter spacing for information-dense screens.",
-      "detailed": ""
+      "detailed": "Roomier, for richer content than the default carries."
     }
   },
   "states": {
@@ -13,7 +13,10 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Open and close on a delay, so passing the pointer over does not trigger it.",
+    "Keep it open while the pointer travels into it.",
+    "Treat everything in it as an enhancement of the link's own destination."
   ],
   "tokensUsed": [
     "border",
@@ -28,7 +31,28 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Preview the thing behind a link on hover, without making the reader navigate."
+  ],
+  "whenNotToUse": [
+    "Content the user needs — hover is unavailable on touch and to many keyboard users.",
+    "Anything required to complete a task."
+  ],
+  "donts": [
+    "Do not place the only copy of an action inside one.",
+    "Do not open it on click — that is a Popover."
+  ],
+  "accessibility": {
+    "notes": [
+      "Reachable on keyboard focus, or its content must exist elsewhere.",
+      "Escape dismisses it."
+    ]
   }
 }

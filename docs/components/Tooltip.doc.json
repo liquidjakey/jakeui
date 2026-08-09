@@ -15,7 +15,9 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Keep it to a short phrase.",
+    "Attach it to the control itself, so it is reachable by keyboard focus."
   ],
   "tokensUsed": [
     "card",
@@ -29,7 +31,34 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Name or clarify a control whose purpose is not obvious from its label alone."
+  ],
+  "whenNotToUse": [
+    "Content the user must read to proceed — a tooltip is unreachable on touch and easy to miss.",
+    "Anything interactive: links, buttons, or text to copy — use a Popover."
+  ],
+  "donts": [
+    "Do not put a tooltip on a non-focusable element.",
+    "Do not repeat the visible label verbatim.",
+    "Do not place essential or interactive content inside one."
+  ],
+  "accessibility": {
+    "role": "tooltip",
+    "keyboard": [
+      "Shows on focus as well as hover.",
+      "Escape dismisses it."
+    ],
+    "notes": [
+      "Referenced by the control via aria-describedby.",
+      "Stays visible long enough to read, and while the pointer is over it."
+    ]
   }
 }

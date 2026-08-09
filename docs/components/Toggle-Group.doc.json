@@ -4,8 +4,8 @@
   "description": "Grouped toggle controls for choosing one or multiple persistent options. Use single selection when options are mutually exclusive.",
   "variants": {
     "selection": {
-      "single": "",
-      "multiple": ""
+      "single": "One item at a time may be selected.",
+      "multiple": "Several items may be selected at once."
     },
     "orientation": {
       "horizontal": "Lays out along the inline axis.",

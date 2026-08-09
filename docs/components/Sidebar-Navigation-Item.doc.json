@@ -5,7 +5,7 @@
   "variants": {
     "state": {
       "default": "Resting state.",
-      "active": ""
+      "active": "The currently selected item in its group."
     }
   },
   "states": {
@@ -14,7 +14,9 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Make the whole row the hit target, not just the text.",
+    "Show the active state from the route, not from click state."
   ],
   "tokensUsed": [
     "radius/lg",
@@ -29,7 +31,26 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "A single destination within sidebar navigation."
+  ],
+  "whenNotToUse": [
+    "Firing an action rather than navigating — use a Button."
+  ],
+  "donts": [
+    "Do not signal the active item by colour alone."
+  ],
+  "accessibility": {
+    "notes": [
+      "It is a link; the active one carries aria-current=\"page\".",
+      "Its icon is decorative when the label is visible."
+    ]
   }
 }

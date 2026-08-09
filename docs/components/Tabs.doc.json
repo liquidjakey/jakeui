@@ -8,7 +8,7 @@
       "vertical": "Lays out along the block axis."
     },
     "density": {
-      "default": "",
+      "default": "Standard spacing.",
       "compact": "Tighter spacing for information-dense screens."
     }
   },
@@ -17,7 +17,10 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Keep one tab selected at all times.",
+    "Keep labels short enough to fit on one line without wrapping.",
+    "Preserve each panel's state when switching away and back."
   ],
   "tokensUsed": [
     "foreground",
@@ -31,7 +34,34 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Switch between peer views of the same subject, within one context."
+  ],
+  "whenNotToUse": [
+    "Steps in a sequence — use a stepper.",
+    "Content the reader needs to compare side by side, or to find with the browser's search.",
+    "Navigating to a different page — use links."
+  ],
+  "donts": [
+    "Do not scroll or wrap tabs into a second row — reconsider the grouping.",
+    "Do not hide required form fields in an unselected tab."
+  ],
+  "accessibility": {
+    "role": "tablist",
+    "keyboard": [
+      "Arrow keys move between tabs; Home and End jump to the first and last.",
+      "Tab moves from the tab list into the active panel."
+    ],
+    "notes": [
+      "Each tab carries aria-selected and aria-controls; each panel is labelled by its tab.",
+      "Only the selected tab is in the tab order."
+    ]
   }
 }

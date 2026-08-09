@@ -4,8 +4,8 @@
   "description": "Primary product navigation with desktop and compact structures. Open=True reveals the navigation panel; compact mode replaces the link row with a menu trigger. Sizing policy: open states use fixed width plus Hug height; closed states intentionally preserve the standard 56px navigation-bar height.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
   "variants": {
     "open": {
-      "false": "",
-      "true": ""
+      "false": "Closed — the content is hidden.",
+      "true": "Open — the content is revealed."
     }
   },
   "states": {
@@ -15,10 +15,14 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Mark the current destination.",
+    "Keep the order stable between sessions and roles."
   ],
   "donts": [
-    "Do not turn Viewport into a code prop."
+    "Do not turn Viewport into a code prop.",
+    "Do not hide a whole section behind hover alone.",
+    "Do not nest destinations deeper than two levels."
   ],
   "tokensUsed": [
     "accent-foreground",
@@ -33,10 +37,30 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "donts": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Present the product's top-level destinations, with room for grouped sub-items."
+  ],
+  "whenNotToUse": [
+    "Firing actions — use a menu.",
+    "A single flat list of two or three links — plain links are enough."
+  ],
+  "accessibility": {
+    "role": "navigation",
+    "keyboard": [
+      "Arrow keys move within a group; Tab moves between groups."
+    ],
+    "notes": [
+      "Wrapped in a nav with an accessible name.",
+      "The current destination carries aria-current=\"page\"."
+    ]
   }
 }

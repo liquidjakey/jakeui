@@ -11,10 +11,15 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Right-align numbers so digits line up.",
+    "Keep the header visible while the body scrolls.",
+    "Give empty, loading, and error states real treatments."
   ],
   "donts": [
-    "Do not turn Pattern/Viewport into a code prop."
+    "Do not turn Pattern/Viewport into a code prop.",
+    "Do not hide the only route to an action behind row hover.",
+    "Do not let a wide table break the page — let the table itself scroll."
   ],
   "tokensUsed": [
     "muted-foreground",
@@ -26,8 +31,28 @@
   "provenance": {
     "description": "imported",
     "states": "imported",
-    "dos": "imported",
-    "donts": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Present records across shared columns, for comparison, scanning, or exact reading."
+  ],
+  "whenNotToUse": [
+    "Page layout — use a grid.",
+    "A handful of key-value pairs — use a description list."
+  ],
+  "accessibility": {
+    "role": "table",
+    "keyboard": [
+      "Interactive cells are reachable in reading order."
+    ],
+    "notes": [
+      "Header cells are th with the right scope; a caption names the table.",
+      "Sortable headers carry aria-sort, and the control is a button inside the th."
+    ]
   }
 }

@@ -4,8 +4,8 @@
   "description": "Scrollable viewport primitive with visible track and thumb anatomy. Choose axis according to overflow direction.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.\n\nLayout exception: Scroll Area uses coordinate-based viewport, track, and thumb geometry rather than root auto layout. Runtime overflow determines scroll position; the Figma axis variants document anatomy and default dimensions.",
   "variants": {
     "axis": {
-      "vertical": "",
-      "horizontal": ""
+      "vertical": "Scrolls along the block axis.",
+      "horizontal": "Scrolls along the inline axis."
     }
   },
   "states": {
@@ -13,7 +13,9 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Leave a visible cue that there is more to see.",
+    "Keep native keyboard and wheel scrolling working."
   ],
   "tokensUsed": [
     "border",
@@ -26,9 +28,33 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Confine overflow to one region so the page itself does not scroll."
+  ],
+  "whenNotToUse": [
+    "The main page scroll — leave that to the browser.",
+    "Hiding content the reader is unlikely to look for."
+  ],
+  "donts": [
+    "Do not nest scroll areas along the same axis.",
+    "Do not hide the scrollbar so thoroughly that the overflow is invisible."
+  ],
+  "accessibility": {
+    "keyboard": [
+      "The region is focusable so it can be scrolled by keyboard."
+    ],
+    "notes": [
+      "A scrollable region needs a tabindex and an accessible name.",
+      "Do not suppress the native scrollbar on platforms that always show one."
+    ]
   }
 }

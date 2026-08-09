@@ -4,8 +4,8 @@
   "description": "Visual trigger patterns for the Dropdown Menu root. Covers button and avatar triggers plus closed, open, focused, and disabled states where applicable. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.\n\nAccessibility contract: avatar-only menu triggers require a programmatic accessible name that communicates the menu action. Decorative trigger icons/avatars must not become the accessible name by themselves.",
   "variants": {
     "type": {
-      "button": "",
-      "avatar": ""
+      "button": "A conventional button triggers it.",
+      "avatar": "Avatar shape — a circular image, or initials when no image is available."
     }
   },
   "states": {
@@ -19,11 +19,13 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Compose it through the parent rather than reaching for it directly."
   ],
   "donts": [
     "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
-    "Do not remove the ring border on focus. It is the only focus affordance."
+    "Do not remove the ring border on focus. It is the only focus affordance.",
+    "Do not re-implement the parent's keyboard or focus behaviour on the part."
   ],
   "accessibility": {
     "notes": [
@@ -47,11 +49,20 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "donts": "imported",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
     "accessibility": "imported",
-    "tokensUsed": "imported"
-  }
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice"
+  },
+  "whenToUse": [
+    "Only inside its parent component's composition — this is a part, not a standalone component."
+  ],
+  "whenNotToUse": [
+    "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+    "As a general-purpose layout or text primitive."
+  ]
 }

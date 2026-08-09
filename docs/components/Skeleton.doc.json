@@ -4,10 +4,10 @@
   "description": "Loading placeholders for text, avatar rows, cards, and table rows. Dimensions are intentionally fixed to reserve layout space and prevent content shift.",
   "variants": {
     "type": {
-      "text": "",
-      "avatar": "",
-      "card": "",
-      "tableRow": ""
+      "text": "Placeholder for a line or block of text.",
+      "avatar": "Avatar shape — a circular image, or initials when no image is available.",
+      "card": "Placeholder shaped like a card.",
+      "tableRow": "Placeholder shaped like a table row."
     }
   },
   "states": {
@@ -15,14 +15,38 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Match the real content's dimensions closely.",
+    "Show a small representative number of placeholders, not a full page of them."
   ],
   "status": "draft",
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported"
+    "dos": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Hold the shape of content that is loading, so the layout does not jump when it arrives."
+  ],
+  "whenNotToUse": [
+    "Waits short enough that it flashes.",
+    "Work with a known duration or total — use Progress.",
+    "An error or an empty result — those need their own states."
+  ],
+  "donts": [
+    "Do not leave skeletons up indefinitely when a request fails.",
+    "Do not animate so strongly that the page appears to be moving."
+  ],
+  "accessibility": {
+    "notes": [
+      "Hidden from assistive technology with aria-hidden=\"true\"; announce loading once, in a live region.",
+      "Respects prefers-reduced-motion by dropping the shimmer."
+    ]
   }
 }

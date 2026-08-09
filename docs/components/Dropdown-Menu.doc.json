@@ -17,7 +17,10 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Group related items and separate the groups.",
+    "Put destructive items last and mark them.",
+    "Show shortcuts alongside the items that have them."
   ],
   "tokensUsed": [
     "border",
@@ -32,7 +35,34 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Offer a list of actions from a trigger, when showing them all would crowd the view."
+  ],
+  "whenNotToUse": [
+    "Choosing a form value — use a Select; a menu fires actions, it does not hold state.",
+    "Primary navigation — use a navigation menu."
+  ],
+  "donts": [
+    "Do not nest submenus more than one level deep.",
+    "Do not hide the only route to a critical action inside a menu."
+  ],
+  "accessibility": {
+    "role": "menu",
+    "keyboard": [
+      "Arrow keys move between items, Enter activates.",
+      "Escape closes and returns focus to the trigger.",
+      "Typing a letter jumps to the next item starting with it."
+    ],
+    "notes": [
+      "The trigger carries aria-haspopup and aria-expanded.",
+      "Focus moves into the menu on open and back to the trigger on close."
+    ]
   }
 }

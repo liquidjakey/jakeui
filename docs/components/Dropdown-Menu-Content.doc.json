@@ -15,8 +15,8 @@
       "end": "Aligns to the trigger's end edge."
     },
     "arrow": {
-      "false": "",
-      "true": ""
+      "false": "No pointer — the surface floats free of its trigger.",
+      "true": "Shows a pointer aimed at the trigger."
     }
   },
   "states": {
@@ -24,7 +24,8 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Compose it through the parent rather than reaching for it directly."
   ],
   "tokensUsed": [
     "popover-foreground",
@@ -36,7 +37,20 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
-  }
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice"
+  },
+  "whenToUse": [
+    "Only inside its parent component's composition — this is a part, not a standalone component."
+  ],
+  "whenNotToUse": [
+    "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+    "As a general-purpose layout or text primitive."
+  ],
+  "donts": [
+    "Do not re-implement the parent's keyboard or focus behaviour on the part."
+  ]
 }

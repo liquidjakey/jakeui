@@ -82,7 +82,7 @@
       "Accordion": {
         "doc": {
           "path": "docs/components/Accordion.doc.json",
-          "fingerprint": "07cd5431c6e43415",
+          "fingerprint": "27e5f9bef095c020",
           "surfaces": {
             "figmaDescription": {
               "src": "07cd5431c6e43415",
@@ -97,7 +97,7 @@
       "Alert": {
         "doc": {
           "path": "docs/components/Alert.doc.json",
-          "fingerprint": "ed414a88baefb901",
+          "fingerprint": "1b43de496d7ca8eb",
           "surfaces": {
             "figmaDescription": {
               "src": "76da86cc35ab49c4",
@@ -127,7 +127,7 @@
       "Avatar": {
         "doc": {
           "path": "docs/components/Avatar.doc.json",
-          "fingerprint": "084005172b71856a",
+          "fingerprint": "de74420e4144995d",
           "surfaces": {
             "figmaDescription": {
               "src": "46553972ead2d87d",
@@ -157,7 +157,7 @@
       "Breadcrumb": {
         "doc": {
           "path": "docs/components/Breadcrumb.doc.json",
-          "fingerprint": "0a5ce504c04d54ba",
+          "fingerprint": "2561d5de320681bf",
           "surfaces": {
             "figmaDescription": {
               "src": "0a5ce504c04d54ba",
@@ -187,7 +187,7 @@
       "Button Group": {
         "doc": {
           "path": "docs/components/Button-Group.doc.json",
-          "fingerprint": "4ca12e3bcd866fdc",
+          "fingerprint": "51b568c256a6ceeb",
           "surfaces": {
             "figmaDescription": {
               "src": "50a63dc389ca2c3d",
@@ -202,7 +202,7 @@
       "Calendar": {
         "doc": {
           "path": "docs/components/Calendar.doc.json",
-          "fingerprint": "ed271d9472925285",
+          "fingerprint": "b887d30e3117d857",
           "surfaces": {
             "figmaDescription": {
               "src": "0b8ecd3aa017bf19",
@@ -232,7 +232,7 @@
       "Chart": {
         "doc": {
           "path": "docs/components/Chart.doc.json",
-          "fingerprint": "60a16c7b14bcb5e5",
+          "fingerprint": "03fe602a001fd013",
           "surfaces": {
             "figmaDescription": {
               "src": "4af63fc77c35ce84",
@@ -262,7 +262,7 @@
       "Collapsible": {
         "doc": {
           "path": "docs/components/Collapsible.doc.json",
-          "fingerprint": "2ebcc305068dc984",
+          "fingerprint": "69c1c284a7873521",
           "surfaces": {
             "figmaDescription": {
               "src": "2ebcc305068dc984",
@@ -277,7 +277,7 @@
       "Command": {
         "doc": {
           "path": "docs/components/Command.doc.json",
-          "fingerprint": "ca4707ccd4bf32f5",
+          "fingerprint": "b5005f12ae3fe0ff",
           "surfaces": {
             "figmaDescription": {
               "src": "ca4707ccd4bf32f5",
@@ -292,7 +292,7 @@
       "Command Panel": {
         "doc": {
           "path": "docs/components/Command-Panel.doc.json",
-          "fingerprint": "d10ca0fb5e0922ca",
+          "fingerprint": "f87e2f9f96161d11",
           "surfaces": {
             "figmaDescription": {
               "src": "d10ca0fb5e0922ca",
@@ -307,7 +307,7 @@
       "Data Table": {
         "doc": {
           "path": "docs/components/Data-Table.doc.json",
-          "fingerprint": "23167dae8852b907",
+          "fingerprint": "8748b58f5163d494",
           "surfaces": {
             "figmaDescription": {
               "src": "3ee1574e876a4639",
@@ -322,7 +322,7 @@
       "Date Picker": {
         "doc": {
           "path": "docs/components/Date-Picker.doc.json",
-          "fingerprint": "316c9879cf57f7bf",
+          "fingerprint": "0dd37c22e3f55b6c",
           "surfaces": {
             "figmaDescription": {
               "src": "4e715b49ad129173",
@@ -367,7 +367,7 @@
       "Dropdown Menu": {
         "doc": {
           "path": "docs/components/Dropdown-Menu.doc.json",
-          "fingerprint": "650f6fffa37a5444",
+          "fingerprint": "a5dfc25c03c1ddfa",
           "surfaces": {
             "figmaDescription": {
               "src": "aa05884cacce5ec7",
@@ -382,7 +382,7 @@
       "Dropdown Menu / Checkbox Item": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Checkbox-Item.doc.json",
-          "fingerprint": "b8d0a4ee2868e274",
+          "fingerprint": "5ea3a8310faf4b73",
           "surfaces": {
             "figmaDescription": {
               "src": "3a1aff206fb316a2",
@@ -397,7 +397,7 @@
       "Dropdown Menu / Content": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Content.doc.json",
-          "fingerprint": "ef8bc6cb467d2642",
+          "fingerprint": "c628300ef0b5af13",
           "surfaces": {
             "figmaDescription": {
               "src": "ac128105002b0057",
@@ -412,7 +412,7 @@
       "Dropdown Menu / Group": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Group.doc.json",
-          "fingerprint": "e0e6a55dae667040",
+          "fingerprint": "ceb0e4a942eb8912",
           "surfaces": {
             "figmaDescription": {
               "src": "e0e6a55dae667040",
@@ -427,7 +427,7 @@
       "Dropdown Menu / Item": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Item.doc.json",
-          "fingerprint": "4c705648eecfd6a7",
+          "fingerprint": "1acf05885a1b1a9c",
           "surfaces": {
             "figmaDescription": {
               "src": "47dbafef514aa3a3",
@@ -442,7 +442,7 @@
       "Dropdown Menu / Label": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Label.doc.json",
-          "fingerprint": "7f96fbc7beb86287",
+          "fingerprint": "0ec8046e924f7155",
           "surfaces": {
             "figmaDescription": {
               "src": "7f96fbc7beb86287",
@@ -457,7 +457,7 @@
       "Dropdown Menu / Radio Group": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Radio-Group.doc.json",
-          "fingerprint": "76d83f0bdbe6071b",
+          "fingerprint": "e6901caba4c8ad87",
           "surfaces": {
             "figmaDescription": {
               "src": "76d83f0bdbe6071b",
@@ -472,7 +472,7 @@
       "Dropdown Menu / Radio Item": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Radio-Item.doc.json",
-          "fingerprint": "a18512acb77a7b43",
+          "fingerprint": "56ffd426d8d2ab85",
           "surfaces": {
             "figmaDescription": {
               "src": "3a74f3e310f7aa01",
@@ -487,7 +487,7 @@
       "Dropdown Menu / Root Composition": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Root-Composition.doc.json",
-          "fingerprint": "d6a866d412cbefb8",
+          "fingerprint": "2c1ee79d8053f7d8",
           "surfaces": {
             "figmaDescription": {
               "src": "d6a866d412cbefb8",
@@ -502,7 +502,7 @@
       "Dropdown Menu / Separator": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Separator.doc.json",
-          "fingerprint": "5f0128077732ec5f",
+          "fingerprint": "fcdd6ed41eb63200",
           "surfaces": {
             "figmaDescription": {
               "src": "5f0128077732ec5f",
@@ -517,7 +517,7 @@
       "Dropdown Menu / Shortcut": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Shortcut.doc.json",
-          "fingerprint": "53639eda45a2b486",
+          "fingerprint": "2fea49bb46869fe1",
           "surfaces": {
             "figmaDescription": {
               "src": "53639eda45a2b486",
@@ -532,7 +532,7 @@
       "Dropdown Menu / Sub Content": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Sub-Content.doc.json",
-          "fingerprint": "1a0c2ae558ce1564",
+          "fingerprint": "1b12de6f2056baa7",
           "surfaces": {
             "figmaDescription": {
               "src": "4829791946c92a47",
@@ -547,7 +547,7 @@
       "Dropdown Menu / Sub Trigger": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Sub-Trigger.doc.json",
-          "fingerprint": "3000d7e5a566a847",
+          "fingerprint": "7b002d6bf83ff4e3",
           "surfaces": {
             "figmaDescription": {
               "src": "3000d7e5a566a847",
@@ -562,7 +562,7 @@
       "Dropdown Menu / Trigger": {
         "doc": {
           "path": "docs/components/Dropdown-Menu-Trigger.doc.json",
-          "fingerprint": "9e163642a5e6b483",
+          "fingerprint": "dce091d64321771b",
           "surfaces": {
             "figmaDescription": {
               "src": "9e163642a5e6b483",
@@ -592,7 +592,7 @@
       "Hover Card": {
         "doc": {
           "path": "docs/components/Hover-Card.doc.json",
-          "fingerprint": "506fb4f07842e5e4",
+          "fingerprint": "deb42fdd764e3b83",
           "surfaces": {
             "figmaDescription": {
               "src": "d30d1af9cfcb2f5b",
@@ -607,7 +607,7 @@
       "Icon": {
         "doc": {
           "path": "docs/components/Icon.doc.json",
-          "fingerprint": "2cd75e24451d6944",
+          "fingerprint": "2f56fa8553dd0a3c",
           "surfaces": {
             "figmaDescription": {
               "src": "2cd75e24451d6944",
@@ -622,7 +622,7 @@
       "Label": {
         "doc": {
           "path": "docs/components/Label.doc.json",
-          "fingerprint": "b29a26aa771ce8c7",
+          "fingerprint": "112008cf361610b3",
           "surfaces": {
             "figmaDescription": {
               "src": "90c12b3620c52c91",
@@ -652,7 +652,7 @@
       "Navigation Menu": {
         "doc": {
           "path": "docs/components/Navigation-Menu.doc.json",
-          "fingerprint": "825f5301138cd976",
+          "fingerprint": "2db4cc8a6b6dd75f",
           "surfaces": {
             "figmaDescription": {
               "src": "825f5301138cd976",
@@ -667,7 +667,7 @@
       "Pagination": {
         "doc": {
           "path": "docs/components/Pagination.doc.json",
-          "fingerprint": "c5a1c6598c066684",
+          "fingerprint": "21cefdc646f27477",
           "surfaces": {
             "figmaDescription": {
               "src": "8f36ca7e1ce309d0",
@@ -682,7 +682,7 @@
       "Popover": {
         "doc": {
           "path": "docs/components/Popover.doc.json",
-          "fingerprint": "a151efad94f64ed1",
+          "fingerprint": "ed0ec8605a36861e",
           "surfaces": {
             "figmaDescription": {
               "src": "08a3307635c300e3",
@@ -697,7 +697,7 @@
       "Popover / Arrow": {
         "doc": {
           "path": "docs/components/Popover-Arrow.doc.json",
-          "fingerprint": "860e05913ae3b071",
+          "fingerprint": "16ff0fd4d1a115d5",
           "surfaces": {
             "figmaDescription": {
               "src": "f985bf5cc4a10141",
@@ -712,7 +712,7 @@
       "Popover / Backdrop": {
         "doc": {
           "path": "docs/components/Popover-Backdrop.doc.json",
-          "fingerprint": "5fd2238afd637f42",
+          "fingerprint": "78fe56e707937305",
           "surfaces": {
             "figmaDescription": {
               "src": "5fd2238afd637f42",
@@ -727,7 +727,7 @@
       "Popover / Close": {
         "doc": {
           "path": "docs/components/Popover-Close.doc.json",
-          "fingerprint": "426521796f6bd687",
+          "fingerprint": "ed78328b621eb8cd",
           "surfaces": {
             "figmaDescription": {
               "src": "426521796f6bd687",
@@ -742,7 +742,7 @@
       "Popover / Content": {
         "doc": {
           "path": "docs/components/Popover-Content.doc.json",
-          "fingerprint": "fef340aa8a4673c1",
+          "fingerprint": "b2d73aefb9a46e6a",
           "surfaces": {
             "figmaDescription": {
               "src": "3a0122757d23209f",
@@ -757,7 +757,7 @@
       "Popover / Form Content": {
         "doc": {
           "path": "docs/components/Popover-Form-Content.doc.json",
-          "fingerprint": "098e70d278a10050",
+          "fingerprint": "3e9caf16de92bdb1",
           "surfaces": {
             "figmaDescription": {
               "src": "098e70d278a10050",
@@ -772,7 +772,7 @@
       "Popover / Header": {
         "doc": {
           "path": "docs/components/Popover-Header.doc.json",
-          "fingerprint": "57369100f883ec80",
+          "fingerprint": "3afb0cf3fd62b9f5",
           "surfaces": {
             "figmaDescription": {
               "src": "57369100f883ec80",
@@ -787,7 +787,7 @@
       "Popover / Root Composition": {
         "doc": {
           "path": "docs/components/Popover-Root-Composition.doc.json",
-          "fingerprint": "d4da77934d9e2527",
+          "fingerprint": "b36fe8118259ccb6",
           "surfaces": {
             "figmaDescription": {
               "src": "d4da77934d9e2527",
@@ -802,7 +802,7 @@
       "Popover / RTL Content": {
         "doc": {
           "path": "docs/components/Popover-RTL-Content.doc.json",
-          "fingerprint": "2964a3754defb082",
+          "fingerprint": "757692246e388ac3",
           "surfaces": {
             "figmaDescription": {
               "src": "2964a3754defb082",
@@ -817,7 +817,7 @@
       "Popover / Trigger": {
         "doc": {
           "path": "docs/components/Popover-Trigger.doc.json",
-          "fingerprint": "5d2e08da34bf0718",
+          "fingerprint": "1d7712eea6d8958e",
           "surfaces": {
             "figmaDescription": {
               "src": "5d2e08da34bf0718",
@@ -832,7 +832,7 @@
       "Popover / Viewport": {
         "doc": {
           "path": "docs/components/Popover-Viewport.doc.json",
-          "fingerprint": "dcb106ae899a1e5b",
+          "fingerprint": "83ea4c2e789e5982",
           "surfaces": {
             "figmaDescription": {
               "src": "dcb106ae899a1e5b",
@@ -847,7 +847,7 @@
       "Progress": {
         "doc": {
           "path": "docs/components/Progress.doc.json",
-          "fingerprint": "cab249f5c37e56f6",
+          "fingerprint": "8883a9d3ed6ec7ca",
           "surfaces": {
             "figmaDescription": {
               "src": "cab249f5c37e56f6",
@@ -862,7 +862,7 @@
       "Radio Group": {
         "doc": {
           "path": "docs/components/Radio-Group.doc.json",
-          "fingerprint": "567b9fdbe3063c91",
+          "fingerprint": "0d1ef5099793be35",
           "surfaces": {
             "figmaDescription": {
               "src": "b58f523b184d581e",
@@ -892,7 +892,7 @@
       "Radio Group / Indicator": {
         "doc": {
           "path": "docs/components/Radio-Group-Indicator.doc.json",
-          "fingerprint": "d56f2d23552b3fcf",
+          "fingerprint": "763397f1c47c1bf3",
           "surfaces": {
             "figmaDescription": {
               "src": "6a58cfd18ac18670",
@@ -922,7 +922,7 @@
       "Radio Group / Root": {
         "doc": {
           "path": "docs/components/Radio-Group-Root.doc.json",
-          "fingerprint": "8f2b507cbc129484",
+          "fingerprint": "6d7dbd6b3589a7cf",
           "surfaces": {
             "figmaDescription": {
               "src": "b05bf4a6b1ca97df",
@@ -937,7 +937,7 @@
       "Scroll Area": {
         "doc": {
           "path": "docs/components/Scroll-Area.doc.json",
-          "fingerprint": "1b51b3cf949ad08b",
+          "fingerprint": "71a3c9b392c55e7d",
           "surfaces": {
             "figmaDescription": {
               "src": "1b51b3cf949ad08b",
@@ -952,7 +952,7 @@
       "Segmented Tab": {
         "doc": {
           "path": "docs/components/Segmented-Tab.doc.json",
-          "fingerprint": "0df17400dc598663",
+          "fingerprint": "32ae8b6acdae4851",
           "surfaces": {
             "figmaDescription": {
               "src": "0df17400dc598663",
@@ -967,7 +967,7 @@
       "Separator": {
         "doc": {
           "path": "docs/components/Separator.doc.json",
-          "fingerprint": "53f7b8f62699fcc0",
+          "fingerprint": "692f0a3b0a0a6bf9",
           "surfaces": {
             "figmaDescription": {
               "src": "1c3edcb7737544ee",
@@ -997,7 +997,7 @@
       "Sidebar": {
         "doc": {
           "path": "docs/components/Sidebar.doc.json",
-          "fingerprint": "05c7760825c38979",
+          "fingerprint": "2cd12d983a280e2a",
           "surfaces": {
             "figmaDescription": {
               "src": "05c7760825c38979",
@@ -1012,7 +1012,7 @@
       "Sidebar Navigation Item": {
         "doc": {
           "path": "docs/components/Sidebar-Navigation-Item.doc.json",
-          "fingerprint": "885c4ef7f08f23af",
+          "fingerprint": "85ea11a92de60dd1",
           "surfaces": {
             "figmaDescription": {
               "src": "5fb522d8a772b9ce",
@@ -1027,7 +1027,7 @@
       "Skeleton": {
         "doc": {
           "path": "docs/components/Skeleton.doc.json",
-          "fingerprint": "b50699a07aaec9d0",
+          "fingerprint": "459d0f3d0aafe9f1",
           "surfaces": {
             "figmaDescription": {
               "src": "b50699a07aaec9d0",
@@ -1042,7 +1042,7 @@
       "Slider": {
         "doc": {
           "path": "docs/components/Slider.doc.json",
-          "fingerprint": "7fc42199fc479671",
+          "fingerprint": "4db79ef07e13786e",
           "surfaces": {
             "figmaDescription": {
               "src": "7fc42199fc479671",
@@ -1087,7 +1087,7 @@
       "Switch / Root": {
         "doc": {
           "path": "docs/components/Switch-Root.doc.json",
-          "fingerprint": "1463c44c74fa0e88",
+          "fingerprint": "57fadd00505db0c7",
           "surfaces": {
             "figmaDescription": {
               "src": "d00e88ecd3b6d286",
@@ -1102,7 +1102,7 @@
       "Switch / Thumb": {
         "doc": {
           "path": "docs/components/Switch-Thumb.doc.json",
-          "fingerprint": "8839b7facf9f9bc8",
+          "fingerprint": "7fed335ad99b7195",
           "surfaces": {
             "figmaDescription": {
               "src": "a497564c26713c05",
@@ -1117,7 +1117,7 @@
       "Table": {
         "doc": {
           "path": "docs/components/Table.doc.json",
-          "fingerprint": "67ef76ce48707fff",
+          "fingerprint": "2400dab75f4b1107",
           "surfaces": {
             "figmaDescription": {
               "src": "e50139f9d92278d0",
@@ -1132,7 +1132,7 @@
       "Table / Action Trigger": {
         "doc": {
           "path": "docs/components/Table-Action-Trigger.doc.json",
-          "fingerprint": "523ee0949e226990",
+          "fingerprint": "c6eaaf8ceb5ed63e",
           "surfaces": {
             "figmaDescription": {
               "src": "523ee0949e226990",
@@ -1147,7 +1147,7 @@
       "Table / Body": {
         "doc": {
           "path": "docs/components/Table-Body.doc.json",
-          "fingerprint": "c1c350933c9fcee4",
+          "fingerprint": "0f21d2d22e23cc77",
           "surfaces": {
             "figmaDescription": {
               "src": "c1c350933c9fcee4",
@@ -1162,7 +1162,7 @@
       "Table / Caption": {
         "doc": {
           "path": "docs/components/Table-Caption.doc.json",
-          "fingerprint": "0fce061a561961d0",
+          "fingerprint": "fae422beefc8cadf",
           "surfaces": {
             "figmaDescription": {
               "src": "0fce061a561961d0",
@@ -1177,7 +1177,7 @@
       "Table / Cell": {
         "doc": {
           "path": "docs/components/Table-Cell.doc.json",
-          "fingerprint": "11f8f26c97a6c467",
+          "fingerprint": "291eea1e85136692",
           "surfaces": {
             "figmaDescription": {
               "src": "11f8f26c97a6c467",
@@ -1192,7 +1192,7 @@
       "Table / Container": {
         "doc": {
           "path": "docs/components/Table-Container.doc.json",
-          "fingerprint": "c303b7583edc240b",
+          "fingerprint": "155a3349d0016a28",
           "surfaces": {
             "figmaDescription": {
               "src": "c303b7583edc240b",
@@ -1207,7 +1207,7 @@
       "Table / Footer": {
         "doc": {
           "path": "docs/components/Table-Footer.doc.json",
-          "fingerprint": "d51b2461aa40f7a2",
+          "fingerprint": "00905242925bb272",
           "surfaces": {
             "figmaDescription": {
               "src": "d51b2461aa40f7a2",
@@ -1222,7 +1222,7 @@
       "Table / Head": {
         "doc": {
           "path": "docs/components/Table-Head.doc.json",
-          "fingerprint": "e273bdb28c89623c",
+          "fingerprint": "56f58dc201dc11b3",
           "surfaces": {
             "figmaDescription": {
               "src": "e273bdb28c89623c",
@@ -1237,7 +1237,7 @@
       "Table / Header": {
         "doc": {
           "path": "docs/components/Table-Header.doc.json",
-          "fingerprint": "edcc9f4c27fa2316",
+          "fingerprint": "13ab0da9a4296e66",
           "surfaces": {
             "figmaDescription": {
               "src": "edcc9f4c27fa2316",
@@ -1252,7 +1252,7 @@
       "Table / Root Composition": {
         "doc": {
           "path": "docs/components/Table-Root-Composition.doc.json",
-          "fingerprint": "3efdf2ea191b60dc",
+          "fingerprint": "761baaa3dcd61027",
           "surfaces": {
             "figmaDescription": {
               "src": "3efdf2ea191b60dc",
@@ -1267,7 +1267,7 @@
       "Table / Row": {
         "doc": {
           "path": "docs/components/Table-Row.doc.json",
-          "fingerprint": "5c64312cd8eaf10b",
+          "fingerprint": "9519aec3f63e5ac4",
           "surfaces": {
             "figmaDescription": {
               "src": "ba666e85a0c737e1",
@@ -1282,7 +1282,7 @@
       "Tabs": {
         "doc": {
           "path": "docs/components/Tabs.doc.json",
-          "fingerprint": "b36246c0029c440d",
+          "fingerprint": "02eb4eaa12d379f8",
           "surfaces": {
             "figmaDescription": {
               "src": "2975d9f3dc2be42c",
@@ -1312,7 +1312,7 @@
       "Toggle": {
         "doc": {
           "path": "docs/components/Toggle.doc.json",
-          "fingerprint": "7688d749d59b616a",
+          "fingerprint": "e7a891cf665cb663",
           "surfaces": {
             "figmaDescription": {
               "src": "730a8b53fdc22b3c",
@@ -1327,7 +1327,7 @@
       "Toggle Group": {
         "doc": {
           "path": "docs/components/Toggle-Group.doc.json",
-          "fingerprint": "561f34b8578477ce",
+          "fingerprint": "74d51f5f083e3d4a",
           "surfaces": {
             "figmaDescription": {
               "src": "2f5c902ff9899244",
@@ -1342,7 +1342,7 @@
       "Tooltip": {
         "doc": {
           "path": "docs/components/Tooltip.doc.json",
-          "fingerprint": "91a04caa95840f0b",
+          "fingerprint": "9290eafaeccdbd66",
           "surfaces": {
             "figmaDescription": {
               "src": "dfaaa1edfaa74f58",
@@ -1463,7 +1463,7 @@
     "_phase4Declined": "token-sync-layer NOT adopted; export-tokens.mjs kept. It already satisfies 4 of the skill's hard rules (float32 rounding at the export boundary, semantic->primitive var() references preserved, --check gate against hand-edits, committed diffable dump), and adopting Phase 4 would require converting to a monorepo for packages/tokens while NOT removing the query-in-Figma step, since that exists because the Variables REST API is Enterprise-only on this plan. Ported the opacity rule immediately (it exposed a live 120-binding bug). Deferred: rename detection (revisit before scaling component count), channel-alpha (when a consumer exists), multi-platform adapters (when a non-web target is real). Full reasoning in docs/design-system/decisions/2026-08-09-phase-4-sync-declined.md.",
     "_phase5and6Skipped": "baseline (5) blocked: no Storybook/Chromatic, and storybook-chromatic-builder requires a monorepo + packages/tokens. code (6) is N/A as a retrofit: no consuming application, scssColorVars/tailwindColorClasses/jsColorsUsages all 0, so there is nothing to swap and no consumer to keep working. Next actionable phase is 6.5 (docs).",
     "_phase5Note": "baseline (Chromatic) still not captured and deliberately so. Storybook WAS set up, but for its own reasons rather than phase 5: globals.css had never been compiled (307 declarations, no Tailwind installed) and no component had ever been rendered. Phase 5 exists to protect a code retrofit that is N/A here.",
-    "_docsProgress": "COMPLETE for parts 1-3. 86/86 adopted into docs/components/<Name>.doc.json (provenance: imported), 48 enriched from docs/archetypes.json, 124 variant meanings filled, docs/DIGEST.md generated (3215 lines). Every description verified byte-for-byte against live Figma via docs:verify (FNV-1a over UTF-16 code units, because the Figma sandbox has no TextEncoder/crypto.subtle). 105 blocks flagged as owed to human review rather than invented. Layer 4 (interview for brand-specific intent) deliberately NOT done - it cannot be inferred. Fingerprint markers deliberately NOT appended to Figma descriptions: it would invalidate the byte-verified dump, and docs:verify already does that job with more information. Full reasoning: docs/design-system/decisions/2026-08-09-docs-phase-adoption.md"
+    "_docsProgress": "COMPLETE for parts 1-3. 86/86 adopted into docs/components/<Name>.doc.json (provenance: imported), then enriched from docs/archetypes.json in two passes: 48 records / 124 variant meanings on 9 Aug, then a second pass the same day that grew the knowledge base from 6 archetypes / 13 vocabulary axes to 31 / 26 and enriched a further 70 records / 89 variant meanings. docs/DIGEST.md regenerated (4167 lines, was 3215). Every description verified byte-for-byte against live Figma via docs:verify (FNV-1a over UTF-16 code units, because the Figma sandbox has no TextEncoder/crypto.subtle). The 105 blocks first flagged as owed to human review are now 1: the only one left is Popover / Viewport (state.current, state.previous, direction.*), left open deliberately because those describe a bespoke transition mechanism and a guessed meaning would be worse than a visible gap - see docs/design-system/decisions/2026-08-09-doc-gaps-closed-via-archetypes.md. Layer 4 (interview for brand-specific intent) deliberately NOT done - it cannot be inferred, and nothing added by enrichment is stamped provenance 'user'. Fingerprint markers deliberately NOT appended to Figma descriptions: it would invalidate the byte-verified dump, and docs:verify already does that job with more information. Full reasoning: docs/design-system/decisions/2026-08-09-docs-phase-adoption.md"
   },
   "completedSkills": [
     "figma-environment-setup",

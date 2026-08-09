@@ -22,7 +22,9 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Fall back to initials, then to a generic placeholder, when no image loads.",
+    "Keep the shape consistent across the product."
   ],
   "tokensUsed": [
     "primary",
@@ -40,7 +42,26 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Represent a person, account, or organisation compactly."
+  ],
+  "whenNotToUse": [
+    "Decorative imagery, or a general-purpose image container."
+  ],
+  "donts": [
+    "Do not put meaning in the avatar alone — pair it with a name where identity matters."
+  ],
+  "accessibility": {
+    "notes": [
+      "A decorative avatar beside a visible name is alt=\"\"; a standalone one needs the name as its accessible name.",
+      "A status dot needs a text equivalent, not colour alone."
+    ]
   }
 }

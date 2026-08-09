@@ -8,9 +8,9 @@
       "horizontal": "Lays out along the inline axis."
     },
     "selection": {
-      "first": "",
-      "second": "",
-      "none": ""
+      "first": "The first option in the group is selected.",
+      "second": "The second option in the group is selected.",
+      "none": "Nothing is currently selected."
     }
   },
   "states": {

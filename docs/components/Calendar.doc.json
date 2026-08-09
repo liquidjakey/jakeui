@@ -17,11 +17,20 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Allow typing the date as well as picking it.",
+    "State the expected format next to the field.",
+    "Disable out-of-range dates rather than rejecting them after submit."
   ],
   "accessibility": {
     "notes": [
-      "month navigation controls require programmatic names such as Previous month and Next month; selected/today/range states require programmatic equivalents and must not rely on color alone."
+      "month navigation controls require programmatic names such as Previous month and Next month; selected/today/range states require programmatic equivalents and must not rely on color alone.",
+      "The grid is a table with aria-selected on the chosen day.",
+      "Announce the focused date in full, not just the day number."
+    ],
+    "keyboard": [
+      "Arrow keys move by day, PageUp and PageDown by month.",
+      "Escape closes the calendar and returns focus to the field."
     ]
   },
   "tokensUsed": [
@@ -37,8 +46,22 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "accessibility": "imported",
-    "tokensUsed": "imported"
-  }
+    "dos": "imported+best-practice",
+    "accessibility": "imported+w3c-apg",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice"
+  },
+  "whenToUse": [
+    "Pick a date, or a start and end pair, where the calendar context matters."
+  ],
+  "whenNotToUse": [
+    "A date the user knows by heart, such as a birthdate — a plain text field is faster.",
+    "Coarse periods like a month or quarter — offer a Select."
+  ],
+  "donts": [
+    "Do not force calendar navigation for dates far from today.",
+    "Do not assume a locale's week start or date order."
+  ]
 }

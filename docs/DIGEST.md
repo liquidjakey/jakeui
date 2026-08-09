@@ -10,7 +10,7 @@ accessibility contract, and the tokens it consumes.
 
 **86 component(s) documented.**
 
-⚠️ **70 record(s) carry blocks still owed to human review** — a missing
+⚠️ **1 record(s) carry blocks still owed to human review** — a missing
 `When to use`, or a variant meaning marked _needs review_. Those gaps are
 deliberate: they cannot be inferred from Figma or from an archetype, and
 inventing them would be worse than leaving them visible.
@@ -115,14 +115,21 @@ Disclosure component for vertically stacked question-and-answer or settings sect
 
 Interaction contract: open/closed and disabled are persistent disclosure states. Hover, pressed, and focus-visible belong to the disclosure trigger at runtime and are not separate root variants.
 
+**When to use**
+- Let the reader collapse secondary content so the page stays scannable.
+
+**When not to use**
+- Content the reader almost always needs — show it instead of hiding it.
+- Switching between peer views — use Tabs.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `state` | `closed` | _needs review_ |
-| `state` | `open` | _needs review_ |
-| `disabled` | `false` | _needs review_ |
-| `disabled` | `true` | _needs review_ |
+| `state` | `closed` | Collapsed — the content is hidden. |
+| `state` | `open` | Expanded — the content is revealed. |
+| `disabled` | `false` | Available and interactive. |
+| `disabled` | `true` | Not available; not focusable and does not respond to input. |
 
 **State → tokens**
 
@@ -135,10 +142,22 @@ Interaction contract: open/closed and disabled are persistent disclosure states.
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Make the trigger the whole header row, not just the chevron.
+- Write triggers that say what is inside.
+
+**Do not**
+- Do not hide validation errors or required form fields behind a collapsed section.
+- Do not animate so slowly that opening feels unresponsive.
+
+**Accessibility**
+- Keyboard: Enter and Space toggle the section.
+- Keyboard: Tab moves between triggers.
+- The trigger is a button carrying aria-expanded and aria-controls.
+- The panel stays in the accessibility tree only while open.
 
 **Tokens used** — `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/lg` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `07cd5431c6e43415` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `27e5f9bef095c020` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -147,6 +166,13 @@ Interaction contract: open/closed and disabled are persistent disclosure states.
 **Inline feedback message for informational, successful, warning, and destructive states.**
 
 Inline feedback message for informational, successful, warning, and destructive states. Use semantic feedback variables; reserve destructive tone for errors that block progress. Sizing policy: fixed/default width with Hug Contents height.
+
+**When to use**
+- Deliver an in-page message about the state of the view or a task.
+
+**When not to use**
+- A decision that must block the flow — use a Dialog.
+- Transient confirmation of a completed action — use a toast.
 
 **Variants**
 
@@ -169,10 +195,21 @@ Inline feedback message for informational, successful, warning, and destructive 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Say what happened and what to do next.
+- Place it next to what it refers to.
+
+**Do not**
+- Do not stack several alerts competing for attention.
+- Do not signal severity with colour alone — pair it with an icon and text.
+
+**Accessibility**
+- Role: `alert`
+- Only an urgent, interrupting message should use role="alert"; a static one uses role="status" or no live region at all.
+- A dismissible alert's close control needs an accessible name.
 
 **Tokens used** — `card` · `destructive` · `info` · `info-muted` · `radius/lg` · `size/14` · `success` · `success-muted` · `warning` · `warning-muted`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `ed414a88baefb901` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `1b43de496d7ca8eb` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -233,6 +270,12 @@ Compact identity representation using initials and optional presence status. Use
 
 Layout exception: Avatar status dots are intentionally absolute-positioned to the avatar edge. This anchored overlay is not a structural layout dependency.
 
+**When to use**
+- Represent a person, account, or organisation compactly.
+
+**When not to use**
+- Decorative imagery, or a general-purpose image container.
+
 **Variants**
 
 | Axis | Value | Meaning |
@@ -256,10 +299,19 @@ Layout exception: Avatar status dots are intentionally absolute-positioned to th
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Fall back to initials, then to a generic placeholder, when no image loads.
+- Keep the shape consistent across the product.
+
+**Do not**
+- Do not put meaning in the avatar alone — pair it with a name where identity matters.
+
+**Accessibility**
+- A decorative avatar beside a visible name is alt=""; a standalone one needs the name as its accessible name.
+- A status dot needs a text equivalent, not colour alone.
 
 **Tokens used** — `primary` · `primary-foreground` · `radius/16` · `radius/24` · `radius/32` · `size/11` · `size/14` · `size/18`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `084005172b71856a` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `de74420e4144995d` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -325,12 +377,19 @@ Compact status label. Tone communicates semantic state; size adapts to dense or 
 
 Hierarchical location trail. Use Collapsed=True when intermediate levels must be condensed at narrower widths. Sizing policy: Hug Contents width with fixed standard control height.
 
+**When to use**
+- Show where the current page sits in a hierarchy, and offer a way back up.
+
+**When not to use**
+- Flat sites with no hierarchy.
+- Step-by-step progress through a flow — use a stepper.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `collapsed` | `false` | _needs review_ |
-| `collapsed` | `true` | _needs review_ |
+| `collapsed` | `false` | Every item is shown in full. |
+| `collapsed` | `true` | Middle items are folded behind an overflow affordance. |
 
 **State → tokens**
 
@@ -341,10 +400,20 @@ Hierarchical location trail. Use Collapsed=True when intermediate levels must be
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Render the current page as plain text, not a link.
+- Collapse the middle rather than wrapping to a second line.
+
+**Do not**
+- Do not use it to record visit history — it reflects hierarchy, not the back button.
+
+**Accessibility**
+- Wrap in a nav with an accessible name such as "Breadcrumb".
+- Mark the current page with aria-current="page".
+- Separators are decorative and hidden from assistive technology.
 
 **Tokens used** — `border` · `card` · `muted-foreground` · `radius/lg` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `0a5ce504c04d54ba` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `2561d5de320681bf` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -432,8 +501,8 @@ Group related Jake UI actions using nested Button instances. Attached variants r
 |---|---|---|
 | `orientation` | `horizontal` | Lays out along the inline axis. |
 | `orientation` | `vertical` | Lays out along the block axis. |
-| `attached` | `false` | _needs review_ |
-| `attached` | `true` | _needs review_ |
+| `attached` | `false` | Members keep their own borders and are separated by a gap. |
+| `attached` | `true` | Members are joined into one continuous control, sharing inner borders. |
 
 **State → tokens**
 
@@ -461,7 +530,7 @@ Group related Jake UI actions using nested Button instances. Attached variants r
 
 **Tokens used** — `primary-foreground` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `4ca12e3bcd866fdc` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `51b568c256a6ceeb` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -474,6 +543,13 @@ Month calendar supporting single-date and date-range selection in compact and co
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
 
 Accessibility contract: month navigation controls require programmatic names such as Previous month and Next month; selected/today/range states require programmatic equivalents and must not rely on color alone.
+
+**When to use**
+- Pick a date, or a start and end pair, where the calendar context matters.
+
+**When not to use**
+- A date the user knows by heart, such as a birthdate — a plain text field is faster.
+- Coarse periods like a month or quarter — offer a Select.
 
 **Variants**
 
@@ -493,13 +569,24 @@ Accessibility contract: month navigation controls require programmatic names suc
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Allow typing the date as well as picking it.
+- State the expected format next to the field.
+- Disable out-of-range dates rather than rejecting them after submit.
+
+**Do not**
+- Do not force calendar navigation for dates far from today.
+- Do not assume a locale's week start or date order.
 
 **Accessibility**
+- Keyboard: Arrow keys move by day, PageUp and PageDown by month.
+- Keyboard: Escape closes the calendar and returns focus to the field.
 - month navigation controls require programmatic names such as Previous month and Next month; selected/today/range states require programmatic equivalents and must not rely on color alone.
+- The grid is a table with aria-selected on the chosen day.
+- Announce the focused date in full, not just the day number.
 
 **Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `ed271d9472925285` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `b887d30e3117d857` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -563,6 +650,13 @@ Token-bound chart container for compact documentation and dashboard examples. Us
 
 Layout exception: chart plot geometry is intentionally coordinate-based because bars and line points represent data positions. Surrounding chart content may use auto layout, but plot marks are excluded from structural auto-layout linting.
 
+**When to use**
+- Reveal a pattern, comparison, or trend that a table would bury.
+
+**When not to use**
+- Precise values the reader needs to read off exactly — use a table.
+- A single number — use a stat or a Badge.
+
 **Variants**
 
 | Axis | Value | Meaning |
@@ -579,10 +673,22 @@ Layout exception: chart plot geometry is intentionally coordinate-based because 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Label axes and units directly.
+- Order categories meaningfully, not alphabetically by accident.
+- Bind series colour to semantic tokens so themes carry through.
+
+**Do not**
+- Do not distinguish series by colour alone — vary shape, pattern, or direct labels.
+- Do not truncate a bar chart's value axis away from zero.
+
+**Accessibility**
+- Role: `img`
+- Give the chart a text alternative that states the takeaway, not just the chart type.
+- Offer the underlying data as a table for screen-reader and keyboard users.
 
 **Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/16`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `60a16c7b14bcb5e5` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `03fe602a001fd013` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -650,14 +756,21 @@ Single disclosure region for optional controls or secondary information. Use Acc
 
 Interaction contract: open/closed and disabled are persistent disclosure states. Hover, pressed, and focus-visible belong to the disclosure trigger at runtime and are not separate root variants.
 
+**When to use**
+- Let the reader collapse secondary content so the page stays scannable.
+
+**When not to use**
+- Content the reader almost always needs — show it instead of hiding it.
+- Switching between peer views — use Tabs.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `state` | `closed` | _needs review_ |
-| `state` | `open` | _needs review_ |
-| `disabled` | `false` | _needs review_ |
-| `disabled` | `true` | _needs review_ |
+| `state` | `closed` | Collapsed — the content is hidden. |
+| `state` | `open` | Expanded — the content is revealed. |
+| `disabled` | `false` | Available and interactive. |
+| `disabled` | `true` | Not available; not focusable and does not respond to input. |
 
 **State → tokens**
 
@@ -670,10 +783,22 @@ Interaction contract: open/closed and disabled are persistent disclosure states.
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Make the trigger the whole header row, not just the chevron.
+- Write triggers that say what is inside.
+
+**Do not**
+- Do not hide validation errors or required form fields behind a collapsed section.
+- Do not animate so slowly that opening feels unresponsive.
+
+**Accessibility**
+- Keyboard: Enter and Space toggle the section.
+- Keyboard: Tab moves between triggers.
+- The trigger is a button carrying aria-expanded and aria-controls.
+- The panel stays in the accessibility tree only while open.
 
 **Tokens used** — `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/lg` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `2ebcc305068dc984` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `69c1c284a7873521` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -685,12 +810,19 @@ Command menu item primitive. Use Selected=True for the currently highlighted res
 
 Interaction contract: Selected=True is the highlighted command option used for pointer or keyboard roving selection. DOM focus remains on the command input/list controller, so a separate item focus variant is not required.
 
+**When to use**
+- Give keyboard-first users a fast path to any command or destination.
+
+**When not to use**
+- The primary means of discovering features — it supplements navigation, it does not replace it.
+- A small fixed set of options — use a Select or a menu.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `selected` | `false` | _needs review_ |
-| `selected` | `true` | _needs review_ |
+| `selected` | `false` | Not selected. |
+| `selected` | `true` | Selected — the active choice in its group. |
 
 **State → tokens**
 
@@ -702,10 +834,23 @@ Interaction contract: Selected=True is the highlighted command option used for p
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Show recent or suggested items before the user types.
+- Group results and label the groups.
+- Show the keyboard shortcut that opens it somewhere discoverable.
+
+**Do not**
+- Do not hide destructive commands in it without a confirmation step.
+- Do not leave an empty result set unexplained.
+
+**Accessibility**
+- Keyboard: Arrow keys move through results, Enter runs the highlighted one.
+- Keyboard: Escape closes and returns focus to the trigger.
+- The input owns focus and points at the list via aria-controls and aria-activedescendant.
+- Announce the result count as it changes.
 
 **Tokens used** — `accent` · `accent-foreground` · `foreground` · `radius/lg` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `ca4707ccd4bf32f5` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `b5005f12ae3fe0ff` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -713,7 +858,29 @@ Interaction contract: Selected=True is the highlighted command option used for p
 
 **Watermelon package-manager command panel with editable Command text.**
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `d10ca0fb5e0922ca` · provenance description:imported</sub>
+**When to use**
+- Give keyboard-first users a fast path to any command or destination.
+
+**When not to use**
+- The primary means of discovering features — it supplements navigation, it does not replace it.
+- A small fixed set of options — use a Select or a menu.
+
+**Do**
+- Show recent or suggested items before the user types.
+- Group results and label the groups.
+- Show the keyboard shortcut that opens it somewhere discoverable.
+
+**Do not**
+- Do not hide destructive commands in it without a confirmation step.
+- Do not leave an empty result set unexplained.
+
+**Accessibility**
+- Keyboard: Arrow keys move through results, Enter runs the highlighted one.
+- Keyboard: Escape closes and returns focus to the trigger.
+- The input owns focus and points at the list via aria-controls and aria-activedescendant.
+- Announce the result count as it changes.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `f87e2f9f96161d11` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -724,6 +891,13 @@ Interaction contract: Selected=True is the highlighted command option used for p
 Data-management composition built from Input, Button, Table, and Pagination. Supports desktop and compact viewports with populated and empty states. Fixed default width with Hug Contents height.
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
+
+**When to use**
+- Present records across shared columns, for comparison, scanning, or exact reading.
+
+**When not to use**
+- Page layout — use a grid.
+- A handful of key-value pairs — use a description list.
 
 **Variants**
 
@@ -743,13 +917,24 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Right-align numbers so digits line up.
+- Keep the header visible while the body scrolls.
+- Give empty, loading, and error states real treatments.
 
 **Do not**
 - Do not turn Viewport into a code prop.
+- Do not hide the only route to an action behind row hover.
+- Do not let a wide table break the page — let the table itself scroll.
+
+**Accessibility**
+- Role: `table`
+- Keyboard: Interactive cells are reachable in reading order.
+- Header cells are th with the right scope; a caption names the table.
+- Sortable headers carry aria-sort, and the control is a button inside the th.
 
 **Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/15` · `size/18`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `23167dae8852b907` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · donts:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `8748b58f5163d494` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -763,14 +948,21 @@ Pipeline property contract: only the component properties defined on this set ar
 
 Layout exception: Date Picker Trigger overlays a fixed semantic Calendar icon on the nested Input. The trigger frame intentionally uses coordinate positioning for this adornment; the icon is a canonical Icon instance, not a text glyph.
 
+**When to use**
+- Pick a date, or a start and end pair, where the calendar context matters.
+
+**When not to use**
+- A date the user knows by heart, such as a birthdate — a plain text field is faster.
+- Coarse periods like a month or quarter — offer a Select.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
 | `mode` | `single` | Selects one value. |
 | `mode` | `range` | Selects a start and end pair. |
-| `open` | `false` | _needs review_ |
-| `open` | `true` | _needs review_ |
+| `open` | `false` | Closed — the content is hidden. |
+| `open` | `true` | Open — the content is revealed. |
 
 **State → tokens**
 
@@ -783,16 +975,25 @@ Layout exception: Date Picker Trigger overlays a fixed semantic Calendar icon on
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Allow typing the date as well as picking it.
+- State the expected format next to the field.
+- Disable out-of-range dates rather than rejecting them after submit.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
+- Do not force calendar navigation for dates far from today.
+- Do not assume a locale's week start or date order.
 
 **Accessibility**
+- Keyboard: Arrow keys move by day, PageUp and PageDown by month.
+- Keyboard: Escape closes the calendar and returns focus to the field.
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Error · Disabled] → :focus-visible CSS-owned, dropped; invalid + disabled independent booleans
+- The grid is a table with aria-selected on the chosen day.
+- Announce the focused date in full, not just the day number.
 
 **Tokens used** — `foreground` · `muted-foreground` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `316c9879cf57f7bf` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · donts:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `0dd37c22e3f55b6c` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -912,6 +1113,13 @@ Basic Dropdown Menu content configurations preserved from the original core buil
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
 
+**When to use**
+- Offer a list of actions from a trigger, when showing them all would crowd the view.
+
+**When not to use**
+- Choosing a form value — use a Select; a menu fires actions, it does not hold state.
+- Primary navigation — use a navigation menu.
+
 **Variants**
 
 | Axis | Value | Meaning |
@@ -930,10 +1138,25 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Group related items and separate the groups.
+- Put destructive items last and mark them.
+- Show shortcuts alongside the items that have them.
+
+**Do not**
+- Do not nest submenus more than one level deep.
+- Do not hide the only route to a critical action inside a menu.
+
+**Accessibility**
+- Role: `menu`
+- Keyboard: Arrow keys move between items, Enter activates.
+- Keyboard: Escape closes and returns focus to the trigger.
+- Keyboard: Typing a letter jumps to the next item starting with it.
+- The trigger carries aria-haspopup and aria-expanded.
+- Focus moves into the menu on open and back to the trigger on close.
 
 **Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `650f6fffa37a5444` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `a5dfc25c03c1ddfa` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -944,6 +1167,13 @@ Pipeline property contract: only the component properties defined on this set ar
 Checkable menu item with unchecked, checked, and indeterminate values plus default, highlighted, and disabled states. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.
 
 Pipeline exception: Icon is a legacy design-only text-glyph control with existing overrides. Do not map it to a production code prop. Migration to an Icon INSTANCE_SWAP requires an approved glyph-to-icon map and consumer update test.
+
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
 
 **Variants**
 
@@ -966,16 +1196,18 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
 - Pass icons as @phosphor-icons/react components through the slot, never as text glyphs.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Highlighted · Disabled] → :highlighted CSS-owned, dropped; disabled independent boolean
 
 **Tokens used** — `accent` · `accent-foreground` · `popover` · `popover-foreground` · `radius/4` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `b8d0a4ee2868e274` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · donts:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `5ea3a8310faf4b73` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -986,6 +1218,13 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 Positioned menu content. Complete placement matrix: Side=Top/Right/Bottom/Left, Align=Start/Center/End, and optional Arrow. Content itself is open-only; closed behavior is represented at the Root Composition level. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
+
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
 
 **Variants**
 
@@ -998,8 +1237,8 @@ Pipeline property contract: only the component properties defined on this set ar
 | `align` | `start` | Aligns to the trigger's start edge. |
 | `align` | `center` | Centres on the trigger. |
 | `align` | `end` | Aligns to the trigger's end edge. |
-| `arrow` | `false` | _needs review_ |
-| `arrow` | `true` | _needs review_ |
+| `arrow` | `false` | No pointer — the surface floats free of its trigger. |
+| `arrow` | `true` | Shows a pointer aimed at the trigger. |
 
 **State → tokens**
 
@@ -1010,10 +1249,14 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `popover-foreground` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `ef8bc6cb467d2642` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `c628300ef0b5af13` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1023,7 +1266,20 @@ Pipeline property contract: only the component properties defined on this set ar
 
 Structural grouping wrapper for labels and related menu items. It carries no visual treatment of its own. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `e0e6a55dae667040` · provenance description:imported</sub>
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
+**Do**
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `ceb0e4a942eb8912` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1035,14 +1291,21 @@ Standard command item. Supports default and destructive tones, default/highlight
 
 Pipeline exception: Icon is a legacy design-only text-glyph control with existing overrides. Do not map it to a production code prop. Migration to an Icon INSTANCE_SWAP requires an approved glyph-to-icon map and consumer update test.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
 | `tone` | `default` | Standard treatment with no semantic weight. |
 | `tone` | `destructive` | An error that blocks progress. |
-| `inset` | `false` | _needs review_ |
-| `inset` | `true` | _needs review_ |
+| `inset` | `false` | Aligned to the container's leading edge. |
+| `inset` | `true` | Indented to line up with items that have a leading icon. |
 
 **State → tokens**
 
@@ -1061,16 +1324,18 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
 - Pass icons as @phosphor-icons/react components through the slot, never as text glyphs.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Highlighted · Disabled] → :highlighted CSS-owned, dropped; disabled independent boolean
 
 **Tokens used** — `accent` · `accent-foreground` · `destructive` · `popover` · `popover-foreground` · `radius/4` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `4c705648eecfd6a7` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · donts:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `1acf05885a1b1a9c` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -1080,12 +1345,19 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 
 Non-focusable group label with standard or inset alignment. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `inset` | `false` | _needs review_ |
-| `inset` | `true` | _needs review_ |
+| `inset` | `false` | Aligned to the container's leading edge. |
+| `inset` | `true` | Indented to line up with items that have a leading icon. |
 
 **State → tokens**
 
@@ -1096,10 +1368,14 @@ Non-focusable group label with standard or inset alignment. Source parity baseli
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `popover` · `popover-foreground` · `size/12`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `7f96fbc7beb86287` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `0ec8046e924f7155` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1109,7 +1385,20 @@ Non-focusable group label with standard or inset alignment. Source parity baseli
 
 Structural single-selection wrapper for Radio Item instances. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `76d83f0bdbe6071b` · provenance description:imported</sub>
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
+**Do**
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `e6901caba4c8ad87` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1120,6 +1409,13 @@ Structural single-selection wrapper for Radio Item instances. Source parity base
 Exclusive-choice menu item used inside a Radio Group. Supports checked/unchecked plus default, highlighted, and disabled states. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.
 
 Pipeline exception: Icon is a legacy design-only text-glyph control with existing overrides. Do not map it to a production code prop. Migration to an Icon INSTANCE_SWAP requires an approved glyph-to-icon map and consumer update test.
+
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
 
 **Variants**
 
@@ -1140,16 +1436,18 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
 - Pass icons as @phosphor-icons/react components through the slot, never as text glyphs.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Highlighted · Disabled] → :highlighted CSS-owned, dropped; disabled independent boolean
 
 **Tokens used** — `accent` · `accent-foreground` · `popover` · `popover-foreground` · `radius/4` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `a18512acb77a7b43` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · donts:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `56ffd426d8d2ab85` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -1161,12 +1459,19 @@ Complete source-parity compositions. Patterns: Basic, Submenu, Shortcuts, Icons,
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
 
+**When to use**
+- Offer a list of actions from a trigger, when showing them all would crowd the view.
+
+**When not to use**
+- Choosing a form value — use a Select; a menu fires actions, it does not hold state.
+- Primary navigation — use a navigation menu.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `state` | `closed` | _needs review_ |
-| `state` | `open` | _needs review_ |
+| `state` | `closed` | Collapsed — the content is hidden. |
+| `state` | `open` | Expanded — the content is revealed. |
 
 **State → tokens**
 
@@ -1184,13 +1489,26 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Group related items and separate the groups.
+- Put destructive items last and mark them.
+- Show shortcuts alongside the items that have them.
 
 **Do not**
 - Do not turn Pattern into a code prop.
+- Do not nest submenus more than one level deep.
+- Do not hide the only route to a critical action inside a menu.
+
+**Accessibility**
+- Role: `menu`
+- Keyboard: Arrow keys move between items, Enter activates.
+- Keyboard: Escape closes and returns focus to the trigger.
+- Keyboard: Typing a letter jumps to the next item starting with it.
+- The trigger carries aria-haspopup and aria-expanded.
+- Focus moves into the menu on open and back to the trigger on close.
 
 **Tokens used** — `accent-foreground` · `foreground` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `d6a866d412cbefb8` · provenance description:imported · variants:imported · states:imported · dos:imported · donts:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `2c1ee79d8053f7d8` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -1200,7 +1518,20 @@ Pipeline property contract: only the component properties defined on this set ar
 
 Visual separator between groups of menu items. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `5f0128077732ec5f` · provenance description:imported</sub>
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
+**Do**
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `fcdd6ed41eb63200` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1210,7 +1541,20 @@ Visual separator between groups of menu items. Source parity baseline: Watermelo
 
 Right-aligned keyboard shortcut hint for menu commands. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `53639eda45a2b486` · provenance description:imported</sub>
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
+**Do**
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `2fea49bb46869fe1` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1221,6 +1565,13 @@ Right-aligned keyboard shortcut hint for menu commands. Source parity baseline: 
 Nested submenu content with Side=Left/Right and Align=Start/Center/End. The anchor marker indicates the edge and alignment relative to the Sub Trigger. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.
 
 Layout exception: Anchor marker is an absolute-positioned documentation/placement reference for submenu alignment. It is not a runtime content layer and is excluded from structural auto-layout linting.
+
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
 
 **Variants**
 
@@ -1241,10 +1592,14 @@ Layout exception: Anchor marker is an absolute-positioned documentation/placemen
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `1a0c2ae558ce1564` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `1b12de6f2056baa7` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1256,12 +1611,19 @@ Submenu trigger with closed, open, highlighted, and disabled states plus optiona
 
 Pipeline exception: Icon is a legacy design-only text-glyph control with existing overrides. Do not map it to a production code prop. Migration to an Icon INSTANCE_SWAP requires an approved glyph-to-icon map and consumer update test.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `inset` | `false` | _needs review_ |
-| `inset` | `true` | _needs review_ |
+| `inset` | `false` | Aligned to the container's leading edge. |
+| `inset` | `true` | Indented to line up with items that have a leading icon. |
 
 **State → tokens**
 
@@ -1277,16 +1639,18 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
 - Pass icons as @phosphor-icons/react components through the slot, never as text glyphs.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Highlighted · Disabled] → :highlighted CSS-owned, dropped; disabled independent boolean; closed/open controlled state
 
 **Tokens used** — `accent` · `accent-foreground` · `popover` · `popover-foreground` · `radius/4` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `3000d7e5a566a847` · provenance description:imported · variants:imported · states:imported · dos:imported · donts:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `7b002d6bf83ff4e3` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -1300,12 +1664,19 @@ Pipeline property contract: only the component properties defined on this set ar
 
 Accessibility contract: avatar-only menu triggers require a programmatic accessible name that communicates the menu action. Decorative trigger icons/avatars must not become the accessible name by themselves.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `type` | `button` | _needs review_ |
-| `type` | `avatar` | _needs review_ |
+| `type` | `button` | A conventional button triggers it. |
+| `type` | `avatar` | Avatar shape — a circular image, or initials when no image is available. |
 
 **State → tokens**
 
@@ -1322,10 +1693,12 @@ Accessibility contract: avatar-only menu triggers require a programmatic accessi
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
 - Do not remove the ring border on focus. It is the only focus affordance.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Accessibility**
 - avatar-only menu triggers require a programmatic accessible name that communicates the menu action. Decorative trigger icons/avatars must not become the accessible name by themselves.
@@ -1333,7 +1706,7 @@ Accessibility contract: avatar-only menu triggers require a programmatic accessi
 
 **Tokens used** — `accent` · `accent-foreground` · `border` · `card` · `foreground` · `muted-foreground` · `radius/lg` · `ring` · `size/12` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `9e163642a5e6b483` · provenance description:imported · variants:imported · states:imported · dos:imported · donts:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `dce091d64321771b` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -1390,12 +1763,19 @@ Accessibility contract: Error must not rely on color alone. The composed field m
 
 Contextual preview surface revealed on pointer hover or keyboard focus. Use compact density for brief descriptions and detailed density when supporting metadata is needed. Sizing policy: fixed/default width with Hug Contents height.
 
+**When to use**
+- Preview the thing behind a link on hover, without making the reader navigate.
+
+**When not to use**
+- Content the user needs — hover is unavailable on touch and to many keyboard users.
+- Anything required to complete a task.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
 | `density` | `compact` | Tighter spacing for information-dense screens. |
-| `density` | `detailed` | _needs review_ |
+| `density` | `detailed` | Roomier, for richer content than the default carries. |
 
 **State → tokens**
 
@@ -1406,10 +1786,21 @@ Contextual preview surface revealed on pointer hover or keyboard focus. Use comp
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Open and close on a delay, so passing the pointer over does not trigger it.
+- Keep it open while the pointer travels into it.
+- Treat everything in it as an enhancement of the link's own destination.
+
+**Do not**
+- Do not place the only copy of an action inside one.
+- Do not open it on click — that is a Popover.
+
+**Accessibility**
+- Reachable on keyboard focus, or its content must exist elsewhere.
+- Escape dismisses it.
 
 **Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `506fb4f07842e5e4` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `deb42fdd764e3b83` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -1419,7 +1810,27 @@ Contextual preview surface revealed on pointer hover or keyboard focus. Use comp
 
 Jake UI production icons — Phosphor Icons (regular weight, @phosphor-icons/react v2). Variant axes: Name and Size (16/20/24). Fill binds to the foreground variable; in code the icon inherits currentColor. Name values match Phosphor React component names exactly, except SidebarSimpleRight which renders as <SidebarSimple mirrored />. Swap Name rather than copying vectors.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `2cd75e24451d6944` · provenance description:imported</sub>
+**When to use**
+- Reinforce a label, or stand in for one where the metaphor is unambiguous and repeated.
+
+**When not to use**
+- Carrying meaning that has no text anywhere near it.
+- Illustration — use an image.
+
+**Do**
+- Take icons from the mapped set rather than pasting one-off SVG.
+- Size and colour them from tokens so they track the text they sit beside.
+- Keep one metaphor for one meaning across the product.
+
+**Do not**
+- Do not use an icon alone for a destructive or unusual action.
+- Do not rotate or recolour an icon to mean something new.
+
+**Accessibility**
+- A decorative icon beside text is aria-hidden="true".
+- A meaningful standalone icon needs a text alternative on it or on its control.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `2f56fa8553dd0a3c` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -1483,14 +1894,21 @@ Form control label primitive. Required variants expose a semantic required mark;
 
 Pipeline API classification: apply the Governance property-classification rule before code mapping. Visual State axes are QA/story states unless engineering explicitly approves a controlled runtime prop; Viewport is responsive test data; Pattern is composition/story data.
 
+**When to use**
+- Name a form control, so it is identifiable before and after it is filled.
+
+**When not to use**
+- Helper text, format hints, or validation messages — those are separate elements.
+- A section heading — use a heading.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `type` | `required` | _needs review_ |
-| `type` | `optional` | _needs review_ |
+| `type` | `required` | Marks a field that must be filled before submit. |
+| `type` | `optional` | Marks a field that may be left empty. |
 | `state` | `default` | Resting state. |
-| `state` | `disabled` | _needs review_ |
+| `state` | `disabled` | Not available; not focusable and does not respond to input. |
 
 **State → tokens**
 
@@ -1502,10 +1920,21 @@ Pipeline API classification: apply the Governance property-classification rule b
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Keep the label visible; do not swap it for a placeholder.
+- Mark required fields consistently, and say what the marker means once.
+- Write it as a noun phrase, in sentence case.
+
+**Do not**
+- Do not mark both required and optional fields — pick whichever is rarer.
+- Do not truncate a label; shorten the wording instead.
+
+**Accessibility**
+- Bound to its control by for/id, so clicking the label focuses the control.
+- Its text is the control's accessible name — keep it stable.
 
 **Tokens used** — `foreground` · `muted-foreground` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `b29a26aa771ce8c7` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `112008cf361610b3` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -1570,12 +1999,19 @@ Primary product navigation with desktop and compact structures. Open=True reveal
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
 
+**When to use**
+- Present the product's top-level destinations, with room for grouped sub-items.
+
+**When not to use**
+- Firing actions — use a menu.
+- A single flat list of two or three links — plain links are enough.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `open` | `false` | _needs review_ |
-| `open` | `true` | _needs review_ |
+| `open` | `false` | Closed — the content is hidden. |
+| `open` | `true` | Open — the content is revealed. |
 
 **State → tokens**
 
@@ -1588,13 +2024,23 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Mark the current destination.
+- Keep the order stable between sessions and roles.
 
 **Do not**
 - Do not turn Viewport into a code prop.
+- Do not hide a whole section behind hover alone.
+- Do not nest destinations deeper than two levels.
+
+**Accessibility**
+- Role: `navigation`
+- Keyboard: Arrow keys move within a group; Tab moves between groups.
+- Wrapped in a nav with an accessible name.
+- The current destination carries aria-current="page".
 
 **Tokens used** — `accent-foreground` · `border` · `card` · `foreground` · `primary-foreground` · `radius/lg` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `825f5301138cd976` · provenance description:imported · variants:imported · states:imported · dos:imported · donts:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `2db4cc8a6b6dd75f` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -1606,12 +2052,19 @@ Navigate paged datasets or long collections. Desktop exposes page numbers; Compa
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
 
+**When to use**
+- Break a long result set into pages the reader can move through and return to.
+
+**When not to use**
+- A feed meant to be browsed continuously — use infinite scroll or a load-more control.
+- Result sets short enough to show at once.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
 | `state` | `default` | Resting state. |
-| `state` | `disabled` | _needs review_ |
+| `state` | `disabled` | Not available; not focusable and does not respond to input. |
 
 **State → tokens**
 
@@ -1622,13 +2075,24 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Show the current page and the total.
+- Keep previous and next in the same place as the page count changes.
+- Disable rather than hide the controls at the first and last page.
 
 **Do not**
 - Do not turn Viewport into a code prop.
+- Do not reset filters or sort when the page changes.
+- Do not make the hit targets smaller than the surrounding controls.
+
+**Accessibility**
+- Role: `navigation`
+- Keyboard: Every control is reachable in reading order.
+- Wrapped in a nav named e.g. "Pagination".
+- The current page carries aria-current="page"; disabled controls stay announced.
 
 **Tokens used** — `card` · `foreground` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `c5a1c6598c066684` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · donts:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `21cefdc646f27477` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -1640,14 +2104,22 @@ Jake UI Popover content extension with Small/Large size and optional arrow. Exac
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
 
+**When to use**
+- Show secondary content or a small task in context, anchored to its trigger.
+
+**When not to use**
+- A decision that must block the flow — use a Dialog.
+- A plain text hint — use a Tooltip.
+- A list of actions — use a menu.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
 | `size` | `small` | Dense contexts — tables, toolbars, compact rows. |
 | `size` | `large` | Prominent or touch-first contexts. |
-| `arrow` | `false` | _needs review_ |
-| `arrow` | `true` | _needs review_ |
+| `arrow` | `false` | No pointer — the surface floats free of its trigger. |
+| `arrow` | `true` | Shows a pointer aimed at the trigger. |
 
 **State → tokens**
 
@@ -1658,10 +2130,24 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Anchor it to the trigger and flip it when it would overflow the viewport.
+- Give it an explicit close affordance.
+- Return focus to the trigger on close.
+
+**Do not**
+- Do not open one from inside another.
+- Do not put a long scrolling form in one.
+
+**Accessibility**
+- Role: `dialog`
+- Keyboard: Escape closes.
+- Keyboard: Tab moves through the content, then out.
+- The trigger carries aria-expanded and aria-controls.
+- A popover holding a form should trap focus; a non-modal one should not.
 
 **Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/15`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `a151efad94f64ed1` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `ed0ec8605a36861e` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -1670,6 +2156,13 @@ Pipeline property contract: only the component properties defined on this set ar
 **Pointing Arrow for all four popup sides.**
 
 Pointing Arrow for all four popup sides. The arrow inherits Popover surface and border variables and aligns through the Content placement matrix.
+
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
 
 **Variants**
 
@@ -1689,8 +2182,12 @@ Pointing Arrow for all four popup sides. The arrow inherits Popover surface and 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `860e05913ae3b071` · provenance description:imported · variants:imported+framework · states:imported · dos:imported</sub>
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `16ff0fd4d1a115d5` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1702,14 +2199,21 @@ Backdrop states for modal and trap-focus Popover modes. Non-modal mode intention
 
 Pipeline API classification: apply the Governance property-classification rule before code mapping. Visual State axes are QA/story states unless engineering explicitly approves a controlled runtime prop; Viewport is responsive test data; Pattern is composition/story data.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `mode` | `modal` | _needs review_ |
-| `mode` | `trapFocus` | _needs review_ |
-| `state` | `closed` | _needs review_ |
-| `state` | `open` | _needs review_ |
+| `mode` | `modal` | Blocks the page behind it until dismissed. |
+| `mode` | `trapFocus` | Keeps keyboard focus inside while open. |
+| `state` | `closed` | Collapsed — the content is hidden. |
+| `state` | `open` | Expanded — the content is revealed. |
 
 **State → tokens**
 
@@ -1720,10 +2224,14 @@ Pipeline API classification: apply the Governance property-classification rule b
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `foreground`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `5fd2238afd637f42` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `78fe56e707937305` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1734,6 +2242,13 @@ Pipeline API classification: apply the Governance property-classification rule b
 Explicit close control for Popover content. States cover default, hover, focus-visible, and disabled. Runtime requires an accessible name.
 
 Accessibility contract: icon-only close control requires a programmatic accessible name such as “Close” and a visible focus indicator; the icon itself is decorative to assistive technology.
+
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
 
 **State → tokens**
 
@@ -1746,10 +2261,12 @@ Accessibility contract: icon-only close control requires a programmatic accessib
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
 - Do not remove the ring border on focus. It is the only focus affordance.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Accessibility**
 - icon-only close control requires a programmatic accessible name such as “Close” and a visible focus indicator; the icon itself is decorative to assistive technology.
@@ -1757,7 +2274,7 @@ Accessibility contract: icon-only close control requires a programmatic accessib
 
 **Tokens used** — `accent` · `popover` · `radius/7` · `ring`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `426521796f6bd687` · provenance description:imported · states:imported · dos:imported · donts:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `ed78328b621eb8cd` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -1768,6 +2285,13 @@ Accessibility contract: icon-only close control requires a programmatic accessib
 Complete Popover Content matrix: Size × Side × Align × Arrow. Uses nested Header, Close, and Arrow assets. Positioner, collision, offset, focus, outside-interaction, and portal behavior are documented in the specification.
 
 Variant-matrix exception: the 48-variant Arrow axis is retained for current consumer compatibility. Refactoring Arrow to a boolean property is a breaking migration and requires consumer-file validation.
+
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
 
 **Variants**
 
@@ -1782,8 +2306,8 @@ Variant-matrix exception: the 48-variant Arrow axis is retained for current cons
 | `align` | `start` | Aligns to the trigger's start edge. |
 | `align` | `center` | Centres on the trigger. |
 | `align` | `end` | Aligns to the trigger's end edge. |
-| `arrow` | `false` | _needs review_ |
-| `arrow` | `true` | _needs review_ |
+| `arrow` | `false` | No pointer — the surface floats free of its trigger. |
+| `arrow` | `true` | Shows a pointer aimed at the trigger. |
 
 **State → tokens**
 
@@ -1795,13 +2319,15 @@ Variant-matrix exception: the 48-variant Arrow axis is retained for current cons
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
 - Pass icons as @phosphor-icons/react components through the slot, never as text glyphs.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Variant count (48) exceeds the 30-combination governance ceiling. Needs a documented exception.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `popover-foreground` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `fef340aa8a4673c1` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · donts:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `b2d73aefb9a46e6a` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -1811,7 +2337,20 @@ Variant-matrix exception: the 48-variant Arrow axis is retained for current cons
 
 Source form-content composition using Header, Close, Arrow, and two linked Field instances. Represents the “With Form” example.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `098e70d278a10050` · provenance description:imported</sub>
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
+**Do**
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `3e9caf16de92bdb1` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1821,7 +2360,20 @@ Source form-content composition using Header, Close, Arrow, and two linked Field
 
 Popover heading group containing Title and Description. Both text nodes are editable component properties and should be associated with the popup for accessible naming and description.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `57369100f883ec80` · provenance description:imported</sub>
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
+**Do**
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `3afb0cf3fd62b9f5` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1833,12 +2385,20 @@ Source usage patterns with open and closed states: Basic, Align, With Form, and 
 
 Pipeline API classification: apply the Governance property-classification rule before code mapping. Visual State axes are QA/story states unless engineering explicitly approves a controlled runtime prop; Viewport is responsive test data; Pattern is composition/story data.
 
+**When to use**
+- Show secondary content or a small task in context, anchored to its trigger.
+
+**When not to use**
+- A decision that must block the flow — use a Dialog.
+- A plain text hint — use a Tooltip.
+- A list of actions — use a menu.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `state` | `closed` | _needs review_ |
-| `state` | `open` | _needs review_ |
+| `state` | `closed` | Collapsed — the content is hidden. |
+| `state` | `open` | Expanded — the content is revealed. |
 
 **State → tokens**
 
@@ -1854,13 +2414,25 @@ Pipeline API classification: apply the Governance property-classification rule b
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Anchor it to the trigger and flip it when it would overflow the viewport.
+- Give it an explicit close affordance.
+- Return focus to the trigger on close.
 
 **Do not**
 - Do not turn Pattern into a code prop.
+- Do not open one from inside another.
+- Do not put a long scrolling form in one.
+
+**Accessibility**
+- Role: `dialog`
+- Keyboard: Escape closes.
+- Keyboard: Tab moves through the content, then out.
+- The trigger carries aria-expanded and aria-controls.
+- A popover holding a form should trap focus; a non-modal one should not.
 
 **Tokens used** — `accent-foreground` · `foreground` · `size/12` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `d4da77934d9e2527` · provenance description:imported · variants:imported · states:imported · dos:imported · donts:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `b36fe8118259ccb6` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -1868,7 +2440,20 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 **RTL Popover content with Arabic Title and Description, linked Close and Arrow controls, right-aligned typography, and Bottom/Start placement.**
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `2964a3754defb082` · provenance description:imported</sub>
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
+**Do**
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `757692246e388ac3` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1880,12 +2465,19 @@ Popover trigger visual states for standard Button and RTL presentation. Covers c
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `type` | `button` | _needs review_ |
-| `type` | `rTL` | _needs review_ |
+| `type` | `button` | A conventional button triggers it. |
+| `type` | `rTL` | Right-to-left layout — mirrored for RTL locales. |
 
 **State → tokens**
 
@@ -1903,17 +2495,19 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
 - Do not remove the ring border on focus. It is the only focus affordance.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Hover · Focused · Disabled] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean; closed/open controlled state
 
 **Tokens used** — `accent-foreground` · `foreground` · `muted-foreground` · `radius/lg` · `ring` · `size/12` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `5d2e08da34bf0718` · provenance description:imported · variants:imported · states:imported · dos:imported · donts:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `1d7712eea6d8958e` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -1922,6 +2516,13 @@ Pipeline property contract: only the component properties defined on this set ar
 **Transition Viewport documenting current and previous content for four activation directions.**
 
 Transition Viewport documenting current and previous content for four activation directions. This asset represents data-activation-direction and data-previous states without prescribing runtime animation duration.
+
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
 
 **Variants**
 
@@ -1943,10 +2544,14 @@ Transition Viewport documenting current and previous content for four activation
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/11`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `dcb106ae899a1e5b` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `83ea4c2e789e5982` · provenance description:imported · variants:imported · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -1956,12 +2561,19 @@ Transition Viewport documenting current and previous content for four activation
 
 Linear progress primitive. Determinate indicates known completion; indeterminate communicates ongoing work without a measurable endpoint.
 
+**When to use**
+- Show that work is underway, and how far along it is when that is known.
+
+**When not to use**
+- Waits short enough that the indicator flashes — show nothing.
+- Content-shaped placeholders while a view loads — use Skeleton.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `type` | `determinate` | _needs review_ |
-| `type` | `indeterminate` | _needs review_ |
+| `type` | `determinate` | Progress is known and reported as a proportion of a total. |
+| `type` | `indeterminate` | Progress is unknown — show activity, not a percentage. |
 
 **State → tokens**
 
@@ -1972,10 +2584,23 @@ Linear progress primitive. Determinate indicates known completion; indeterminate
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Use the determinate form whenever a total is known.
+- Say what is happening in text beside the bar.
+- Keep it in place until the work actually finishes.
+
+**Do not**
+- Do not fake determinate progress.
+- Do not let a bar sit at 100% without resolving.
+
+**Accessibility**
+- Role: `progressbar`
+- Determinate sets aria-valuenow, aria-valuemin, and aria-valuemax.
+- Indeterminate omits aria-valuenow.
+- Named by aria-labelledby, or aria-label when no visible label exists.
 
 **Tokens used** — `muted` · `radius/lg`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `cab249f5c37e56f6` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `8883a9d3ed6ec7ca` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -2001,8 +2626,8 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `value` | `unselected` | _needs review_ |
-| `value` | `selected` | _needs review_ |
+| `value` | `unselected` | Not selected. |
+| `value` | `selected` | Selected. |
 
 **State → tokens**
 
@@ -2031,7 +2656,7 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 **Tokens used** — `foreground` · `muted-foreground` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `567b9fdbe3063c91` · provenance description:imported · variants:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `0d1ef5099793be35` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -2086,12 +2711,19 @@ Pipeline property contract: only the component properties defined on this set ar
 
 Checked-state indicator nested inside Radio Group / Item. Runtime may force-mount the indicator for animation or measurement.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
 | `state` | `default` | Resting state. |
-| `state` | `disabled` | _needs review_ |
+| `state` | `disabled` | Not available; not focusable and does not respond to input. |
 
 **State → tokens**
 
@@ -2102,10 +2734,14 @@ Checked-state indicator nested inside Radio Group / Item. Runtime may force-moun
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `primary` · `radius/full`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `d56f2d23552b3fcf` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `763397f1c47c1bf3` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -2192,9 +2828,9 @@ Accessibility contract: State=Invalid is a group visual state; the consuming fie
 |---|---|---|
 | `orientation` | `vertical` | Lays out along the block axis. |
 | `orientation` | `horizontal` | Lays out along the inline axis. |
-| `selection` | `first` | _needs review_ |
-| `selection` | `second` | _needs review_ |
-| `selection` | `none` | _needs review_ |
+| `selection` | `first` | The first option in the group is selected. |
+| `selection` | `second` | The second option in the group is selected. |
+| `selection` | `none` | Nothing is currently selected. |
 
 **State → tokens**
 
@@ -2228,7 +2864,7 @@ Accessibility contract: State=Invalid is a group visual state; the consuming fie
 
 **Tokens used** — `foreground` · `muted-foreground` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `8f2b507cbc129484` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `6d7dbd6b3589a7cf` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -2242,12 +2878,19 @@ Pipeline property contract: only the component properties defined on this set ar
 
 Layout exception: Scroll Area uses coordinate-based viewport, track, and thumb geometry rather than root auto layout. Runtime overflow determines scroll position; the Figma axis variants document anatomy and default dimensions.
 
+**When to use**
+- Confine overflow to one region so the page itself does not scroll.
+
+**When not to use**
+- The main page scroll — leave that to the browser.
+- Hiding content the reader is unlikely to look for.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `axis` | `vertical` | _needs review_ |
-| `axis` | `horizontal` | _needs review_ |
+| `axis` | `vertical` | Scrolls along the block axis. |
+| `axis` | `horizontal` | Scrolls along the inline axis. |
 
 **State → tokens**
 
@@ -2258,10 +2901,21 @@ Layout exception: Scroll Area uses coordinate-based viewport, track, and thumb g
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Leave a visible cue that there is more to see.
+- Keep native keyboard and wheel scrolling working.
+
+**Do not**
+- Do not nest scroll areas along the same axis.
+- Do not hide the scrollbar so thoroughly that the overflow is invisible.
+
+**Accessibility**
+- Keyboard: The region is focusable so it can be scrolled by keyboard.
+- A scrollable region needs a tabindex and an accessible name.
+- Do not suppress the native scrollbar on platforms that always show one.
 
 **Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `1b51b3cf949ad08b` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `71a3c9b392c55e7d` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -2273,12 +2927,20 @@ Compact Watermelon option tab. Place instances inside a secondary-colored segmen
 
 Interaction contract: Selected is the persistent tab selection state. Hover and focus-visible are transient runtime states; focus remains visually distinguishable using the shared ring treatment.
 
+**When to use**
+- Switch between peer views of the same subject, within one context.
+
+**When not to use**
+- Steps in a sequence — use a stepper.
+- Content the reader needs to compare side by side, or to find with the browser's search.
+- Navigating to a different page — use links.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `selected` | `false` | _needs review_ |
-| `selected` | `true` | _needs review_ |
+| `selected` | `false` | Not selected. |
+| `selected` | `true` | Selected — the active choice in its group. |
 
 **State → tokens**
 
@@ -2290,10 +2952,24 @@ Interaction contract: Selected is the persistent tab selection state. Hover and 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Keep one tab selected at all times.
+- Keep labels short enough to fit on one line without wrapping.
+- Preserve each panel's state when switching away and back.
+
+**Do not**
+- Do not scroll or wrap tabs into a second row — reconsider the grouping.
+- Do not hide required form fields in an unselected tab.
+
+**Accessibility**
+- Role: `tablist`
+- Keyboard: Arrow keys move between tabs; Home and End jump to the first and last.
+- Keyboard: Tab moves from the tab list into the active panel.
+- Each tab carries aria-selected and aria-controls; each panel is labelled by its tab.
+- Only the selected tab is in the tab order.
 
 **Tokens used** — `card` · `foreground` · `muted-foreground` · `radius/lg` · `size/12`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `0df17400dc598663` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `32ae8b6acdae4851` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -2302,6 +2978,13 @@ Interaction contract: Selected is the persistent tab selection state. Hover and 
 **Visual separator for grouping adjacent content.**
 
 Visual separator for grouping adjacent content. Horizontal is the default for stacked regions; vertical is used between inline groups.
+
+**When to use**
+- Mark a boundary between groups that spacing alone does not make clear.
+
+**When not to use**
+- Where whitespace already separates the groups.
+- Decoration, or as a border around a region.
 
 **Variants**
 
@@ -2319,10 +3002,19 @@ Visual separator for grouping adjacent content. Horizontal is the default for st
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Bind it to a border token so it tracks the theme.
+
+**Do not**
+- Do not use a run of separators to create rhythm.
+
+**Accessibility**
+- Role: `separator`
+- Purely visual separators are aria-hidden="true".
+- One that genuinely divides groups keeps role="separator" and its orientation.
 
 **Tokens used** — `border`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `53f7b8f62699fcc0` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `692f0a3b0a0a6bf9` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -2387,12 +3079,19 @@ Application sidebar with desktop and compact structures. Expanded variants use n
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
 
+**When to use**
+- Keep navigation persistently in view alongside the main content.
+
+**When not to use**
+- Fewer than about five destinations — a horizontal bar reads faster.
+- Page content or filters that belong in the main column.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `state` | `expanded` | _needs review_ |
-| `state` | `collapsed` | _needs review_ |
+| `state` | `expanded` | Shown at full width, with labels visible. |
+| `state` | `collapsed` | Reduced to a minimal rail. |
 
 **State → tokens**
 
@@ -2405,13 +3104,24 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Remember the expanded or collapsed choice across sessions.
+- Keep icons meaningful when collapsed, and add tooltips for their labels.
+- Move to an overlay drawer at narrow widths.
 
 **Do not**
 - Do not turn Viewport into a code prop.
+- Do not collapse to icons alone where the metaphors are ambiguous.
+- Do not let the sidebar scroll the whole page.
+
+**Accessibility**
+- Role: `navigation`
+- Keyboard: The collapse control is focusable and labelled.
+- The collapse toggle carries aria-expanded.
+- When collapsed, each item still needs an accessible name.
 
 **Tokens used** — `radius/lg` · `sidebar` · `sidebar-accent-foreground` · `sidebar-border` · `sidebar-foreground` · `size/13` · `size/15`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `05c7760825c38979` · provenance description:imported · variants:imported · states:imported · dos:imported · donts:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `2cd12d983a280e2a` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -2423,12 +3133,18 @@ Watermelon docs sidebar route item. Use State=Active for the current route. Sizi
 
 Interaction contract: State=Active is the persistent current-route state. Hover and focus-visible are transient runtime link states rather than additional persistent variants; runtime focus must use the shared ring treatment.
 
+**When to use**
+- A single destination within sidebar navigation.
+
+**When not to use**
+- Firing an action rather than navigating — use a Button.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
 | `state` | `default` | Resting state. |
-| `state` | `active` | _needs review_ |
+| `state` | `active` | The currently selected item in its group. |
 
 **State → tokens**
 
@@ -2440,10 +3156,19 @@ Interaction contract: State=Active is the persistent current-route state. Hover 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Make the whole row the hit target, not just the text.
+- Show the active state from the route, not from click state.
+
+**Do not**
+- Do not signal the active item by colour alone.
+
+**Accessibility**
+- It is a link; the active one carries aria-current="page".
+- Its icon is decorative when the label is visible.
 
 **Tokens used** — `radius/lg` · `sidebar-accent` · `sidebar-accent-foreground` · `sidebar-foreground` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `885c4ef7f08f23af` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `85ea11a92de60dd1` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -2453,14 +3178,22 @@ Interaction contract: State=Active is the persistent current-route state. Hover 
 
 Loading placeholders for text, avatar rows, cards, and table rows. Dimensions are intentionally fixed to reserve layout space and prevent content shift.
 
+**When to use**
+- Hold the shape of content that is loading, so the layout does not jump when it arrives.
+
+**When not to use**
+- Waits short enough that it flashes.
+- Work with a known duration or total — use Progress.
+- An error or an empty result — those need their own states.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `type` | `text` | _needs review_ |
-| `type` | `avatar` | _needs review_ |
-| `type` | `card` | _needs review_ |
-| `type` | `tableRow` | _needs review_ |
+| `type` | `text` | Placeholder for a line or block of text. |
+| `type` | `avatar` | Avatar shape — a circular image, or initials when no image is available. |
+| `type` | `card` | Placeholder shaped like a card. |
+| `type` | `tableRow` | Placeholder shaped like a table row. |
 
 **State → tokens**
 
@@ -2471,8 +3204,18 @@ Loading placeholders for text, avatar rows, cards, and table rows. Dimensions ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Match the real content's dimensions closely.
+- Show a small representative number of placeholders, not a full page of them.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `b50699a07aaec9d0` · provenance description:imported · variants:imported · states:imported · dos:imported</sub>
+**Do not**
+- Do not leave skeletons up indefinitely when a request fails.
+- Do not animate so strongly that the page appears to be moving.
+
+**Accessibility**
+- Hidden from assistive technology with aria-hidden="true"; announce loading once, in a live region.
+- Respects prefers-reduced-motion by dropping the shimmer.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `459d0f3d0aafe9f1` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -2484,6 +3227,14 @@ Continuous value selection primitive. State variants document default, keyboard 
 
 Layout exception: Slider uses coordinate-based track, fill, and thumb geometry so the control can represent a continuous value. Do not infer absolute pixel positions as code API values; runtime width and value positioning are behavioral.
 
+**When to use**
+- Pick from a continuous or coarsely stepped range where the relative position matters more than the exact figure.
+
+**When not to use**
+- A precise value the user knows — use a number input.
+- Ranges so wide that a pixel is worth many units.
+- Fewer than about five discrete options — use radios or a segmented control.
+
 **State → tokens**
 
 | State | Tokens |
@@ -2493,14 +3244,24 @@ Layout exception: Slider uses coordinate-based track, fill, and thumb geometry s
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Show the current value as text next to the track.
+- Make the thumb large enough to hit on touch.
+- Pair it with a number input when precision matters.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
+- Do not use one for a value with a required exact entry.
+- Do not hide the minimum and maximum.
 
 **Accessibility**
+- Role: `slider`
+- Keyboard: Arrow keys move by one step; PageUp and PageDown by a larger one.
+- Keyboard: Home and End jump to the minimum and maximum.
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean
+- Carries aria-valuenow, aria-valuemin, aria-valuemax, and aria-valuetext where a raw number would not read well.
+- The thumb is the focusable element and carries the accessible name.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `7fc42199fc479671` · provenance description:imported · states:imported · dos:imported · donts:imported · accessibility:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `4db79ef07e13786e` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -2625,7 +3386,7 @@ Accessibility contract: the switch track is intentionally smaller than a 24px po
 | Axis | Value | Meaning |
 |---|---|---|
 | `size` | `small` | Dense contexts — tables, toolbars, compact rows. |
-| `size` | `default` | _needs review_ |
+| `size` | `default` | The standard size — use unless there is a reason not to. |
 | `value` | `unchecked` | Not selected. |
 | `value` | `checked` | Selected. |
 
@@ -2663,7 +3424,7 @@ Accessibility contract: the switch track is intentionally smaller than a 24px po
 
 **Tokens used** — `accent` · `destructive` · `input` · `primary` · `radius/full` · `ring`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `1463c44c74fa0e88` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `57fadd00505db0c7` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -2675,14 +3436,21 @@ Movable Switch thumb. Size follows the Root size; disabled styling is inherited 
 
 Pipeline API classification: apply the Governance property-classification rule before code mapping. Visual State axes are QA/story states unless engineering explicitly approves a controlled runtime prop; Viewport is responsive test data; Pattern is composition/story data.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
 | `size` | `small` | Dense contexts — tables, toolbars, compact rows. |
-| `size` | `default` | _needs review_ |
+| `size` | `default` | The standard size — use unless there is a reason not to. |
 | `state` | `default` | Resting state. |
-| `state` | `disabled` | _needs review_ |
+| `state` | `disabled` | Not available; not focusable and does not respond to input. |
 
 **State → tokens**
 
@@ -2693,10 +3461,14 @@ Pipeline API classification: apply the Governance property-classification rule b
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `card` · `radius/full`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `8839b7facf9f9bc8` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `7fed335ad99b7195` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -2708,14 +3480,21 @@ Jake UI extension for structured tabular data with compact and comfortable densi
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
 
+**When to use**
+- Present records across shared columns, for comparison, scanning, or exact reading.
+
+**When not to use**
+- Page layout — use a grid.
+- A handful of key-value pairs — use a description list.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
 | `density` | `compact` | Tighter spacing for information-dense screens. |
 | `density` | `comfortable` | Default spacing, easier to scan and tap. |
-| `selection` | `none` | _needs review_ |
-| `selection` | `selected` | _needs review_ |
+| `selection` | `none` | Nothing is currently selected. |
+| `selection` | `selected` | At least one item is selected. |
 
 **State → tokens**
 
@@ -2726,10 +3505,23 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Right-align numbers so digits line up.
+- Keep the header visible while the body scrolls.
+- Give empty, loading, and error states real treatments.
+
+**Do not**
+- Do not hide the only route to an action behind row hover.
+- Do not let a wide table break the page — let the table itself scroll.
+
+**Accessibility**
+- Role: `table`
+- Keyboard: Interactive cells are reachable in reading order.
+- Header cells are th with the right scope; a caption names the table.
+- Sortable headers carry aria-sort, and the control is a button inside the th.
 
 **Tokens used** — `border` · `card` · `muted-foreground` · `radius/lg` · `size/12`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `67ef76ce48707fff` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `2400dab75f4b1107` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -2740,6 +3532,13 @@ Pipeline property contract: only the component properties defined on this set ar
 Icon-only row-action trigger used with Dropdown Menu. States cover default, hover, focus-visible, and disabled. Runtime implementation requires an accessible name and menu focus management.
 
 Accessibility contract: icon-only row action trigger requires a programmatic accessible name that identifies the action context (for example, “Open row actions”) and a visible focus indicator.
+
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
 
 **State → tokens**
 
@@ -2752,10 +3551,12 @@ Accessibility contract: icon-only row action trigger requires a programmatic acc
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
 - Do not remove the ring border on focus. It is the only focus affordance.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Accessibility**
 - icon-only row action trigger requires a programmatic accessible name that identifies the action context (for example, “Open row actions”) and a visible focus indicator.
@@ -2763,7 +3564,7 @@ Accessibility contract: icon-only row action trigger requires a programmatic acc
 
 **Tokens used** — `accent` · `card` · `radius/lg` · `ring`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `523ee0949e226990` · provenance description:imported · states:imported · dos:imported · donts:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `c6eaaf8ceb5ed63e` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -2773,7 +3574,20 @@ Accessibility contract: icon-only row action trigger requires a programmatic acc
 
 Table body section containing data rows. Use the Row component states for hover and selection.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `c1c350933c9fcee4` · provenance description:imported</sub>
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
+**Do**
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `0f21d2d22e23cc77` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -2783,12 +3597,19 @@ Table body section containing data rows. Use the Row component states for hover 
 
 Accessible descriptive caption for a table. Position is visual; code should preserve caption semantics and reading order.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `position` | `top` | _needs review_ |
-| `position` | `bottom` | _needs review_ |
+| `position` | `top` | Placed above the content. |
+| `position` | `bottom` | Placed below the content. |
 
 **State → tokens**
 
@@ -2799,10 +3620,14 @@ Accessible descriptive caption for a table. Position is visual; code should pres
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `muted-foreground` · `size/12`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `0fce061a561961d0` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `fae422beefc8cadf` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -2812,15 +3637,22 @@ Accessible descriptive caption for a table. Position is visual; code should pres
 
 Semantic table data cell with alignment and text-emphasis options. Width is controlled by the containing column or row composition.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `alignment` | `left` | _needs review_ |
-| `alignment` | `center` | _needs review_ |
-| `alignment` | `right` | _needs review_ |
-| `emphasis` | `default` | _needs review_ |
-| `emphasis` | `strong` | _needs review_ |
+| `alignment` | `left` | Text aligned to the leading edge — the default for labels and prose. |
+| `alignment` | `center` | Text centred in the cell. |
+| `alignment` | `right` | Text aligned to the trailing edge — use for numbers, so digits line up. |
+| `emphasis` | `default` | Normal weight — the standard treatment. |
+| `emphasis` | `strong` | Heavier weight, to mark the row's key value. |
 
 **State → tokens**
 
@@ -2834,10 +3666,14 @@ Semantic table data cell with alignment and text-emphasis options. Width is cont
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `foreground` · `muted-foreground` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `11f8f26c97a6c467` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `291eea1e85136692` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -2846,6 +3682,13 @@ Semantic table data cell with alignment and text-emphasis options. Width is cont
 **Responsive overflow wrapper used by the Table root.**
 
 Responsive overflow wrapper used by the Table root. Viewport variants document desktop fit and compact horizontal scrolling. Runtime implementation should expose the scroll region without collapsing column readability.
+
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
 
 **State → tokens**
 
@@ -2856,13 +3699,15 @@ Responsive overflow wrapper used by the Table root. Viewport variants document d
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not turn Viewport into a code prop.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `border` · `card` · `muted-foreground` · `radius/lg` · `size/10`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `c303b7583edc240b` · provenance description:imported · states:imported · dos:imported · donts:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `155a3349d0016a28` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -2870,7 +3715,20 @@ Responsive overflow wrapper used by the Table root. Viewport variants document d
 
 **Table footer section for totals, summaries, or aggregate content.**
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `d51b2461aa40f7a2` · provenance description:imported</sub>
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
+**Do**
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `00905242925bb272` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -2880,13 +3738,20 @@ Responsive overflow wrapper used by the Table root. Viewport variants document d
 
 Semantic table column header. Alignment controls presentation only; use scope/row-header semantics in code where applicable.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `alignment` | `left` | _needs review_ |
-| `alignment` | `center` | _needs review_ |
-| `alignment` | `right` | _needs review_ |
+| `alignment` | `left` | Text aligned to the leading edge — the default for labels and prose. |
+| `alignment` | `center` | Text centred in the cell. |
+| `alignment` | `right` | Text aligned to the trailing edge — use for numbers, so digits line up. |
 
 **State → tokens**
 
@@ -2897,10 +3762,14 @@ Semantic table column header. Alignment controls presentation only; use scope/ro
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Tokens used** — `muted-foreground` · `size/12`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `e273bdb28c89623c` · provenance description:imported · variants:imported · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `56f58dc201dc11b3` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -2910,7 +3779,20 @@ Semantic table column header. Alignment controls presentation only; use scope/ro
 
 Table header section containing semantic column headers. This wrapper has no independent visual fill beyond its rows.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `edcc9f4c27fa2316` · provenance description:imported</sub>
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
+**Do**
+- Compose it through the parent rather than reaching for it directly.
+
+**Do not**
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
+
+<sub>status `draft` · updated 2026-08-09 · fingerprint `13ab0da9a4296e66` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
 
 ---
 
@@ -2921,6 +3803,13 @@ Table header section containing semantic column headers. This wrapper has no ind
 Source-parity Table compositions covering the basic invoice example, explicit footer example, row actions with a Dropdown Menu trigger, RTL content, desktop fit, and compact horizontal overflow. The original Table set remains the Jake UI density and selection extension.
 
 Pipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.
+
+**When to use**
+- Present records across shared columns, for comparison, scanning, or exact reading.
+
+**When not to use**
+- Page layout — use a grid.
+- A handful of key-value pairs — use a description list.
 
 **State → tokens**
 
@@ -2935,13 +3824,24 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Right-align numbers so digits line up.
+- Keep the header visible while the body scrolls.
+- Give empty, loading, and error states real treatments.
 
 **Do not**
 - Do not turn Pattern/Viewport into a code prop.
+- Do not hide the only route to an action behind row hover.
+- Do not let a wide table break the page — let the table itself scroll.
+
+**Accessibility**
+- Role: `table`
+- Keyboard: Interactive cells are reachable in reading order.
+- Header cells are th with the right scope; a caption names the table.
+- Sortable headers carry aria-sort, and the control is a button inside the th.
 
 **Tokens used** — `muted-foreground` · `size/11` · `size/12`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `3efdf2ea191b60dc` · provenance description:imported · states:imported · dos:imported · donts:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `761baaa3dcd61027` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -2953,13 +3853,20 @@ Table row patterns for header, body, and footer sections. Body rows include defa
 
 Pipeline API classification: apply the Governance property-classification rule before code mapping. Visual State axes are QA/story states unless engineering explicitly approves a controlled runtime prop; Viewport is responsive test data; Pattern is composition/story data.
 
+**When to use**
+- Only inside its parent component's composition — this is a part, not a standalone component.
+
+**When not to use**
+- On its own, outside the parent that owns its behaviour and accessibility wiring.
+- As a general-purpose layout or text primitive.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `type` | `header` | _needs review_ |
-| `type` | `body` | _needs review_ |
-| `type` | `footer` | _needs review_ |
+| `type` | `header` | The heading region, above the body. |
+| `type` | `body` | The main content region. |
+| `type` | `footer` | The summary or totals region, below the body. |
 | `density` | `compact` | Tighter spacing for information-dense screens. |
 | `density` | `comfortable` | Default spacing, easier to scan and tap. |
 
@@ -2979,16 +3886,18 @@ Pipeline API classification: apply the Governance property-classification rule b
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not emit State as an enum prop. It packs states that co-occur at runtime.
+- Do not re-implement the parent's keyboard or focus behaviour on the part.
 
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Selected] → :hover CSS-owned, dropped; selected controlled state
 
 **Tokens used** — `accent` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `size/12` · `size/13`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `5c64312cd8eaf10b` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · donts:imported · accessibility:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `9519aec3f63e5ac4` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -2998,13 +3907,21 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 Grouped navigation for switching between peer views without leaving the current context. Orientation controls horizontal or vertical layout; Density supports default and compact applications.
 
+**When to use**
+- Switch between peer views of the same subject, within one context.
+
+**When not to use**
+- Steps in a sequence — use a stepper.
+- Content the reader needs to compare side by side, or to find with the browser's search.
+- Navigating to a different page — use links.
+
 **Variants**
 
 | Axis | Value | Meaning |
 |---|---|---|
 | `orientation` | `horizontal` | Lays out along the inline axis. |
 | `orientation` | `vertical` | Lays out along the block axis. |
-| `density` | `default` | _needs review_ |
+| `density` | `default` | Standard spacing. |
 | `density` | `compact` | Tighter spacing for information-dense screens. |
 
 **State → tokens**
@@ -3016,10 +3933,24 @@ Grouped navigation for switching between peer views without leaving the current 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Keep one tab selected at all times.
+- Keep labels short enough to fit on one line without wrapping.
+- Preserve each panel's state when switching away and back.
+
+**Do not**
+- Do not scroll or wrap tabs into a second row — reconsider the grouping.
+- Do not hide required form fields in an unselected tab.
+
+**Accessibility**
+- Role: `tablist`
+- Keyboard: Arrow keys move between tabs; Home and End jump to the first and last.
+- Keyboard: Tab moves from the tab list into the active panel.
+- Each tab carries aria-selected and aria-controls; each panel is labelled by its tab.
+- Only the selected tab is in the tab order.
 
 **Tokens used** — `foreground` · `muted` · `radius/lg` · `size/12`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `b36246c0029c440d` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `02eb4eaa12d379f8` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -3095,8 +4026,8 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `pressed` | `false` | _needs review_ |
-| `pressed` | `true` | _needs review_ |
+| `pressed` | `false` | Off — the toggle is not engaged. |
+| `pressed` | `true` | On — the toggle is engaged. |
 
 **State → tokens**
 
@@ -3130,7 +4061,7 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 **Tokens used** — `accent` · `accent-foreground` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/md` · `ring` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `7688d749d59b616a` · provenance description:imported · variants:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `e7a891cf665cb663` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
 
 ---
 
@@ -3152,8 +4083,8 @@ Grouped toggle controls for choosing one or multiple persistent options. Use sin
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `selection` | `single` | _needs review_ |
-| `selection` | `multiple` | _needs review_ |
+| `selection` | `single` | One item at a time may be selected. |
+| `selection` | `multiple` | Several items may be selected at once. |
 | `orientation` | `horizontal` | Lays out along the inline axis. |
 | `orientation` | `vertical` | Lays out along the block axis. |
 
@@ -3180,7 +4111,7 @@ Grouped toggle controls for choosing one or multiple persistent options. Use sin
 
 **Tokens used** — `accent-foreground` · `size/14`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `561f34b8578477ce` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `74d51f5f083e3d4a` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
 
 ---
 
@@ -3189,6 +4120,13 @@ Grouped toggle controls for choosing one or multiple persistent options. Use sin
 **Brief non-interactive label revealed on hover or focus.**
 
 Brief non-interactive label revealed on hover or focus. Side controls preferred placement relative to the trigger.
+
+**When to use**
+- Name or clarify a control whose purpose is not obvious from its label alone.
+
+**When not to use**
+- Content the user must read to proceed — a tooltip is unreachable on touch and easy to miss.
+- Anything interactive: links, buttons, or text to copy — use a Popover.
 
 **Variants**
 
@@ -3208,7 +4146,21 @@ Brief non-interactive label revealed on hover or focus. Side controls preferred 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
 - Change state through props, never by detaching the instance.
+- Keep it to a short phrase.
+- Attach it to the control itself, so it is reachable by keyboard focus.
+
+**Do not**
+- Do not put a tooltip on a non-focusable element.
+- Do not repeat the visible label verbatim.
+- Do not place essential or interactive content inside one.
+
+**Accessibility**
+- Role: `tooltip`
+- Keyboard: Shows on focus as well as hover.
+- Keyboard: Escape dismisses it.
+- Referenced by the control via aria-describedby.
+- Stays visible long enough to read, and while the pointer is over it.
 
 **Tokens used** — `card` · `foreground` · `radius/lg` · `size/12`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `91a04caa95840f0b` · provenance description:imported · variants:imported+framework · states:imported · dos:imported · tokensUsed:imported</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `9290eafaeccdbd66` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>

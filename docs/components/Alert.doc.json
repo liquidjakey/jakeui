@@ -18,7 +18,9 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Say what happened and what to do next.",
+    "Place it next to what it refers to."
   ],
   "tokensUsed": [
     "card",
@@ -38,7 +40,29 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Deliver an in-page message about the state of the view or a task."
+  ],
+  "whenNotToUse": [
+    "A decision that must block the flow — use a Dialog.",
+    "Transient confirmation of a completed action — use a toast."
+  ],
+  "donts": [
+    "Do not stack several alerts competing for attention.",
+    "Do not signal severity with colour alone — pair it with an icon and text."
+  ],
+  "accessibility": {
+    "role": "alert",
+    "notes": [
+      "Only an urgent, interrupting message should use role=\"alert\"; a static one uses role=\"status\" or no live region at all.",
+      "A dismissible alert's close control needs an accessible name."
+    ]
   }
 }

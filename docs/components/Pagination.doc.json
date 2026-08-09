@@ -5,7 +5,7 @@
   "variants": {
     "state": {
       "default": "Resting state.",
-      "disabled": ""
+      "disabled": "Not available; not focusable and does not respond to input."
     }
   },
   "states": {
@@ -13,10 +13,15 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Show the current page and the total.",
+    "Keep previous and next in the same place as the page count changes.",
+    "Disable rather than hide the controls at the first and last page."
   ],
   "donts": [
-    "Do not turn Viewport into a code prop."
+    "Do not turn Viewport into a code prop.",
+    "Do not reset filters or sort when the page changes.",
+    "Do not make the hit targets smaller than the surrounding controls."
   ],
   "tokensUsed": [
     "card",
@@ -29,8 +34,28 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "donts": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Break a long result set into pages the reader can move through and return to."
+  ],
+  "whenNotToUse": [
+    "A feed meant to be browsed continuously — use infinite scroll or a load-more control.",
+    "Result sets short enough to show at once."
+  ],
+  "accessibility": {
+    "role": "navigation",
+    "keyboard": [
+      "Every control is reachable in reading order."
+    ],
+    "notes": [
+      "Wrapped in a nav named e.g. \"Pagination\".",
+      "The current page carries aria-current=\"page\"; disabled controls stay announced."
+    ]
   }
 }

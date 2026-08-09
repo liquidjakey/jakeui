@@ -4,13 +4,13 @@
   "description": "Semantic table data cell with alignment and text-emphasis options. Width is controlled by the containing column or row composition.",
   "variants": {
     "alignment": {
-      "left": "",
-      "center": "",
-      "right": ""
+      "left": "Text aligned to the leading edge — the default for labels and prose.",
+      "center": "Text centred in the cell.",
+      "right": "Text aligned to the trailing edge — use for numbers, so digits line up."
     },
     "emphasis": {
-      "default": "",
-      "strong": ""
+      "default": "Normal weight — the standard treatment.",
+      "strong": "Heavier weight, to mark the row's key value."
     }
   },
   "states": {
@@ -21,7 +21,8 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Compose it through the parent rather than reaching for it directly."
   ],
   "tokensUsed": [
     "foreground",
@@ -32,9 +33,22 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
-  }
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice"
+  },
+  "whenToUse": [
+    "Only inside its parent component's composition — this is a part, not a standalone component."
+  ],
+  "whenNotToUse": [
+    "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+    "As a general-purpose layout or text primitive."
+  ],
+  "donts": [
+    "Do not re-implement the parent's keyboard or focus behaviour on the part."
+  ]
 }

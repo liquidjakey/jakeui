@@ -5,6 +5,33 @@
   "status": "draft",
   "updatedAt": "2026-08-09",
   "provenance": {
-    "description": "imported"
+    "description": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "dos": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Reinforce a label, or stand in for one where the metaphor is unambiguous and repeated."
+  ],
+  "whenNotToUse": [
+    "Carrying meaning that has no text anywhere near it.",
+    "Illustration — use an image."
+  ],
+  "dos": [
+    "Take icons from the mapped set rather than pasting one-off SVG.",
+    "Size and colour them from tokens so they track the text they sit beside.",
+    "Keep one metaphor for one meaning across the product."
+  ],
+  "donts": [
+    "Do not use an icon alone for a destructive or unusual action.",
+    "Do not rotate or recolour an icon to mean something new."
+  ],
+  "accessibility": {
+    "notes": [
+      "A decorative icon beside text is aria-hidden=\"true\".",
+      "A meaningful standalone icon needs a text alternative on it or on its control."
+    ]
   }
 }

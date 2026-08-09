@@ -8,8 +8,8 @@
       "large": "Prominent or touch-first contexts."
     },
     "arrow": {
-      "false": "",
-      "true": ""
+      "false": "No pointer — the surface floats free of its trigger.",
+      "true": "Shows a pointer aimed at the trigger."
     }
   },
   "states": {
@@ -17,7 +17,10 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Anchor it to the trigger and flip it when it would overflow the viewport.",
+    "Give it an explicit close affordance.",
+    "Return focus to the trigger on close."
   ],
   "tokensUsed": [
     "border",
@@ -32,7 +35,34 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Show secondary content or a small task in context, anchored to its trigger."
+  ],
+  "whenNotToUse": [
+    "A decision that must block the flow — use a Dialog.",
+    "A plain text hint — use a Tooltip.",
+    "A list of actions — use a menu."
+  ],
+  "donts": [
+    "Do not open one from inside another.",
+    "Do not put a long scrolling form in one."
+  ],
+  "accessibility": {
+    "role": "dialog",
+    "keyboard": [
+      "Escape closes.",
+      "Tab moves through the content, then out."
+    ],
+    "notes": [
+      "The trigger carries aria-expanded and aria-controls.",
+      "A popover holding a form should trap focus; a non-modal one should not."
+    ]
   }
 }

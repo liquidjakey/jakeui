@@ -13,7 +13,10 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Label axes and units directly.",
+    "Order categories meaningfully, not alphabetically by accident.",
+    "Bind series colour to semantic tokens so themes carry through."
   ],
   "tokensUsed": [
     "border",
@@ -28,7 +31,29 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Reveal a pattern, comparison, or trend that a table would bury."
+  ],
+  "whenNotToUse": [
+    "Precise values the reader needs to read off exactly — use a table.",
+    "A single number — use a stat or a Badge."
+  ],
+  "donts": [
+    "Do not distinguish series by colour alone — vary shape, pattern, or direct labels.",
+    "Do not truncate a bar chart's value axis away from zero."
+  ],
+  "accessibility": {
+    "role": "img",
+    "notes": [
+      "Give the chart a text alternative that states the takeaway, not just the chart type.",
+      "Offer the underlying data as a table for screen-reader and keyboard users."
+    ]
   }
 }

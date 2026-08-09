@@ -139,11 +139,16 @@ be inferred; inventing a voice would be worse than a visible gap.
 
 ### Needs your judgement (blocking nothing, but owed)
 
-- **105 doc blocks flagged for review.** Run `npm run docs:enrich` to list them.
-  Mostly `whenToUse` / `whenNotToUse` on the **26 components with no archetype
-  match**, plus variant values with no vocabulary entry (`arrow.false`,
-  `disabled.true`, …). Add archetypes or vocabulary to `docs/archetypes.json` and
-  re-run — never hand-edit the generated records.
+- ~~**105 doc blocks flagged for review.**~~ **Closed — now 1.** `docs/archetypes.json`
+  grew from 6 archetypes / 13 vocabulary axes to 31 / 26; 70 of 86 records enriched,
+  89 variant meanings filled. Decision record:
+  `decisions/2026-08-09-doc-gaps-closed-via-archetypes.md`. **The one block still owed
+  is `Popover / Viewport`** (`state.current`, `state.previous`, `direction.*`) — left
+  open deliberately, because those describe a bespoke transition mechanism and a
+  guessed meaning would be worse than a visible gap.
+  Note: `docs:enrich` truncates its owed list at 8 entries, which is why the shape of
+  the 105 was never visible. To see all of them, read the records rather than the
+  script's output.
 - **`audit.percentSemantic` is internally inconsistent** — the field says `100`, its
   own `_percentSemanticNote` says 99 for colour and 19% across all bindings. The note's
   reasoning is sound; the headline field is the wrong one.
@@ -174,8 +179,8 @@ be inferred; inventing a voice would be worse than a visible gap.
 
 ## 6. Recommended next actions, in order
 
-1. **Resolve the 105 flagged blocks** — or explicitly accept them. This is the only
-   thing that needs you rather than an agent.
+1. ~~**Resolve the 105 flagged blocks.**~~ **Done** — see §5. What is left for you is
+   the smaller `audit.percentSemantic` inconsistency, also in §5.
 2. **Write props tables for the next batch of components.** `validate-map.mjs`
    requires one before a component may declare a `codePath`. This is now
    **transcription** from `docs/components/*.doc.json` (per-state token bindings,

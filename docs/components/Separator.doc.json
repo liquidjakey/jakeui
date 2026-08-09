@@ -13,7 +13,8 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Bind it to a border token so it tracks the theme."
   ],
   "tokensUsed": [
     "border"
@@ -24,7 +25,28 @@
     "description": "imported",
     "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Mark a boundary between groups that spacing alone does not make clear."
+  ],
+  "whenNotToUse": [
+    "Where whitespace already separates the groups.",
+    "Decoration, or as a border around a region."
+  ],
+  "donts": [
+    "Do not use a run of separators to create rhythm."
+  ],
+  "accessibility": {
+    "role": "separator",
+    "notes": [
+      "Purely visual separators are aria-hidden=\"true\".",
+      "One that genuinely divides groups keeps role=\"separator\" and its orientation."
+    ]
   }
 }

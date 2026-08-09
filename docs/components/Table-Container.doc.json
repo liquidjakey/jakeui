@@ -7,10 +7,12 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Compose it through the parent rather than reaching for it directly."
   ],
   "donts": [
-    "Do not turn Viewport into a code prop."
+    "Do not turn Viewport into a code prop.",
+    "Do not re-implement the parent's keyboard or focus behaviour on the part."
   ],
   "tokensUsed": [
     "border",
@@ -24,8 +26,17 @@
   "provenance": {
     "description": "imported",
     "states": "imported",
-    "dos": "imported",
-    "donts": "imported",
-    "tokensUsed": "imported"
-  }
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice"
+  },
+  "whenToUse": [
+    "Only inside its parent component's composition — this is a part, not a standalone component."
+  ],
+  "whenNotToUse": [
+    "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+    "As a general-purpose layout or text primitive."
+  ]
 }

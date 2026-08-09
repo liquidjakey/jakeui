@@ -4,12 +4,12 @@
   "description": "Single disclosure region for optional controls or secondary information. Use Accordion instead when multiple related items are grouped together. Sizing policy: fixed/default width with Hug Contents height.\n\nInteraction contract: open/closed and disabled are persistent disclosure states. Hover, pressed, and focus-visible belong to the disclosure trigger at runtime and are not separate root variants.",
   "variants": {
     "state": {
-      "closed": "",
-      "open": ""
+      "closed": "Collapsed — the content is hidden.",
+      "open": "Expanded — the content is revealed."
     },
     "disabled": {
-      "false": "",
-      "true": ""
+      "false": "Available and interactive.",
+      "true": "Not available; not focusable and does not respond to input."
     }
   },
   "states": {
@@ -19,7 +19,9 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Make the trigger the whole header row, not just the chevron.",
+    "Write triggers that say what is inside."
   ],
   "tokensUsed": [
     "border",
@@ -34,9 +36,34 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Let the reader collapse secondary content so the page stays scannable."
+  ],
+  "whenNotToUse": [
+    "Content the reader almost always needs — show it instead of hiding it.",
+    "Switching between peer views — use Tabs."
+  ],
+  "donts": [
+    "Do not hide validation errors or required form fields behind a collapsed section.",
+    "Do not animate so slowly that opening feels unresponsive."
+  ],
+  "accessibility": {
+    "keyboard": [
+      "Enter and Space toggle the section.",
+      "Tab moves between triggers."
+    ],
+    "notes": [
+      "The trigger is a button carrying aria-expanded and aria-controls.",
+      "The panel stays in the accessibility tree only while open."
+    ]
   }
 }

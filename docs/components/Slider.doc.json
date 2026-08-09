@@ -7,14 +7,26 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Show the current value as text next to the track.",
+    "Make the thumb large enough to hit on touch.",
+    "Pair it with a number input when precision matters."
   ],
   "donts": [
-    "Do not emit State as an enum prop. It packs states that co-occur at runtime."
+    "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
+    "Do not use one for a value with a required exact entry.",
+    "Do not hide the minimum and maximum."
   ],
   "accessibility": {
     "notes": [
-      "State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean"
+      "State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean",
+      "Carries aria-valuenow, aria-valuemin, aria-valuemax, and aria-valuetext where a raw number would not read well.",
+      "The thumb is the focusable element and carries the accessible name."
+    ],
+    "role": "slider",
+    "keyboard": [
+      "Arrow keys move by one step; PageUp and PageDown by a larger one.",
+      "Home and End jump to the minimum and maximum."
     ]
   },
   "status": "draft",
@@ -22,8 +34,18 @@
   "provenance": {
     "description": "imported",
     "states": "imported",
-    "dos": "imported",
-    "donts": "imported",
-    "accessibility": "imported"
-  }
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "accessibility": "imported+w3c-apg",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice"
+  },
+  "whenToUse": [
+    "Pick from a continuous or coarsely stepped range where the relative position matters more than the exact figure."
+  ],
+  "whenNotToUse": [
+    "A precise value the user knows — use a number input.",
+    "Ranges so wide that a pixel is worth many units.",
+    "Fewer than about five discrete options — use radios or a segmented control."
+  ]
 }

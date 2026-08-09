@@ -4,8 +4,8 @@
   "description": "Hierarchical location trail. Use Collapsed=True when intermediate levels must be condensed at narrower widths. Sizing policy: Hug Contents width with fixed standard control height.",
   "variants": {
     "collapsed": {
-      "false": "",
-      "true": ""
+      "false": "Every item is shown in full.",
+      "true": "Middle items are folded behind an overflow affordance."
     }
   },
   "states": {
@@ -13,7 +13,9 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Render the current page as plain text, not a link.",
+    "Collapse the middle rather than wrapping to a second line."
   ],
   "tokensUsed": [
     "border",
@@ -26,9 +28,30 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Show where the current page sits in a hierarchy, and offer a way back up."
+  ],
+  "whenNotToUse": [
+    "Flat sites with no hierarchy.",
+    "Step-by-step progress through a flow — use a stepper."
+  ],
+  "donts": [
+    "Do not use it to record visit history — it reflects hierarchy, not the back button."
+  ],
+  "accessibility": {
+    "notes": [
+      "Wrap in a nav with an accessible name such as \"Breadcrumb\".",
+      "Mark the current page with aria-current=\"page\".",
+      "Separators are decorative and hidden from assistive technology."
+    ]
   }
 }

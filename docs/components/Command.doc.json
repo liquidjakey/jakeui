@@ -4,8 +4,8 @@
   "description": "Command menu item primitive. Use Selected=True for the currently highlighted result.\n\nInteraction contract: Selected=True is the highlighted command option used for pointer or keyboard roving selection. DOM focus remains on the command input/list controller, so a separate item focus variant is not required.",
   "variants": {
     "selected": {
-      "false": "",
-      "true": ""
+      "false": "Not selected.",
+      "true": "Selected — the active choice in its group."
     }
   },
   "states": {
@@ -14,7 +14,10 @@
   },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
-    "Change state through props, never by detaching the instance."
+    "Change state through props, never by detaching the instance.",
+    "Show recent or suggested items before the user types.",
+    "Group results and label the groups.",
+    "Show the keyboard shortcut that opens it somewhere discoverable."
   ],
   "tokensUsed": [
     "accent",
@@ -27,9 +30,34 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
-    "dos": "imported",
-    "tokensUsed": "imported"
+    "dos": "imported+best-practice",
+    "tokensUsed": "imported",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "donts": "best-practice",
+    "accessibility": "w3c-apg"
+  },
+  "whenToUse": [
+    "Give keyboard-first users a fast path to any command or destination."
+  ],
+  "whenNotToUse": [
+    "The primary means of discovering features — it supplements navigation, it does not replace it.",
+    "A small fixed set of options — use a Select or a menu."
+  ],
+  "donts": [
+    "Do not hide destructive commands in it without a confirmation step.",
+    "Do not leave an empty result set unexplained."
+  ],
+  "accessibility": {
+    "keyboard": [
+      "Arrow keys move through results, Enter runs the highlighted one.",
+      "Escape closes and returns focus to the trigger."
+    ],
+    "notes": [
+      "The input owns focus and points at the list via aria-controls and aria-activedescendant.",
+      "Announce the result count as it changes."
+    ]
   }
 }

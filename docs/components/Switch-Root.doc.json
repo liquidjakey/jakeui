@@ -5,7 +5,7 @@
   "variants": {
     "size": {
       "small": "Dense contexts — tables, toolbars, compact rows.",
-      "default": ""
+      "default": "The standard size — use unless there is a reason not to."
     },
     "value": {
       "unchecked": "Not selected.",

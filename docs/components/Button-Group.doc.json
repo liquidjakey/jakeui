@@ -8,8 +8,8 @@
       "vertical": "Lays out along the block axis."
     },
     "attached": {
-      "false": "",
-      "true": ""
+      "false": "Members keep their own borders and are separated by a gap.",
+      "true": "Members are joined into one continuous control, sharing inner borders."
     }
   },
   "states": {
