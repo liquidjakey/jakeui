@@ -1,6 +1,25 @@
 import type { Preview, Decorator } from '@storybook/react-vite';
 import { createElement } from 'react';
 
+/**
+ * Inter, self-hosted, at exactly the four weights the Figma text styles bind:
+ * 400 regular, 500 medium, 600 semibold, 700 bold.
+ *
+ * WHY THIS IS NOT OPTIONAL. `--font-sans` has always asked for "Inter", but no
+ * @font-face ever declared it — the stack simply fell through to ui-sans-serif.
+ * It LOOKED correct in this repo only because Inter happens to be installed on
+ * the author's machine, so the OS resolved it. On CI, or on any machine without
+ * Inter installed, every component silently rendered in the system UI face with
+ * different metrics from Figma. `@fontsource/inter` declares the family as plain
+ * `Inter`, which is why it is used here rather than the Variable package: it
+ * matches the generated font stack exactly, so tokens/globals.css — which is
+ * generated from Figma and must never be hand-edited — needs no change.
+ */
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+
 // The whole point: this import puts tokens/globals.css through a real Tailwind v4
 // build. Everything in the library resolves from these variables.
 import '../tokens/globals.css';
