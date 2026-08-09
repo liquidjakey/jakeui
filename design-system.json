@@ -65,7 +65,11 @@
       "Native Select",
       "Label",
       "Separator",
-      "Field"
+      "Field",
+      "Dialog",
+      "Alert Dialog",
+      "Drawer",
+      "Sheet"
     ],
     "meta": {
       "Input": {
@@ -127,7 +131,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T11:05:00Z",
+        "_note": "Implemented 9 Aug 2026. Two deliberate differences from Dialog, both accessibility decisions: the backdrop does NOT dismiss (a decision dismissed by misclick is how people lose data; Escape still cancels), and description is REQUIRED by the type. Initial focus goes to Cancel so a reflexive Enter takes the safe path. No slots on purpose - a slot would let a caller turn it back into a Dialog. This component binds card-foreground, which is the CORRECT pairing for a card fill; Dialog/Drawer/Sheet bind plain foreground on the same fill."
       },
       "Avatar": {
         "doc": {
@@ -352,7 +357,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T11:05:00Z",
+        "_note": "Implemented 9 Aug 2026 on the native <dialog> element via the shared internal components/modal-surface.tsx. showModal() supplies the focus trap, Escape, top layer and ::backdrop from the platform, following the NativeSelect precedent. children/footer are SLOTS not typed props, per the record's instruction that embedded copy must not be generated as a public code prop until engineering API review. GAPS: Size has no token backing (there are NO width or container tokens anywhere in the file - every size/* variable is a type size), and the backdrop has no token."
       },
       "Drawer": {
         "doc": {
@@ -367,7 +373,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T11:05:00Z",
+        "_note": "Implemented 9 Aug 2026. See the Sheet note - the two are indistinguishable in the design file."
       },
       "Dropdown Menu": {
         "doc": {
@@ -1001,7 +1008,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T11:05:00Z",
+        "_note": "Implemented 9 Aug 2026. DRAWER AND SHEET ARE IDENTICAL IN EVERY RECORDED RESPECT: same tokensUsed, same state rows, same variant count, same props, same accessibility. The ONLY difference is the placement axis name (Drawer=Placement, Sheet=Side) with the same two values. The distinction exists only as prose. Both built as specified rather than merged because collapsing them is a design decision; they share modal-surface.tsx so they cannot drift further. UNRESOLVED - worth deciding: give them a real visual difference, or collapse them."
       },
       "Sidebar": {
         "doc": {
@@ -1456,7 +1464,8 @@
         "mdx": 0
       },
       "_note": "All 86 now carry a canonical doc record in docs/components/, adopted from their Figma descriptions and verified byte-for-byte against the live file. 1 has a code doc (input.md) and 1 has code + Storybook stories (Input). 105 blocks across the records are flagged as owed to human review (mostly whenToUse/whenNotToUse on the 26 components with no archetype match)."
-    }
+    },
+    "_tokenGapsFound": "Found 9 Aug 2026 while building the overlay family. (1) NO width or container tokens exist in the file - every size/* variable is a type size (10-22) - so Dialog Size and Drawer/Sheet Width are raw values in code. (2) No backdrop/scrim token on any of the four overlay records. (3) SEMANTIC MISMATCH: Alert Dialog binds card-foreground while Dialog, Drawer and Sheet bind plain foreground, all on a card fill. Verified in .figma-tokens-dump.json that foreground and card-foreground currently resolve to the SAME primitives (neutral/950 Light, neutral/50 Dark), so this is invisible today - but it is the same latent failure mode already recorded for warning-muted-foreground, where identical-resolving tokens made a planned fix a no-op. card-foreground is the correct pairing for a card fill."
   },
   "tokenCrosswalk": {
     "path": null,

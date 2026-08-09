@@ -47,8 +47,8 @@
     "Alert Dialog": {
       "figmaNodeId": "66:22",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/alert-dialog.tsx",
+      "codeExport": "AlertDialog",
       "props": {
         "Title#66:0": {
           "kind": "prop",
@@ -1076,8 +1076,8 @@
     "Dialog": {
       "figmaNodeId": "105:521",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/dialog.tsx",
+      "codeExport": "Dialog",
       "props": {
         "Title#105:0": {
           "kind": "prop",
@@ -1108,8 +1108,8 @@
     "Drawer": {
       "figmaNodeId": "106:559",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/drawer.tsx",
+      "codeExport": "Drawer",
       "props": {
         "Title#106:0": {
           "kind": "prop",
@@ -1204,8 +1204,8 @@
     "Sheet": {
       "figmaNodeId": "111:649",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/sheet.tsx",
+      "codeExport": "Sheet",
       "props": {
         "Title#111:10": {
           "kind": "prop",
