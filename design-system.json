@@ -90,7 +90,13 @@
       "Popover / Close",
       "Popover / Viewport",
       "Tooltip",
-      "Hover Card"
+      "Hover Card",
+      "Dropdown Menu",
+      "Dropdown Menu / Trigger",
+      "Dropdown Menu / Label",
+      "Dropdown Menu / Radio Item",
+      "Dropdown Menu / Sub Trigger",
+      "Dropdown Menu / Sub Content"
     ],
     "meta": {
       "Input": {
@@ -414,7 +420,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:55:00Z",
+        "_note": "Implemented 9 Aug 2026. Correct surface pairing (popover + popover-foreground). Type and Density BOTH carry no token delta - Type describes what is inside rather than how the container looks, and Density is the fourth component in this system with no spacing token, so padding is raw. Primary item label / Primary shortcut are example content not API, same pattern as Table row labels and Breadcrumb levels."
       },
       "Dropdown Menu / Checkbox Item": {
         "doc": {
@@ -489,7 +496,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:55:00Z",
+        "_note": "Implemented 9 Aug 2026. role=presentation and non-focusable per the record, so arrow-key navigation skips it - a label announced as an item is a dead end. GAP: it binds full-strength popover-foreground, the SAME colour as the items it labels, so a label looks exactly like the things beneath it; muted-foreground would be the usual treatment. Inset changes padding only and no spacing token is recorded."
       },
       "Dropdown Menu / Radio Group": {
         "doc": {
@@ -519,7 +527,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:55:00Z",
+        "_note": "Implemented 9 Aug 2026. THE CHECKED STATE HAS NO RECORDED VISUAL: both Checked rows in the record are Highlighted rows and are identical to the unchecked highlighted row, so there is no recorded way to tell a checked radio item from an unchecked one. For an exclusive-choice control that is the one state that must be visible, so a check indicator is ASSERTED, not transcribed. aria-checked carries it correctly either way, so this is a sighted-user gap only. FIGMA OWES a checked indicator. The Show icon boolean collapsed into the nullable icon slot per the map kind: slot-toggle."
       },
       "Dropdown Menu / Root Composition": {
         "doc": {
@@ -579,7 +588,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:55:00Z",
+        "_note": "Implemented 9 Aug 2026. Identical tokens to Dropdown Menu, which is correct - a submenu is the same surface. Neither Side nor Align carries a token delta; both are pure geometry. The `side` vocabulary (opens to the left/right OF THE TRIGGER) is correct here, unlike on Sheet where the surface attaches to the viewport. Placement is not collision-aware, same limitation as Popover."
       },
       "Dropdown Menu / Sub Trigger": {
         "doc": {
@@ -594,7 +604,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:55:00Z",
+        "_note": "Implemented 9 Aug 2026. Inset is PROVABLY INERT - both Inset pairs present (Open and Highlighted) bind identical tokens, the same reasoning that recovered Table / Row. GAP: Open and Highlighted bind IDENTICAL tokens (accent fill, accent-foreground text), so a sub trigger looks the same whether its submenu is open or merely hovered - no feedback that it opened. No submenu indicator token either. Right Arrow opens and moves in, Left closes and returns; flips in RTL."
       },
       "Dropdown Menu / Trigger": {
         "doc": {
@@ -609,7 +620,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:55:00Z",
+        "_note": "Implemented 9 Aug 2026. NOTE THE CONTRAST WITH NativeSelect: both maps annotate State with a `controlled` open state. There it was deliberately NOT emitted because a native select menu is platform-owned and unobservable; here the menu is ours, can be opened programmatically, and aria-expanded needs it. Same annotation, opposite conclusion - the difference is who owns the popup. GAPS: avatar/closed binds accent-foreground with NO fill (that token is the text colour FOR the accent fill, so it sits on whatever is beneath - same class as Card, far less severe); disabled changes text only with no fill change, unlike every other disabled control here; no disabled variant exists for the avatar type."
       },
       "Field": {
         "doc": {

@@ -87,3 +87,20 @@ export type { TooltipProps } from './tooltip.js';
 
 export { HoverCard } from './hover-card.js';
 export type { HoverCardProps } from './hover-card.js';
+
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuLabel,
+  DropdownMenuRadioItem,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+} from './dropdown-menu.js';
+export type {
+  DropdownMenuProps,
+  DropdownMenuTriggerProps,
+  DropdownMenuLabelProps,
+  DropdownMenuRadioItemProps,
+  DropdownMenuSubTriggerProps,
+  DropdownMenuSubContentProps,
+} from './dropdown-menu.js';

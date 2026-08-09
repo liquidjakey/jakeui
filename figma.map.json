@@ -1140,8 +1140,8 @@
     "Dropdown Menu": {
       "figmaNodeId": "109:607",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/dropdown-menu.tsx",
+      "codeExport": "DropdownMenu",
       "props": {
         "Primary item label#109:0": {
           "kind": "prop",
@@ -1256,8 +1256,8 @@
     "Dropdown Menu / Trigger": {
       "figmaNodeId": "144:2051",
       "variants": 7,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/dropdown-menu.tsx",
+      "codeExport": "DropdownMenuTrigger",
       "props": {
         "Type": {
           "kind": "prop",
@@ -1410,8 +1410,8 @@
     "Dropdown Menu / Radio Item": {
       "figmaNodeId": "144:2198",
       "variants": 6,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/dropdown-menu.tsx",
+      "codeExport": "DropdownMenuRadioItem",
       "props": {
         "Label#144:62": {
           "kind": "prop",
@@ -1460,8 +1460,8 @@
     "Dropdown Menu / Label": {
       "figmaNodeId": "144:2203",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/dropdown-menu.tsx",
+      "codeExport": "DropdownMenuLabel",
       "props": {
         "Label#144:69": {
           "kind": "prop",
@@ -1480,8 +1480,8 @@
     "Dropdown Menu / Sub Trigger": {
       "figmaNodeId": "144:2232",
       "variants": 8,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/dropdown-menu.tsx",
+      "codeExport": "DropdownMenuSubTrigger",
       "props": {
         "Label#144:73": {
           "kind": "prop",
@@ -1560,8 +1560,8 @@
     "Dropdown Menu / Sub Content": {
       "figmaNodeId": "146:2705",
       "variants": 6,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/dropdown-menu.tsx",
+      "codeExport": "DropdownMenuSubContent",
       "props": {
         "Side": {
           "kind": "prop",
