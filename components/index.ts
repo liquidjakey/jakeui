@@ -104,3 +104,15 @@ export type {
   DropdownMenuSubTriggerProps,
   DropdownMenuSubContentProps,
 } from './dropdown-menu.js';
+
+export { Switch, SwitchThumb } from './switch.js';
+export type { SwitchProps, SwitchThumbProps } from './switch.js';
+
+export { RadioGroup, RadioGroupIndicator } from './radio-group.js';
+export type { RadioGroupProps, RadioGroupIndicatorProps, RadioItem } from './radio-group.js';
+
+export { Progress } from './progress.js';
+export type { ProgressProps } from './progress.js';
+
+export { ScrollArea } from './scroll-area.js';
+export type { ScrollAreaProps } from './scroll-area.js';

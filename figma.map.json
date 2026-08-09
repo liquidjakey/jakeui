@@ -297,8 +297,8 @@
     "Progress": {
       "figmaNodeId": "70:373",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/progress.tsx",
+      "codeExport": "Progress",
       "props": {
         "Type": {
           "kind": "prop",
@@ -311,8 +311,8 @@
     "Scroll Area": {
       "figmaNodeId": "70:390",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/scroll-area.tsx",
+      "codeExport": "ScrollArea",
       "props": {
         "Axis": {
           "kind": "prop",
@@ -479,8 +479,8 @@
     "Radio Group": {
       "figmaNodeId": "78:452",
       "variants": 6,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/radio-group.tsx",
+      "codeExport": "RadioGroup",
       "props": {
         "Label#78:10": {
           "kind": "prop",
@@ -516,8 +516,8 @@
     "Switch": {
       "figmaNodeId": "81:172",
       "variants": 6,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/switch.tsx",
+      "codeExport": "Switch",
       "props": {
         "Label#81:0": {
           "kind": "prop",
@@ -651,8 +651,8 @@
     "Switch / Thumb": {
       "figmaNodeId": "167:4372",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/switch.tsx",
+      "codeExport": "SwitchThumb",
       "props": {
         "Size": {
           "kind": "prop",
@@ -736,8 +736,8 @@
     "Radio Group / Indicator": {
       "figmaNodeId": "174:4446",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/radio-group.tsx",
+      "codeExport": "RadioGroupIndicator",
       "props": {
         "State": {
           "kind": "prop",

@@ -96,7 +96,13 @@
       "Dropdown Menu / Label",
       "Dropdown Menu / Radio Item",
       "Dropdown Menu / Sub Trigger",
-      "Dropdown Menu / Sub Content"
+      "Dropdown Menu / Sub Content",
+      "Switch",
+      "Switch / Thumb",
+      "Radio Group",
+      "Radio Group / Indicator",
+      "Progress",
+      "Scroll Area"
     ],
     "meta": {
       "Input": {
@@ -915,7 +921,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T14:30:00Z",
+        "_note": "Implemented 9 Aug 2026. tokensUsed is muted and radius/lg - two entries, BOTH belonging to the track. The filled portion, the only part that conveys progress, has NO colour recorded; asserted as primary on the Radio Group / Indicator precedent. `Type` deliberately did NOT become an enum: a determinate bar with no value is meaningless and an indeterminate one with a value contradicts itself, so deriving the type from value's presence makes the invalid pair unrepresentable - the same move as Card's media slot. Indeterminate OMITS aria-valuenow, which is precisely what tells assistive tech the value is unknown. Also flagged: radius/lg on a thin bar reads as nearly square; radius/full would be usual."
       },
       "Radio Group": {
         "doc": {
@@ -930,7 +937,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T14:30:00Z",
+        "_note": "Implemented 9 Aug 2026. Same shape of gap as Switch: tokensUsed is three TEXT tokens; the outer circle lives on Radio Group / Root, which is BLOCKED (24 variants). The circle border is ASSERTED as input. Unlike Switch the SELECTED half is real - Radio Group / Indicator records fill primary - so only the ring is asserted, not the state colour. Figma models ONE option; a group has N, so items[] plus a single group-level `value` string, which makes two selected items unrepresentable by construction. fieldset+legend, not a wrapper label. Arrow keys move AND select in one step, which differs from ToggleGroup."
       },
       "Radio Group / Field Composition": {
         "doc": {
@@ -945,7 +953,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T14:30:00Z",
+        "_note": "DELIBERATELY NOT BOUND TO CODE: kind: story-only, same as Switch / Field Composition. Its seven patterns ship as stories."
       },
       "Radio Group / Indicator": {
         "doc": {
@@ -960,7 +969,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T14:30:00Z",
+        "_note": "Implemented 9 Aug 2026. THE ONE RECORDED PIECE OF THE RADIO'S SELECTED STATE (fill primary + radius/full), and the precedent that made Switch's track and Progress's bar assertions defensible - primary is demonstrably this system's checked-state colour. forceMount has no Figma property but is required by the record's prose: runtime may force-mount for animation or measurement; unmounting kills an exit animation and makes the element unmeasurable. Force-mounted and unchecked means hidden from sight AND assistive technology, not merely transparent."
       },
       "Radio Group / Item": {
         "doc": {
@@ -1005,7 +1015,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T14:30:00Z",
+        "_note": "Implemented 9 Aug 2026. The record's own description promises anatomy it does not bind: 'visible track and thumb anatomy', but tokensUsed is five entries all belonging to the viewport container. Rather than invent two colours the NATIVE SCROLLBAR IS KEPT - the same decision, for the same reason, as NativeSelect's chevron, and it keeps native scroll behaviour intact. The focusable+named region is the important part: a region that scrolls but cannot be focused is UNREACHABLE BY KEYBOARD, the most common failure of custom scroll areas."
       },
       "Segmented Tab": {
         "doc": {
@@ -1128,7 +1139,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T14:30:00Z",
+        "_note": "Implemented 9 Aug 2026. THIS ASSET RECORDS THE LABEL, NOT THE SWITCH: its entire tokensUsed is foreground / muted-foreground / size/14 - three TEXT tokens and nothing else. No track fill, no checked colour, no border. Switch / Thumb gives the thumb (card + radius/full) and SWITCH / ROOT, WHICH HOLDS THE TRACK, IS BLOCKED by the 8-row cap (24 variants). The track is ASSERTED as primary (checked) / input (unchecked) on the strongest precedent available: Radio Group / Indicator binds fill primary for its checked indicator, so primary is this system's checked-state colour. THIS IS THE LARGEST ASSERTION IN THE BUILD - re-verify when Switch / Root is readable. role=switch with aria-checked; Space toggles and Enter does not, which is the switch convention and differs from Toggle."
       },
       "Switch / Field Composition": {
         "doc": {
@@ -1143,7 +1155,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T14:30:00Z",
+        "_note": "DELIBERATELY NOT BOUND TO CODE: its Pattern axis is kind: story-only (\"Storybook story, never a prop\"), same treatment as the Table and Popover root compositions. Its seven patterns ship as stories in components/switch.stories.tsx."
       },
       "Switch / Root": {
         "doc": {
@@ -1173,7 +1186,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T14:30:00Z",
+        "_note": "Implemented 9 Aug 2026. The record states both its axes are inherited: \"Size follows the Root size; disabled styling is inherited from the Root state\", so neither carries a token delta and none is applied. radius/full is the correct token for a circle - no raw 9999px. Size has no dimension token, so both sizes are raw."
       },
       "Table": {
         "doc": {
