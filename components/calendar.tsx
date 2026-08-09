@@ -15,7 +15,7 @@ import { cn } from '../lib/cn.js';
  * The day states are asserted from precedent already established elsewhere:
  *   selected      primary / primary-foreground   (Radio Group / Indicator)
  *   range         accent / accent-foreground     (Command, Toggle, menus)
- *   today         ring outline                   (the only marker token here)
+ *   today         primary stroke                 (CONFIRMED by the Date Picker read)
  *   disabled      muted-foreground               (shared convention)
  *   out-of-month  muted-foreground               (shared convention)
  *
@@ -140,7 +140,10 @@ export function Calendar({
                         // 🛑 every line below is ASSERTED — see the block above.
                         sel && 'bg-primary text-primary-foreground',
                         !sel && range && 'bg-accent text-accent-foreground',
-                        !sel && !range && isToday && 'ring-1 ring-ring',
+                        // CORRECTED 9 Aug 2026 from the Date Picker live read:
+                        // `today` is a PRIMARY STROKE, not the ring outline that
+                        // was asserted here. The other four day states were right.
+                        !sel && !range && isToday && 'border border-primary',
                         (outside || disabled) && 'text-muted-foreground',
                         disabled && 'cursor-not-allowed',
                       )}

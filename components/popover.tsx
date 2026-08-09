@@ -302,3 +302,66 @@ export function PopoverTrigger({
     </button>
   );
 }
+
+/* ─────────────────────── Popover / Content ─────────────────────── */
+
+export interface PopoverContentProps {
+  title?: string;
+  description?: string;
+  children?: ReactNode;
+  action?: ReactNode;
+  onClose?: () => void;
+  size?: 'small' | 'large';
+  side?: PopoverSide;
+  align?: 'start' | 'center' | 'end';
+  arrow?: boolean;
+}
+
+/**
+ * Read from LIVE BINDINGS — its description showed 1 of 48 rows, the worst ratio in
+ * the file, and nothing could be inferred from it.
+ *
+ * SIZE, SIDE AND ALIGN ALL CARRY NO COLOUR DELTA. 48 variants collapse to THREE
+ * distinct binding sets, differing only by the Arrow node. Every visual axis on this
+ * component is geometry.
+ *
+ * 🔎 AND THE READ PROVED THE STALENESS FINDING: the action link binds
+ * `primary-readable` — one of the three tokens the 9 Aug rebind introduced, which
+ * appears in NO description anywhere. The bindings are current; the descriptions are
+ * not. That is the clearest single piece of evidence for it in the file.
+ */
+export function PopoverContent({
+  title,
+  description,
+  children,
+  action,
+  onClose,
+  size = 'small',
+  side = 'bottom',
+  align = 'start',
+  arrow = false,
+}: PopoverContentProps) {
+  return (
+    <div
+      data-side={side}
+      data-align={align}
+      className={cn(
+        'relative rounded-lg border border-border bg-popover p-4 shadow-md',
+        'text-body-md text-popover-foreground',
+        size === 'large' ? 'w-[min(28rem,90vw)]' : 'w-[min(18rem,90vw)]',
+      )}
+    >
+      {arrow ? <span aria-hidden="true" className="absolute h-2 w-2 rotate-45 border border-border bg-popover" style={{ [side === 'top' ? 'bottom' : 'top']: '-5px', left: 'calc(50% - 4px)' }} /> : null}
+      {onClose ? (
+        <span className="absolute right-2 top-2">
+          <PopoverClose onClose={onClose} />
+        </span>
+      ) : null}
+      {title ? <h3 className="font-semibold text-popover-foreground">{title}</h3> : null}
+      {description ? <p className="mt-1 text-body-sm text-muted-foreground">{description}</p> : null}
+      {children ? <div className="mt-2 text-muted-foreground">{children}</div> : null}
+      {/* primary-readable, read from the live binding. */}
+      {action ? <div className="mt-3 text-primary-readable">{action}</div> : null}
+    </div>
+  );
+}

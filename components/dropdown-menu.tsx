@@ -430,3 +430,55 @@ export function DropdownMenuCheckboxItem({
     </div>
   );
 }
+
+/* ──────────────────── Dropdown Menu / Content ──────────────────── */
+
+export interface DropdownMenuContentProps {
+  children: ReactNode;
+  side?: 'top' | 'right' | 'bottom' | 'left';
+  align?: 'start' | 'center' | 'end';
+  arrow?: boolean;
+  label?: string;
+}
+
+/**
+ * Read from LIVE BINDINGS — its description showed 1 of 24 rows, so nothing could be
+ * inferred. The read settles it in one line:
+ *
+ * SIDE AND ALIGN CARRY NO COLOUR DELTA AT ALL. 24 variants collapse to just THREE
+ * distinct binding sets, and the only difference between those is whether the Arrow
+ * node is present and where it sits in z-order. Both axes are purely geometric.
+ *
+ * Surface popover + border. Items: popover at rest, accent when highlighted, with
+ * labels popover-foreground / accent-foreground and destructive items in destructive.
+ * Shortcuts and indicators are muted-foreground.
+ */
+export function DropdownMenuContent({
+  children,
+  side = 'bottom',
+  align = 'start',
+  arrow = false,
+  label,
+}: DropdownMenuContentProps) {
+  return (
+    <div
+      role="menu"
+      aria-label={label}
+      data-side={side}
+      data-align={align}
+      className={cn(
+        'relative min-w-48 rounded-lg border border-border bg-popover p-1',
+        'text-body-sm text-popover-foreground shadow-md',
+      )}
+    >
+      {arrow ? (
+        <span
+          aria-hidden="true"
+          className="absolute h-2 w-2 rotate-45 border border-border bg-popover"
+          style={{ [side === 'top' ? 'bottom' : 'top']: '-5px', left: 'calc(50% - 4px)' }}
+        />
+      ) : null}
+      {children}
+    </div>
+  );
+}

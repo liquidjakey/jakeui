@@ -3,8 +3,8 @@
 Inline feedback message for informational, successful, warning, and destructive states.
 
 - **Figma:** `Alert` — node `103:475`, 4 variants
-- **Code:** not yet implemented — `codePath` is `null`
-- **Maturity:** Transcribed from `docs/components/Alert.doc.json`. **Two open questions in Table 3 must be settled before implementing.**
+- **Code:** [`components/alert.tsx`](../../components/alert.tsx) — implemented 9 Aug 2026, exports `Alert`
+- **Maturity:** `draft`. **Both open questions are now SETTLED by a live binding read** — see below.
 - **Format:** [props-table-format.md](../props-table-format.md)
 
 ---
@@ -51,7 +51,7 @@ under the 8-row cap.
 | Warning | `tone === 'warning'` | fill `warning-muted` · border `1px` `warning` · text `warning` ⚠️ **see Open question 1** |
 | Destructive | `tone === 'destructive'` | fill `card` · border `1px` `destructive` · text `destructive` ⚠️ **see Open question 2** |
 
-### ⚠️ Open question 1 — RESOLVED: the record's text tokens ARE stale post-rebind
+### ✅ Open question 1 — SETTLED by reading the live bindings, and the answer is worse than expected
 
 The doc record says Success and Warning bind their **text** to `success` and `warning`.
 The 9 Aug rebind phase says otherwise. `design-system.json` `retrofit._rebindProgress`
@@ -78,10 +78,25 @@ Dump and Figma carry the same stale text, so verify passes.
 `text warning-muted-foreground`.** Implementing from the record's `success`/`warning`
 would reintroduce the 3.07:1 and 3.15:1 contrast failures the rebind fixed.
 
-**The record is not authoritative until the Figma descriptions are regenerated and
-`docs:adopt` re-run.** Alert is the ONLY record affected — an earlier claim of six was a
-regex error (`text warning\b` matched `text warning-foreground`), corrected in the
-handoff §5.
+**Confirmed on 9 Aug 2026 by reading the live bindings** (`.figma-blocked-variants.json`):
+
+| Tone | Title | Description |
+|---|---|---|
+| Info | `info` | `info` — deliberately not rebound; it passed at 4.82/4.88 |
+| Success | `success-muted-foreground` | `success-muted-foreground` ✅ |
+| **Warning** | `warning-muted-foreground` | **`warning`** 🛑 |
+| Destructive | `destructive` | `destructive` |
+
+🛑 **Warning is HALF-REBOUND in Figma.** Its title moved to
+`warning-muted-foreground`; its description did not. One of the two 3.07:1 nodes was
+fixed and the other was missed.
+
+**The code applies `warning-muted-foreground` to both.** Shipping a known 3.07:1
+failure in order to match a half-finished rebind would be transcribing a bug, not a
+contract. Figma owes the second half.
+
+Alert is the ONLY record affected by the staleness — an earlier claim of six was a regex
+error, corrected in the handoff §5.
 
 Related: the handoff records that this same fix was nearly a no-op —
 `warning-muted-foreground` originally resolved to the *same primitive* as `warning`, so
@@ -108,8 +123,10 @@ This is the same gap the handoff's accessibility item points at from the other s
 the fix." Adding `destructive-muted` + `destructive-muted-foreground` would close both
 this asymmetry and part of that contrast failure.
 
-**Until the token exists, `fill card` is correct** — do not substitute an approximate
-value or a raw hex. Flagged here rather than discovered at codegen, per format rule 3.
+**And the live read shows `fill card` was never bound at all.** The Destructive variant
+has **no surface fill binding** — the description was reporting an unbound literal. So
+the tone has no tinted surface *and* no fallback, which is why the most severe tone is
+the least visually distinct. Code applies no fill, matching the file.
 
 ---
 

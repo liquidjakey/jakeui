@@ -126,3 +126,86 @@ export function RadioGroup({
     </fieldset>
   );
 }
+
+/* ──────────────────── Radio Group / Item + Root ──────────────────── */
+
+export type RadioState = 'default' | 'hover' | 'focused' | 'disabled' | 'readOnly' | 'invalid';
+
+export interface RadioGroupItemProps {
+  checked?: boolean;
+  state?: RadioState;
+}
+
+/**
+ * The circle. Read from LIVE BINDINGS — capped at 8 of 12 rows.
+ *
+ *   unchecked   card + input | hover accent + input | focused card + ring
+ *               | invalid card + destructive
+ *   checked     card + primary | hover accent + primary | focused card + ring
+ *               | invalid card + destructive
+ *   indicator   primary, on checked variants only
+ *
+ * ⚠️ THE ASSERTION MADE IN radio-group.tsx WAS CORRECT — `input` for the resting
+ * border. Confirmed rather than assumed.
+ *
+ * ⚠️ Disabled and ReadOnly bind the same tokens as Default here too.
+ */
+export function RadioGroupItem({ checked = false, state = 'default' }: RadioGroupItemProps) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn(
+        'inline-flex h-4 w-4 items-center justify-center rounded-full border',
+        state === 'hover' ? 'bg-accent' : 'bg-card',
+        state === 'invalid'
+          ? 'border-destructive'
+          : state === 'focused'
+            ? 'border-ring'
+            : checked
+              ? 'border-primary'
+              : 'border-input',
+        (state === 'disabled' || state === 'readOnly') && 'opacity-50',
+      )}
+    >
+      <RadioGroupIndicator checked={checked} />
+    </span>
+  );
+}
+
+export interface RadioGroupRootProps {
+  children: React.ReactNode;
+  orientation?: 'vertical' | 'horizontal';
+  label: string;
+  state?: 'default' | 'disabled' | 'readOnly' | 'invalid';
+}
+
+/**
+ * The group wrapper. Read from LIVE BINDINGS — capped at 7 of 24 rows, and the read
+ * showed 24 variants collapse to just 9 distinct binding sets.
+ *
+ * ORIENTATION CARRIES NO COLOUR DELTA AT ALL — vertical and horizontal always pair
+ * identically. Default and ReadOnly are identical. Disabled changes only the option
+ * LABELS to muted-foreground. Invalid changes every item's stroke to destructive.
+ */
+export function RadioGroupRoot({
+  children,
+  orientation = 'vertical',
+  label,
+  state = 'default',
+}: RadioGroupRootProps) {
+  return (
+    <fieldset className="border-0 p-0" disabled={state === 'disabled'}>
+      <legend
+        className={cn(
+          'mb-2 text-body-md',
+          state === 'disabled' ? 'text-muted-foreground' : 'text-foreground',
+        )}
+      >
+        {label}
+      </legend>
+      <div className={cn('flex gap-3', orientation === 'vertical' ? 'flex-col' : 'flex-row')}>
+        {children}
+      </div>
+    </fieldset>
+  );
+}

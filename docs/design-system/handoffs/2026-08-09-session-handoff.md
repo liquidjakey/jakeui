@@ -15,7 +15,7 @@ sync with `origin/main` and the working tree is clean.
 | Gates | `npm run check` = tokens · map · docs · typecheck — **all passing** |
 | Variables | 189 (was 180) · 65,045 bindings · 0 unresolved · 189/189 described |
 | Doc records | **86 / 86** in `docs/components/*.doc.json` |
-| Code components | **58 of 74** — everything reachable without a Figma session; all `draft` |
+| Code components | **69 of 74** — every asset that should be a component; the other 5 are story-only by design |
 | Storybook | Installed, single-package. **No Chromatic** (deliberate) |
 | Retrofit phase | `docs` |
 

@@ -60,24 +60,65 @@
   },
   "components": {
     "built": [
-      "Input",
-      "Textarea",
-      "Native Select",
-      "Label",
-      "Separator",
-      "Field",
-      "Dialog",
-      "Alert Dialog",
-      "Drawer",
-      "Sheet",
-      "Card",
-      "Accordion",
-      "Collapsible",
-      "Breadcrumb",
-      "Tabs",
+      "Sidebar Navigation Item",
       "Segmented Tab",
+      "Alert Dialog",
+      "Chart",
+      "Command",
+      "Field",
+      "Hover Card",
+      "Input",
+      "Label",
+      "Native Select",
+      "Progress",
+      "Scroll Area",
+      "Separator",
+      "Slider",
+      "Button",
+      "Button Group",
+      "Checkbox",
+      "Radio Group",
+      "Switch",
       "Toggle",
       "Toggle Group",
+      "Textarea",
+      "Switch / Thumb",
+      "Switch / Root",
+      "Radio Group / Indicator",
+      "Radio Group / Item",
+      "Radio Group / Root",
+      "Accordion",
+      "Breadcrumb",
+      "Collapsible",
+      "Navigation Menu",
+      "Pagination",
+      "Tabs",
+      "Sidebar",
+      "Alert",
+      "Dialog",
+      "Drawer",
+      "Dropdown Menu",
+      "Popover",
+      "Sheet",
+      "Tooltip",
+      "Dropdown Menu / Trigger",
+      "Dropdown Menu / Item",
+      "Dropdown Menu / Checkbox Item",
+      "Dropdown Menu / Radio Item",
+      "Dropdown Menu / Label",
+      "Dropdown Menu / Sub Trigger",
+      "Dropdown Menu / Content",
+      "Dropdown Menu / Sub Content",
+      "Popover / Trigger",
+      "Popover / Backdrop",
+      "Popover / Close",
+      "Popover / Arrow",
+      "Popover / Viewport",
+      "Popover / Content",
+      "Avatar",
+      "Badge",
+      "Card",
+      "Skeleton",
       "Table",
       "Table / Container",
       "Table / Caption",
@@ -85,39 +126,9 @@
       "Table / Cell",
       "Table / Row",
       "Table / Action Trigger",
-      "Popover",
-      "Popover / Backdrop",
-      "Popover / Close",
-      "Popover / Viewport",
-      "Tooltip",
-      "Hover Card",
-      "Dropdown Menu",
-      "Dropdown Menu / Trigger",
-      "Dropdown Menu / Label",
-      "Dropdown Menu / Radio Item",
-      "Dropdown Menu / Sub Trigger",
-      "Dropdown Menu / Sub Content",
-      "Switch",
-      "Switch / Thumb",
-      "Radio Group",
-      "Radio Group / Indicator",
-      "Progress",
-      "Scroll Area",
-      "Sidebar",
-      "Sidebar Navigation Item",
-      "Command",
-      "Chart",
-      "Pagination",
       "Calendar",
-      "Data Table",
-      "Avatar",
-      "Button Group",
-      "Navigation Menu",
-      "Checkbox",
-      "Badge",
-      "Dropdown Menu / Item",
-      "Dropdown Menu / Checkbox Item",
-      "Popover / Trigger"
+      "Date Picker",
+      "Data Table"
     ],
     "meta": {
       "Input": {
@@ -165,7 +176,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS. Both open questions settled. WARNING IS HALF-REBOUND IN FIGMA: title = warning-muted-foreground but description = plain warning; one of the two 3.07:1 nodes was fixed and the other missed. Code applies warning-muted-foreground to BOTH, because shipping a known contrast failure to match a half-finished rebind would be transcribing a bug. Success rebound both; Info deliberately neither (it passed at 4.82/4.88). Destructive has NO surface fill bound at all - the description fill card was reporting an unbound literal."
       },
       "Alert Dialog": {
         "doc": {
@@ -244,7 +256,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS via the Desktop Bridge. The longest-blocked component - 32 variants vs 8 description rows, with outline and ghost entirely missing. The read also proved THE DESCRIPTION FORMAT LOSES INFORMATION: live bindings carry spacing and stroke-weight tokens (space/1-5, space/2, space/3, space/4, space/2-25, stroke/1, stroke/2) that no ANATOMY block emits, plus primary-hover and accent-hover which appear in NO doc record anywhere. Every earlier no-spacing-token flag was wrong about the cause. GAP: disabled drops the outline border entirely, so a disabled outline button is indistinguishable from a disabled ghost one."
       },
       "Button Group": {
         "doc": {
@@ -402,7 +415,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS. Its read also gave THE AUTHORITATIVE DAY STATES that Calendar names in prose and binds nowhere: four of five Calendar assertions were CORRECT; today is a primary STROKE not a ring outline, and calendar.tsx was corrected. GAP against the archetype: the asset records only a button trigger, so typing a date is not implemented."
       },
       "Dialog": {
         "doc": {
@@ -481,7 +495,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS. Side and Align carry NO colour delta - 24 variants collapse to THREE sets differing only by the Arrow node. Purely geometric axes, which could not have been guessed from 1 of 24 rows."
       },
       "Dropdown Menu / Group": {
         "doc": {
@@ -794,7 +809,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS - third child-node record. popover fill + border stroke on all four sides; Side is pure geometry. Also fills the arrow-token gap popover.md had flagged."
       },
       "Popover / Backdrop": {
         "doc": {
@@ -841,7 +857,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS. 48 variants collapse to THREE sets. AND THE ACTION LINK BINDS primary-readable - one of the three rebind tokens, appearing in no description anywhere. That is the clearest single proof that the bindings are current while the descriptions are stale."
       },
       "Popover / Form Content": {
         "doc": {
@@ -1013,7 +1030,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS. CONFIRMS the asserted input resting border. Same disabled-indistinguishable defect as Switch / Root."
       },
       "Radio Group / Root": {
         "doc": {
@@ -1028,7 +1046,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS. Orientation carries NO colour delta - 24 variants collapse to 9 distinct sets. Disabled changes only the LABELS, leaving circles at full strength. Invalid marks EVERY item destructive including unchecked ones."
       },
       "Scroll Area": {
         "doc": {
@@ -1139,7 +1158,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS - another child-node record. EVERY shape in EVERY variant binds muted; the four types differ only in which shapes exist."
       },
       "Slider": {
         "doc": {
@@ -1154,7 +1174,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS - a no-root-level-bindings record whose tokens all live on Track/Range/Thumb children. Complete, consistent contract: every state distinguishable, unlike several root-level records."
       },
       "Switch": {
         "doc": {
@@ -1201,7 +1222,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T16:40:00Z",
+        "_note": "Implemented 9 Aug 2026 from LIVE BINDINGS. CONFIRMS the assertion made in switch.tsx: input unchecked, primary checked. DEFECT: Disabled and ReadOnly bind EXACTLY the same tokens as Default, so a disabled switch is visually indistinguishable from an operable one - a real accessibility problem, not cosmetic. Same pattern confirmed on Radio Group / Item."
       },
       "Switch / Thumb": {
         "doc": {
@@ -1586,7 +1608,8 @@
     "_phase4Declined": "token-sync-layer NOT adopted; export-tokens.mjs kept. It already satisfies 4 of the skill's hard rules (float32 rounding at the export boundary, semantic->primitive var() references preserved, --check gate against hand-edits, committed diffable dump), and adopting Phase 4 would require converting to a monorepo for packages/tokens while NOT removing the query-in-Figma step, since that exists because the Variables REST API is Enterprise-only on this plan. Ported the opacity rule immediately (it exposed a live 120-binding bug). Deferred: rename detection (revisit before scaling component count), channel-alpha (when a consumer exists), multi-platform adapters (when a non-web target is real). Full reasoning in docs/design-system/decisions/2026-08-09-phase-4-sync-declined.md.",
     "_phase5and6Skipped": "baseline (5) blocked: no Storybook/Chromatic, and storybook-chromatic-builder requires a monorepo + packages/tokens. code (6) is N/A as a retrofit: no consuming application, scssColorVars/tailwindColorClasses/jsColorsUsages all 0, so there is nothing to swap and no consumer to keep working. Next actionable phase is 6.5 (docs).",
     "_phase5Note": "baseline (Chromatic) still not captured and deliberately so. Storybook WAS set up, but for its own reasons rather than phase 5: globals.css had never been compiled (307 declarations, no Tailwind installed) and no component had ever been rendered. Phase 5 exists to protect a code retrofit that is N/A here.",
-    "_docsProgress": "COMPLETE for parts 1-3. 86/86 adopted into docs/components/<Name>.doc.json (provenance: imported), then enriched from docs/archetypes.json in two passes: 48 records / 124 variant meanings on 9 Aug, then a second pass the same day that grew the knowledge base from 6 archetypes / 13 vocabulary axes to 31 / 26 and enriched a further 70 records / 89 variant meanings. docs/DIGEST.md regenerated (4167 lines, was 3215). Every description verified byte-for-byte against live Figma via docs:verify (FNV-1a over UTF-16 code units, because the Figma sandbox has no TextEncoder/crypto.subtle). The 105 blocks first flagged as owed to human review are now 1: the only one left is Popover / Viewport (state.current, state.previous, direction.*), left open deliberately because those describe a bespoke transition mechanism and a guessed meaning would be worse than a visible gap - see docs/design-system/decisions/2026-08-09-doc-gaps-closed-via-archetypes.md. Layer 4 (interview for brand-specific intent) deliberately NOT done - it cannot be inferred, and nothing added by enrichment is stamped provenance 'user'. Fingerprint markers deliberately NOT appended to Figma descriptions: it would invalidate the byte-verified dump, and docs:verify already does that job with more information. Full reasoning: docs/design-system/decisions/2026-08-09-docs-phase-adoption.md"
+    "_docsProgress": "COMPLETE for parts 1-3. 86/86 adopted into docs/components/<Name>.doc.json (provenance: imported), then enriched from docs/archetypes.json in two passes: 48 records / 124 variant meanings on 9 Aug, then a second pass the same day that grew the knowledge base from 6 archetypes / 13 vocabulary axes to 31 / 26 and enriched a further 70 records / 89 variant meanings. docs/DIGEST.md regenerated (4167 lines, was 3215). Every description verified byte-for-byte against live Figma via docs:verify (FNV-1a over UTF-16 code units, because the Figma sandbox has no TextEncoder/crypto.subtle). The 105 blocks first flagged as owed to human review are now 1: the only one left is Popover / Viewport (state.current, state.previous, direction.*), left open deliberately because those describe a bespoke transition mechanism and a guessed meaning would be worse than a visible gap - see docs/design-system/decisions/2026-08-09-doc-gaps-closed-via-archetypes.md. Layer 4 (interview for brand-specific intent) deliberately NOT done - it cannot be inferred, and nothing added by enrichment is stamped provenance 'user'. Fingerprint markers deliberately NOT appended to Figma descriptions: it would invalidate the byte-verified dump, and docs:verify already does that job with more information. Full reasoning: docs/design-system/decisions/2026-08-09-docs-phase-adoption.md",
+    "_completion": "69 of 74 assets bound to code as of 9 Aug 2026. The remaining 5 are ALL kind: story-only compositions (Switch / Field Composition, Radio Group / Field Composition, Dropdown Menu / Root Composition, Popover / Root Composition, Table / Root Composition) which ship as Storybook stories and must NOT be components - binding them would claim they are something they are not. THERE ARE NO BLOCKED COMPONENTS REMAINING. The final 11 were unblocked by reading live bindings through the Desktop Bridge (scripts/figma-query-blocked-variants.js, read-only); the data is committed at .figma-blocked-variants.json."
   },
   "completedSkills": [
     "figma-environment-setup",

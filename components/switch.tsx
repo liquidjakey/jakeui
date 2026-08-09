@@ -113,3 +113,49 @@ export function Switch({
     </div>
   );
 }
+
+/* ─────────────────────────── Switch / Root ─────────────────────────── */
+
+export interface SwitchRootProps {
+  checked: boolean;
+  size?: 'small' | 'default';
+  /** Figma State: only Focused and Invalid carry a visual. */
+  state?: 'default' | 'hover' | 'focused' | 'disabled' | 'readOnly' | 'invalid';
+  children?: React.ReactNode;
+}
+
+/**
+ * The track. Read from LIVE BINDINGS — its description was capped at 8 of 24 rows.
+ *
+ *   unchecked   input | hover accent-hover | focused +ring | invalid +destructive
+ *   checked     primary | hover primary-hover | focused +ring | invalid +destructive
+ *
+ * ⚠️ THE ASSERTION MADE IN switch.tsx WAS CORRECT — input unchecked, primary
+ * checked. It is now confirmed rather than assumed.
+ *
+ * ⚠️ Disabled and ReadOnly bind EXACTLY the same tokens as Default. A disabled
+ * switch is visually indistinguishable from an operable one, which is a real
+ * accessibility problem: only opacity (applied in Switch) separates them.
+ */
+export function SwitchRoot({ checked, size = 'default', state = 'default', children }: SwitchRootProps) {
+  return (
+    <span
+      className={cn(
+        'inline-flex shrink-0 items-center rounded-full border-2 border-transparent',
+        size === 'small' ? 'h-4 w-7' : 'h-5 w-9',
+        checked
+          ? state === 'hover'
+            ? 'bg-primary-hover'
+            : 'bg-primary'
+          : state === 'hover'
+            ? 'bg-accent-hover'
+            : 'bg-input',
+        state === 'focused' && 'ring-1 ring-ring',
+        state === 'invalid' && 'border-destructive',
+        (state === 'disabled' || state === 'readOnly') && 'opacity-50',
+      )}
+    >
+      {children}
+    </span>
+  );
+}
