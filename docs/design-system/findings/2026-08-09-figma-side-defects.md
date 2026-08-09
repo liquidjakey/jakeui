@@ -9,6 +9,12 @@ These are things the CODE cannot fix. Each one is a place where the file itself
 is either untokenised or off-ramp, so "match Figma exactly" and "reference a
 variable for every value" cannot both be satisfied until Figma changes.
 
+> **Options and recommendations for all five now live in
+> [`decisions/2026-08-10-figma-side-decision-memo.md`](../decisions/2026-08-10-figma-side-decision-memo.md)**
+> — measured blast radius per option, a recommendation with its reasoning, and a
+> suggested order. Nothing there is decided; this document stays the record of
+> what was *found*, and the memo is the record of what the choices *are*.
+
 ---
 
 ## 1. Untokenised fill — Alert / Tone=Destructive
