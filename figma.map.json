@@ -7,8 +7,8 @@
     "Sidebar Navigation Item": {
       "figmaNodeId": "17:13",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/sidebar.tsx",
+      "codeExport": "SidebarNavigationItem",
       "props": {
         "Label#17:0": {
           "kind": "prop",
@@ -85,8 +85,8 @@
     "Chart": {
       "figmaNodeId": "67:287",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/chart.tsx",
+      "codeExport": "Chart",
       "props": {
         "Title#67:0": {
           "kind": "prop",
@@ -105,8 +105,8 @@
     "Command": {
       "figmaNodeId": "67:319",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/command.tsx",
+      "codeExport": "Command",
       "props": {
         "Label#67:3": {
           "kind": "prop",
@@ -984,8 +984,8 @@
     "Pagination": {
       "figmaNodeId": "91:318",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/pagination.tsx",
+      "codeExport": "Pagination",
       "props": {
         "Viewport": {
           "kind": "responsive-fixture",
@@ -1027,8 +1027,8 @@
     "Sidebar": {
       "figmaNodeId": "101:413",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/sidebar.tsx",
+      "codeExport": "Sidebar",
       "props": {
         "Viewport": {
           "kind": "responsive-fixture",
@@ -2113,8 +2113,8 @@
     "Calendar": {
       "figmaNodeId": "132:1214",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/calendar.tsx",
+      "codeExport": "Calendar",
       "props": {
         "Month label#132:0": {
           "kind": "prop",
@@ -2178,8 +2178,8 @@
     "Data Table": {
       "figmaNodeId": "136:1974",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/data-table.tsx",
+      "codeExport": "DataTable",
       "props": {
         "Title#136:0": {
           "kind": "prop",

@@ -15,7 +15,7 @@ sync with `origin/main` and the working tree is clean.
 | Gates | `npm run check` = tokens · map · docs · typecheck — **all passing** |
 | Variables | 189 (was 180) · 65,045 bindings · 0 unresolved · 189/189 described |
 | Doc records | **86 / 86** in `docs/components/*.doc.json` |
-| Code components | **43 of 74** — all `draft` |
+| Code components | **50 of 74** — every buildable component; all `draft` |
 | Storybook | Installed, single-package. **No Chromatic** (deliberate) |
 | Retrofit phase | `docs` |
 

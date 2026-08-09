@@ -102,7 +102,14 @@
       "Radio Group",
       "Radio Group / Indicator",
       "Progress",
-      "Scroll Area"
+      "Scroll Area",
+      "Sidebar",
+      "Sidebar Navigation Item",
+      "Command",
+      "Chart",
+      "Pagination",
+      "Calendar",
+      "Data Table"
     ],
     "meta": {
       "Input": {
@@ -257,7 +264,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T15:10:00Z",
+        "_note": "Implemented 9 Aug 2026. FIVE STATES NAMED IN PROSE, ZERO IN TOKENS - the widest promise-to-binding gap in the build. The description ends 'Includes today, selected, range, disabled, and out-of-month' but tokensUsed is five CONTAINER tokens and not one day-state colour. All five asserted from precedent: selected=primary (Radio Group / Indicator), range=accent (Command/Toggle/menus), today=ring outline, disabled and out-of-month=muted-foreground. Six rows always rendered so the grid does not change height between months. Roving tabindex - one tabbable day, not 42. Days announce in full, not just the number. FIGMA OWES day-state bindings."
       },
       "Card": {
         "doc": {
@@ -288,7 +296,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T15:10:00Z",
+        "_note": "Implemented 9 Aug 2026. THIS IS A FRAME, NOT A CHART. tokensUsed is five entries and EVERY ONE belongs to the container - no series colour, no axis, no gridline, no legend. The record's own name for itself is honest: 'Token-bound chart CONTAINER'. So it ships as a titled token-bound frame that a chart renders into; no data props, no series colours and no rendering, because supplying them would mean INVENTING A CATEGORICAL PALETTE, a substantial design-system decision not to be made by implication. Type carries no token delta and no rendering; passed through as a data attribute so a consuming chart can read it. FIGMA OWES a categorical series palette."
       },
       "Checkbox": {
         "doc": {
@@ -334,7 +343,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T15:10:00Z",
+        "_note": "Implemented 9 Aug 2026. This asset is one ITEM, not the palette (Command Panel is separate and not in this build). The record is precise: Selected=True is the HIGHLIGHTED option - the active descendant, not a chosen value; a command palette selects nothing, it runs things. So focus never lands here: it stays in the search input which points via aria-activedescendant, hence the id prop. Shortcut is aria-hidden - screen readers announce the label and the glyphs would read as punctuation. No shortcut token (muted asserted) and no disabled treatment exists."
       },
       "Command Panel": {
         "doc": {
@@ -364,7 +374,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T15:10:00Z",
+        "_note": "Implemented 9 Aug 2026. State=Populated|Empty is NOT a prop: a populated data table with no rows contradicts itself, so the state is derived from whether there is anything to show - same move as Progress's Type and Card's media. THIS COMPOSITION NAMES FOUR COMPONENTS AND ONE IS BLOCKED: the record says 'built from Input, Button, Table, and Pagination'; Input, Table and Pagination are all built but BUTTON IS NOT (32 variants, 8 rows). The toolbar is therefore a SLOT left to the caller rather than pre-composed with a Button that does not exist. GAP: the empty state changes only the type size - no muted colour, no distinct treatment - and there is no loading or error state at all."
       },
       "Date Picker": {
         "doc": {
@@ -736,7 +747,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T15:10:00Z",
+        "_note": "Implemented 9 Aug 2026. Viewport is kind: responsive-fixture and would normally be dropped (it was for Table / Container and Sidebar) - THIS IS THE EXCEPTION, because the record describes a STRUCTURAL difference not a breakpoint: 'Desktop exposes page numbers; Compact uses a concise page summary.' Different content, not the same content reflowed. State=Disabled is NOT a prop: previous is disabled at page 1 and next at the last page, which is arithmetic, and a prop would let a caller contradict it. GAP: three tokens and NO state distinctions at all - no current page, no disabled, no hover, no focus, no radius; all asserted from convention."
       },
       "Popover": {
         "doc": {
@@ -1079,7 +1091,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T15:10:00Z",
+        "_note": "Implemented 9 Aug 2026. Viewport is kind: responsive-fixture so NOT a prop, same as Table / Container. GAP: collapsed switches text to sidebar-accent-foreground with NO accent fill - that token is the foreground FOR sidebar-accent, so it sits on plain sidebar; same class of mismatch as Dropdown Menu / Trigger avatar. No width tokens exist anywhere in the file so both widths are raw."
       },
       "Sidebar Navigation Item": {
         "doc": {
@@ -1094,7 +1107,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T15:10:00Z",
+        "_note": "Implemented 9 Aug 2026. THE BEST-BEHAVED COLOUR RECORD IN THE SYSTEM: dedicated sidebar-* family throughout, with fill and matching foreground correctly paired (sidebar-accent + sidebar-accent-foreground). Compare Card (info-foreground on a card fill) and Dialog (plain foreground on card). Active is derived from the route, never set by hand. Collapsed keeps the label in the DOM visually hidden so the item keeps its accessible name. GAPS: no hover/focus tokens, no height token despite the record calling fixed height intentional."
       },
       "Skeleton": {
         "doc": {

@@ -116,3 +116,21 @@ export type { ProgressProps } from './progress.js';
 
 export { ScrollArea } from './scroll-area.js';
 export type { ScrollAreaProps } from './scroll-area.js';
+
+export { Sidebar, SidebarNavigationItem } from './sidebar.js';
+export type { SidebarProps, SidebarNavigationItemProps } from './sidebar.js';
+
+export { Command } from './command.js';
+export type { CommandProps } from './command.js';
+
+export { Chart } from './chart.js';
+export type { ChartProps } from './chart.js';
+
+export { Pagination } from './pagination.js';
+export type { PaginationProps } from './pagination.js';
+
+export { Calendar } from './calendar.js';
+export type { CalendarProps } from './calendar.js';
+
+export { DataTable } from './data-table.js';
+export type { DataTableProps } from './data-table.js';
