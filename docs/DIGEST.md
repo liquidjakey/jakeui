@@ -10,11 +10,6 @@ accessibility contract, and the tokens it consumes.
 
 **86 component(s) documented.**
 
-⚠️ **1 record(s) carry blocks still owed to human review** — a missing
-`When to use`, or a variant meaning marked _needs review_. Those gaps are
-deliberate: they cannot be inferred from Figma or from an archetype, and
-inventing them would be worse than leaving them visible.
-
 ---
 
 ## Contents
@@ -2532,12 +2527,12 @@ Transition Viewport documenting current and previous content for four activation
 
 | Axis | Value | Meaning |
 |---|---|---|
-| `state` | `current` | _needs review_ |
-| `state` | `previous` | _needs review_ |
-| `direction` | `top` | _needs review_ |
-| `direction` | `right` | _needs review_ |
-| `direction` | `bottom` | _needs review_ |
-| `direction` | `left` | _needs review_ |
+| `state` | `current` | The content on screen now — the incoming half of a transition. |
+| `state` | `previous` | The outgoing content, still rendered while the transition runs. |
+| `direction` | `top` | Activated from the top — content travels along that axis. |
+| `direction` | `right` | Activated from the right — content travels along that axis. |
+| `direction` | `bottom` | Activated from the bottom — content travels along that axis. |
+| `direction` | `left` | Activated from the left — content travels along that axis. |
 
 **State → tokens**
 
@@ -2555,7 +2550,7 @@ Transition Viewport documenting current and previous content for four activation
 
 **Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/11`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `83ea4c2e789e5982` · provenance description:imported · variants:imported · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-09 · fingerprint `d62ab2a6fa9bda33` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
 
 ---
 

@@ -176,8 +176,8 @@
     "Hover Card": {
       "figmaNodeId": "69:46",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/hover-card.tsx",
+      "codeExport": "HoverCard",
       "props": {
         "Title#69:0": {
           "kind": "prop",
@@ -1172,8 +1172,8 @@
     "Popover": {
       "figmaNodeId": "111:589",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/popover.tsx",
+      "codeExport": "Popover",
       "props": {
         "Title#111:0": {
           "kind": "prop",
@@ -1236,8 +1236,8 @@
     "Tooltip": {
       "figmaNodeId": "111:684",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/tooltip.tsx",
+      "codeExport": "Tooltip",
       "props": {
         "Label#111:20": {
           "kind": "prop",
@@ -1650,8 +1650,8 @@
     "Popover / Backdrop": {
       "figmaNodeId": "178:4684",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/popover.tsx",
+      "codeExport": "PopoverBackdrop",
       "props": {
         "Mode": {
           "kind": "prop",
@@ -1670,8 +1670,8 @@
     "Popover / Close": {
       "figmaNodeId": "178:4704",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/popover.tsx",
+      "codeExport": "PopoverClose",
       "props": {
         "State": {
           "kind": "decompose",
@@ -1711,8 +1711,8 @@
     "Popover / Viewport": {
       "figmaNodeId": "178:4738",
       "variants": 8,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/popover.tsx",
+      "codeExport": "PopoverViewport",
       "props": {
         "State": {
           "kind": "prop",

@@ -72,3 +72,18 @@ export type {
   TableDensity,
   TableAlignment,
 } from './table.js';
+
+export { Popover, PopoverBackdrop, PopoverClose, PopoverViewport } from './popover.js';
+export type {
+  PopoverProps,
+  PopoverBackdropProps,
+  PopoverCloseProps,
+  PopoverViewportProps,
+  PopoverSide,
+} from './popover.js';
+
+export { Tooltip } from './tooltip.js';
+export type { TooltipProps } from './tooltip.js';
+
+export { HoverCard } from './hover-card.js';
+export type { HoverCardProps } from './hover-card.js';

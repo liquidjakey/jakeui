@@ -4,14 +4,14 @@
   "description": "Transition Viewport documenting current and previous content for four activation directions. This asset represents data-activation-direction and data-previous states without prescribing runtime animation duration.",
   "variants": {
     "state": {
-      "current": "",
-      "previous": ""
+      "current": "The content on screen now — the incoming half of a transition.",
+      "previous": "The outgoing content, still rendered while the transition runs."
     },
     "direction": {
-      "top": "",
-      "right": "",
-      "bottom": "",
-      "left": ""
+      "top": "Activated from the top — content travels along that axis.",
+      "right": "Activated from the right — content travels along that axis.",
+      "bottom": "Activated from the bottom — content travels along that axis.",
+      "left": "Activated from the left — content travels along that axis."
     }
   },
   "states": {
@@ -33,7 +33,7 @@
   "updatedAt": "2026-08-09",
   "provenance": {
     "description": "imported",
-    "variants": "imported",
+    "variants": "imported+framework",
     "states": "imported",
     "dos": "imported+best-practice",
     "tokensUsed": "imported",

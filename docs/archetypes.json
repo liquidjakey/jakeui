@@ -43,7 +43,16 @@
       "disabled": "Not available; not focusable and does not respond to input.",
       "active": "The currently selected item in its group.",
       "expanded": "Shown at full width, with labels visible.",
-      "collapsed": "Reduced to a minimal rail."
+      "collapsed": "Reduced to a minimal rail.",
+      "current": "The content on screen now — the incoming half of a transition.",
+      "previous": "The outgoing content, still rendered while the transition runs."
+    },
+    "direction": {
+      "$comment": "Activation direction for a transitioning viewport (data-activation-direction). NOT anchored placement — that is the `side` axis. Added 9 Aug 2026 once Popover / Viewport's description made the meaning explicit; it was deliberately left owed until then rather than guessed.",
+      "top": "Activated from the top — content travels along that axis.",
+      "right": "Activated from the right — content travels along that axis.",
+      "bottom": "Activated from the bottom — content travels along that axis.",
+      "left": "Activated from the left — content travels along that axis."
     },
     "mode": {
       "single": "Selects one value.",

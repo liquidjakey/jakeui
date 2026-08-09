@@ -84,7 +84,13 @@
       "Table / Head",
       "Table / Cell",
       "Table / Row",
-      "Table / Action Trigger"
+      "Table / Action Trigger",
+      "Popover",
+      "Popover / Backdrop",
+      "Popover / Close",
+      "Popover / Viewport",
+      "Tooltip",
+      "Hover Card"
     ],
     "meta": {
       "Input": {
@@ -634,7 +640,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:20:00Z",
+        "_note": "Implemented 9 Aug 2026. Opens on focus as well as hover: the record is explicit that it must be reachable on keyboard focus or its content must exist elsewhere, since hover alone excludes keyboard and touch users. closeDelay lets the pointer travel from trigger into the card without it vanishing. Density is not just spacing - the record ties detailed density to supporting metadata, so density sets spacing and meta is the content it makes room for; meta without detailed renders nothing."
       },
       "Icon": {
         "doc": {
@@ -726,7 +733,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:20:00Z",
+        "_note": "Implemented 9 Aug 2026. Uses the CORRECT surface pairing (popover fill + popover-foreground text) - worth noting against Dialog which binds plain foreground on a card fill, and Card whose text token is outright wrong. Size has no width token (same gap as Dialog). PLACEMENT IS NOT COLLISION-AWARE: places on the requested side and stays there; flipping needs a positioning library, out of scope for a token-level component and recorded rather than half-built. The modal prop implements the record line exactly: a popover holding a form should trap focus, a non-modal one should not."
       },
       "Popover / Arrow": {
         "doc": {
@@ -756,7 +764,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:20:00Z",
+        "_note": "Implemented 9 Aug 2026. THE ONLY SCRIM TOKEN IN THE SYSTEM AND IT IS THE WRONG KIND. Binds fill foreground, which is neutral/950 Light and neutral/50 Dark - it INVERTS, giving a near-black scrim in Light (right) and a near-WHITE scrim in Dark (wrong). Dialog/Drawer/Sheet/AlertDialog record no backdrop token at all, which is why modal-surface.tsx falls back to raw black/50. So there is no correct scrim token anywhere. Applied as recorded because unlike Card it produces a visible functioning backdrop and deviating would mean inventing; FIGMA OWES an overlay/scrim token, which would close five gaps at once."
       },
       "Popover / Close": {
         "doc": {
@@ -771,7 +780,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:20:00Z",
+        "_note": "Implemented 9 Aug 2026. Defaults label to Close rather than requiring it, unlike TableActionTrigger where the name must identify a row - here Close genuinely is right almost every time and a required prop everyone fills identically is friction not safety. Binds radius/7, a half-step ramp member and the only component that uses it; written as an explicit calc so it can never degrade to a raw pixel value. No disabled tokens and no icon colour recorded."
       },
       "Popover / Content": {
         "doc": {
@@ -831,7 +841,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:20:00Z",
+        "_note": "DELIBERATELY NOT BOUND TO CODE, same treatment as Table / Root Composition: its Pattern axis is kind: story-only (Storybook story, never a prop). Its four patterns - Basic, Align, Form, RTL - ship as stories in components/popover.stories.tsx."
       },
       "Popover / RTL Content": {
         "doc": {
@@ -866,7 +877,7 @@
       "Popover / Viewport": {
         "doc": {
           "path": "docs/components/Popover-Viewport.doc.json",
-          "fingerprint": "83ea4c2e789e5982",
+          "fingerprint": "d62ab2a6fa9bda33",
           "surfaces": {
             "figmaDescription": {
               "src": "dcb106ae899a1e5b",
@@ -876,7 +887,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:20:00Z",
+        "_note": "Implemented 9 Aug 2026. THIS WAS THE LAST UNRESOLVED DOC BLOCK IN THE SYSTEM - six variant meanings left deliberately owed because the side axis already holds top/right/bottom/left for placement and guessing would have put a wrong meaning in six blocks. Its own description settled it without a Figma query: direction is an ACTIVATION direction (data-activation-direction), not placement, and current/previous are the incoming and outgoing halves of a transition. Vocabulary added on that evidence; the system now has ZERO owed doc blocks. State deliberately did NOT become an enum: both halves render at once during a transition and an enum could only show one."
       },
       "Progress": {
         "doc": {
@@ -1401,7 +1413,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T13:20:00Z",
+        "_note": "Implemented 9 Aug 2026. label is deliberately a STRING not a ReactNode - everywhere else a content property was widened to a node, but the record calls this brief non-interactive and a node slot invites buttons and links into a surface unreachable by keyboard and invisible on touch. The narrow type is the guardrail. The fill/text inversion (foreground fill + card text) is CORRECT and deliberate; note it is the same foreground token that is wrong as a backdrop - as a fill behind short text it inverts correctly, as a full-screen scrim it inverts backwards."
       }
     },
     "instanceSwapUpgradePending": []
