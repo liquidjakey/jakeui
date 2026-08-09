@@ -27,3 +27,15 @@ export type { DrawerProps } from './drawer.js';
 
 export { Sheet } from './sheet.js';
 export type { SheetProps } from './sheet.js';
+
+export { Card } from './card.js';
+export type { CardProps } from './card.js';
+
+export { Accordion } from './accordion.js';
+export type { AccordionProps, AccordionItem } from './accordion.js';
+
+export { Collapsible } from './collapsible.js';
+export type { CollapsibleProps } from './collapsible.js';
+
+export { Breadcrumb } from './breadcrumb.js';
+export type { BreadcrumbProps, BreadcrumbItem } from './breadcrumb.js';

@@ -865,8 +865,8 @@
     "Accordion": {
       "figmaNodeId": "85:222",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/accordion.tsx",
+      "codeExport": "Accordion",
       "props": {
         "Title#85:0": {
           "kind": "prop",
@@ -897,8 +897,8 @@
     "Breadcrumb": {
       "figmaNodeId": "88:222",
       "variants": 2,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/breadcrumb.tsx",
+      "codeExport": "Breadcrumb",
       "props": {
         "Home label#88:0": {
           "kind": "prop",
@@ -929,8 +929,8 @@
     "Collapsible": {
       "figmaNodeId": "89:240",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/collapsible.tsx",
+      "codeExport": "Collapsible",
       "props": {
         "Trigger label#89:0": {
           "kind": "prop",
@@ -1860,8 +1860,8 @@
     "Card": {
       "figmaNodeId": "126:675",
       "variants": 4,
-      "codePath": null,
-      "codeExport": null,
+      "codePath": "components/card.tsx",
+      "codeExport": "Card",
       "props": {
         "Title#126:0": {
           "kind": "prop",

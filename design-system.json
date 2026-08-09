@@ -69,7 +69,11 @@
       "Dialog",
       "Alert Dialog",
       "Drawer",
-      "Sheet"
+      "Sheet",
+      "Card",
+      "Accordion",
+      "Collapsible",
+      "Breadcrumb"
     ],
     "meta": {
       "Input": {
@@ -101,7 +105,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T11:40:00Z",
+        "_note": "Implemented 9 Aug 2026. Figma models a SINGLE item; an Accordion is a group, so code takes items[] and openIds[] (an array, because several sections may be open at once, which the Figma State enum cannot express). The map types State as closed|open and Disabled as false|true string unions; both emitted as real booleans since a stringly-typed boolean is a Figma artefact not an API. Triggers are wrapped in headings for heading navigation - the difference from Collapsible. No focus token is recorded on this set; the shared ring treatment is asserted."
       },
       "Alert": {
         "doc": {
@@ -177,7 +182,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T11:40:00Z",
+        "_note": "Implemented 9 Aug 2026. Figma models a FIXED three-level trail (Home/Parent/Current labels) because a design file cannot express a variable-length list; those three properties are one EXAMPLE of the array, not the API. Code takes items[]. GAPS: no token for the current page (everything binds muted-foreground, which would make the current page indistinguishable from its ancestors, so foreground is asserted), no separator token, no link/hover treatment. The collapse affordance is a real button with an accessible name, never an inert ellipsis - collapsing must not hide levels from assistive technology that a sighted user can reach."
       },
       "Button": {
         "doc": {
@@ -237,7 +243,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T11:40:00Z",
+        "_note": "Implemented 9 Aug 2026. THE ONLY COMPONENT WHOSE CODE DELIBERATELY DOES NOT MATCH ITS RECORD. Card.doc.json binds text to info-foreground, which is INVERTED relative to card-foreground (info-foreground is Light neutral/50 + Dark neutral/950; card-foreground is Light neutral/950 + Dark neutral/50). On a card fill that is near-white text on a white card in Light and near-black on near-black in Dark - contrast roughly 1:1, text invisible in BOTH modes. info-foreground is the light-on-dark pairing, correct for text on the SOLID info fill, which is how Badge uses it legitimately. Code binds card-foreground. Transcribing faithfully would ship a visible bug rather than a documentation inaccuracy. FIGMA OWES A REBIND; until then docs:adopt keeps re-importing the wrong token. Also transcribed-but-flagged: size/11 (smallest in the scale) for card text, and State=Interactive binding 2px primary, the same treatment Input uses for FOCUS, so an interactive card looks focused at rest."
       },
       "Chart": {
         "doc": {
@@ -282,7 +289,8 @@
           }
         },
         "status": "draft",
-        "updatedAt": "2026-08-09T08:43:23.438Z"
+        "updatedAt": "2026-08-09T11:40:00Z",
+        "_note": "Implemented 9 Aug 2026. Token-identical to Accordion, and unlike the Drawer/Sheet pair this is DEFENSIBLE: the Figma master draws one disclosure item, which is exactly what a Collapsible is, while an Accordion is a group of the same item. The records match because the design file draws one thing. Difference is real in code - one boolean vs items[]/openIds[]. Trigger deliberately NOT wrapped in a heading: a lone Collapsible usually sits inside content that already has one."
       },
       "Command": {
         "doc": {
@@ -1465,7 +1473,8 @@
       },
       "_note": "All 86 now carry a canonical doc record in docs/components/, adopted from their Figma descriptions and verified byte-for-byte against the live file. 1 has a code doc (input.md) and 1 has code + Storybook stories (Input). 105 blocks across the records are flagged as owed to human review (mostly whenToUse/whenNotToUse on the 26 components with no archetype match)."
     },
-    "_tokenGapsFound": "Found 9 Aug 2026 while building the overlay family. (1) NO width or container tokens exist in the file - every size/* variable is a type size (10-22) - so Dialog Size and Drawer/Sheet Width are raw values in code. (2) No backdrop/scrim token on any of the four overlay records. (3) SEMANTIC MISMATCH: Alert Dialog binds card-foreground while Dialog, Drawer and Sheet bind plain foreground, all on a card fill. Verified in .figma-tokens-dump.json that foreground and card-foreground currently resolve to the SAME primitives (neutral/950 Light, neutral/50 Dark), so this is invisible today - but it is the same latent failure mode already recorded for warning-muted-foreground, where identical-resolving tokens made a planned fix a no-op. card-foreground is the correct pairing for a card fill."
+    "_tokenGapsFound": "Found 9 Aug 2026 while building the overlay family. (1) NO width or container tokens exist in the file - every size/* variable is a type size (10-22) - so Dialog Size and Drawer/Sheet Width are raw values in code. (2) No backdrop/scrim token on any of the four overlay records. (3) SEMANTIC MISMATCH: Alert Dialog binds card-foreground while Dialog, Drawer and Sheet bind plain foreground, all on a card fill. Verified in .figma-tokens-dump.json that foreground and card-foreground currently resolve to the SAME primitives (neutral/950 Light, neutral/50 Dark), so this is invisible today - but it is the same latent failure mode already recorded for warning-muted-foreground, where identical-resolving tokens made a planned fix a no-op. card-foreground is the correct pairing for a card fill.",
+    "_tokenDefectsFound": "CARD TEXT IS BOUND TO THE WRONG TOKEN - found 9 Aug 2026 while building batch 3. Card.doc.json binds text to info-foreground on a card fill. Verified in .figma-tokens-dump.json that info-foreground (Light neutral/50, Dark neutral/950) is INVERTED relative to card-foreground (Light neutral/950, Dark neutral/50). Result is roughly 1:1 contrast and invisible text in both modes. This is a live defect, not a latent one like the Dialog/AlertDialog foreground mismatch. Badge also binds info-foreground but legitimately, because Badge has a solid info fill and that is what the token is for. FIX: rebind Card text to card-foreground in Figma, then re-run docs:adopt. Until then the code deliberately diverges and docs/components/card.md is the only thing preventing someone re-transcribing the wrong value."
   },
   "tokenCrosswalk": {
     "path": null,
