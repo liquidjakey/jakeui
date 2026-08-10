@@ -10,25 +10,14 @@
       "left": "Opens to the left of the trigger."
     }
   },
-  "states": {
-    "Side=Top": "no root-level bindings"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
     "Compose it through the parent rather than reaching for it directly."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice"
-  },
+  "donts": [
+    "Do not re-implement the parent's keyboard or focus behaviour on the part."
+  ],
   "whenToUse": [
     "Only inside its parent component's composition — this is a part, not a standalone component."
   ],
@@ -36,7 +25,23 @@
     "On its own, outside the parent that owns its behaviour and accessibility wiring.",
     "As a general-purpose layout or text primitive."
   ],
-  "donts": [
-    "Do not re-implement the parent's keyboard or focus behaviour on the part."
-  ]
+  "status": "draft",
+  "states": {
+    "Side=Top": "fill popover · border border · (+3 variants share these)"
+  },
+  "tokensUsed": [
+    "border",
+    "popover"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

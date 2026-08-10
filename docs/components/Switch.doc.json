@@ -8,11 +8,6 @@
       "checked": "Selected."
     }
   },
-  "states": {
-    "Value=Unchecked, State=Default": "text foreground · type size/14",
-    "Value=Unchecked, State=Disabled": "text muted-foreground",
-    "Value=Checked, State=Disabled": "text muted-foreground"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -23,6 +18,14 @@
     "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
     "Do not use a radio group for multi-select.",
     "Do not use a toggle for choices that only apply after a separate Save."
+  ],
+  "whenToUse": [
+    "Checkbox or toggle for an independent on/off value.",
+    "Radio for one-of-many within a group."
+  ],
+  "whenNotToUse": [
+    "A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.",
+    "A choice that only applies after a separate Save — prefer radio or checkbox over a toggle."
   ],
   "accessibility": {
     "notes": [
@@ -35,30 +38,37 @@
       "Radio groups move between options with arrow keys."
     ]
   },
-  "tokensUsed": [
-    "foreground",
-    "muted-foreground",
-    "size/14"
-  ],
   "status": "draft",
-  "updatedAt": "2026-08-09",
+  "states": {
+    "Value=Unchecked, State=Default": "gap space/2-5 · fill input · radius radius/full · fill card · text foreground · type Label/LG",
+    "Value=Unchecked, State=Focused": "gap space/2-5 · fill input · border stroke/2 ring · radius radius/full · fill card · text foreground · type Label/LG",
+    "Value=Unchecked, State=Disabled": "gap space/2-5 · fill muted · radius radius/full · fill card · text muted-foreground · type Label/LG · (+1 variant share these)",
+    "Value=Checked, State=Default": "gap space/2-5 · fill primary · radius radius/full · fill card · text foreground · type Label/LG",
+    "Value=Checked, State=Focused": "gap space/2-5 · fill primary · border stroke/2 ring · radius radius/full · fill card · text foreground · type Label/LG"
+  },
+  "tokensUsed": [
+    "Label/LG",
+    "card",
+    "foreground",
+    "input",
+    "muted",
+    "muted-foreground",
+    "primary",
+    "radius/full",
+    "ring",
+    "space/2-5",
+    "stroke/2"
+  ],
+  "updatedAt": "2026-08-10",
   "provenance": {
     "description": "imported",
     "variants": "imported+framework",
-    "states": "imported",
     "dos": "imported+best-practice",
     "donts": "imported+best-practice",
-    "accessibility": "imported+w3c-apg",
-    "tokensUsed": "imported",
     "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice"
-  },
-  "whenToUse": [
-    "Checkbox or toggle for an independent on/off value.",
-    "Radio for one-of-many within a group."
-  ],
-  "whenNotToUse": [
-    "A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.",
-    "A choice that only applies after a separate Save — prefer radio or checkbox over a toggle."
-  ]
+    "whenNotToUse": "best-practice",
+    "accessibility": "imported+w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

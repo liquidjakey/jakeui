@@ -8,15 +8,6 @@
       "avatar": "Avatar shape — a circular image, or initials when no image is available."
     }
   },
-  "states": {
-    "Type=Button, State=Closed": "fill card · border 1px border · radius radius/lg · text foreground · type size/13",
-    "Type=Button, State=Open": "fill accent · text accent-foreground",
-    "Type=Button, State=Focused": "border 2px ring",
-    "Type=Button, State=Disabled": "text muted-foreground",
-    "Type=Avatar, State=Closed": "text accent-foreground · type size/12",
-    "Type=Avatar, State=Open": "fill accent · text accent-foreground · type size/12",
-    "Type=Avatar, State=Focused": "border 2px ring · text accent-foreground · type size/12"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -27,42 +18,59 @@
     "Do not remove the ring border on focus. It is the only focus affordance.",
     "Do not re-implement the parent's keyboard or focus behaviour on the part."
   ],
-  "accessibility": {
-    "notes": [
-      "avatar-only menu triggers require a programmatic accessible name that communicates the menu action. Decorative trigger icons/avatars must not become the accessible name by themselves.",
-      "State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean; closed/open controlled state"
-    ]
-  },
-  "tokensUsed": [
-    "accent",
-    "accent-foreground",
-    "border",
-    "card",
-    "foreground",
-    "muted-foreground",
-    "radius/lg",
-    "ring",
-    "size/12",
-    "size/13"
-  ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "donts": "imported+best-practice",
-    "accessibility": "imported",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice"
-  },
   "whenToUse": [
     "Only inside its parent component's composition — this is a part, not a standalone component."
   ],
   "whenNotToUse": [
     "On its own, outside the parent that owns its behaviour and accessibility wiring.",
     "As a general-purpose layout or text primitive."
-  ]
+  ],
+  "accessibility": {
+    "notes": [
+      "avatar-only menu triggers require a programmatic accessible name that communicates the menu action. Decorative trigger icons/avatars must not become the accessible name by themselves.",
+      "State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean; closed/open controlled state"
+    ]
+  },
+  "status": "draft",
+  "states": {
+    "Type=Button, State=Closed": "fill card · border stroke/1 border · radius radius/lg · padding y space/1-75 x space/3 · gap space/2 · text foreground · type Label/MD",
+    "Type=Button, State=Open": "fill accent · border stroke/1 border · radius radius/lg · padding y space/1-75 x space/3 · gap space/2 · text accent-foreground · type Label/MD",
+    "Type=Button, State=Focused": "fill card · border stroke/2 ring · radius radius/lg · padding y space/1-75 x space/3 · gap space/2 · text foreground · type Label/MD",
+    "Type=Button, State=Disabled": "fill card · border stroke/1 border · radius radius/lg · padding y space/1-75 x space/3 · gap space/2 · opacity opacity/50 · text muted-foreground · type Label/MD",
+    "Type=Avatar, State=Closed": "fill card · border stroke/1 border · radius radius/lg · padding y space/1 x space/1-5 · gap space/2 · fill accent · radius radius/2xl · text accent-foreground · type UNBOUND 12/16 Semi Bold",
+    "Type=Avatar, State=Open": "fill accent · border stroke/1 border · radius radius/lg · padding y space/1 x space/1-5 · gap space/2 · radius radius/2xl · text accent-foreground · type UNBOUND 12/16 Semi Bold",
+    "Type=Avatar, State=Focused": "fill card · border stroke/2 ring · radius radius/lg · padding y space/1 x space/1-5 · gap space/2 · fill accent · radius radius/2xl · text accent-foreground · type UNBOUND 12/16 Semi Bold"
+  },
+  "tokensUsed": [
+    "Label/MD",
+    "accent",
+    "accent-foreground",
+    "border",
+    "card",
+    "foreground",
+    "muted-foreground",
+    "opacity/50",
+    "radius/2xl",
+    "radius/lg",
+    "ring",
+    "space/1",
+    "space/1-5",
+    "space/1-75",
+    "space/2",
+    "space/3",
+    "stroke/1",
+    "stroke/2"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "imported",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

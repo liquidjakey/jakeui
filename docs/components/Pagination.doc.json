@@ -8,9 +8,6 @@
       "disabled": "Not available; not focusable and does not respond to input."
     }
   },
-  "states": {
-    "Viewport=Desktop, State=Default": "fill card · text foreground · type size/13"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -23,24 +20,6 @@
     "Do not reset filters or sort when the page changes.",
     "Do not make the hit targets smaller than the surrounding controls."
   ],
-  "tokensUsed": [
-    "card",
-    "foreground",
-    "size/13"
-  ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "donts": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Break a long result set into pages the reader can move through and return to."
   ],
@@ -57,5 +36,39 @@
       "Wrapped in a nav named e.g. \"Pagination\".",
       "The current page carries aria-current=\"page\"; disabled controls stay announced."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Viewport=Desktop, State=Default": "fill card · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/lg · padding y space/2 x space/2-5 · gap space/1 · text foreground · type Label/MD · fill primary · text primary-foreground",
+    "Viewport=Desktop, State=Disabled": "fill card · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/lg · padding y space/2 x space/2-5 · gap space/1 · opacity UNTOKENISED 0.45 · text foreground · type Label/MD · fill primary · text primary-foreground",
+    "Viewport=Compact, State=Default": "fill card · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/lg · padding y space/2 x space/2-5 · gap space/1 · text foreground · type Label/MD",
+    "Viewport=Compact, State=Disabled": "fill card · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/lg · padding y space/2 x space/2-5 · gap space/1 · opacity UNTOKENISED 0.45 · text foreground · type Label/MD · text muted-foreground"
+  },
+  "tokensUsed": [
+    "Label/MD",
+    "border",
+    "card",
+    "foreground",
+    "muted-foreground",
+    "primary",
+    "primary-foreground",
+    "radius/lg",
+    "space/1",
+    "space/1-5",
+    "space/2",
+    "space/2-5",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

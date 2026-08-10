@@ -2,23 +2,6 @@
   "name": "Icon",
   "summary": "Jake UI production icons — Phosphor Icons (regular weight, @phosphor-icons/react v2).",
   "description": "Jake UI production icons — Phosphor Icons (regular weight, @phosphor-icons/react v2). Variant axes: Name and Size (16/20/24). Fill binds to the foreground variable; in code the icon inherits currentColor. Name values match Phosphor React component names exactly, except SidebarSimpleRight which renders as <SidebarSimple mirrored />. Swap Name rather than copying vectors.",
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "dos": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
-  "whenToUse": [
-    "Reinforce a label, or stand in for one where the metaphor is unambiguous and repeated."
-  ],
-  "whenNotToUse": [
-    "Carrying meaning that has no text anywhere near it.",
-    "Illustration — use an image."
-  ],
   "dos": [
     "Take icons from the mapped set rather than pasting one-off SVG.",
     "Size and colour them from tokens so they track the text they sit beside.",
@@ -28,10 +11,35 @@
     "Do not use an icon alone for a destructive or unusual action.",
     "Do not rotate or recolour an icon to mean something new."
   ],
+  "whenToUse": [
+    "Reinforce a label, or stand in for one where the metaphor is unambiguous and repeated."
+  ],
+  "whenNotToUse": [
+    "Carrying meaning that has no text anywhere near it.",
+    "Illustration — use an image."
+  ],
   "accessibility": {
     "notes": [
       "A decorative icon beside text is aria-hidden=\"true\".",
       "A meaningful standalone icon needs a text alternative on it or on its control."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Name=Plus, Size=16": "fill foreground · (+155 variants share these)"
+  },
+  "tokensUsed": [
+    "foreground"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "dos": "best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

@@ -8,15 +8,6 @@
       "true": "On — the toggle is engaged."
     }
   },
-  "states": {
-    "Pressed=False, State=Default": "fill card · border 1px border · radius radius/md · text foreground · type size/14",
-    "Pressed=False, State=Focused": "border 2px ring",
-    "Pressed=False, State=Disabled": "fill muted · text muted-foreground",
-    "Pressed=True, State=Default": "fill accent · text accent-foreground",
-    "Pressed=True, State=Hover": "fill accent · text accent-foreground",
-    "Pressed=True, State=Focused": "fill accent · border 2px ring · text accent-foreground",
-    "Pressed=True, State=Disabled": "fill muted · text muted-foreground"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -31,6 +22,15 @@
     "Do not rely on colour alone to show pressed; the state must be in the accessibility tree.",
     "Do not put a toggle in a group where only one may be active and call it single-select without also making it behave that way."
   ],
+  "whenToUse": [
+    "A reversible on/off action that takes effect immediately — bold, mute, pin, show grid.",
+    "Use the group form when several such actions belong together in a toolbar."
+  ],
+  "whenNotToUse": [
+    "A form value that is only applied on Save — use Checkbox or Switch.",
+    "One-of-many where the options are the data, not actions — use Radio Group.",
+    "A one-way action that cannot be un-done — use a Button."
+  ],
   "accessibility": {
     "notes": [
       "State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Focused · Disabled] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean",
@@ -44,9 +44,22 @@
       "Tab moves between toggles; arrow keys are not used."
     ]
   },
+  "status": "draft",
+  "states": {
+    "Pressed=False, State=Default": "fill card · border stroke/1 border · radius radius/md · padding y space/2 x space/3 · gap space/2 · text foreground · type Heading/XS · type Label/LG",
+    "Pressed=False, State=Hover": "fill accent · border stroke/1 border · radius radius/md · padding y space/2 x space/3 · gap space/2 · text foreground · type Heading/XS · type Label/LG",
+    "Pressed=False, State=Focused": "fill card · border stroke/2 ring · radius radius/md · padding y space/2 x space/3 · gap space/2 · text foreground · type Heading/XS · type Label/LG",
+    "Pressed=False, State=Disabled": "fill muted · radius radius/md · padding y space/2 x space/3 · gap space/2 · text muted-foreground · type Heading/XS · type Label/LG · (+1 variant share these)",
+    "Pressed=True, State=Default": "fill accent · radius radius/md · padding y space/2 x space/3 · gap space/2 · text accent-foreground · type Heading/XS · type Label/LG",
+    "Pressed=True, State=Hover": "fill accent-hover · radius radius/md · padding y space/2 x space/3 · gap space/2 · text accent-foreground · type Heading/XS · type Label/LG",
+    "Pressed=True, State=Focused": "fill accent · border stroke/2 ring · radius radius/md · padding y space/2 x space/3 · gap space/2 · text accent-foreground · type Heading/XS · type Label/LG"
+  },
   "tokensUsed": [
+    "Heading/XS",
+    "Label/LG",
     "accent",
     "accent-foreground",
+    "accent-hover",
     "border",
     "card",
     "foreground",
@@ -54,28 +67,21 @@
     "muted-foreground",
     "radius/md",
     "ring",
-    "size/14"
+    "space/2",
+    "space/3",
+    "stroke/1",
+    "stroke/2"
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
+  "updatedAt": "2026-08-10",
   "provenance": {
     "description": "imported",
     "variants": "imported+framework",
-    "states": "imported",
     "dos": "imported+best-practice",
     "donts": "imported+best-practice",
-    "accessibility": "imported+w3c-apg",
-    "tokensUsed": "imported",
     "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice"
-  },
-  "whenToUse": [
-    "A reversible on/off action that takes effect immediately — bold, mute, pin, show grid.",
-    "Use the group form when several such actions belong together in a toolbar."
-  ],
-  "whenNotToUse": [
-    "A form value that is only applied on Save — use Checkbox or Switch.",
-    "One-of-many where the options are the data, not actions — use Radio Group.",
-    "A one-way action that cannot be un-done — use a Button."
-  ]
+    "whenNotToUse": "best-practice",
+    "accessibility": "imported+w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

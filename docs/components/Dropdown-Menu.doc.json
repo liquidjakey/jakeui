@@ -12,9 +12,6 @@
       "comfortable": "Default spacing, easier to scan and tap."
     }
   },
-  "states": {
-    "Type=Standard, Density=Compact": "fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/13"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -22,36 +19,16 @@
     "Put destructive items last and mark them.",
     "Show shortcuts alongside the items that have them."
   ],
-  "tokensUsed": [
-    "border",
-    "popover",
-    "popover-foreground",
-    "radius/lg",
-    "size/13"
+  "donts": [
+    "Do not nest submenus more than one level deep.",
+    "Do not hide the only route to a critical action inside a menu."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Offer a list of actions from a trigger, when showing them all would crowd the view."
   ],
   "whenNotToUse": [
     "Choosing a form value — use a Select; a menu fires actions, it does not hold state.",
     "Primary navigation — use a navigation menu."
-  ],
-  "donts": [
-    "Do not nest submenus more than one level deep.",
-    "Do not hide the only route to a critical action inside a menu."
   ],
   "accessibility": {
     "role": "menu",
@@ -64,5 +41,42 @@
       "The trigger carries aria-haspopup and aria-expanded.",
       "Focus moves into the menu on open and back to the trigger on close."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Type=Standard, Density=Compact": "fill popover · border stroke/1 border · radius radius/lg · padding space/2 · gap space/1 · padding y space/1-75 x space/2-5 · gap space/2 · fill muted-foreground · text popover-foreground · type Label/MD · text muted-foreground · type Caption/SM · fill accent · text accent-foreground · text destructive",
+    "Type=Standard, Density=Comfortable": "fill popover · border stroke/1 border · radius radius/lg · padding space/2 · gap space/1 · padding y space/2-25 x space/2-5 · gap space/2 · fill muted-foreground · text popover-foreground · type Label/MD · text muted-foreground · type Caption/SM · fill accent · text accent-foreground · text destructive",
+    "Type=Checkbox, Density=Compact": "fill popover · border stroke/1 border · radius radius/lg · padding space/2 · gap space/1 · padding y space/1-75 x space/2-5 · gap space/2 · text popover-foreground · type Label/MD · text muted-foreground · type Caption/SM · fill accent · text accent-foreground · border muted-foreground",
+    "Type=Checkbox, Density=Comfortable": "fill popover · border stroke/1 border · radius radius/lg · padding space/2 · gap space/1 · padding y space/2-25 x space/2-5 · gap space/2 · text popover-foreground · type Label/MD · text muted-foreground · type Caption/SM · fill accent · text accent-foreground · border muted-foreground"
+  },
+  "tokensUsed": [
+    "Caption/SM",
+    "Label/MD",
+    "accent",
+    "accent-foreground",
+    "border",
+    "destructive",
+    "muted-foreground",
+    "popover",
+    "popover-foreground",
+    "radius/lg",
+    "space/1",
+    "space/1-75",
+    "space/2",
+    "space/2-25",
+    "space/2-5",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

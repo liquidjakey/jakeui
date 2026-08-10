@@ -12,10 +12,6 @@
       "disabled": "Not available; not focusable and does not respond to input."
     }
   },
-  "states": {
-    "Type=Required, State=Default": "text foreground · type size/14",
-    "Type=Required, State=Disabled": "text muted-foreground"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -23,24 +19,10 @@
     "Mark required fields consistently, and say what the marker means once.",
     "Write it as a noun phrase, in sentence case."
   ],
-  "tokensUsed": [
-    "foreground",
-    "muted-foreground",
-    "size/14"
+  "donts": [
+    "Do not mark both required and optional fields — pick whichever is rarer.",
+    "Do not truncate a label; shorten the wording instead."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Name a form control, so it is identifiable before and after it is filled."
   ],
@@ -48,14 +30,36 @@
     "Helper text, format hints, or validation messages — those are separate elements.",
     "A section heading — use a heading."
   ],
-  "donts": [
-    "Do not mark both required and optional fields — pick whichever is rarer.",
-    "Do not truncate a label; shorten the wording instead."
-  ],
   "accessibility": {
     "notes": [
       "Bound to its control by for/id, so clicking the label focuses the control.",
       "Its text is the control's accessible name — keep it stable."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Type=Required, State=Default": "gap space/1 · text foreground · type Label/LG · text destructive",
+    "Type=Optional, State=Default": "gap space/1 · text foreground · type Label/LG · text muted-foreground · type Caption/SM",
+    "Type=Required, State=Disabled": "gap space/1 · text muted-foreground · type Label/LG"
+  },
+  "tokensUsed": [
+    "Caption/SM",
+    "Label/LG",
+    "destructive",
+    "foreground",
+    "muted-foreground",
+    "space/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

@@ -2,23 +2,6 @@
   "name": "Command Panel",
   "summary": "Watermelon package-manager command panel with editable Command text.",
   "description": "Watermelon package-manager command panel with editable Command text.",
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "dos": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
-  "whenToUse": [
-    "Give keyboard-first users a fast path to any command or destination."
-  ],
-  "whenNotToUse": [
-    "The primary means of discovering features — it supplements navigation, it does not replace it.",
-    "A small fixed set of options — use a Select or a menu."
-  ],
   "dos": [
     "Show recent or suggested items before the user types.",
     "Group results and label the groups.",
@@ -27,6 +10,13 @@
   "donts": [
     "Do not hide destructive commands in it without a confirmation step.",
     "Do not leave an empty result set unexplained."
+  ],
+  "whenToUse": [
+    "Give keyboard-first users a fast path to any command or destination."
+  ],
+  "whenNotToUse": [
+    "The primary means of discovering features — it supplements navigation, it does not replace it.",
+    "A small fixed set of options — use a Select or a menu."
   ],
   "accessibility": {
     "keyboard": [
@@ -37,5 +27,31 @@
       "The input owns focus and points at the list via aria-controls and aria-activedescendant.",
       "Announce the result count as it changes."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Default": "fill background · border border · radius radius · shadow Effect/Code Inset · fill card · fill primary · text primary-foreground · type UNBOUND 12/auto Medium · text muted-foreground · border muted-foreground · type UNBOUND 13/20 Regular · text foreground"
+  },
+  "tokensUsed": [
+    "Effect/Code Inset",
+    "background",
+    "border",
+    "card",
+    "foreground",
+    "muted-foreground",
+    "primary",
+    "primary-foreground",
+    "radius"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "dos": "best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

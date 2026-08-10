@@ -2,13 +2,6 @@
   "name": "Table / Root Composition",
   "summary": "Source-parity Table compositions covering the basic invoice example, explicit footer example, row actions with a Dropdown Menu trigger, RTL content, desktop fit, and compact horizontal overflow.",
   "description": "Source-parity Table compositions covering the basic invoice example, explicit footer example, row actions with a Dropdown Menu trigger, RTL content, desktop fit, and compact horizontal overflow. The original Table set remains the Jake UI density and selection extension.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
-  "states": {
-    "Pattern=Basic, Viewport=Desktop": "text muted-foreground · type size/12",
-    "Pattern=Basic, Viewport=Compact": "type size/11",
-    "Pattern=Footer, Viewport=Compact": "type size/11",
-    "Pattern=Actions, Viewport=Compact": "type size/11",
-    "Pattern=RTL, Viewport=Compact": "type size/11"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -21,23 +14,6 @@
     "Do not hide the only route to an action behind row hover.",
     "Do not let a wide table break the page — let the table itself scroll."
   ],
-  "tokensUsed": [
-    "muted-foreground",
-    "size/11",
-    "size/12"
-  ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "donts": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Present records across shared columns, for comparison, scanning, or exact reading."
   ],
@@ -54,5 +30,31 @@
       "Header cells are th with the right scope; a caption names the table.",
       "Sortable headers carry aria-sort, and the control is a button inside the th."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Pattern=Basic, Viewport=Desktop": "gap space/2 · fill card · fill muted · border border · (+3 variants share these)",
+    "Pattern=Basic, Viewport=Compact": "gap space/2 · fill card · fill muted · border border · radius radius/lg · padding y space/1 x space/2 · text muted-foreground · type Caption/XS · (+3 variants share these)"
+  },
+  "tokensUsed": [
+    "Caption/XS",
+    "border",
+    "card",
+    "muted",
+    "muted-foreground",
+    "radius/lg",
+    "space/1",
+    "space/2"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

@@ -130,9 +130,8 @@ Interaction contract: open/closed and disabled are persistent disclosure states.
 
 | State | Tokens |
 |---|---|
-| State=Closed, Disabled=False | fill card · border 1px border · radius radius/lg · text foreground · type size/14 |
-| State=Closed, Disabled=True | fill muted · text muted-foreground |
-| State=Open, Disabled=True | fill muted · text muted-foreground |
+| State=Closed, Disabled=False | fill card · border stroke/1 border · radius radius/lg · padding y space/3-5 x space/4 · gap space/3 · text foreground · type Label/LG · text muted-foreground · type Body/SM · (+1 variant share these) |
+| State=Closed, Disabled=True | fill muted · border stroke/1 border · radius radius/lg · padding y space/3-5 x space/4 · gap space/3 · text muted-foreground · type Label/LG · type Body/SM · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -150,9 +149,9 @@ Interaction contract: open/closed and disabled are persistent disclosure states.
 - The trigger is a button carrying aria-expanded and aria-controls.
 - The panel stays in the accessibility tree only while open.
 
-**Tokens used** — `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/lg` · `size/14`
+**Tokens used** — `Body/SM` · `Label/LG` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/lg` · `space/3` · `space/3-5` · `space/4` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `27e5f9bef095c020` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `e25e3044ab1d9de9` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -182,10 +181,10 @@ Inline feedback message for informational, successful, warning, and destructive 
 
 | State | Tokens |
 |---|---|
-| Tone=Info | fill info-muted · border 1px info · radius radius/lg · text info · type size/14 |
-| Tone=Success | fill success-muted · border 1px success · text success |
-| Tone=Warning | fill warning-muted · border 1px warning · text warning |
-| Tone=Destructive | fill card · border 1px destructive · text destructive |
+| Tone=Info | fill info-muted · border stroke/1 info · radius radius/lg · padding space/4 · gap space/3 · fill info · radius radius/12 · text card · type Value/Strong · gap space/1 · text info · type Label/LG · type Body/SM |
+| Tone=Success | fill success-muted · border stroke/1 success · radius radius/lg · padding space/4 · gap space/3 · fill success · radius radius/12 · gap space/1 · text success-muted-foreground · type Label/LG · type Body/SM |
+| Tone=Warning | fill warning-muted · border stroke/1 warning · radius radius/lg · padding space/4 · gap space/3 · fill warning · radius radius/12 · gap space/1 · text warning-muted-foreground · type Label/LG · type Body/SM |
+| Tone=Destructive | fill destructive-muted · border stroke/1 destructive · radius radius/lg · padding space/4 · gap space/3 · fill destructive · radius radius/12 · gap space/1 · text destructive · type Label/LG · type Body/SM |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -202,9 +201,9 @@ Inline feedback message for informational, successful, warning, and destructive 
 - Only an urgent, interrupting message should use role="alert"; a static one uses role="status" or no live region at all.
 - A dismissible alert's close control needs an accessible name.
 
-**Tokens used** — `card` · `destructive` · `info` · `info-muted` · `radius/lg` · `size/14` · `success` · `success-muted` · `warning` · `warning-muted`
+**Tokens used** — `Body/SM` · `Label/LG` · `Value/Strong` · `card` · `destructive` · `destructive-muted` · `info` · `info-muted` · `radius/12` · `radius/lg` · `space/1` · `space/3` · `space/4` · `stroke/1` · `success` · `success-muted` · `success-muted-foreground` · `warning` · `warning-muted` · `warning-muted-foreground`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `1b43de496d7ca8eb` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `91f1e558c08b2705` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -231,7 +230,8 @@ Modal confirmation surface for consequential actions. Use Tone=Destructive only 
 
 | State | Tokens |
 |---|---|
-| Tone=Default | fill card · border 1px border · radius radius/lg · text card-foreground · type size/18 |
+| Tone=Default | fill card · border stroke/1 border · radius radius/lg · padding space/6 · gap space/5 · gap space/2 · text card-foreground · type Heading/LG · text muted-foreground · type Body/MD · padding y space/2 x space/3-5 · text foreground · type Label/LG · fill primary · text primary-foreground |
+| Tone=Destructive | fill card · border stroke/1 border · radius radius/lg · padding space/6 · gap space/5 · gap space/2 · text card-foreground · type Heading/LG · text muted-foreground · type Body/MD · padding y space/2 x space/3-5 · text foreground · type Label/LG · fill destructive · text destructive-foreground |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -251,9 +251,9 @@ Modal confirmation surface for consequential actions. Use Tone=Destructive only 
 - aria-modal="true", labelled by its title via aria-labelledby.
 - Focus is trapped within while open.
 
-**Tokens used** — `border` · `card` · `card-foreground` · `radius/lg` · `size/18`
+**Tokens used** — `Body/MD` · `Heading/LG` · `Label/LG` · `border` · `card` · `card-foreground` · `destructive` · `destructive-foreground` · `foreground` · `muted-foreground` · `primary` · `primary-foreground` · `radius/lg` · `space/2` · `space/3-5` · `space/5` · `space/6` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `1207477704891b2c` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `131b56a8cc88c730` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -285,11 +285,12 @@ Layout exception: Avatar status dots are intentionally absolute-positioned to th
 
 | State | Tokens |
 |---|---|
-| Size=Small, Type=Initials | fill primary · radius radius/16 · text primary-foreground · type size/11 |
-| Size=Medium, Type=Initials | radius radius/24 · type size/14 |
-| Size=Medium, Type=Status | radius radius/24 · type size/14 |
-| Size=Large, Type=Initials | radius radius/32 · type size/18 |
-| Size=Large, Type=Status | radius radius/32 · type size/18 |
+| Size=Small, Type=Initials | fill primary · radius radius/16 · text primary-foreground · type UNBOUND 11/14 Semi Bold |
+| Size=Small, Type=Status | fill primary · radius radius/16 · text primary-foreground · type UNBOUND 11/14 Semi Bold · fill success · border stroke/2 card |
+| Size=Medium, Type=Initials | fill primary · radius radius/24 · text primary-foreground · type Heading/XS |
+| Size=Medium, Type=Status | fill primary · radius radius/24 · text primary-foreground · type Heading/XS · fill success · border stroke/2 card |
+| Size=Large, Type=Initials | fill primary · radius radius/32 · text primary-foreground · type Heading/LG |
+| Size=Large, Type=Status | fill primary · radius radius/32 · text primary-foreground · type Heading/LG · fill success · border stroke/2 card |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -304,9 +305,9 @@ Layout exception: Avatar status dots are intentionally absolute-positioned to th
 - A decorative avatar beside a visible name is alt=""; a standalone one needs the name as its accessible name.
 - A status dot needs a text equivalent, not colour alone.
 
-**Tokens used** — `primary` · `primary-foreground` · `radius/16` · `radius/24` · `radius/32` · `size/11` · `size/14` · `size/18`
+**Tokens used** — `Heading/LG` · `Heading/XS` · `card` · `primary` · `primary-foreground` · `radius/16` · `radius/24` · `radius/32` · `stroke/2` · `success`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `de74420e4144995d` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `cc7c0d09661ecfbc` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -338,14 +339,16 @@ Compact status label. Tone communicates semantic state; size adapts to dense or 
 
 | State | Tokens |
 |---|---|
-| Tone=Neutral, Size=Small | fill secondary · radius radius/lg · text secondary-foreground · type size/11 |
-| Tone=Neutral, Size=Medium | type size/12 |
-| Tone=Info, Size=Small | fill info · text info-foreground |
-| Tone=Info, Size=Medium | fill info · text info-foreground · type size/12 |
-| Tone=Success, Size=Small | fill success · text info-foreground |
-| Tone=Success, Size=Medium | fill success · text info-foreground · type size/12 |
-| Tone=Warning, Size=Small | fill warning · text warning-foreground |
-| Tone=Warning, Size=Medium | fill warning · text warning-foreground · type size/12 |
+| Tone=Neutral, Size=Small | fill secondary · radius radius/lg · padding y space/0-75 x space/2 · text secondary-foreground · type Label/XS |
+| Tone=Neutral, Size=Medium | fill secondary · radius radius/lg · padding y space/1-25 x space/2-5 · text secondary-foreground · type Label/SM |
+| Tone=Info, Size=Small | fill info · radius radius/lg · padding y space/0-75 x space/2 · text info-foreground · type Label/XS |
+| Tone=Info, Size=Medium | fill info · radius radius/lg · padding y space/1-25 x space/2-5 · text info-foreground · type Label/SM |
+| Tone=Success, Size=Small | fill success · radius radius/lg · padding y space/0-75 x space/2 · text success-foreground · type Label/XS |
+| Tone=Success, Size=Medium | fill success · radius radius/lg · padding y space/1-25 x space/2-5 · text success-foreground · type Label/SM |
+| Tone=Warning, Size=Small | fill warning · radius radius/lg · padding y space/0-75 x space/2 · text warning-foreground · type Label/XS |
+| Tone=Warning, Size=Medium | fill warning · radius radius/lg · padding y space/1-25 x space/2-5 · text warning-foreground · type Label/SM |
+| Tone=Destructive, Size=Small | fill destructive · radius radius/lg · padding y space/0-75 x space/2 · text card · type Label/XS |
+| Tone=Destructive, Size=Medium | fill destructive · radius radius/lg · padding y space/1-25 x space/2-5 · text card · type Label/SM |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -360,9 +363,9 @@ Compact status label. Tone communicates semantic state; size adapts to dense or 
 - Status is conveyed with text, not colour only (WCAG 1.4.1).
 - A removable chip's remove control needs an accessible name, e.g. "Remove <label>".
 
-**Tokens used** — `info` · `info-foreground` · `radius/lg` · `secondary` · `secondary-foreground` · `size/11` · `size/12` · `success` · `warning` · `warning-foreground`
+**Tokens used** — `Label/SM` · `Label/XS` · `card` · `destructive` · `info` · `info-foreground` · `radius/lg` · `secondary` · `secondary-foreground` · `space/0-75` · `space/1-25` · `space/2` · `space/2-5` · `success` · `success-foreground` · `warning` · `warning-foreground`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `136f6dc031fa1df3` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `47d5216e186fa303` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -390,7 +393,7 @@ Hierarchical location trail. Use Collapsed=True when intermediate levels must be
 
 | State | Tokens |
 |---|---|
-| Collapsed=False | fill card · border 1px border · radius radius/lg · text muted-foreground · type size/13 |
+| Collapsed=False | fill card · border stroke/1 border · radius radius/lg · padding y space/2-5 x space/3 · gap space/2 · text muted-foreground · type Body/SM · text foreground · type Label/MD · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -406,9 +409,9 @@ Hierarchical location trail. Use Collapsed=True when intermediate levels must be
 - Mark the current page with aria-current="page".
 - Separators are decorative and hidden from assistive technology.
 
-**Tokens used** — `border` · `card` · `muted-foreground` · `radius/lg` · `size/13`
+**Tokens used** — `Body/SM` · `Label/MD` · `border` · `card` · `foreground` · `muted-foreground` · `radius/lg` · `space/2` · `space/2-5` · `space/3` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `2561d5de320681bf` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `1d3c05c685985979` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -441,14 +444,30 @@ Pipeline property contract: Leading icon is an INSTANCE_SWAP constrained to the 
 
 | State | Tokens |
 |---|---|
-| Style=Primary, Size=Small, State=Default | fill primary · radius radius/lg · text primary-foreground · type size/13 |
-| Style=Primary, Size=Small, State=Disabled | fill muted · text muted-foreground |
-| Style=Primary, Size=Medium, State=Default | type size/14 |
-| Style=Primary, Size=Medium, State=Hover | type size/14 |
-| Style=Primary, Size=Medium, State=Disabled | fill muted · text muted-foreground · type size/14 |
-| Style=Secondary, Size=Small, State=Default | fill secondary · text secondary-foreground |
-| Style=Secondary, Size=Small, State=Hover | fill accent · text secondary-foreground |
-| Style=Secondary, Size=Small, State=Disabled | fill muted · text muted-foreground |
+| Style=Primary, Size=Small, State=Default | fill primary · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text primary-foreground · type Label/MD |
+| Style=Primary, Size=Small, State=Hover | fill primary-hover · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text primary-foreground · type Label/MD |
+| Style=Primary, Size=Small, State=Disabled | fill muted · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text muted-foreground · type Label/MD · (+3 variants share these) |
+| Style=Primary, Size=Medium, State=Default | fill primary · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text primary-foreground · type Label/LG |
+| Style=Primary, Size=Medium, State=Hover | fill primary-hover · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text primary-foreground · type Label/LG |
+| Style=Primary, Size=Medium, State=Disabled | fill muted · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text muted-foreground · type Label/LG · (+3 variants share these) |
+| Style=Secondary, Size=Small, State=Default | fill secondary · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text secondary-foreground · type Label/MD |
+| Style=Secondary, Size=Small, State=Hover | fill accent-hover · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text secondary-foreground · type Label/MD |
+| Style=Secondary, Size=Medium, State=Default | fill secondary · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text secondary-foreground · type Label/LG |
+| Style=Secondary, Size=Medium, State=Hover | fill accent-hover · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text secondary-foreground · type Label/LG |
+| Style=Outline, Size=Small, State=Default | border stroke/1 border · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text foreground · type Label/MD |
+| Style=Outline, Size=Small, State=Hover | fill accent-hover · border stroke/1 border · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text accent-foreground · type Label/MD |
+| Style=Outline, Size=Medium, State=Default | border stroke/1 border · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text foreground · type Label/LG |
+| Style=Outline, Size=Medium, State=Hover | fill accent-hover · border stroke/1 border · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text accent-foreground · type Label/LG |
+| Style=Ghost, Size=Small, State=Default | radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text foreground · type Label/MD |
+| Style=Ghost, Size=Small, State=Hover | fill accent-hover · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text accent-foreground · type Label/MD |
+| Style=Ghost, Size=Medium, State=Default | radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text foreground · type Label/LG |
+| Style=Ghost, Size=Medium, State=Hover | fill accent-hover · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text accent-foreground · type Label/LG |
+| Style=Primary, Size=Small, State=Focused | fill primary · border stroke/2 ring · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text primary-foreground · type Label/MD |
+| Style=Primary, Size=Medium, State=Focused | fill primary · border stroke/2 ring · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text primary-foreground · type Label/LG |
+| Style=Secondary, Size=Small, State=Focused | fill secondary · border stroke/2 ring · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text secondary-foreground · type Label/MD |
+| Style=Secondary, Size=Medium, State=Focused | fill secondary · border stroke/2 ring · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text secondary-foreground · type Label/LG |
+| Style=Outline, Size=Small, State=Focused | border stroke/2 ring · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text foreground · type Label/MD · (+1 variant share these) |
+| Style=Outline, Size=Medium, State=Focused | border stroke/2 ring · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text foreground · type Label/LG · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -472,9 +491,9 @@ Pipeline property contract: Leading icon is an INSTANCE_SWAP constrained to the 
 - An icon-only button needs an aria-label.
 - Disabled buttons are not focusable.
 
-**Tokens used** — `accent` · `muted` · `muted-foreground` · `primary` · `primary-foreground` · `radius/lg` · `secondary` · `secondary-foreground` · `size/13` · `size/14`
+**Tokens used** — `Label/LG` · `Label/MD` · `accent-foreground` · `accent-hover` · `border` · `foreground` · `muted` · `muted-foreground` · `primary` · `primary-foreground` · `primary-hover` · `radius/lg` · `ring` · `secondary` · `secondary-foreground` · `space/1-5` · `space/2` · `space/2-25` · `space/3` · `space/4` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `b312af55ad9bad9b` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `3aabd366262eaf70` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -503,7 +522,8 @@ Group related Jake UI actions using nested Button instances. Attached variants r
 
 | State | Tokens |
 |---|---|
-| Orientation=Horizontal, Attached=False | text primary-foreground · type size/14 |
+| Orientation=Horizontal, Attached=False | gap space/2 · (+1 variant share these) |
+| Orientation=Horizontal, Attached=True |  · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -523,9 +543,9 @@ Group related Jake UI actions using nested Button instances. Attached variants r
 - An icon-only button needs an aria-label.
 - Disabled buttons are not focusable.
 
-**Tokens used** — `primary-foreground` · `size/14`
+**Tokens used** — `space/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `51b568c256a6ceeb` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `e6dace531adb6e54` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -559,7 +579,10 @@ Accessibility contract: month navigation controls require programmatic names suc
 
 | State | Tokens |
 |---|---|
-| Mode=Single, Density=Compact | fill card · border 1px border · radius radius/lg · text foreground · type size/13 |
+| Mode=Single, Density=Compact | fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/3 · text foreground · type Heading/XS · gap space/1 · text muted-foreground · type Label/XS · radius radius/md · type Label/SM · border stroke/1 primary · fill primary · radius radius/16 · text primary-foreground · opacity opacity/50 |
+| Mode=Single, Density=Comfortable | fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/3 · text foreground · type Heading/XS · gap space/1-5 · text muted-foreground · type Label/XS · radius radius/md · type Label/SM · border stroke/1 primary · fill primary · radius radius/2xl · text primary-foreground · opacity opacity/50 |
+| Mode=Range, Density=Compact | fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/3 · text foreground · type Heading/XS · gap space/1 · text muted-foreground · type Label/XS · radius radius/md · type Label/SM · border stroke/1 primary · fill primary · radius radius/16 · text primary-foreground · fill accent · text accent-foreground · opacity opacity/50 |
+| Mode=Range, Density=Comfortable | fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/3 · text foreground · type Heading/XS · gap space/1-5 · text muted-foreground · type Label/XS · radius radius/md · type Label/SM · border stroke/1 primary · fill primary · radius radius/2xl · text primary-foreground · fill accent · text accent-foreground · opacity opacity/50 |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -579,9 +602,9 @@ Accessibility contract: month navigation controls require programmatic names suc
 - The grid is a table with aria-selected on the chosen day.
 - Announce the focused date in full, not just the day number.
 
-**Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/13`
+**Tokens used** — `Heading/XS` · `Label/SM` · `Label/XS` · `accent` · `accent-foreground` · `border` · `card` · `foreground` · `muted-foreground` · `opacity/50` · `primary` · `primary-foreground` · `radius/16` · `radius/2xl` · `radius/lg` · `radius/md` · `space/1` · `space/1-5` · `space/3` · `space/4` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `b887d30e3117d857` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `55319792342f7720` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -613,9 +636,10 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| Type=Content, State=Default | fill card · border 1px border · radius radius/lg · text info-foreground · type size/11 |
-| Type=Content, State=Interactive | border 2px primary |
-| Type=Media, State=Interactive | border 2px primary |
+| Type=Content, State=Default | fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/4 · gap space/3 · gap space/2-5 · gap space/0-5 · text foreground · type Heading/MD · text muted-foreground · type Body/XS · type Body/MD |
+| Type=Content, State=Interactive | fill card · border stroke/2 primary · radius radius/lg · padding space/5 · gap space/4 · gap space/3 · gap space/2-5 · gap space/0-5 · text foreground · type Heading/MD · text muted-foreground · type Body/XS · type Body/MD |
+| Type=Media, State=Default | fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/4 · fill muted · fill chart-1 · radius radius/sm · gap space/3 · gap space/2-5 · gap space/0-5 · text foreground · type Heading/MD · text muted-foreground · type Body/XS · type Body/MD |
+| Type=Media, State=Interactive | fill card · border stroke/2 primary · radius radius/lg · padding space/5 · gap space/4 · fill muted · fill chart-1 · radius radius/sm · gap space/3 · gap space/2-5 · gap space/0-5 · text foreground · type Heading/MD · text muted-foreground · type Body/XS · type Body/MD |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -631,9 +655,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 - If the whole card is a link or button it needs an accessible name.
 - Do not bury interactive controls where keyboard users reach them out of order.
 
-**Tokens used** — `border` · `card` · `info-foreground` · `primary` · `radius/lg` · `size/11`
+**Tokens used** — `Body/MD` · `Body/XS` · `Heading/MD` · `border` · `card` · `chart-1` · `foreground` · `muted` · `muted-foreground` · `primary` · `radius/lg` · `radius/sm` · `space/0-5` · `space/2-5` · `space/3` · `space/4` · `space/5` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `9fe82e7c0bdc0914` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `3fe23a527ffd57d7` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -663,7 +687,8 @@ Layout exception: chart plot geometry is intentionally coordinate-based because 
 
 | State | Tokens |
 |---|---|
-| Type=Bar | fill card · border 1px border · radius radius/lg · text foreground · type size/16 |
+| Type=Bar | fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/5 · text foreground · type Heading/MD · fill chart-1 · radius radius/sm · fill chart-2 · fill chart-3 · fill chart-4 · fill chart-5 |
+| Type=Line | fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/5 · text foreground · type Heading/MD · border chart-2 · fill chart-2 |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -681,9 +706,9 @@ Layout exception: chart plot geometry is intentionally coordinate-based because 
 - Give the chart a text alternative that states the takeaway, not just the chart type.
 - Offer the underlying data as a table for screen-reader and keyboard users.
 
-**Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/16`
+**Tokens used** — `Heading/MD` · `border` · `card` · `chart-1` · `chart-2` · `chart-3` · `chart-4` · `chart-5` · `foreground` · `radius/lg` · `radius/sm` · `space/5` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `03fe602a001fd013` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `f93efa023de4c4c7` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -715,10 +740,12 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| Value=Unchecked, State=Default | text foreground · type size/14 |
-| Value=Unchecked, State=Disabled | text muted-foreground |
-| Value=Checked, State=Disabled | text muted-foreground |
-| Value=Indeterminate, State=Disabled | text muted-foreground |
+| Value=Unchecked, State=Default | gap space/2-5 · fill card · border stroke/1 input · radius radius/4 · text primary-readable · type UNBOUND 12/14 Semi Bold · text foreground · type Label/LG |
+| Value=Unchecked, State=Focused | gap space/2-5 · fill card · border stroke/2 ring · radius radius/4 · text primary-readable · type UNBOUND 12/14 Semi Bold · text foreground · type Label/LG |
+| Value=Unchecked, State=Disabled | gap space/2-5 · fill muted · border stroke/1 input · radius radius/4 · text muted-foreground · type UNBOUND 12/14 Semi Bold · type Label/LG |
+| Value=Checked, State=Default | gap space/2-5 · fill primary · border stroke/1 primary · radius radius/4 · text foreground · type Label/LG · (+1 variant share these) |
+| Value=Checked, State=Focused | gap space/2-5 · fill primary · border stroke/2 ring · radius radius/4 · text foreground · type Label/LG · (+1 variant share these) |
+| Value=Checked, State=Disabled | gap space/2-5 · fill muted · border stroke/1 primary · radius radius/4 · text muted-foreground · type Label/LG · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -737,9 +764,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean
 - State is exposed via aria-checked, never by colour alone.
 
-**Tokens used** — `foreground` · `muted-foreground` · `size/14`
+**Tokens used** — `Label/LG` · `card` · `foreground` · `input` · `muted` · `muted-foreground` · `primary` · `primary-readable` · `radius/4` · `ring` · `space/2-5` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `0d1f6fdeda171066` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `8f3a6686cca614a6` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -771,9 +798,8 @@ Interaction contract: open/closed and disabled are persistent disclosure states.
 
 | State | Tokens |
 |---|---|
-| State=Closed, Disabled=False | fill card · border 1px border · radius radius/lg · text foreground · type size/14 |
-| State=Closed, Disabled=True | fill muted · text muted-foreground |
-| State=Open, Disabled=True | fill muted · text muted-foreground |
+| State=Closed, Disabled=False | fill card · border stroke/1 border · radius radius/lg · padding y space/3 x space/3-5 · gap space/2-5 · text foreground · type Label/LG · text muted-foreground · type Body/SM · (+1 variant share these) |
+| State=Closed, Disabled=True | fill muted · border stroke/1 border · radius radius/lg · padding y space/3 x space/3-5 · gap space/2-5 · text muted-foreground · type Label/LG · type Body/SM · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -791,9 +817,9 @@ Interaction contract: open/closed and disabled are persistent disclosure states.
 - The trigger is a button carrying aria-expanded and aria-controls.
 - The panel stays in the accessibility tree only while open.
 
-**Tokens used** — `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/lg` · `size/14`
+**Tokens used** — `Body/SM` · `Label/LG` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/lg` · `space/2-5` · `space/3` · `space/3-5` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `69c1c284a7873521` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `b4d6d01d95a5686d` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -823,8 +849,8 @@ Interaction contract: Selected=True is the highlighted command option used for p
 
 | State | Tokens |
 |---|---|
-| Selected=False | radius radius/lg · text foreground · type size/14 |
-| Selected=True | fill accent · text accent-foreground |
+| Selected=False | radius radius/lg · padding y space/2-5 x space/3 · gap space/3 · text muted-foreground · type Body/MD · text foreground · type Label/LG · type Caption/SM |
+| Selected=True | fill accent · radius radius/lg · padding y space/2-5 x space/3 · gap space/3 · text accent-foreground · type Body/MD · type Label/LG · text muted-foreground · type Caption/SM |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -843,9 +869,9 @@ Interaction contract: Selected=True is the highlighted command option used for p
 - The input owns focus and points at the list via aria-controls and aria-activedescendant.
 - Announce the result count as it changes.
 
-**Tokens used** — `accent` · `accent-foreground` · `foreground` · `radius/lg` · `size/14`
+**Tokens used** — `Body/MD` · `Caption/SM` · `Label/LG` · `accent` · `accent-foreground` · `foreground` · `muted-foreground` · `radius/lg` · `space/2-5` · `space/3`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `b5005f12ae3fe0ff` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `a0e183752c2224c4` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -859,6 +885,12 @@ Interaction contract: Selected=True is the highlighted command option used for p
 **When not to use**
 - The primary means of discovering features — it supplements navigation, it does not replace it.
 - A small fixed set of options — use a Select or a menu.
+
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default | fill background · border border · radius radius · shadow Effect/Code Inset · fill card · fill primary · text primary-foreground · type UNBOUND 12/auto Medium · text muted-foreground · border muted-foreground · type UNBOUND 13/20 Regular · text foreground |
 
 **Do**
 - Show recent or suggested items before the user types.
@@ -875,7 +907,9 @@ Interaction contract: Selected=True is the highlighted command option used for p
 - The input owns focus and points at the list via aria-controls and aria-activedescendant.
 - Announce the result count as it changes.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `f87e2f9f96161d11` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+**Tokens used** — `Effect/Code Inset` · `background` · `border` · `card` · `foreground` · `muted-foreground` · `primary` · `primary-foreground` · `radius`
+
+<sub>status `draft` · updated 2026-08-10 · fingerprint `17c10b595b560e7d` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -905,9 +939,10 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Viewport=Desktop, State=Populated | fill card · border 1px border · radius radius/lg · text foreground · type size/18 |
-| Viewport=Desktop, State=Empty | type size/15 |
-| Viewport=Compact, State=Empty | type size/15 |
+| Viewport=Desktop, State=Populated | fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/5 · gap space/4 · gap space/1 · text foreground · type Heading/LG · text muted-foreground · type Body/SM · gap space/3 · gap space/2 |
+| Viewport=Desktop, State=Empty | fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/5 · gap space/4 · gap space/1 · text foreground · type Heading/LG · text muted-foreground · type Body/SM · gap space/3 · gap space/2 · fill muted · padding y space/10 x space/6 · fill accent · radius radius/24 · type Heading/SM |
+| Viewport=Compact, State=Populated | fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/5 · gap space/1-5 · gap space/1 · text foreground · type Heading/LG · text muted-foreground · type Body/SM · gap space/3 · gap space/2 |
+| Viewport=Compact, State=Empty | fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/5 · gap space/1-5 · gap space/1 · text foreground · type Heading/LG · text muted-foreground · type Body/SM · gap space/3 · gap space/2 · fill muted · padding y space/10 x space/6 · fill accent · radius radius/24 · type Heading/SM |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -927,9 +962,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - Header cells are th with the right scope; a caption names the table.
 - Sortable headers carry aria-sort, and the control is a button inside the th.
 
-**Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/15` · `size/18`
+**Tokens used** — `Body/SM` · `Heading/LG` · `Heading/SM` · `accent` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/24` · `radius/lg` · `space/1` · `space/1-5` · `space/10` · `space/2` · `space/3` · `space/4` · `space/5` · `space/6` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `8748b58f5163d494` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `7ab1e4cb7f533b3f` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -963,9 +998,8 @@ Layout exception: Date Picker Trigger overlays a fixed semantic Calendar icon on
 
 | State | Tokens |
 |---|---|
-| Mode=Single, State=Default, Open=False | text foreground · type size/14 |
-| Mode=Single, State=Disabled, Open=False | text muted-foreground |
-| Mode=Range, State=Disabled, Open=False | text muted-foreground |
+| Mode=Single, State=Default, Open=False | gap space/2 · (+9 variants share these) |
+| Mode=Single, State=Error, Open=False | gap space/2 · text destructive · type Body/XS · (+3 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -986,9 +1020,9 @@ Layout exception: Date Picker Trigger overlays a fixed semantic Calendar icon on
 - The grid is a table with aria-selected on the chosen day.
 - Announce the focused date in full, not just the day number.
 
-**Tokens used** — `foreground` · `muted-foreground` · `size/14`
+**Tokens used** — `Body/XS` · `destructive` · `space/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `0dd37c22e3f55b6c` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `090bb29f59e7a98a` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1019,9 +1053,8 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Type=Standard, Size=Small | fill card · border 1px border · radius radius/lg · text foreground · type size/18 |
-| Type=Form, Size=Small | type size/13 |
-| Type=Form, Size=Large | type size/13 |
+| Type=Standard, Size=Small | fill card · border stroke/1 border · radius radius/lg · padding space/6 · gap space/5 · gap space/3 · gap space/2 · text foreground · type Heading/LG · text muted-foreground · type Body/MD · padding y space/2-25 x space/3-5 · type Label/LG · fill primary · text primary-foreground · (+1 variant share these) |
+| Type=Form, Size=Small | fill card · border stroke/1 border · radius radius/lg · padding space/6 · gap space/5 · gap space/3 · gap space/2 · text foreground · type Heading/LG · text muted-foreground · type Body/MD · gap space/1-5 · type Label/MD · padding y space/2-5 x space/3 · padding y space/2-25 x space/3-5 · type Label/LG · fill primary · text primary-foreground · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1041,9 +1074,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - aria-modal="true", labelled by its title via aria-labelledby.
 - Focus is trapped within while open.
 
-**Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/13` · `size/18`
+**Tokens used** — `Body/MD` · `Heading/LG` · `Label/LG` · `Label/MD` · `border` · `card` · `foreground` · `muted-foreground` · `primary` · `primary-foreground` · `radius/lg` · `space/1-5` · `space/2` · `space/2-25` · `space/2-5` · `space/3` · `space/3-5` · `space/5` · `space/6` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `d9717bb83f70289a` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `de4c994e7d274d2d` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1074,7 +1107,7 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Placement=Left, Width=Compact | fill card · border 1px border · radius radius/lg · text foreground · type size/18 |
+| Placement=Left, Width=Compact | fill card · border stroke/1 border · radius radius/lg · padding space/6 · gap space/5 · gap space/3 · text foreground · type Heading/LG · text muted-foreground · type Body/MD · fill muted · padding y space/2-5 x space/3 · gap space/2 · type Label/LG · type Body/SM · fill primary · padding y space/2-25 x space/3-5 · text primary-foreground · (+3 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1094,9 +1127,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - aria-modal="true", labelled by its title via aria-labelledby.
 - Focus is trapped within while open.
 
-**Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/18`
+**Tokens used** — `Body/MD` · `Body/SM` · `Heading/LG` · `Label/LG` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `primary` · `primary-foreground` · `radius/lg` · `space/2` · `space/2-25` · `space/2-5` · `space/3` · `space/3-5` · `space/5` · `space/6` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `4e1c3500a010bb6a` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `be85794451f6dd97` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1128,7 +1161,10 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Type=Standard, Density=Compact | fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/13 |
+| Type=Standard, Density=Compact | fill popover · border stroke/1 border · radius radius/lg · padding space/2 · gap space/1 · padding y space/1-75 x space/2-5 · gap space/2 · fill muted-foreground · text popover-foreground · type Label/MD · text muted-foreground · type Caption/SM · fill accent · text accent-foreground · text destructive |
+| Type=Standard, Density=Comfortable | fill popover · border stroke/1 border · radius radius/lg · padding space/2 · gap space/1 · padding y space/2-25 x space/2-5 · gap space/2 · fill muted-foreground · text popover-foreground · type Label/MD · text muted-foreground · type Caption/SM · fill accent · text accent-foreground · text destructive |
+| Type=Checkbox, Density=Compact | fill popover · border stroke/1 border · radius radius/lg · padding space/2 · gap space/1 · padding y space/1-75 x space/2-5 · gap space/2 · text popover-foreground · type Label/MD · text muted-foreground · type Caption/SM · fill accent · text accent-foreground · border muted-foreground |
+| Type=Checkbox, Density=Comfortable | fill popover · border stroke/1 border · radius radius/lg · padding space/2 · gap space/1 · padding y space/2-25 x space/2-5 · gap space/2 · text popover-foreground · type Label/MD · text muted-foreground · type Caption/SM · fill accent · text accent-foreground · border muted-foreground |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1149,9 +1185,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - The trigger carries aria-haspopup and aria-expanded.
 - Focus moves into the menu on open and back to the trigger on close.
 
-**Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/13`
+**Tokens used** — `Caption/SM` · `Label/MD` · `accent` · `accent-foreground` · `border` · `destructive` · `muted-foreground` · `popover` · `popover-foreground` · `radius/lg` · `space/1` · `space/1-75` · `space/2` · `space/2-25` · `space/2-5` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `a5dfc25c03c1ddfa` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `0636e70ab8a3d393` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1182,10 +1218,12 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 
 | State | Tokens |
 |---|---|
-| Value=Unchecked, State=Default | fill popover · radius radius/4 · text popover-foreground · type size/13 |
-| Value=Unchecked, State=Highlighted | fill accent · text accent-foreground |
-| Value=Checked, State=Highlighted | fill accent · text accent-foreground |
-| Value=Indeterminate, State=Highlighted | fill accent · text accent-foreground |
+| Value=Unchecked, State=Default | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/3 · text popover-foreground · type Label/MD · type UNBOUND 1/1 Regular |
+| Value=Unchecked, State=Highlighted | fill accent · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/3 · text accent-foreground · type Label/MD · text popover-foreground · type UNBOUND 1/1 Regular |
+| Value=Unchecked, State=Disabled | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · opacity opacity/50 · border stroke/1 border · radius radius/3 · text popover-foreground · type Label/MD · type UNBOUND 1/1 Regular |
+| Value=Checked, State=Default | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 primary · radius radius/3 · text popover-foreground · type Label/MD · type UNBOUND 1/1 Regular · (+1 variant share these) |
+| Value=Checked, State=Highlighted | fill accent · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 primary · radius radius/3 · text accent-foreground · type Label/MD · text popover-foreground · type UNBOUND 1/1 Regular · (+1 variant share these) |
+| Value=Checked, State=Disabled | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · opacity opacity/50 · border stroke/1 primary · radius radius/3 · text popover-foreground · type Label/MD · type UNBOUND 1/1 Regular · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1200,9 +1238,9 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Highlighted · Disabled] → :highlighted CSS-owned, dropped; disabled independent boolean
 
-**Tokens used** — `accent` · `accent-foreground` · `popover` · `popover-foreground` · `radius/4` · `size/13`
+**Tokens used** — `Label/MD` · `accent` · `accent-foreground` · `border` · `opacity/50` · `popover` · `popover-foreground` · `primary` · `radius/3` · `radius/4` · `space/1-5` · `space/2` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `5ea3a8310faf4b73` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `39df2d6bfa7be1b9` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1239,7 +1277,8 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Side=Top, Align=Start, Arrow=False | text popover-foreground · type size/13 |
+| Side=Top, Align=Start, Arrow=False |  · (+11 variants share these) |
+| Side=Top, Align=Start, Arrow=True | fill popover · border stroke/1 border · (+11 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1249,9 +1288,9 @@ Pipeline property contract: only the component properties defined on this set ar
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `popover-foreground` · `size/13`
+**Tokens used** — `border` · `popover` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `c628300ef0b5af13` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `d1f093480fc78643` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1268,13 +1307,19 @@ Structural grouping wrapper for labels and related menu items. It carries no vis
 - On its own, outside the parent that owns its behaviour and accessibility wiring.
 - As a general-purpose layout or text primitive.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default |  |
+
 **Do**
 - Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `ceb0e4a942eb8912` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `042718305b859e56` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings</sub>
 
 ---
 
@@ -1306,14 +1351,18 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 
 | State | Tokens |
 |---|---|
-| Tone=Default, State=Default, Inset=False | fill popover · radius radius/4 · text popover-foreground · type size/13 |
-| Tone=Default, State=Highlighted, Inset=False | fill accent · text accent-foreground |
-| Tone=Default, State=Highlighted, Inset=True | fill accent · text accent-foreground |
-| Tone=Destructive, State=Default, Inset=False | text destructive |
-| Tone=Destructive, State=Default, Inset=True | text destructive |
-| Tone=Destructive, State=Highlighted, Inset=False | fill accent · text destructive |
-| Tone=Destructive, State=Highlighted, Inset=True | fill accent · text destructive |
-| Tone=Destructive, State=Disabled, Inset=False | text destructive |
+| Tone=Default, State=Default, Inset=False | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · text popover-foreground · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Default, State=Default, Inset=True | fill popover · radius radius/4 · padding t space/1-5 r space/2 b space/1-5 l space/8 · gap space/2 · text popover-foreground · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Default, State=Highlighted, Inset=False | fill accent · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · text accent-foreground · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Default, State=Highlighted, Inset=True | fill accent · radius radius/4 · padding t space/1-5 r space/2 b space/1-5 l space/8 · gap space/2 · text accent-foreground · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Default, State=Disabled, Inset=False | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · opacity opacity/50 · text popover-foreground · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Default, State=Disabled, Inset=True | fill popover · radius radius/4 · padding t space/1-5 r space/2 b space/1-5 l space/8 · gap space/2 · opacity opacity/50 · text popover-foreground · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Destructive, State=Default, Inset=False | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · text destructive · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Destructive, State=Default, Inset=True | fill popover · radius radius/4 · padding t space/1-5 r space/2 b space/1-5 l space/8 · gap space/2 · text destructive · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Destructive, State=Highlighted, Inset=False | fill accent · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · text destructive · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Destructive, State=Highlighted, Inset=True | fill accent · radius radius/4 · padding t space/1-5 r space/2 b space/1-5 l space/8 · gap space/2 · text destructive · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Destructive, State=Disabled, Inset=False | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · opacity opacity/50 · text destructive · type Label/MD · text muted-foreground · type Caption/XS |
+| Tone=Destructive, State=Disabled, Inset=True | fill popover · radius radius/4 · padding t space/1-5 r space/2 b space/1-5 l space/8 · gap space/2 · opacity opacity/50 · text destructive · type Label/MD · text muted-foreground · type Caption/XS |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1328,9 +1377,9 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Highlighted · Disabled] → :highlighted CSS-owned, dropped; disabled independent boolean
 
-**Tokens used** — `accent` · `accent-foreground` · `destructive` · `popover` · `popover-foreground` · `radius/4` · `size/13`
+**Tokens used** — `Caption/XS` · `Label/MD` · `accent` · `accent-foreground` · `destructive` · `muted-foreground` · `opacity/50` · `popover` · `popover-foreground` · `radius/4` · `space/1-5` · `space/2` · `space/8`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `1acf05885a1b1a9c` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `b318f96b39186a49` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1358,7 +1407,8 @@ Non-focusable group label with standard or inset alignment. Source parity baseli
 
 | State | Tokens |
 |---|---|
-| Inset=False | fill popover · text popover-foreground · type size/12 |
+| Inset=False | fill popover · padding y space/1-25 x space/2 · text popover-foreground · type UNBOUND 12/18 Semi Bold |
+| Inset=True | fill popover · padding t space/1-25 r space/2 b space/1-25 l space/8 · text popover-foreground · type UNBOUND 12/18 Semi Bold |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1368,9 +1418,9 @@ Non-focusable group label with standard or inset alignment. Source parity baseli
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `popover` · `popover-foreground` · `size/12`
+**Tokens used** — `popover` · `popover-foreground` · `space/1-25` · `space/2` · `space/8`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `0ec8046e924f7155` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `aac63ec9a32be84e` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1387,13 +1437,19 @@ Structural single-selection wrapper for Radio Item instances. Source parity base
 - On its own, outside the parent that owns its behaviour and accessibility wiring.
 - As a general-purpose layout or text primitive.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default |  |
+
 **Do**
 - Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `e6901caba4c8ad87` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `d29bbbd0a565ebc9` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings</sub>
 
 ---
 
@@ -1423,9 +1479,12 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 
 | State | Tokens |
 |---|---|
-| Value=Unchecked, State=Default | fill popover · radius radius/4 · text popover-foreground · type size/13 |
-| Value=Unchecked, State=Highlighted | fill accent · text accent-foreground |
-| Value=Checked, State=Highlighted | fill accent · text accent-foreground |
+| Value=Unchecked, State=Default | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/md · text popover-foreground · type Label/MD · type UNBOUND 1/1 Regular |
+| Value=Unchecked, State=Highlighted | fill accent · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/md · text accent-foreground · type Label/MD · text popover-foreground · type UNBOUND 1/1 Regular |
+| Value=Unchecked, State=Disabled | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · opacity opacity/50 · border stroke/1 border · radius radius/md · text popover-foreground · type Label/MD · type UNBOUND 1/1 Regular |
+| Value=Checked, State=Default | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 primary · radius radius/md · fill primary · text popover-foreground · type Label/MD · type UNBOUND 1/1 Regular |
+| Value=Checked, State=Highlighted | fill accent · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 primary · radius radius/md · fill primary · text accent-foreground · type Label/MD · text popover-foreground · type UNBOUND 1/1 Regular |
+| Value=Checked, State=Disabled | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · opacity opacity/50 · border stroke/1 primary · radius radius/md · fill primary · text popover-foreground · type Label/MD · type UNBOUND 1/1 Regular |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1440,9 +1499,9 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Highlighted · Disabled] → :highlighted CSS-owned, dropped; disabled independent boolean
 
-**Tokens used** — `accent` · `accent-foreground` · `popover` · `popover-foreground` · `radius/4` · `size/13`
+**Tokens used** — `Label/MD` · `accent` · `accent-foreground` · `border` · `opacity/50` · `popover` · `popover-foreground` · `primary` · `radius/4` · `radius/md` · `space/1-5` · `space/2` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `56ffd426d8d2ab85` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `55f6303422dcfbee` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1472,14 +1531,9 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Pattern=Basic, State=Closed | text foreground · type size/13 |
-| Pattern=Basic, State=Open | text accent-foreground |
-| Pattern=Submenu, State=Open | text accent-foreground |
-| Pattern=Shortcuts, State=Open | text accent-foreground |
-| Pattern=Icons, State=Open | text accent-foreground |
-| Pattern=Checkboxes, State=Open | text accent-foreground |
-| Pattern=Checkbox Icons, State=Open | text accent-foreground |
-| Pattern=Radio Group, State=Open | text accent-foreground |
+| Pattern=Basic, State=Closed | gap space/2 · (+11 variants share these) |
+| Pattern=Basic, State=Open | gap space/2 · gap space/1 · fill popover · border stroke/1 border · radius radius/lg · padding space/1 · (+10 variants share these) |
+| Pattern=RTL, State=Open | gap space/2 · gap space/1 · fill popover · border stroke/1 border · radius radius/lg · padding space/1 · padding y space/1-75 x space/2 · text popover-foreground · type Label/MD |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1501,9 +1555,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - The trigger carries aria-haspopup and aria-expanded.
 - Focus moves into the menu on open and back to the trigger on close.
 
-**Tokens used** — `accent-foreground` · `foreground` · `size/13`
+**Tokens used** — `Label/MD` · `border` · `popover` · `popover-foreground` · `radius/lg` · `space/1` · `space/1-75` · `space/2` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `2c1ee79d8053f7d8` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `0c55d3bb9f4d4e91` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1520,13 +1574,21 @@ Visual separator between groups of menu items. Source parity baseline: Watermelo
 - On its own, outside the parent that owns its behaviour and accessibility wiring.
 - As a general-purpose layout or text primitive.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default | fill border |
+
 **Do**
 - Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `fcdd6ed41eb63200` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
+**Tokens used** — `border`
+
+<sub>status `draft` · updated 2026-08-10 · fingerprint `8a4f9e93e1c0c2f3` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1543,13 +1605,21 @@ Right-aligned keyboard shortcut hint for menu commands. Source parity baseline: 
 - On its own, outside the parent that owns its behaviour and accessibility wiring.
 - As a general-purpose layout or text primitive.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default | text muted-foreground · type UNBOUND 11/16 Regular |
+
 **Do**
 - Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `2fea49bb46869fe1` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
+**Tokens used** — `muted-foreground`
+
+<sub>status `draft` · updated 2026-08-10 · fingerprint `d207774f263ce306` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1582,7 +1652,7 @@ Layout exception: Anchor marker is an absolute-positioned documentation/placemen
 
 | State | Tokens |
 |---|---|
-| Side=Left, Align=Start | fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/13 |
+| Side=Left, Align=Start | fill popover · border stroke/1 border · radius radius/lg · padding space/1 · fill accent · (+5 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1592,9 +1662,9 @@ Layout exception: Anchor marker is an absolute-positioned documentation/placemen
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/13`
+**Tokens used** — `accent` · `border` · `popover` · `radius/lg` · `space/1` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `1b12de6f2056baa7` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `c1f3da80cc298902` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1624,11 +1694,12 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 
 | State | Tokens |
 |---|---|
-| State=Closed, Inset=False | fill popover · radius radius/4 · text popover-foreground · type size/13 |
-| State=Open, Inset=False | fill accent · text accent-foreground |
-| State=Open, Inset=True | fill accent · text accent-foreground |
-| State=Highlighted, Inset=False | fill accent · text accent-foreground |
-| State=Highlighted, Inset=True | fill accent · text accent-foreground |
+| State=Closed, Inset=False | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · text popover-foreground · type Label/MD |
+| State=Closed, Inset=True | fill popover · radius radius/4 · padding t space/1-5 r space/2 b space/1-5 l space/8 · gap space/2 · text popover-foreground · type Label/MD |
+| State=Open, Inset=False | fill accent · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · text accent-foreground · type Label/MD · (+1 variant share these) |
+| State=Open, Inset=True | fill accent · radius radius/4 · padding t space/1-5 r space/2 b space/1-5 l space/8 · gap space/2 · text accent-foreground · type Label/MD · (+1 variant share these) |
+| State=Disabled, Inset=False | fill popover · radius radius/4 · padding y space/1-5 x space/2 · gap space/2 · opacity opacity/50 · text popover-foreground · type Label/MD |
+| State=Disabled, Inset=True | fill popover · radius radius/4 · padding t space/1-5 r space/2 b space/1-5 l space/8 · gap space/2 · opacity opacity/50 · text popover-foreground · type Label/MD |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1643,9 +1714,9 @@ Pipeline exception: Icon is a legacy design-only text-glyph control with existin
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Highlighted · Disabled] → :highlighted CSS-owned, dropped; disabled independent boolean; closed/open controlled state
 
-**Tokens used** — `accent` · `accent-foreground` · `popover` · `popover-foreground` · `radius/4` · `size/13`
+**Tokens used** — `Label/MD` · `accent` · `accent-foreground` · `opacity/50` · `popover` · `popover-foreground` · `radius/4` · `space/1-5` · `space/2` · `space/8`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `7b002d6bf83ff4e3` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `edbda218032fb805` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1677,13 +1748,13 @@ Accessibility contract: avatar-only menu triggers require a programmatic accessi
 
 | State | Tokens |
 |---|---|
-| Type=Button, State=Closed | fill card · border 1px border · radius radius/lg · text foreground · type size/13 |
-| Type=Button, State=Open | fill accent · text accent-foreground |
-| Type=Button, State=Focused | border 2px ring |
-| Type=Button, State=Disabled | text muted-foreground |
-| Type=Avatar, State=Closed | text accent-foreground · type size/12 |
-| Type=Avatar, State=Open | fill accent · text accent-foreground · type size/12 |
-| Type=Avatar, State=Focused | border 2px ring · text accent-foreground · type size/12 |
+| Type=Button, State=Closed | fill card · border stroke/1 border · radius radius/lg · padding y space/1-75 x space/3 · gap space/2 · text foreground · type Label/MD |
+| Type=Button, State=Open | fill accent · border stroke/1 border · radius radius/lg · padding y space/1-75 x space/3 · gap space/2 · text accent-foreground · type Label/MD |
+| Type=Button, State=Focused | fill card · border stroke/2 ring · radius radius/lg · padding y space/1-75 x space/3 · gap space/2 · text foreground · type Label/MD |
+| Type=Button, State=Disabled | fill card · border stroke/1 border · radius radius/lg · padding y space/1-75 x space/3 · gap space/2 · opacity opacity/50 · text muted-foreground · type Label/MD |
+| Type=Avatar, State=Closed | fill card · border stroke/1 border · radius radius/lg · padding y space/1 x space/1-5 · gap space/2 · fill accent · radius radius/2xl · text accent-foreground · type UNBOUND 12/16 Semi Bold |
+| Type=Avatar, State=Open | fill accent · border stroke/1 border · radius radius/lg · padding y space/1 x space/1-5 · gap space/2 · radius radius/2xl · text accent-foreground · type UNBOUND 12/16 Semi Bold |
+| Type=Avatar, State=Focused | fill card · border stroke/2 ring · radius radius/lg · padding y space/1 x space/1-5 · gap space/2 · fill accent · radius radius/2xl · text accent-foreground · type UNBOUND 12/16 Semi Bold |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1699,9 +1770,9 @@ Accessibility contract: avatar-only menu triggers require a programmatic accessi
 - avatar-only menu triggers require a programmatic accessible name that communicates the menu action. Decorative trigger icons/avatars must not become the accessible name by themselves.
 - State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean; closed/open controlled state
 
-**Tokens used** — `accent` · `accent-foreground` · `border` · `card` · `foreground` · `muted-foreground` · `radius/lg` · `ring` · `size/12` · `size/13`
+**Tokens used** — `Label/MD` · `accent` · `accent-foreground` · `border` · `card` · `foreground` · `muted-foreground` · `opacity/50` · `radius/2xl` · `radius/lg` · `ring` · `space/1` · `space/1-5` · `space/1-75` · `space/2` · `space/3` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `dce091d64321771b` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `30d5b980f432224b` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1724,8 +1795,10 @@ Accessibility contract: Error must not rely on color alone. The composed field m
 
 | State | Tokens |
 |---|---|
-| State=Default | text foreground · type size/14 |
-| State=Disabled | text muted-foreground |
+| State=Default | gap space/1-5 · text foreground · type Label/LG · fill card · border stroke/1 input · radius radius/lg · padding y space/2-25 x space/3 · type Body/MD · text muted-foreground · type Caption/SM |
+| State=Focused | gap space/1-5 · text foreground · type Label/LG · fill card · border stroke/2 ring · radius radius/lg · padding y space/2-25 x space/3 · type Body/MD · text muted-foreground · type Caption/SM |
+| State=Error | gap space/1-5 · text foreground · type Label/LG · fill card · border stroke/1 destructive · radius radius/lg · padding y space/2-25 x space/3 · type Body/MD · text destructive · type Caption/SM |
+| State=Disabled | gap space/1-5 · text muted-foreground · type Label/LG · fill muted · border stroke/1 input · radius radius/lg · padding y space/2-25 x space/3 · type Body/MD · type Caption/SM |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1745,9 +1818,9 @@ Accessibility contract: Error must not rely on color alone. The composed field m
 - Generates the id and binds label-for, aria-describedby, and aria-invalid onto the control it wraps.
 - The error message is announced politely; it is not a role="alert" per keystroke.
 
-**Tokens used** — `foreground` · `muted-foreground` · `size/14`
+**Tokens used** — `Body/MD` · `Caption/SM` · `Label/LG` · `card` · `destructive` · `foreground` · `input` · `muted` · `muted-foreground` · `radius/lg` · `ring` · `space/1-5` · `space/2-25` · `space/3` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `576aec193a7b025a` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `7a4c2a35ce3f0008` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1775,7 +1848,8 @@ Contextual preview surface revealed on pointer hover or keyboard focus. Use comp
 
 | State | Tokens |
 |---|---|
-| Density=Compact | fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/14 |
+| Density=Compact | fill popover · border stroke/1 border · radius radius/lg · padding space/4 · gap space/2 · text popover-foreground · type Heading/XS · text muted-foreground · type Body/SM |
+| Density=Detailed | fill popover · border stroke/1 border · radius radius/lg · padding space/4 · gap space/2 · text popover-foreground · type Heading/XS · text muted-foreground · type Body/SM · type Label/SM |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1792,9 +1866,9 @@ Contextual preview surface revealed on pointer hover or keyboard focus. Use comp
 - Reachable on keyboard focus, or its content must exist elsewhere.
 - Escape dismisses it.
 
-**Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/14`
+**Tokens used** — `Body/SM` · `Heading/XS` · `Label/SM` · `border` · `muted-foreground` · `popover` · `popover-foreground` · `radius/lg` · `space/2` · `space/4` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `deb42fdd764e3b83` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `b07eb07a2da6f00a` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1811,6 +1885,12 @@ Jake UI production icons — Phosphor Icons (regular weight, @phosphor-icons/rea
 - Carrying meaning that has no text anywhere near it.
 - Illustration — use an image.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Name=Plus, Size=16 | fill foreground · (+155 variants share these) |
+
 **Do**
 - Take icons from the mapped set rather than pasting one-off SVG.
 - Size and colour them from tokens so they track the text they sit beside.
@@ -1824,7 +1904,9 @@ Jake UI production icons — Phosphor Icons (regular weight, @phosphor-icons/rea
 - A decorative icon beside text is aria-hidden="true".
 - A meaningful standalone icon needs a text alternative on it or on its control.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `2f56fa8553dd0a3c` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+**Tokens used** — `foreground`
+
+<sub>status `draft` · updated 2026-08-10 · fingerprint `28e90afe2f7ba9ab` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1849,10 +1931,10 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| State=Default | fill card · border 1px input · radius radius/lg · text foreground · type size/14 |
-| State=Focused | border 2px ring |
-| State=Error | border 1px destructive |
-| State=Disabled | fill muted · text muted-foreground |
+| State=Default | fill card · border stroke/1 input · radius radius/lg · padding y space/2-25 x space/3 · text foreground · type Body/MD |
+| State=Focused | fill card · border stroke/2 ring · radius radius/lg · padding y space/2-25 x space/3 · text foreground · type Body/MD |
+| State=Error | fill card · border stroke/1 destructive · radius radius/lg · padding y space/2-25 x space/3 · text foreground · type Body/MD |
+| State=Disabled | fill muted · border stroke/1 input · radius radius/lg · padding y space/2-25 x space/3 · text muted-foreground · type Body/MD |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1874,9 +1956,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 - Every input has a programmatically associated label.
 - The error state sets aria-invalid and links its message via aria-describedby.
 
-**Tokens used** — `card` · `destructive` · `foreground` · `input` · `muted` · `muted-foreground` · `radius/lg` · `ring` · `size/14`
+**Tokens used** — `Body/MD` · `card` · `destructive` · `foreground` · `input` · `muted` · `muted-foreground` · `radius/lg` · `ring` · `space/2-25` · `space/3` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `c04354397c92cbfb` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `9b7d11054297fc8a` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1908,8 +1990,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| Type=Required, State=Default | text foreground · type size/14 |
-| Type=Required, State=Disabled | text muted-foreground |
+| Type=Required, State=Default | gap space/1 · text foreground · type Label/LG · text destructive |
+| Type=Optional, State=Default | gap space/1 · text foreground · type Label/LG · text muted-foreground · type Caption/SM |
+| Type=Required, State=Disabled | gap space/1 · text muted-foreground · type Label/LG |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1926,9 +2009,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 - Bound to its control by for/id, so clicking the label focuses the control.
 - Its text is the control's accessible name — keep it stable.
 
-**Tokens used** — `foreground` · `muted-foreground` · `size/14`
+**Tokens used** — `Caption/SM` · `Label/LG` · `destructive` · `foreground` · `muted-foreground` · `space/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `112008cf361610b3` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `ed45bf6a57ff0119` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -1955,11 +2038,10 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| State=Default | fill card · border 1px input · radius radius/lg · text foreground · type size/14 |
-| State=Open | border 2px ring |
-| State=Error | border 1px destructive |
-| State=Disabled | fill muted · text muted-foreground |
-| State=Focused | border 2px ring |
+| State=Default | fill card · border stroke/1 input · radius radius/lg · padding y space/2-25 x space/3 · gap space/2 · text foreground · type Body/MD |
+| State=Open | fill card · border stroke/2 ring · radius radius/lg · padding y space/2-25 x space/3 · gap space/2 · text foreground · type Body/MD · (+1 variant share these) |
+| State=Error | fill card · border stroke/1 destructive · radius radius/lg · padding y space/2-25 x space/3 · gap space/2 · text foreground · type Body/MD |
+| State=Disabled | fill muted · border stroke/1 input · radius radius/lg · padding y space/2-25 x space/3 · gap space/2 · text muted-foreground · type Body/MD |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -1984,9 +2066,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 - It is a native select element, so platform semantics come for free — do not re-implement them.
 - Programmatically associated label; the error state sets aria-invalid and links its message via aria-describedby.
 
-**Tokens used** — `card` · `destructive` · `foreground` · `input` · `muted` · `muted-foreground` · `radius/lg` · `ring` · `size/14`
+**Tokens used** — `Body/MD` · `card` · `destructive` · `foreground` · `input` · `muted` · `muted-foreground` · `radius/lg` · `ring` · `space/2` · `space/2-25` · `space/3` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `e293bd72ea2a0229` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `1dac547ba589403e` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2016,9 +2098,10 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Viewport=Desktop, Open=False | fill card · border 1px border · radius radius/lg · text primary-foreground · type size/13 |
-| Viewport=Compact, Open=False | text foreground |
-| Viewport=Compact, Open=True | text accent-foreground |
+| Viewport=Desktop, Open=False | fill card · border stroke/1 border · radius radius/lg · padding y space/2 x space/3 · gap space/3 · text foreground · type Heading/SM · gap space/1-5 · fill accent · padding y space/2 x space/2-5 · type Label/MD · fill primary · text primary-foreground |
+| Viewport=Desktop, Open=True | fill card · border stroke/1 border · radius radius/lg · padding y space/2 x space/3 · gap space/3 · text foreground · type Heading/SM · gap space/1-5 · fill accent · padding y space/2 x space/2-5 · text accent-foreground · type Label/MD · fill primary · text primary-foreground · fill muted · padding space/4 · padding space/2-5 · gap space/1 · text muted-foreground · type Body/XS |
+| Viewport=Compact, Open=False | fill card · border stroke/1 border · radius radius/lg · padding y space/2 x space/3 · gap space/3 · text foreground · type Heading/SM · fill muted · padding y space/2 x space/2-5 · gap space/1-5 · type Label/MD |
+| Viewport=Compact, Open=True | fill card · border stroke/1 border · radius radius/lg · padding y space/2 x space/3 · gap space/3 · text foreground · type Heading/SM · fill accent · padding y space/2 x space/2-5 · gap space/1-5 · text accent-foreground · type Label/MD · fill muted · padding space/4 · padding space/2-5 · gap space/1 · text muted-foreground · type Body/XS |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2037,9 +2120,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - Wrapped in a nav with an accessible name.
 - The current destination carries aria-current="page".
 
-**Tokens used** — `accent-foreground` · `border` · `card` · `foreground` · `primary-foreground` · `radius/lg` · `size/13`
+**Tokens used** — `Body/XS` · `Heading/SM` · `Label/MD` · `accent` · `accent-foreground` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `primary` · `primary-foreground` · `radius/lg` · `space/1` · `space/1-5` · `space/2` · `space/2-5` · `space/3` · `space/4` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `2db4cc8a6b6dd75f` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `8410c1e3ff320d61` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2069,7 +2152,10 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Viewport=Desktop, State=Default | fill card · text foreground · type size/13 |
+| Viewport=Desktop, State=Default | fill card · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/lg · padding y space/2 x space/2-5 · gap space/1 · text foreground · type Label/MD · fill primary · text primary-foreground |
+| Viewport=Desktop, State=Disabled | fill card · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/lg · padding y space/2 x space/2-5 · gap space/1 · opacity UNTOKENISED 0.45 · text foreground · type Label/MD · fill primary · text primary-foreground |
+| Viewport=Compact, State=Default | fill card · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/lg · padding y space/2 x space/2-5 · gap space/1 · text foreground · type Label/MD |
+| Viewport=Compact, State=Disabled | fill card · padding y space/1-5 x space/2 · gap space/2 · border stroke/1 border · radius radius/lg · padding y space/2 x space/2-5 · gap space/1 · opacity UNTOKENISED 0.45 · text foreground · type Label/MD · text muted-foreground |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2089,9 +2175,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - Wrapped in a nav named e.g. "Pagination".
 - The current page carries aria-current="page"; disabled controls stay announced.
 
-**Tokens used** — `card` · `foreground` · `size/13`
+**Tokens used** — `Label/MD` · `border` · `card` · `foreground` · `muted-foreground` · `primary` · `primary-foreground` · `radius/lg` · `space/1` · `space/1-5` · `space/2` · `space/2-5` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `21cefdc646f27477` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `e91a6b2e7d25e70d` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2124,7 +2210,7 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Size=Small, Arrow=False | fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/15 |
+| Size=Small, Arrow=False | fill popover · border stroke/1 border · radius radius/lg · padding space/4 · gap space/2-5 · text popover-foreground · type UNBOUND 15/22 Medium · text muted-foreground · type Body/SM · fill primary · padding y space/2 x space/3 · gap space/2 · text primary-foreground · type Label/MD · (+3 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2144,9 +2230,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - The trigger carries aria-expanded and aria-controls.
 - A popover holding a form should trap focus; a non-modal one should not.
 
-**Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/15`
+**Tokens used** — `Body/SM` · `Label/MD` · `border` · `muted-foreground` · `popover` · `popover-foreground` · `primary` · `primary-foreground` · `radius/lg` · `space/2` · `space/2-5` · `space/3` · `space/4` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `ed0ec8605a36861e` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `5eb84aa6385d0d9c` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2176,7 +2262,7 @@ Pointing Arrow for all four popup sides. The arrow inherits Popover surface and 
 
 | State | Tokens |
 |---|---|
-| Side=Top | no root-level bindings |
+| Side=Top | fill popover · border border · (+3 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2186,7 +2272,9 @@ Pointing Arrow for all four popup sides. The arrow inherits Popover surface and 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `16ff0fd4d1a115d5` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+**Tokens used** — `border` · `popover`
+
+<sub>status `draft` · updated 2026-08-10 · fingerprint `82eaea81dfd8fc2c` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2218,7 +2306,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| Mode=Modal, State=Closed | fill foreground |
+| Mode=Modal, State=Closed | fill foreground · opacity opacity/0 · (+1 variant share these) |
+| Mode=Modal, State=Open | fill foreground · opacity UNTOKENISED 0.32 |
+| Mode=Trap Focus, State=Open | fill foreground · opacity UNTOKENISED 0.16 |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2228,9 +2318,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `foreground`
+**Tokens used** — `foreground` · `opacity/0`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `78fe56e707937305` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `9b21462cf1b84e70` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2254,8 +2344,9 @@ Accessibility contract: icon-only close control requires a programmatic accessib
 | State | Tokens |
 |---|---|
 | State=Default | fill popover · radius radius/7 |
-| State=Hover | fill accent |
-| State=Focused | fill accent · border 2px ring |
+| State=Hover | fill accent · radius radius/7 |
+| State=Focused | fill accent · border stroke/2 ring · radius radius/7 |
+| State=Disabled | fill popover · radius radius/7 · opacity opacity/50 |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2271,9 +2362,9 @@ Accessibility contract: icon-only close control requires a programmatic accessib
 - icon-only close control requires a programmatic accessible name such as “Close” and a visible focus indicator; the icon itself is decorative to assistive technology.
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Focused · Disabled] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean
 
-**Tokens used** — `accent` · `popover` · `radius/7` · `ring`
+**Tokens used** — `accent` · `opacity/50` · `popover` · `radius/7` · `ring` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `ed78328b621eb8cd` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `ece7ae5a70bc6ff8` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2312,7 +2403,7 @@ Variant-matrix exception: the 48-variant Arrow axis is retained for current cons
 
 | State | Tokens |
 |---|---|
-| Size=Small, Side=Top, Align=Start, Arrow=False | text popover-foreground · type size/14 |
+| Size=Small, Side=Top, Align=Start, Arrow=False | fill popover · border stroke/1 border · radius radius/lg · padding space/4 · gap space/3 · gap space/1-5 · text muted-foreground · type Body/XS · gap space/2 · text primary-readable · type Label/XS · (+47 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2324,9 +2415,9 @@ Variant-matrix exception: the 48-variant Arrow axis is retained for current cons
 - Variant count (48) exceeds the 30-combination governance ceiling. Needs a documented exception.
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `popover-foreground` · `size/14`
+**Tokens used** — `Body/XS` · `Label/XS` · `border` · `muted-foreground` · `popover` · `primary-readable` · `radius/lg` · `space/1-5` · `space/2` · `space/3` · `space/4` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `b2d73aefb9a46e6a` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `b5b1b1e76cf4d80d` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2343,13 +2434,21 @@ Source form-content composition using Header, Close, Arrow, and two linked Field
 - On its own, outside the parent that owns its behaviour and accessibility wiring.
 - As a general-purpose layout or text primitive.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default | fill popover · border border |
+
 **Do**
 - Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `3e9caf16de92bdb1` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
+**Tokens used** — `border` · `popover`
+
+<sub>status `draft` · updated 2026-08-10 · fingerprint `bd1fd049b543579c` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2366,13 +2465,21 @@ Popover heading group containing Title and Description. Both text nodes are edit
 - On its own, outside the parent that owns its behaviour and accessibility wiring.
 - As a general-purpose layout or text primitive.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default | text popover-foreground · type UNBOUND 14/20 Semi Bold · text muted-foreground · type UNBOUND 12/18 Regular |
+
 **Do**
 - Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `3afb0cf3fd62b9f5` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
+**Tokens used** — `muted-foreground` · `popover-foreground`
+
+<sub>status `draft` · updated 2026-08-10 · fingerprint `726b7590af9b7d0a` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2403,12 +2510,8 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| Pattern=Basic, State=Closed | text foreground · type size/13 |
-| Pattern=Basic, State=Open | text accent-foreground |
-| Pattern=Align, State=Open | text accent-foreground |
-| Pattern=Form, State=Open | text accent-foreground |
-| Pattern=RTL, State=Closed | type size/12 |
-| Pattern=RTL, State=Open | type size/12 |
+| Pattern=Basic, State=Closed | gap space/2 · (+5 variants share these) |
+| Pattern=Align, State=Closed | gap space/5 · gap space/2 · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2429,9 +2532,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 - The trigger carries aria-expanded and aria-controls.
 - A popover holding a form should trap focus; a non-modal one should not.
 
-**Tokens used** — `accent-foreground` · `foreground` · `size/12` · `size/13`
+**Tokens used** — `space/2` · `space/5`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `b36fe8118259ccb6` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `8f3f17b2db637dc7` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2446,13 +2549,21 @@ Pipeline API classification: apply the Governance property-classification rule b
 - On its own, outside the parent that owns its behaviour and accessibility wiring.
 - As a general-purpose layout or text primitive.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default | fill popover · border border · text popover-foreground · type UNBOUND 14/20 SemiBold · text muted-foreground · type UNBOUND 12/18 Regular |
+
 **Do**
 - Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `757692246e388ac3` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
+**Tokens used** — `border` · `muted-foreground` · `popover` · `popover-foreground`
+
+<sub>status `draft` · updated 2026-08-10 · fingerprint `96f1726b497479ad` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2482,14 +2593,13 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Type=Button, State=Closed | text foreground · type size/13 |
-| Type=Button, State=Open | text accent-foreground |
-| Type=Button, State=Hover | text accent-foreground |
-| Type=Button, State=Focused | border 2px ring · radius radius/lg |
-| Type=Button, State=Disabled | text muted-foreground |
-| Type=RTL, State=Closed | type size/12 |
-| Type=RTL, State=Open | type size/12 |
-| Type=RTL, State=Hover | type size/12 |
+| Type=Button, State=Closed |  · (+2 variants share these) |
+| Type=Button, State=Focused | border stroke/2 ring · radius radius/lg |
+| Type=Button, State=Disabled | opacity opacity/50 |
+| Type=RTL, State=Closed | fill card · border stroke/1 border · radius radius/md · padding y space/2 x space/2-5 · text foreground · type Label/SM |
+| Type=RTL, State=Open | fill accent · border stroke/1 border · radius radius/md · padding y space/2 x space/2-5 · text foreground · type Label/SM · (+1 variant share these) |
+| Type=RTL, State=Focused | border stroke/2 ring · radius radius/lg · fill card · border stroke/1 border · radius radius/md · padding y space/2 x space/2-5 · text foreground · type Label/SM |
+| Type=RTL, State=Disabled | opacity opacity/50 · fill card · border stroke/1 border · radius radius/md · padding y space/2 x space/2-5 · text foreground · type Label/SM |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2504,9 +2614,9 @@ Pipeline property contract: only the component properties defined on this set ar
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Hover · Focused · Disabled] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean; closed/open controlled state
 
-**Tokens used** — `accent-foreground` · `foreground` · `muted-foreground` · `radius/lg` · `ring` · `size/12` · `size/13`
+**Tokens used** — `Label/SM` · `accent` · `border` · `card` · `foreground` · `opacity/50` · `radius/lg` · `radius/md` · `ring` · `space/2` · `space/2-5` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `1d7712eea6d8958e` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `7bdf9f8d8c166b38` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2538,7 +2648,8 @@ Transition Viewport documenting current and previous content for four activation
 
 | State | Tokens |
 |---|---|
-| State=Current, Direction=Top | fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/11 |
+| State=Current, Direction=Top | fill popover · border stroke/1 border · radius radius/lg · padding space/3-5 · gap space/1-5 · text popover-foreground · type Label/XS · text muted-foreground · type Caption/XS · (+3 variants share these) |
+| State=Previous, Direction=Top | fill popover · border stroke/1 border · radius radius/lg · padding space/3-5 · gap space/1-5 · opacity UNTOKENISED 0.55 · text popover-foreground · type Label/XS · text muted-foreground · type Caption/XS · (+3 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2548,9 +2659,9 @@ Transition Viewport documenting current and previous content for four activation
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `border` · `popover` · `popover-foreground` · `radius/lg` · `size/11`
+**Tokens used** — `Caption/XS` · `Label/XS` · `border` · `muted-foreground` · `popover` · `popover-foreground` · `radius/lg` · `space/1-5` · `space/3-5` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `d62ab2a6fa9bda33` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `d7906d1704554fa0` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2578,7 +2689,7 @@ Linear progress primitive. Determinate indicates known completion; indeterminate
 
 | State | Tokens |
 |---|---|
-| Type=Determinate | fill muted · radius radius/lg |
+| Type=Determinate | fill muted · radius radius/lg · fill primary · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2597,9 +2708,9 @@ Linear progress primitive. Determinate indicates known completion; indeterminate
 - Indeterminate omits aria-valuenow.
 - Named by aria-labelledby, or aria-label when no visible label exists.
 
-**Tokens used** — `muted` · `radius/lg`
+**Tokens used** — `muted` · `primary` · `radius/lg`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `8883a9d3ed6ec7ca` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `b5a4176369143dde` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2632,9 +2743,12 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| Value=Unselected, State=Default | text foreground · type size/14 |
-| Value=Unselected, State=Disabled | text muted-foreground |
-| Value=Selected, State=Disabled | text muted-foreground |
+| Value=Unselected, State=Default | gap space/2-5 · fill card · border stroke/1 input · text foreground · type Label/LG |
+| Value=Unselected, State=Focused | gap space/2-5 · fill card · border stroke/2 ring · text foreground · type Label/LG |
+| Value=Unselected, State=Disabled | gap space/2-5 · fill muted · border stroke/1 input · text muted-foreground · type Label/LG |
+| Value=Selected, State=Default | gap space/2-5 · fill card · border stroke/1 primary · fill primary · text foreground · type Label/LG |
+| Value=Selected, State=Focused | gap space/2-5 · fill card · border stroke/2 ring · fill primary · text foreground · type Label/LG |
+| Value=Selected, State=Disabled | gap space/2-5 · fill muted · border stroke/1 primary · fill muted-foreground · text muted-foreground · type Label/LG |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2653,9 +2767,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean
 - State is exposed via aria-checked, never by colour alone.
 
-**Tokens used** — `foreground` · `muted-foreground` · `size/14`
+**Tokens used** — `Label/LG` · `card` · `foreground` · `input` · `muted` · `muted-foreground` · `primary` · `ring` · `space/2-5` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `0d1ef5099793be35` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `4a1c6fc5cef3d485` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2679,8 +2793,12 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Pattern=Basic | text foreground · type size/13 |
-| Pattern=Disabled | text muted-foreground |
+| Pattern=Basic | gap space/3 · (+1 variant share these) |
+| Pattern=Description | gap space/3 · gap space/2-5 · gap space/1 · text foreground · type Label/MD · text muted-foreground · type Body/XS |
+| Pattern=Choice Card | gap space/3 · fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/1 · text foreground · type Label/MD · text muted-foreground · type Body/XS · border stroke/2 primary |
+| Pattern=Fieldset | gap space/3 · text foreground · type Heading/SM · text muted-foreground · type Body/XS |
+| Pattern=Invalid | gap space/3 · text foreground · type Heading/SM · text muted-foreground · type Body/XS · gap space/1 · type Label/MD · text destructive |
+| Pattern=RTL | gap space/3 · text foreground · type Heading/SM · gap space/1 · type Label/MD · text muted-foreground · type Body/XS |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2698,9 +2816,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - Keyboard: Radio groups move between options with arrow keys.
 - State is exposed via aria-checked, never by colour alone.
 
-**Tokens used** — `foreground` · `muted-foreground` · `size/13`
+**Tokens used** — `Body/XS` · `Heading/SM` · `Label/MD` · `border` · `card` · `destructive` · `foreground` · `muted-foreground` · `primary` · `radius/lg` · `space/1` · `space/2-5` · `space/3` · `space/4` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `c37f618eacb512ea` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `1a769ed9f0913cac` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2729,6 +2847,7 @@ Checked-state indicator nested inside Radio Group / Item. Runtime may force-moun
 | State | Tokens |
 |---|---|
 | State=Default | fill primary · radius radius/full |
+| State=Disabled | fill primary · radius radius/full · opacity opacity/50 |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2738,9 +2857,9 @@ Checked-state indicator nested inside Radio Group / Item. Runtime may force-moun
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `primary` · `radius/full`
+**Tokens used** — `opacity/50` · `primary` · `radius/full`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `763397f1c47c1bf3` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `6d71b531c87311dd` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2771,14 +2890,16 @@ Accessibility contract: the 20×20 radio visual is not the runtime target box. R
 
 | State | Tokens |
 |---|---|
-| Value=Unchecked, State=Default | fill card · border 1px input · radius radius/full |
-| Value=Unchecked, State=Hover | fill accent |
-| Value=Unchecked, State=Focused | border 2px ring |
-| Value=Unchecked, State=Invalid | border 2px destructive |
-| Value=Checked, State=Default | border 1px primary |
-| Value=Checked, State=Hover | fill accent · border 1px primary |
-| Value=Checked, State=Focused | border 2px ring |
-| Value=Checked, State=Disabled | border 1px primary |
+| Value=Unchecked, State=Default | fill card · border stroke/1 input · radius radius/full |
+| Value=Unchecked, State=Hover | fill accent · border stroke/1 input · radius radius/full |
+| Value=Unchecked, State=Focused | fill card · border stroke/2 ring · radius radius/full · (+1 variant share these) |
+| Value=Unchecked, State=Disabled | fill card · border stroke/1 input · radius radius/full · opacity opacity/50 |
+| Value=Unchecked, State=ReadOnly | fill card · border stroke/1 input · radius radius/full · opacity opacity/80 |
+| Value=Unchecked, State=Invalid | fill card · border stroke/2 destructive · radius radius/full · (+1 variant share these) |
+| Value=Checked, State=Default | fill card · border stroke/1 primary · radius radius/full |
+| Value=Checked, State=Hover | fill accent · border stroke/1 primary · radius radius/full |
+| Value=Checked, State=Disabled | fill card · border stroke/1 primary · radius radius/full · opacity opacity/50 |
+| Value=Checked, State=ReadOnly | fill card · border stroke/1 primary · radius radius/full · opacity opacity/80 |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2799,9 +2920,9 @@ Accessibility contract: the 20×20 radio visual is not the runtime target box. R
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Focused · Disabled · ReadOnly · Invalid] → :hover + :focus-visible CSS-owned, dropped; disabled + readOnly + invalid independent booleans
 - State is exposed via aria-checked, never by colour alone.
 
-**Tokens used** — `accent` · `card` · `destructive` · `input` · `primary` · `radius/full` · `ring`
+**Tokens used** — `accent` · `card` · `destructive` · `input` · `opacity/50` · `opacity/80` · `primary` · `radius/full` · `ring` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `9bc517eabe244a9b` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `df4c0e609dfbfdde` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2835,13 +2956,10 @@ Accessibility contract: State=Invalid is a group visual state; the consuming fie
 
 | State | Tokens |
 |---|---|
-| Orientation=Vertical, Selection=First, State=Default | text foreground · type size/13 |
-| Orientation=Vertical, Selection=First, State=Disabled | text muted-foreground |
-| Orientation=Vertical, Selection=Second, State=Disabled | text muted-foreground |
-| Orientation=Vertical, Selection=None, State=Disabled | text muted-foreground |
-| Orientation=Horizontal, Selection=First, State=Disabled | text muted-foreground |
-| Orientation=Horizontal, Selection=Second, State=Disabled | text muted-foreground |
-| Orientation=Horizontal, Selection=None, State=Disabled | text muted-foreground |
+| Orientation=Vertical, Selection=First, State=Default | gap space/2-5 · text foreground · type Label/MD · (+8 variants share these) |
+| Orientation=Vertical, Selection=First, State=Disabled | gap space/2-5 · text muted-foreground · type Label/MD · (+2 variants share these) |
+| Orientation=Horizontal, Selection=First, State=Default | gap space/6 · gap space/2-5 · text foreground · type Label/MD · (+8 variants share these) |
+| Orientation=Horizontal, Selection=First, State=Disabled | gap space/6 · gap space/2-5 · text muted-foreground · type Label/MD · (+2 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2861,9 +2979,9 @@ Accessibility contract: State=Invalid is a group visual state; the consuming fie
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Disabled · ReadOnly · Invalid] → disabled + readOnly + invalid independent booleans
 - State is exposed via aria-checked, never by colour alone.
 
-**Tokens used** — `foreground` · `muted-foreground` · `size/13`
+**Tokens used** — `Label/MD` · `foreground` · `muted-foreground` · `space/2-5` · `space/6`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `6d7dbd6b3589a7cf` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `8eb03de8676d995f` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2895,7 +3013,7 @@ Layout exception: Scroll Area uses coordinate-based viewport, track, and thumb g
 
 | State | Tokens |
 |---|---|
-| Axis=Vertical | fill card · border 1px border · radius radius/lg · text foreground · type size/14 |
+| Axis=Vertical | fill card · border stroke/1 border · radius radius/lg · text foreground · type Body/MD · fill muted · fill muted-foreground · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2912,9 +3030,9 @@ Layout exception: Scroll Area uses coordinate-based viewport, track, and thumb g
 - A scrollable region needs a tabindex and an accessible name.
 - Do not suppress the native scrollbar on platforms that always show one.
 
-**Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/14`
+**Tokens used** — `Body/MD` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/lg` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `71a3c9b392c55e7d` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `f02411b0d8cc0a06` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2945,8 +3063,8 @@ Interaction contract: Selected is the persistent tab selection state. Hover and 
 
 | State | Tokens |
 |---|---|
-| Selected=False | radius radius/lg · text muted-foreground · type size/12 |
-| Selected=True | fill card · text foreground |
+| Selected=False | radius radius/lg · padding y space/1-75 x space/3 · text muted-foreground · type Label/SM |
+| Selected=True | fill card · radius radius/lg · padding y space/1-75 x space/3 · shadow Effect/Selected Tab · text foreground · type Label/SM |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -2966,9 +3084,9 @@ Interaction contract: Selected is the persistent tab selection state. Hover and 
 - Each tab carries aria-selected and aria-controls; each panel is labelled by its tab.
 - Only the selected tab is in the tab order.
 
-**Tokens used** — `card` · `foreground` · `muted-foreground` · `radius/lg` · `size/12`
+**Tokens used** — `Effect/Selected Tab` · `Label/SM` · `card` · `foreground` · `muted-foreground` · `radius/lg` · `space/1-75` · `space/3`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `32ae8b6acdae4851` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `c5c3b649fb559cf3` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -2996,7 +3114,7 @@ Visual separator for grouping adjacent content. Horizontal is the default for st
 
 | State | Tokens |
 |---|---|
-| Orientation=Horizontal | fill border |
+| Orientation=Horizontal | fill border · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3013,7 +3131,7 @@ Visual separator for grouping adjacent content. Horizontal is the default for st
 
 **Tokens used** — `border`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `692f0a3b0a0a6bf9` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `a880e3f962a55d06` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3044,7 +3162,7 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Side=Left, Width=Compact | fill card · border 1px border · radius radius/lg · text foreground · type size/18 |
+| Side=Left, Width=Compact | fill card · border stroke/1 border · radius radius/lg · padding space/6 · gap space/4-5 · gap space/3 · text foreground · type Heading/LG · text muted-foreground · type Body/SM · fill accent · padding space/3 · gap space/2 · text accent-foreground · type Label/LG · (+3 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3064,9 +3182,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - aria-modal="true", labelled by its title via aria-labelledby.
 - Focus is trapped within while open.
 
-**Tokens used** — `border` · `card` · `foreground` · `radius/lg` · `size/18`
+**Tokens used** — `Body/SM` · `Heading/LG` · `Label/LG` · `accent` · `accent-foreground` · `border` · `card` · `foreground` · `muted-foreground` · `radius/lg` · `space/2` · `space/3` · `space/4-5` · `space/6` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `91bcc9a95fed6e57` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `d4a9ccad25cc57c2` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3096,9 +3214,10 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Viewport=Desktop, State=Expanded | fill sidebar · border 1px sidebar-border · radius radius/lg · text sidebar-foreground · type size/15 |
-| Viewport=Desktop, State=Collapsed | text sidebar-accent-foreground · type size/13 |
-| Viewport=Compact, State=Collapsed | type size/13 |
+| Viewport=Desktop, State=Expanded | fill sidebar · border stroke/1 sidebar-border · radius radius/lg · padding y space/5 x space/4 · gap space/4 · gap space/2-5 · fill sidebar-primary · padding space/2 · text sidebar-primary-foreground · type Heading/XS · text sidebar-foreground · type Heading/SM · gap space/1-5 · fill sidebar-accent · padding space/2-5 · gap space/0-5 · text sidebar-accent-foreground · type Label/MD · text muted-foreground · type Caption/XS |
+| Viewport=Desktop, State=Collapsed | fill sidebar · border stroke/1 sidebar-border · radius radius/lg · padding y space/5 x space/4 · gap space/4 · fill sidebar-accent · padding space/2-5 · text sidebar-accent-foreground · type Value/Strong · text sidebar-foreground |
+| Viewport=Compact, State=Expanded | fill sidebar · border stroke/1 sidebar-border · radius radius/lg · padding y space/4 x space/3-5 · gap space/4 · gap space/2-5 · fill sidebar-primary · padding space/2 · text sidebar-primary-foreground · type Heading/XS · text sidebar-foreground · type Heading/SM · gap space/1-5 · fill sidebar-accent · padding space/2-5 · gap space/0-5 · text sidebar-accent-foreground · type Label/MD · text muted-foreground · type Caption/XS |
+| Viewport=Compact, State=Collapsed | fill sidebar · border stroke/1 sidebar-border · radius radius/lg · padding y space/4 x space/3-5 · gap space/4 · padding space/2-5 · text sidebar-foreground · type Value/Strong |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3118,9 +3237,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - The collapse toggle carries aria-expanded.
 - When collapsed, each item still needs an accessible name.
 
-**Tokens used** — `radius/lg` · `sidebar` · `sidebar-accent-foreground` · `sidebar-border` · `sidebar-foreground` · `size/13` · `size/15`
+**Tokens used** — `Caption/XS` · `Heading/SM` · `Heading/XS` · `Label/MD` · `Value/Strong` · `muted-foreground` · `radius/lg` · `sidebar` · `sidebar-accent` · `sidebar-accent-foreground` · `sidebar-border` · `sidebar-foreground` · `sidebar-primary` · `sidebar-primary-foreground` · `space/0-5` · `space/1-5` · `space/2` · `space/2-5` · `space/3-5` · `space/4` · `space/5` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `2cd12d983a280e2a` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `11310b5f50427d3c` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3149,8 +3268,8 @@ Interaction contract: State=Active is the persistent current-route state. Hover 
 
 | State | Tokens |
 |---|---|
-| State=Default | radius radius/lg · text sidebar-foreground · type size/14 |
-| State=Active | fill sidebar-accent · text sidebar-accent-foreground |
+| State=Default | radius radius/lg · padding y space/2 x space/3 · gap space/2-5 · fill sidebar-foreground · radius radius/0-75 · text sidebar-foreground · type Label/LG |
+| State=Active | fill sidebar-accent · radius radius/lg · padding y space/2 x space/3 · gap space/2-5 · fill sidebar-accent-foreground · radius radius/0-75 · text sidebar-accent-foreground · type Label/LG |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3165,9 +3284,9 @@ Interaction contract: State=Active is the persistent current-route state. Hover 
 - It is a link; the active one carries aria-current="page".
 - Its icon is decorative when the label is visible.
 
-**Tokens used** — `radius/lg` · `sidebar-accent` · `sidebar-accent-foreground` · `sidebar-foreground` · `size/14`
+**Tokens used** — `Label/LG` · `radius/0-75` · `radius/lg` · `sidebar-accent` · `sidebar-accent-foreground` · `sidebar-foreground` · `space/2` · `space/2-5` · `space/3`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `85ea11a92de60dd1` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `95f2296afc187ad5` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3198,7 +3317,10 @@ Loading placeholders for text, avatar rows, cards, and table rows. Dimensions ar
 
 | State | Tokens |
 |---|---|
-| Type=Text | no root-level bindings |
+| Type=Text | padding space/3 · gap space/2-5 · fill muted · radius radius/sm |
+| Type=Avatar | padding space/3 · gap space/3 · fill muted · radius radius/16 · gap space/2 · radius radius/sm |
+| Type=Card | padding space/3 · gap space/3 · fill muted · radius radius/sm · gap space/2-5 · radius radius/md |
+| Type=Table Row | padding y space/2-5 x space/3 · gap space/3 · fill muted · radius radius/4 · radius radius/5 |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3214,7 +3336,9 @@ Loading placeholders for text, avatar rows, cards, and table rows. Dimensions ar
 - Hidden from assistive technology with aria-hidden="true"; announce loading once, in a live region.
 - Respects prefers-reduced-motion by dropping the shimmer.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `459d0f3d0aafe9f1` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+**Tokens used** — `muted` · `radius/16` · `radius/4` · `radius/5` · `radius/md` · `radius/sm` · `space/2` · `space/2-5` · `space/3`
+
+<sub>status `draft` · updated 2026-08-10 · fingerprint `9537623f13cd0257` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3238,7 +3362,9 @@ Layout exception: Slider uses coordinate-based track, fill, and thumb geometry s
 
 | State | Tokens |
 |---|---|
-| State=Default | no root-level bindings |
+| State=Default | fill muted · radius radius/lg · fill primary · fill card · border stroke/2 primary |
+| State=Focused | fill muted · radius radius/lg · fill primary · fill card · border stroke/3 ring |
+| State=Disabled | fill muted · radius radius/lg · fill muted-foreground · fill card · border stroke/2 muted-foreground |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3260,7 +3386,9 @@ Layout exception: Slider uses coordinate-based track, fill, and thumb geometry s
 - Carries aria-valuenow, aria-valuemin, aria-valuemax, and aria-valuetext where a raw number would not read well.
 - The thumb is the focusable element and carries the accessible name.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `4db79ef07e13786e` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+**Tokens used** — `card` · `muted` · `muted-foreground` · `primary` · `radius/lg` · `ring` · `stroke/2` · `stroke/3`
+
+<sub>status `draft` · updated 2026-08-10 · fingerprint `69dda23def7eb04f` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3291,9 +3419,11 @@ Accessibility contract: visual height is 22px. Runtime target area must be at le
 
 | State | Tokens |
 |---|---|
-| Value=Unchecked, State=Default | text foreground · type size/14 |
-| Value=Unchecked, State=Disabled | text muted-foreground |
-| Value=Checked, State=Disabled | text muted-foreground |
+| Value=Unchecked, State=Default | gap space/2-5 · fill input · radius radius/full · fill card · text foreground · type Label/LG |
+| Value=Unchecked, State=Focused | gap space/2-5 · fill input · border stroke/2 ring · radius radius/full · fill card · text foreground · type Label/LG |
+| Value=Unchecked, State=Disabled | gap space/2-5 · fill muted · radius radius/full · fill card · text muted-foreground · type Label/LG · (+1 variant share these) |
+| Value=Checked, State=Default | gap space/2-5 · fill primary · radius radius/full · fill card · text foreground · type Label/LG |
+| Value=Checked, State=Focused | gap space/2-5 · fill primary · border stroke/2 ring · radius radius/full · fill card · text foreground · type Label/LG |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3313,9 +3443,9 @@ Accessibility contract: visual height is 22px. Runtime target area must be at le
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Disabled] → :focus-visible CSS-owned, dropped; disabled independent boolean
 - State is exposed via aria-checked, never by colour alone.
 
-**Tokens used** — `foreground` · `muted-foreground` · `size/14`
+**Tokens used** — `Label/LG` · `card` · `foreground` · `input` · `muted` · `muted-foreground` · `primary` · `radius/full` · `ring` · `space/2-5` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `e861d034e760a004` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `175ba28b42e34070` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3339,8 +3469,11 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Pattern=Basic | text foreground · type size/13 |
-| Pattern=Disabled | text muted-foreground |
+| Pattern=Basic | gap space/3 · gap space/4 · gap space/1 · text foreground · type Label/MD · (+1 variant share these) |
+| Pattern=Description | gap space/3 · gap space/4 · gap space/1 · text foreground · type Label/MD · text muted-foreground · type Body/XS · (+1 variant share these) |
+| Pattern=Choice Card | gap space/3 · fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/4 · gap space/1 · text foreground · type Label/MD · text muted-foreground · type Body/XS |
+| Pattern=Disabled | gap space/3 · gap space/4 · gap space/1 · text muted-foreground · type Label/MD |
+| Pattern=Invalid | gap space/3 · gap space/4 · gap space/1 · text foreground · type Label/MD · text destructive · type Body/XS |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3358,9 +3491,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - Keyboard: Radio groups move between options with arrow keys.
 - State is exposed via aria-checked, never by colour alone.
 
-**Tokens used** — `foreground` · `muted-foreground` · `size/13`
+**Tokens used** — `Body/XS` · `Label/MD` · `border` · `card` · `destructive` · `foreground` · `muted-foreground` · `radius/lg` · `space/1` · `space/3` · `space/4` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `0d9a6bfa1702d1c5` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `3be952558d2bea70` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3393,14 +3526,18 @@ Accessibility contract: the switch track is intentionally smaller than a 24px po
 
 | State | Tokens |
 |---|---|
-| Size=Small, Value=Unchecked, State=Default | fill input · radius radius/full |
-| Size=Small, Value=Unchecked, State=Hover | fill accent |
-| Size=Small, Value=Unchecked, State=Focused | border 2px ring |
-| Size=Small, Value=Unchecked, State=Invalid | border 2px destructive |
-| Size=Small, Value=Checked, State=Default | fill primary |
-| Size=Small, Value=Checked, State=Hover | fill primary |
-| Size=Small, Value=Checked, State=Focused | fill primary · border 2px ring |
-| Size=Small, Value=Checked, State=Disabled | fill primary |
+| Size=Small, Value=Unchecked, State=Default | fill input · radius radius/full · padding space/0-5 · (+1 variant share these) |
+| Size=Small, Value=Unchecked, State=Hover | fill accent-hover · radius radius/full · padding space/0-5 · (+1 variant share these) |
+| Size=Small, Value=Unchecked, State=Focused | fill input · border stroke/2 ring · radius radius/full · padding space/0-5 · (+1 variant share these) |
+| Size=Small, Value=Unchecked, State=Disabled | fill input · radius radius/full · padding space/0-5 · opacity opacity/50 · (+1 variant share these) |
+| Size=Small, Value=Unchecked, State=ReadOnly | fill input · radius radius/full · padding space/0-5 · opacity opacity/80 · (+1 variant share these) |
+| Size=Small, Value=Unchecked, State=Invalid | fill input · border stroke/2 destructive · radius radius/full · padding space/0-5 · (+1 variant share these) |
+| Size=Small, Value=Checked, State=Default | fill primary · radius radius/full · padding space/0-5 · (+1 variant share these) |
+| Size=Small, Value=Checked, State=Hover | fill primary-hover · radius radius/full · padding space/0-5 · (+1 variant share these) |
+| Size=Small, Value=Checked, State=Focused | fill primary · border stroke/2 ring · radius radius/full · padding space/0-5 · (+1 variant share these) |
+| Size=Small, Value=Checked, State=Disabled | fill primary · radius radius/full · padding space/0-5 · opacity opacity/50 · (+1 variant share these) |
+| Size=Small, Value=Checked, State=ReadOnly | fill primary · radius radius/full · padding space/0-5 · opacity opacity/80 · (+1 variant share these) |
+| Size=Small, Value=Checked, State=Invalid | fill primary · border stroke/2 destructive · radius radius/full · padding space/0-5 · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3421,9 +3558,9 @@ Accessibility contract: the switch track is intentionally smaller than a 24px po
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Focused · Disabled · ReadOnly · Invalid] → :hover + :focus-visible CSS-owned, dropped; disabled + readOnly + invalid independent booleans
 - State is exposed via aria-checked, never by colour alone.
 
-**Tokens used** — `accent` · `destructive` · `input` · `primary` · `radius/full` · `ring`
+**Tokens used** — `accent-hover` · `destructive` · `input` · `opacity/50` · `opacity/80` · `primary` · `primary-hover` · `radius/full` · `ring` · `space/0-5` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `57fadd00505db0c7` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `ff9d04e1e1ecf340` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3455,7 +3592,8 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| Size=Small, State=Default | fill card · radius radius/full |
+| Size=Small, State=Default | fill card · radius radius/full · (+1 variant share these) |
+| Size=Small, State=Disabled | fill card · radius radius/full · opacity opacity/75 · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3465,9 +3603,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `card` · `radius/full`
+**Tokens used** — `card` · `opacity/75` · `radius/full`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `7fed335ad99b7195` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `cd1c9521ed38a959` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3499,7 +3637,8 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Density=Compact, Selection=None | fill card · border 1px border · radius radius/lg · text muted-foreground · type size/12 |
+| Density=Compact, Selection=None | fill card · border stroke/1 border · radius radius/lg · fill muted · padding t — r space/2-5 b — l space/2-5 · gap space/2 · text muted-foreground · type Caption/SM · padding t — r space/3 b — l space/3 · type Label/SM · border border · padding t — r space/3-25 b — l space/3-25 · radius radius/4 · text foreground · type Label/MD · type Body/SM · (+1 variant share these) |
+| Density=Compact, Selection=Selected | fill card · border stroke/1 border · radius radius/lg · fill muted · padding t — r space/2-5 b — l space/2-5 · gap space/2 · text muted-foreground · type Caption/SM · padding t — r space/3 b — l space/3 · type Label/SM · border border · padding t — r space/3-25 b — l space/3-25 · radius radius/4 · text foreground · type Label/MD · type Body/SM · fill accent · fill primary · border stroke/1 primary · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3518,9 +3657,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - Header cells are th with the right scope; a caption names the table.
 - Sortable headers carry aria-sort, and the control is a button inside the th.
 
-**Tokens used** — `border` · `card` · `muted-foreground` · `radius/lg` · `size/12`
+**Tokens used** — `Body/SM` · `Caption/SM` · `Label/MD` · `Label/SM` · `accent` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `primary` · `radius/4` · `radius/lg` · `space/2` · `space/2-5` · `space/3` · `space/3-25` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `2400dab75f4b1107` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `9f8012dfd623156f` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3544,8 +3683,9 @@ Accessibility contract: icon-only row action trigger requires a programmatic acc
 | State | Tokens |
 |---|---|
 | State=Default | fill card · radius radius/lg |
-| State=Hover | fill accent |
-| State=Focused | fill accent · border 2px ring |
+| State=Hover | fill accent · radius radius/lg |
+| State=Focused | fill accent · border stroke/2 ring · radius radius/lg |
+| State=Disabled | fill card · radius radius/lg · opacity opacity/50 |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3561,9 +3701,9 @@ Accessibility contract: icon-only row action trigger requires a programmatic acc
 - icon-only row action trigger requires a programmatic accessible name that identifies the action context (for example, “Open row actions”) and a visible focus indicator.
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Focused · Disabled] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean
 
-**Tokens used** — `accent` · `card` · `radius/lg` · `ring`
+**Tokens used** — `accent` · `card` · `opacity/50` · `radius/lg` · `ring` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `c6eaaf8ceb5ed63e` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `bcfaf3681178deff` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3580,13 +3720,19 @@ Table body section containing data rows. Use the Row component states for hover 
 - On its own, outside the parent that owns its behaviour and accessibility wiring.
 - As a general-purpose layout or text primitive.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default |  |
+
 **Do**
 - Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `0f21d2d22e23cc77` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `cf913a3c8efd2380` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings</sub>
 
 ---
 
@@ -3614,7 +3760,7 @@ Accessible descriptive caption for a table. Position is visual; code should pres
 
 | State | Tokens |
 |---|---|
-| Position=Top | text muted-foreground · type size/12 |
+| Position=Top | padding y space/1-5 x space/2 · text muted-foreground · type Body/XS · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3624,9 +3770,9 @@ Accessible descriptive caption for a table. Position is visual; code should pres
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `muted-foreground` · `size/12`
+**Tokens used** — `Body/XS` · `muted-foreground` · `space/1-5` · `space/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `fae422beefc8cadf` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `15b8271af34ef31b` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3657,10 +3803,8 @@ Semantic table data cell with alignment and text-emphasis options. Width is cont
 
 | State | Tokens |
 |---|---|
-| Alignment=Left, Emphasis=Default | text muted-foreground · type size/13 |
-| Alignment=Left, Emphasis=Strong | text foreground |
-| Alignment=Center, Emphasis=Strong | text foreground |
-| Alignment=Right, Emphasis=Strong | text foreground |
+| Alignment=Left, Emphasis=Default | padding t — r space/4 b — l space/4 · text muted-foreground · type Body/SM · (+2 variants share these) |
+| Alignment=Left, Emphasis=Strong | padding t — r space/4 b — l space/4 · text foreground · type Value/Strong · (+2 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3670,9 +3814,9 @@ Semantic table data cell with alignment and text-emphasis options. Width is cont
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `foreground` · `muted-foreground` · `size/13`
+**Tokens used** — `Body/SM` · `Value/Strong` · `foreground` · `muted-foreground` · `space/4`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `291eea1e85136692` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `aadfde84ec35a82d` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3693,7 +3837,7 @@ Responsive overflow wrapper used by the Table root. Viewport variants document d
 
 | State | Tokens |
 |---|---|
-| Viewport=Desktop | fill card · border 1px border · radius radius/lg · text muted-foreground · type size/10 |
+| Viewport=Desktop | fill card · border stroke/1 border · radius radius/lg · padding space/2 · gap space/2 · fill muted · fill accent · gap space/1-5 · text muted-foreground · type UNBOUND 10/16 Regular · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3704,9 +3848,9 @@ Responsive overflow wrapper used by the Table root. Viewport variants document d
 - Do not turn Viewport into a code prop.
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `border` · `card` · `muted-foreground` · `radius/lg` · `size/10`
+**Tokens used** — `accent` · `border` · `card` · `muted` · `muted-foreground` · `radius/lg` · `space/1-5` · `space/2` · `stroke/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `155a3349d0016a28` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `2ed6321e4906784e` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3721,13 +3865,19 @@ Responsive overflow wrapper used by the Table root. Viewport variants document d
 - On its own, outside the parent that owns its behaviour and accessibility wiring.
 - As a general-purpose layout or text primitive.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default |  |
+
 **Do**
 - Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `00905242925bb272` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `983056e63b6659ae` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings</sub>
 
 ---
 
@@ -3756,7 +3906,7 @@ Semantic table column header. Alignment controls presentation only; use scope/ro
 
 | State | Tokens |
 |---|---|
-| Alignment=Left | text muted-foreground · type size/12 |
+| Alignment=Left | padding t — r space/4 b — l space/4 · text muted-foreground · type Label/SM · (+2 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3766,9 +3916,9 @@ Semantic table column header. Alignment controls presentation only; use scope/ro
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-**Tokens used** — `muted-foreground` · `size/12`
+**Tokens used** — `Label/SM` · `muted-foreground` · `space/4`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `56f58dc201dc11b3` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `4215afc070ea978b` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3785,13 +3935,19 @@ Table header section containing semantic column headers. This wrapper has no ind
 - On its own, outside the parent that owns its behaviour and accessibility wiring.
 - As a general-purpose layout or text primitive.
 
+**State → tokens**
+
+| State | Tokens |
+|---|---|
+| Default |  |
+
 **Do**
 - Compose it through the parent rather than reaching for it directly.
 
 **Do not**
 - Do not re-implement the parent's keyboard or focus behaviour on the part.
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `13ab0da9a4296e66` · provenance description:imported · whenToUse:best-practice · whenNotToUse:best-practice · dos:best-practice · donts:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `d26449937af46ff3` · provenance description:imported · dos:best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · states:live-bindings</sub>
 
 ---
 
@@ -3814,11 +3970,8 @@ Pipeline property contract: only the component properties defined on this set ar
 
 | State | Tokens |
 |---|---|
-| Pattern=Basic, Viewport=Desktop | text muted-foreground · type size/12 |
-| Pattern=Basic, Viewport=Compact | type size/11 |
-| Pattern=Footer, Viewport=Compact | type size/11 |
-| Pattern=Actions, Viewport=Compact | type size/11 |
-| Pattern=RTL, Viewport=Compact | type size/11 |
+| Pattern=Basic, Viewport=Desktop | gap space/2 · fill card · fill muted · border border · (+3 variants share these) |
+| Pattern=Basic, Viewport=Compact | gap space/2 · fill card · fill muted · border border · radius radius/lg · padding y space/1 x space/2 · text muted-foreground · type Caption/XS · (+3 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3838,9 +3991,9 @@ Pipeline property contract: only the component properties defined on this set ar
 - Header cells are th with the right scope; a caption names the table.
 - Sortable headers carry aria-sort, and the control is a button inside the th.
 
-**Tokens used** — `muted-foreground` · `size/11` · `size/12`
+**Tokens used** — `Caption/XS` · `border` · `card` · `muted` · `muted-foreground` · `radius/lg` · `space/1` · `space/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `761baaa3dcd61027` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `9e0f5a5950057c8b` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3873,14 +4026,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| Type=Header, State=Default, Density=Compact | fill muted · border border · text muted-foreground · type size/12 |
-| Type=Body, State=Default, Density=Compact | fill card · text foreground · type size/13 |
-| Type=Body, State=Hover, Density=Compact | text foreground · type size/13 |
-| Type=Body, State=Selected, Density=Compact | fill accent · text foreground · type size/13 |
-| Type=Footer, State=Default, Density=Compact | text foreground · type size/13 |
-| Type=Body, State=Default, Density=Comfortable | fill card · text foreground · type size/13 |
-| Type=Body, State=Hover, Density=Comfortable | text foreground · type size/13 |
-| Type=Body, State=Selected, Density=Comfortable | fill accent · text foreground · type size/13 |
+| Type=Header, State=Default, Density=Compact | fill muted · border border · (+5 variants share these) |
+| Type=Body, State=Default, Density=Compact | fill card · border border · (+1 variant share these) |
+| Type=Body, State=Selected, Density=Compact | fill accent · border border · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3894,9 +4042,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 **Accessibility**
 - State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Selected] → :hover CSS-owned, dropped; selected controlled state
 
-**Tokens used** — `accent` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `size/12` · `size/13`
+**Tokens used** — `accent` · `border` · `card` · `muted`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `9519aec3f63e5ac4` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `55000039196f6f01` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3927,7 +4075,8 @@ Grouped navigation for switching between peer views without leaving the current 
 
 | State | Tokens |
 |---|---|
-| Orientation=Horizontal, Density=Default | fill muted · radius radius/lg · text foreground · type size/12 |
+| Orientation=Horizontal, Density=Default | fill muted · radius radius/lg · padding space/1 · gap space/1 · (+1 variant share these) |
+| Orientation=Horizontal, Density=Compact | fill muted · radius radius/lg · padding space/0-75 · gap space/0-5 · (+1 variant share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -3947,9 +4096,9 @@ Grouped navigation for switching between peer views without leaving the current 
 - Each tab carries aria-selected and aria-controls; each panel is labelled by its tab.
 - Only the selected tab is in the tab order.
 
-**Tokens used** — `foreground` · `muted` · `radius/lg` · `size/12`
+**Tokens used** — `muted` · `radius/lg` · `space/0-5` · `space/0-75` · `space/1`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `02eb4eaa12d379f8` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `fd7ace0b2381ab3b` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -3974,10 +4123,10 @@ Accessibility contract: State=Error requires specific visible error text outside
 
 | State | Tokens |
 |---|---|
-| State=Default | fill card · border 1px input · radius radius/lg · text foreground · type size/14 |
-| State=Focused | border 2px ring |
-| State=Error | border 1px destructive |
-| State=Disabled | fill muted · text muted-foreground |
+| State=Default | fill card · border stroke/1 input · radius radius/lg · padding space/3 · gap space/2 · text foreground · type Body/MD · text muted-foreground · type Caption/SM |
+| State=Focused | fill card · border stroke/2 ring · radius radius/lg · padding space/3 · gap space/2 · text foreground · type Body/MD · text muted-foreground · type Caption/SM |
+| State=Error | fill card · border stroke/1 destructive · radius radius/lg · padding space/3 · gap space/2 · text foreground · type Body/MD · text destructive · type Caption/SM |
+| State=Disabled | fill muted · border stroke/1 input · radius radius/lg · padding space/3 · gap space/2 · text muted-foreground · type Body/MD · type Caption/SM |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -4003,9 +4152,9 @@ Accessibility contract: State=Error requires specific visible error text outside
 - The error state sets aria-invalid and links its message via aria-describedby.
 - A character counter is announced politely, not on every keystroke.
 
-**Tokens used** — `card` · `destructive` · `foreground` · `input` · `muted` · `muted-foreground` · `radius/lg` · `ring` · `size/14`
+**Tokens used** — `Body/MD` · `Caption/SM` · `card` · `destructive` · `foreground` · `input` · `muted` · `muted-foreground` · `radius/lg` · `ring` · `space/2` · `space/3` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `bb7e4198160dbc59` · provenance description:imported · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `ec9f2c16ee0f5d56` · provenance description:imported · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -4037,13 +4186,13 @@ Pipeline API classification: apply the Governance property-classification rule b
 
 | State | Tokens |
 |---|---|
-| Pressed=False, State=Default | fill card · border 1px border · radius radius/md · text foreground · type size/14 |
-| Pressed=False, State=Focused | border 2px ring |
-| Pressed=False, State=Disabled | fill muted · text muted-foreground |
-| Pressed=True, State=Default | fill accent · text accent-foreground |
-| Pressed=True, State=Hover | fill accent · text accent-foreground |
-| Pressed=True, State=Focused | fill accent · border 2px ring · text accent-foreground |
-| Pressed=True, State=Disabled | fill muted · text muted-foreground |
+| Pressed=False, State=Default | fill card · border stroke/1 border · radius radius/md · padding y space/2 x space/3 · gap space/2 · text foreground · type Heading/XS · type Label/LG |
+| Pressed=False, State=Hover | fill accent · border stroke/1 border · radius radius/md · padding y space/2 x space/3 · gap space/2 · text foreground · type Heading/XS · type Label/LG |
+| Pressed=False, State=Focused | fill card · border stroke/2 ring · radius radius/md · padding y space/2 x space/3 · gap space/2 · text foreground · type Heading/XS · type Label/LG |
+| Pressed=False, State=Disabled | fill muted · radius radius/md · padding y space/2 x space/3 · gap space/2 · text muted-foreground · type Heading/XS · type Label/LG · (+1 variant share these) |
+| Pressed=True, State=Default | fill accent · radius radius/md · padding y space/2 x space/3 · gap space/2 · text accent-foreground · type Heading/XS · type Label/LG |
+| Pressed=True, State=Hover | fill accent-hover · radius radius/md · padding y space/2 x space/3 · gap space/2 · text accent-foreground · type Heading/XS · type Label/LG |
+| Pressed=True, State=Focused | fill accent · border stroke/2 ring · radius radius/md · padding y space/2 x space/3 · gap space/2 · text accent-foreground · type Heading/XS · type Label/LG |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -4068,9 +4217,9 @@ Pipeline API classification: apply the Governance property-classification rule b
 - An icon-only toggle needs an aria-label that names the action, not the state.
 - A disabled toggle is not focusable.
 
-**Tokens used** — `accent` · `accent-foreground` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/md` · `ring` · `size/14`
+**Tokens used** — `Heading/XS` · `Label/LG` · `accent` · `accent-foreground` · `accent-hover` · `border` · `card` · `foreground` · `muted` · `muted-foreground` · `radius/md` · `ring` · `space/2` · `space/3` · `stroke/1` · `stroke/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `5d6d32f30d9c6582` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · donts:imported+best-practice · accessibility:imported+w3c-apg · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `9bf27f663428a017` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:imported+best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:imported+w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -4102,7 +4251,7 @@ Grouped toggle controls for choosing one or multiple persistent options. Use sin
 
 | State | Tokens |
 |---|---|
-| Selection=Single, Orientation=Horizontal | text accent-foreground · type size/14 |
+| Selection=Single, Orientation=Horizontal | gap space/2 · (+3 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -4124,9 +4273,9 @@ Grouped toggle controls for choosing one or multiple persistent options. Use sin
 - An icon-only toggle needs an aria-label that names the action, not the state.
 - A disabled toggle is not focusable.
 
-**Tokens used** — `accent-foreground` · `size/14`
+**Tokens used** — `space/2`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `b70f3b8951153ea0` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `62b63da2e36e689f` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>
 
 ---
 
@@ -4156,7 +4305,7 @@ Brief non-interactive label revealed on hover or focus. Side controls preferred 
 
 | State | Tokens |
 |---|---|
-| Side=Top | fill foreground · radius radius/lg · text card · type size/12 |
+| Side=Top | fill foreground · radius radius/lg · padding y space/2-5 x space/3 · text card · type Label/SM · (+3 variants share these) |
 
 **Do**
 - Reference variables for every value; never hardcode a hex or px.
@@ -4176,6 +4325,6 @@ Brief non-interactive label revealed on hover or focus. Side controls preferred 
 - Referenced by the control via aria-describedby.
 - Stays visible long enough to read, and while the pointer is over it.
 
-**Tokens used** — `card` · `foreground` · `radius/lg` · `size/12`
+**Tokens used** — `Label/SM` · `card` · `foreground` · `radius/lg` · `space/2-5` · `space/3`
 
-<sub>status `draft` · updated 2026-08-09 · fingerprint `9290eafaeccdbd66` · provenance description:imported · variants:imported+framework · states:imported · dos:imported+best-practice · tokensUsed:imported · whenToUse:best-practice · whenNotToUse:best-practice · donts:best-practice · accessibility:w3c-apg</sub>
+<sub>status `draft` · updated 2026-08-10 · fingerprint `a21d6200357d1451` · provenance description:imported · variants:imported+framework · dos:imported+best-practice · donts:best-practice · whenToUse:best-practice · whenNotToUse:best-practice · accessibility:w3c-apg · states:live-bindings · tokensUsed:live-bindings</sub>

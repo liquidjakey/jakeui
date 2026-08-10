@@ -23,9 +23,6 @@
       "true": "Shows a pointer aimed at the trigger."
     }
   },
-  "states": {
-    "Size=Small, Side=Top, Align=Start, Arrow=False": "text popover-foreground · type size/14"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -36,27 +33,40 @@
     "Variant count (48) exceeds the 30-combination governance ceiling. Needs a documented exception.",
     "Do not re-implement the parent's keyboard or focus behaviour on the part."
   ],
-  "tokensUsed": [
-    "popover-foreground",
-    "size/14"
-  ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "donts": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice"
-  },
   "whenToUse": [
     "Only inside its parent component's composition — this is a part, not a standalone component."
   ],
   "whenNotToUse": [
     "On its own, outside the parent that owns its behaviour and accessibility wiring.",
     "As a general-purpose layout or text primitive."
-  ]
+  ],
+  "status": "draft",
+  "states": {
+    "Size=Small, Side=Top, Align=Start, Arrow=False": "fill popover · border stroke/1 border · radius radius/lg · padding space/4 · gap space/3 · gap space/1-5 · text muted-foreground · type Body/XS · gap space/2 · text primary-readable · type Label/XS · (+47 variants share these)"
+  },
+  "tokensUsed": [
+    "Body/XS",
+    "Label/XS",
+    "border",
+    "muted-foreground",
+    "popover",
+    "primary-readable",
+    "radius/lg",
+    "space/1-5",
+    "space/2",
+    "space/3",
+    "space/4",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

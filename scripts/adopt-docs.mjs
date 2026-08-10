@@ -1,38 +1,60 @@
 #!/usr/bin/env node
 /**
- * Jake UI — documentation adoption, step 2 of 2: Figma descriptions -> records.
+ * Jake UI — doc-record ingest, step 2 of 2: LIVE BINDINGS -> records.
  *
- * WHY THIS EXISTS
- * 86 components already carry hand-written Figma descriptions; only one has a
- * code-side doc. This claims the existing content into canonical
- * `docs/components/<Name>.doc.json` records marked `provenance: imported`,
- * rather than authoring 86 docs from scratch. Adoption, not generation — the
- * brownfield first-run rule: never overwrite existing human-written docs.
+ * WHY THIS WAS REWRITTEN (10 Aug 2026)
+ * This script used to read `.figma-docs-dump.json`: the hand-written Figma
+ * DESCRIPTION on each component, parsed out of a house prose format. That source
+ * was wrong seven separate times in two days, every time in a way that shipped a
+ * real visual bug:
+ *
+ *   Badge / Success       said info-foreground            binds success-foreground
+ *   Badge / Destructive   said destructive-foreground     binds card
+ *   Card / Title          said info-foreground, size/11   binds foreground, 16px
+ *   Label                 said Body/MD                    binds Label/LG
+ *   Dialog / Title        said "size/18 and size/13"      binds Heading/LG on both
+ *   Tabs / Density        said "no spacing recorded"      binds space/1 · space/0-75
+ *   Alert / Destructive   said "no surface fill"          carried a solid #fdeae9
+ *
+ * and it reported 16 unbound text nodes where a direct read found 469. Each of
+ * those was corrected in the COMPONENT source, which left the records as a
+ * standing hazard: the next `docs:adopt` would have re-imported the wrong values
+ * over corrections that had cost an audit to find. The handoff called it a time
+ * bomb, and it was.
+ *
+ * The descriptions are prose maintained by hand. They drift the moment anyone
+ * rebinds a token without retyping the paragraph, and NOTHING can detect it —
+ * that is the defining property of the defect. Bindings cannot drift from
+ * themselves.
+ *
+ * WHAT IS GENERATED AND WHAT IS PRESERVED
+ * The split is the whole design. A binding has a single source of truth in the
+ * file; prose does not exist there at all.
+ *
+ *   GENERATED from bindings, overwritten every run:
+ *     states       per-variant token sets, read from the live file
+ *     tokensUsed   derived from states, so it can never disagree with them
+ *
+ *   PRESERVED from the existing record, never regenerated and never dropped:
+ *     summary · description · variants · dos · donts
+ *     whenToUse · whenNotToUse · accessibility · status
+ *
+ * There is no third category. A field is either in the file or it is not.
+ *
+ * IDEMPOTENCE
+ * Generated fields are a pure function of the dump; preserved fields are copied
+ * from the record being rewritten. So the second run produces the first run's
+ * output exactly, and `docs:adopt` twice is a no-op. That is asserted, not
+ * assumed — see the `--check` flag and the exit criteria in the handoff.
  *
  * HOW TO REGENERATE
- *   1. Execute scripts/figma-docs-query.js through the Figma Desktop Bridge.
- *   2. Save its JSON to design-system/.figma-docs-dump.json
- *   3. node design-system/scripts/adopt-docs.mjs [--check]
+ *   1. Open Figma Desktop on ovnLtL9xbX8SG5xDw673Un with the Desktop Bridge plugin.
+ *   2. Execute the body of scripts/figma-bindings-query.js through the bridge.
+ *   3. Save its JSON to design-system/.figma-bindings-dump.json
+ *   4. node design-system/scripts/adopt-docs.mjs [--check]
  *
  *   --check   write nothing; exit 1 if any record on disk differs from what
- *             would be generated, or if an imported block would be overwritten.
- *
- * WHAT IT PARSES
- * The descriptions follow the house format (docs/figma-descriptions.md):
- *
- *   {authored lead}
- *   ———
- *   ANATOMY / STATE TOKENS
- *   State=Default — fill card · border 1px input · radius radius/lg · ...
- *   CODE API — full contract: docs/state-decomposition.md
- *   Props — Value: string · Tone: info | success | warning
- *   ! Decompose — State [...] → ...
- *   DO / DO NOT
- *   + do this
- *   - do not do this
- *
- * Anything it cannot confidently parse is left absent rather than guessed. An
- * absent block is honest; an invented one is worse than nothing.
+ *             would be generated.
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
@@ -41,142 +63,108 @@ import { fileURLToPath } from 'node:url';
 import { canonicalFingerprint, renderHash, validateRecord, recordFileName, isProtected } from './lib/doc-record.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const DUMP = resolve(ROOT, '.figma-docs-dump.json');
+const DUMP = resolve(ROOT, '.figma-bindings-dump.json');
 const OUT_DIR = resolve(ROOT, 'docs/components');
 const MANIFEST = resolve(ROOT, 'design-system.json');
 const CHECK = process.argv.includes('--check');
 
-const RULE = '———';
+/** Fields this script owns. Everything else belongs to the record. */
+const GENERATED = ['states', 'tokensUsed'];
 
-/** Token references inside an anatomy line, e.g. "fill card", "radius radius/lg". */
-const TOKEN_WORD = /(?:fill|border|text|type|radius|shadow|gap|padding)\s+(?:\d+px\s+)?([a-z][a-z0-9/-]*)/g;
+/** Fields carried across untouched. Prose has no binding equivalent. */
+const PRESERVED = [
+  'summary', 'description', 'variants', 'dos', 'donts',
+  'whenToUse', 'whenNotToUse', 'accessibility', 'status',
+];
 
-function splitDescription(desc) {
-  const i = desc.indexOf(RULE);
-  if (i === -1) return { lead: desc.trim(), generated: '' };
-  return { lead: desc.slice(0, i).trim(), generated: desc.slice(i + RULE.length).trim() };
+/** Leading keywords in a token phrase, and the positional markers to discard. */
+const PHRASE_HEAD = /^(fill|border|radius|padding|gap|opacity|text|type|shadow)\b\s*/;
+const POSITIONAL = new Set(['y', 'x', 't', 'r', 'b', 'l', '—']);
+
+/**
+ * Pull real token names out of one phrase.
+ *
+ * `type` and `shadow` name a STYLE, which may contain spaces ("Effect/Code
+ * Inset"), so their remainder is taken whole. Everything else is a list of
+ * variable names with positional markers interleaved.
+ *
+ * UNTOKENISED and UNBOUND mark values that have no token at all. They are kept
+ * in `states` — that is exactly the kind of thing this record must surface — but
+ * they contribute nothing to `tokensUsed`, because no token was used.
+ */
+function tokensInPhrase(phrase) {
+  const head = phrase.match(PHRASE_HEAD);
+  if (!head) return [];
+  const kind = head[1];
+  const rest = phrase.slice(head[0].length).trim();
+  if (!rest || /^(UNTOKENISED|UNBOUND)\b/.test(rest)) return [];
+  if (kind === 'type' || kind === 'shadow') return [rest];
+  return rest
+    .split(/\s+/)
+    .filter((w) => w && !POSITIONAL.has(w) && !/^#/.test(w) && !/^\d/.test(w));
 }
 
-function section(generated, heading) {
-  // Headings are ALL-CAPS lines; a section runs to the next heading or the end.
-  const lines = generated.split('\n');
-  const start = lines.findIndex((l) => l.trim().startsWith(heading));
-  if (start === -1) return [];
-  const out = [];
-  for (let i = start + 1; i < lines.length; i++) {
-    const l = lines[i];
-    if (/^[A-Z][A-Z /]{3,}$/.test(l.trim()) && !l.includes('—')) break;
-    if (/^(CODE API|DO \/ DO NOT|ANATOMY)/.test(l.trim())) break;
-    if (l.trim()) out.push(l.trim());
-  }
-  return out;
-}
-
-function parseStates(generated) {
-  const states = {};
-  for (const line of section(generated, 'ANATOMY / STATE TOKENS')) {
-    const m = line.match(/^(.+?)\s+—\s+(.+)$/);
-    if (!m) continue;
-    const key = m[1].trim();
-    if (/^\(\+\d+/.test(key)) continue; // "(+2 further variants share these tokens)"
-    states[key] = m[2].trim();
-  }
-  return Object.keys(states).length ? states : undefined;
-}
-
-function parseTokensUsed(generated) {
+function tokensUsedFrom(states) {
   const found = new Set();
-  for (const line of section(generated, 'ANATOMY / STATE TOKENS')) {
-    for (const m of line.matchAll(TOKEN_WORD)) {
-      const t = m[1];
-      if (t && !/^\d/.test(t) && t !== 'px') found.add(t);
+  for (const tokens of Object.values(states)) {
+    for (const phrase of String(tokens).split(' · ')) {
+      for (const t of tokensInPhrase(phrase)) found.add(t);
     }
   }
   return found.size ? [...found].sort() : undefined;
 }
 
-/** `Props — Tone: info | success | warning` becomes a variants entry. */
-function parseVariants(generated) {
-  const variants = {};
-  const propsLine = generated.split('\n').find((l) => l.trim().startsWith('Props —'));
-  if (!propsLine) return undefined;
-  const body = propsLine.replace(/^\s*Props\s*—\s*/, '');
-  for (const part of body.split('·')) {
-    const m = part.trim().match(/^(.+?):\s*(.+)$/);
-    if (!m) continue;
-    const [, name, type] = m;
-    if (!type.includes('|')) continue; // only enumerated props are variants
-    const values = {};
-    for (const v of type.split('|')) values[v.trim()] = '';
-    variants[name.trim().toLowerCase()] = values;
-  }
-  return Object.keys(variants).length ? variants : undefined;
-}
-
-function parseDosDonts(generated) {
-  const dos = [];
-  const donts = [];
-  for (const line of section(generated, 'DO / DO NOT')) {
-    if (line.startsWith('+')) dos.push(line.slice(1).trim());
-    else if (line.startsWith('-')) donts.push(line.slice(1).trim());
-  }
-  return { dos: dos.length ? dos : undefined, donts: donts.length ? donts : undefined };
-}
-
-/** Pull an explicit accessibility paragraph out of the authored lead. */
-function parseAccessibility(lead, generated) {
-  const para = lead
-    .split(/\n\s*\n/)
-    .find((p) => /^accessibility\b/i.test(p.trim()) || /^a11y\b/i.test(p.trim()));
-  const decompose = generated.split('\n').find((l) => l.trim().startsWith('! Decompose'));
-  if (!para && !decompose) return undefined;
-  const notes = [];
-  if (para) notes.push(para.replace(/^accessibility contract:\s*/i, '').replace(/\s+/g, ' ').trim());
-  if (decompose) {
-    notes.push(
-      'State decomposition applies — see docs/state-decomposition.md. ' +
-        decompose.replace(/^\s*!\s*Decompose\s*—\s*/, '').trim(),
-    );
-  }
-  return notes.length ? { notes } : undefined;
-}
-
-/** First sentence of the lead, for `summary`. */
-function firstSentence(lead) {
-  const first = lead.split(/\n\s*\n/)[0].replace(/\s+/g, ' ').trim();
-  const m = first.match(/^(.+?[.!?])(\s|$)/);
-  return (m ? m[1] : first).trim();
+/** Read the record already on disk, so its prose can be carried forward. */
+function existingRecord(name) {
+  const file = resolve(OUT_DIR, recordFileName(name));
+  if (!existsSync(file)) return null;
+  try { return JSON.parse(readFileSync(file, 'utf8')); } catch { return null; }
 }
 
 function buildRecord(entry, today) {
-  const { lead, generated } = splitDescription(entry.description || '');
-  if (!lead) return null;
+  const prior = existingRecord(entry.name);
 
-  const { dos, donts } = parseDosDonts(generated);
-  const record = {
-    name: entry.name,
-    summary: firstSentence(lead),
-    description: lead.replace(/\s*\n\s*\n\s*/g, '\n\n').trim(),
-    variants: parseVariants(generated),
-    states: parseStates(generated),
-    dos,
-    donts,
-    accessibility: parseAccessibility(lead, generated),
-    tokensUsed: parseTokensUsed(generated),
-    status: entry.status || 'draft',
-    updatedAt: today,
-  };
+  // Prose cannot be invented. A component with no record and no authored summary
+  // is skipped rather than given a machine-written one.
+  if (!prior) return { skip: 'no existing record — bindings alone cannot supply prose' };
 
-  // Drop undefined blocks — an absent block is honest, an empty one is noise.
+  const record = { name: entry.name };
+  for (const f of PRESERVED) if (prior[f] !== undefined) record[f] = prior[f];
+
+  const priorProv = prior.provenance || {};
+  for (const f of GENERATED) {
+    // A block a human took ownership of stays theirs, even here.
+    if (isProtected(priorProv[f]) && String(priorProv[f]).includes('user')) {
+      if (prior[f] !== undefined) record[f] = prior[f];
+      continue;
+    }
+    if (f === 'states') record.states = entry.states;
+    if (f === 'tokensUsed') {
+      const t = tokensUsedFrom(entry.states);
+      if (t) record.tokensUsed = t;
+    }
+  }
+
+  record.status = record.status || 'draft';
+  record.updatedAt = today;
+
   for (const k of Object.keys(record)) if (record[k] === undefined) delete record[k];
 
-  // Every block here came out of the Figma description, so all of it is imported.
-  record.provenance = Object.fromEntries(
-    ['description', 'variants', 'states', 'dos', 'donts', 'accessibility', 'tokensUsed']
-      .filter((k) => k in record)
-      .map((k) => [k, 'imported']),
-  );
-  return record;
+  // Provenance: preserved blocks keep whatever they had; generated blocks are
+  // now sourced from the file itself, which is a stronger claim than "imported".
+  const prov = {};
+  for (const f of PRESERVED) if (f in record && priorProv[f]) prov[f] = priorProv[f];
+  for (const f of GENERATED) {
+    if (!(f in record)) continue;
+    prov[f] = isProtected(priorProv[f]) && String(priorProv[f]).includes('user')
+      ? priorProv[f]
+      : 'live-bindings';
+  }
+  // Blocks enrichment added that are not in either list keep their provenance.
+  for (const [k, v] of Object.entries(priorProv)) if (!(k in prov) && k in record) prov[k] = v;
+  record.provenance = prov;
+
+  return { record };
 }
 
 function main() {
@@ -189,76 +177,43 @@ function main() {
   mkdirSync(OUT_DIR, { recursive: true });
 
   const written = [];
+  const unchanged = [];
   const skipped = [];
-  const drift = [];
   const problems = [];
   const pointers = {};
 
   for (const entry of dump.components) {
-    const record = buildRecord(entry, today);
-    if (!record) { skipped.push({ name: entry.name, why: 'no description to adopt' }); continue; }
+    const { record, skip } = buildRecord(entry, today);
+    if (skip) { skipped.push({ name: entry.name, why: skip }); continue; }
 
     const errs = validateRecord(record, entry.name);
     if (errs.length) { problems.push(...errs); continue; }
 
     const file = resolve(OUT_DIR, recordFileName(entry.name));
     const next = JSON.stringify(record, null, 2) + '\n';
-
-    if (existsSync(file)) {
-      const current = readFileSync(file, 'utf8');
-      if (current === next) { skipped.push({ name: entry.name, why: 'unchanged' }); continue; }
-      let existing;
-      try { existing = JSON.parse(current); } catch { existing = null; }
-
-      // A record that enrichment has touched will legitimately differ from a fresh
-      // adoption — it carries best-practice / framework / w3c-apg blocks the Figma
-      // description never had. That is not drift. What matters is that the
-      // IMPORTED blocks still match the source.
-      if (existing) {
-        // Only a block whose provenance is PURELY "imported" must still match the
-        // source exactly. A mixed block like "imported+framework" (variant keys
-        // imported, meanings added by enrichment) is expected to differ — testing
-        // it for equality would flag enrichment as drift.
-        const importedKeys = Object.entries(existing.provenance || {})
-          .filter(([, v]) => String(v).trim() === 'imported')
-          .map(([k]) => k);
-        const importedDiffer = importedKeys.filter(
-          (k) => JSON.stringify(existing[k]) !== JSON.stringify(record[k]),
-        );
-        if (!importedDiffer.length) {
-          skipped.push({ name: entry.name, why: 'enriched — imported blocks still match source' });
-          continue;
-        }
-        // Imported content genuinely diverges: refuse rather than clobber.
-        drift.push({ name: entry.name, protectedBlocks: importedDiffer });
-        continue;
-      }
-      drift.push({ name: entry.name, protectedBlocks: [] });
-    }
-
-    if (!CHECK) writeFileSync(file, next);
     const fp = canonicalFingerprint(record);
-    written.push({ name: entry.name, fingerprint: fp, blocks: Object.keys(record.provenance || {}).length });
 
-    // The Figma description IS the surface this record was adopted from, so it is
-    // in sync by construction. Record the pointer so docs:check has something to
-    // compare against; the code surfaces come later from Storybook.
+    // The bindings ARE the surface this record is projected from, so the pointer
+    // is in sync by construction. `adopted` marks it as a SOURCE rather than a
+    // rendering, which is what stops docs:check reading enrichment as staleness.
     pointers[entry.name] = {
       path: `docs/components/${recordFileName(entry.name)}`,
       fingerprint: fp,
       surfaces: {
-        figmaDescription: {
+        figmaBindings: {
           src: fp,
-          render: renderHash(entry.description || ''),
-          // The Figma description is the SOURCE this record was adopted from, not a
-          // rendering of it. Once enrichment adds archetype/framework blocks the
-          // description no longer carries the whole record — that is a partial
-          // projection by design, and the brownfield rule forbids re-rendering it.
-          // docs:check reports that as informational rather than as drift.
+          render: renderHash(JSON.stringify(entry.states)),
           adopted: true,
         },
       },
     };
+
+    if (existsSync(file) && readFileSync(file, 'utf8') === next) {
+      unchanged.push(entry.name);
+      continue;
+    }
+    if (!CHECK) writeFileSync(file, next);
+    written.push({ name: entry.name, fingerprint: fp });
   }
 
   if (problems.length) {
@@ -267,26 +222,16 @@ function main() {
     process.exit(1);
   }
 
-  const verb = CHECK ? 'would adopt' : 'adopted';
-  console.log(`${verb} ${written.length} record(s) into docs/components/`);
-  if (skipped.length) {
-    const unchanged = skipped.filter((s) => s.why === 'unchanged').length;
-    const nodesc = skipped.filter((s) => s.why !== 'unchanged');
-    if (unchanged) console.log(`  ${unchanged} unchanged`);
-    for (const s of nodesc) console.log(`  · skipped ${s.name} — ${s.why}`);
-  }
-  const clobber = drift.filter((d) => d.protectedBlocks.length);
-  if (clobber.length) {
-    console.error(`\n${clobber.length} record(s) would overwrite imported/user blocks — refusing:`);
-    for (const d of clobber) console.error(`  ✗ ${d.name}: ${d.protectedBlocks.join(', ')}`);
-    process.exit(1);
-  }
+  const verb = CHECK ? 'would rewrite' : 'rewrote';
+  console.log(`Jake UI docs — ${verb} ${written.length} record(s) from live bindings; ${unchanged.length} unchanged.`);
+  for (const s of skipped) console.log(`  · skipped ${s.name} — ${s.why}`);
+
   if (CHECK && written.length) {
-    console.error(`\n✗ ${written.length} record(s) differ from the dump. Run: node design-system/scripts/adopt-docs.mjs`);
+    console.error(`\n✗ ${written.length} record(s) differ from the bindings dump. Run: node design-system/scripts/adopt-docs.mjs`);
+    for (const w of written.slice(0, 10)) console.error(`    ${w.name}`);
     process.exit(1);
   }
-  // Write the manifest pointers so docs:check has a baseline. Only
-  // components.meta[*].doc is touched; every other manifest field is left alone.
+
   if (!CHECK && Object.keys(pointers).length) {
     const manifest = JSON.parse(readFileSync(MANIFEST, 'utf8'));
     manifest.components = manifest.components || { built: [], meta: {}, instanceSwapUpgradePending: [] };
@@ -295,7 +240,7 @@ function main() {
       const entry = manifest.components.meta[name] || {};
       entry.doc = doc;
       if (!entry.status) entry.status = 'draft';
-      if (!entry.updatedAt) entry.updatedAt = new Date().toISOString();
+      if (!entry.updatedAt) entry.updatedAt = `${today}T00:00:00.000Z`;
       manifest.components.meta[name] = entry;
     }
     writeFileSync(MANIFEST, JSON.stringify(manifest, null, 2) + '\n');
@@ -303,7 +248,7 @@ function main() {
   }
 
   const onDisk = readdirSync(OUT_DIR).filter((f) => f.endsWith('.doc.json')).length;
-  console.log(`\n${onDisk} record(s) on disk.`);
+  console.log(`${onDisk} record(s) on disk.`);
 }
 
 main();

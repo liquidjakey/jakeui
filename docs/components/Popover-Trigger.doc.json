@@ -8,16 +8,6 @@
       "rTL": "Right-to-left layout — mirrored for RTL locales."
     }
   },
-  "states": {
-    "Type=Button, State=Closed": "text foreground · type size/13",
-    "Type=Button, State=Open": "text accent-foreground",
-    "Type=Button, State=Hover": "text accent-foreground",
-    "Type=Button, State=Focused": "border 2px ring · radius radius/lg",
-    "Type=Button, State=Disabled": "text muted-foreground",
-    "Type=RTL, State=Closed": "type size/12",
-    "Type=RTL, State=Open": "type size/12",
-    "Type=RTL, State=Hover": "type size/12"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -28,38 +18,53 @@
     "Do not remove the ring border on focus. It is the only focus affordance.",
     "Do not re-implement the parent's keyboard or focus behaviour on the part."
   ],
-  "accessibility": {
-    "notes": [
-      "State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Hover · Focused · Disabled] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean; closed/open controlled state"
-    ]
-  },
-  "tokensUsed": [
-    "accent-foreground",
-    "foreground",
-    "muted-foreground",
-    "radius/lg",
-    "ring",
-    "size/12",
-    "size/13"
-  ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "donts": "imported+best-practice",
-    "accessibility": "imported",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice"
-  },
   "whenToUse": [
     "Only inside its parent component's composition — this is a part, not a standalone component."
   ],
   "whenNotToUse": [
     "On its own, outside the parent that owns its behaviour and accessibility wiring.",
     "As a general-purpose layout or text primitive."
-  ]
+  ],
+  "accessibility": {
+    "notes": [
+      "State decomposition applies — see docs/state-decomposition.md. State [Closed · Open · Hover · Focused · Disabled] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean; closed/open controlled state"
+    ]
+  },
+  "status": "draft",
+  "states": {
+    "Type=Button, State=Closed": " · (+2 variants share these)",
+    "Type=Button, State=Focused": "border stroke/2 ring · radius radius/lg",
+    "Type=Button, State=Disabled": "opacity opacity/50",
+    "Type=RTL, State=Closed": "fill card · border stroke/1 border · radius radius/md · padding y space/2 x space/2-5 · text foreground · type Label/SM",
+    "Type=RTL, State=Open": "fill accent · border stroke/1 border · radius radius/md · padding y space/2 x space/2-5 · text foreground · type Label/SM · (+1 variant share these)",
+    "Type=RTL, State=Focused": "border stroke/2 ring · radius radius/lg · fill card · border stroke/1 border · radius radius/md · padding y space/2 x space/2-5 · text foreground · type Label/SM",
+    "Type=RTL, State=Disabled": "opacity opacity/50 · fill card · border stroke/1 border · radius radius/md · padding y space/2 x space/2-5 · text foreground · type Label/SM"
+  },
+  "tokensUsed": [
+    "Label/SM",
+    "accent",
+    "border",
+    "card",
+    "foreground",
+    "opacity/50",
+    "radius/lg",
+    "radius/md",
+    "ring",
+    "space/2",
+    "space/2-5",
+    "stroke/1",
+    "stroke/2"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "imported",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

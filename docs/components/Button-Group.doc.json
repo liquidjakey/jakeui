@@ -12,9 +12,6 @@
       "true": "Members are joined into one continuous control, sharing inner borders."
     }
   },
-  "states": {
-    "Orientation=Horizontal, Attached=False": "text primary-foreground · type size/14"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -22,33 +19,16 @@
     "Keep one primary (highest-emphasis) button per view.",
     "Keep labels short — around three words or fewer."
   ],
-  "tokensUsed": [
-    "primary-foreground",
-    "size/14"
+  "donts": [
+    "Do not use a button for navigation.",
+    "Do not stack multiple primary buttons.",
+    "Do not disable a button without telling the user why."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Trigger an action or event — submit, confirm, open a dialog."
   ],
   "whenNotToUse": [
     "Navigating between pages or URLs — use a Link."
-  ],
-  "donts": [
-    "Do not use a button for navigation.",
-    "Do not stack multiple primary buttons.",
-    "Do not disable a button without telling the user why."
   ],
   "accessibility": {
     "role": "button",
@@ -59,5 +39,25 @@
       "An icon-only button needs an aria-label.",
       "Disabled buttons are not focusable."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Orientation=Horizontal, Attached=False": "gap space/2 · (+1 variant share these)",
+    "Orientation=Horizontal, Attached=True": " · (+1 variant share these)"
+  },
+  "tokensUsed": [
+    "space/2"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

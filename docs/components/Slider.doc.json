@@ -2,9 +2,6 @@
   "name": "Slider",
   "summary": "Continuous value selection primitive.",
   "description": "Continuous value selection primitive. State variants document default, keyboard focus, and disabled behavior.\n\nLayout exception: Slider uses coordinate-based track, fill, and thumb geometry so the control can represent a continuous value. Do not infer absolute pixel positions as code API values; runtime width and value positioning are behavioral.",
-  "states": {
-    "State=Default": "no root-level bindings"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -16,6 +13,14 @@
     "Do not emit State as an enum prop. It packs states that co-occur at runtime.",
     "Do not use one for a value with a required exact entry.",
     "Do not hide the minimum and maximum."
+  ],
+  "whenToUse": [
+    "Pick from a continuous or coarsely stepped range where the relative position matters more than the exact figure."
+  ],
+  "whenNotToUse": [
+    "A precise value the user knows — use a number input.",
+    "Ranges so wide that a pixel is worth many units.",
+    "Fewer than about five discrete options — use radios or a segmented control."
   ],
   "accessibility": {
     "notes": [
@@ -30,22 +35,30 @@
     ]
   },
   "status": "draft",
-  "updatedAt": "2026-08-09",
+  "states": {
+    "State=Default": "fill muted · radius radius/lg · fill primary · fill card · border stroke/2 primary",
+    "State=Focused": "fill muted · radius radius/lg · fill primary · fill card · border stroke/3 ring",
+    "State=Disabled": "fill muted · radius radius/lg · fill muted-foreground · fill card · border stroke/2 muted-foreground"
+  },
+  "tokensUsed": [
+    "card",
+    "muted",
+    "muted-foreground",
+    "primary",
+    "radius/lg",
+    "ring",
+    "stroke/2",
+    "stroke/3"
+  ],
+  "updatedAt": "2026-08-10",
   "provenance": {
     "description": "imported",
-    "states": "imported",
     "dos": "imported+best-practice",
     "donts": "imported+best-practice",
-    "accessibility": "imported+w3c-apg",
     "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice"
-  },
-  "whenToUse": [
-    "Pick from a continuous or coarsely stepped range where the relative position matters more than the exact figure."
-  ],
-  "whenNotToUse": [
-    "A precise value the user knows — use a number input.",
-    "Ranges so wide that a pixel is worth many units.",
-    "Fewer than about five discrete options — use radios or a segmented control."
-  ]
+    "whenNotToUse": "best-practice",
+    "accessibility": "imported+w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

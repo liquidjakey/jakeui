@@ -2,10 +2,6 @@
   "name": "Radio Group / Field Composition",
   "summary": "Source usage patterns built from Radio Group / Root and Item: Basic, Description, Choice Card, Fieldset, Disabled, Invalid, and RTL.",
   "description": "Source usage patterns built from Radio Group / Root and Item: Basic, Description, Choice Card, Fieldset, Disabled, Invalid, and RTL.\n\nPipeline property contract: only the component properties defined on this set are configurable public inputs. Other embedded copy is illustrative composition content and must not be generated as a public code prop until engineering API review.",
-  "states": {
-    "Pattern=Basic": "text foreground · type size/13",
-    "Pattern=Disabled": "text muted-foreground"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -17,23 +13,6 @@
     "Do not use a radio group for multi-select.",
     "Do not use a toggle for choices that only apply after a separate Save."
   ],
-  "tokensUsed": [
-    "foreground",
-    "muted-foreground",
-    "size/13"
-  ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "donts": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Checkbox or toggle for an independent on/off value.",
     "Radio for one-of-many within a group."
@@ -50,5 +29,43 @@
     "notes": [
       "State is exposed via aria-checked, never by colour alone."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Pattern=Basic": "gap space/3 · (+1 variant share these)",
+    "Pattern=Description": "gap space/3 · gap space/2-5 · gap space/1 · text foreground · type Label/MD · text muted-foreground · type Body/XS",
+    "Pattern=Choice Card": "gap space/3 · fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/1 · text foreground · type Label/MD · text muted-foreground · type Body/XS · border stroke/2 primary",
+    "Pattern=Fieldset": "gap space/3 · text foreground · type Heading/SM · text muted-foreground · type Body/XS",
+    "Pattern=Invalid": "gap space/3 · text foreground · type Heading/SM · text muted-foreground · type Body/XS · gap space/1 · type Label/MD · text destructive",
+    "Pattern=RTL": "gap space/3 · text foreground · type Heading/SM · gap space/1 · type Label/MD · text muted-foreground · type Body/XS"
+  },
+  "tokensUsed": [
+    "Body/XS",
+    "Heading/SM",
+    "Label/MD",
+    "border",
+    "card",
+    "destructive",
+    "foreground",
+    "muted-foreground",
+    "primary",
+    "radius/lg",
+    "space/1",
+    "space/2-5",
+    "space/3",
+    "space/4",
+    "stroke/1",
+    "stroke/2"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

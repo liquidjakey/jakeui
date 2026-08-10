@@ -10,27 +10,16 @@
       "tableRow": "Placeholder shaped like a table row."
     }
   },
-  "states": {
-    "Type=Text": "no root-level bindings"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
     "Match the real content's dimensions closely.",
     "Show a small representative number of placeholders, not a full page of them."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
+  "donts": [
+    "Do not leave skeletons up indefinitely when a request fails.",
+    "Do not animate so strongly that the page appears to be moving."
+  ],
   "whenToUse": [
     "Hold the shape of content that is loading, so the layout does not jump when it arrives."
   ],
@@ -39,14 +28,40 @@
     "Work with a known duration or total — use Progress.",
     "An error or an empty result — those need their own states."
   ],
-  "donts": [
-    "Do not leave skeletons up indefinitely when a request fails.",
-    "Do not animate so strongly that the page appears to be moving."
-  ],
   "accessibility": {
     "notes": [
       "Hidden from assistive technology with aria-hidden=\"true\"; announce loading once, in a live region.",
       "Respects prefers-reduced-motion by dropping the shimmer."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Type=Text": "padding space/3 · gap space/2-5 · fill muted · radius radius/sm",
+    "Type=Avatar": "padding space/3 · gap space/3 · fill muted · radius radius/16 · gap space/2 · radius radius/sm",
+    "Type=Card": "padding space/3 · gap space/3 · fill muted · radius radius/sm · gap space/2-5 · radius radius/md",
+    "Type=Table Row": "padding y space/2-5 x space/3 · gap space/3 · fill muted · radius radius/4 · radius radius/5"
+  },
+  "tokensUsed": [
+    "muted",
+    "radius/16",
+    "radius/4",
+    "radius/5",
+    "radius/md",
+    "radius/sm",
+    "space/2",
+    "space/2-5",
+    "space/3"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

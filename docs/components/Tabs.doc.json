@@ -12,9 +12,6 @@
       "compact": "Tighter spacing for information-dense screens."
     }
   },
-  "states": {
-    "Orientation=Horizontal, Density=Default": "fill muted · radius radius/lg · text foreground · type size/12"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -22,25 +19,10 @@
     "Keep labels short enough to fit on one line without wrapping.",
     "Preserve each panel's state when switching away and back."
   ],
-  "tokensUsed": [
-    "foreground",
-    "muted",
-    "radius/lg",
-    "size/12"
+  "donts": [
+    "Do not scroll or wrap tabs into a second row — reconsider the grouping.",
+    "Do not hide required form fields in an unselected tab."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Switch between peer views of the same subject, within one context."
   ],
@@ -48,10 +30,6 @@
     "Steps in a sequence — use a stepper.",
     "Content the reader needs to compare side by side, or to find with the browser's search.",
     "Navigating to a different page — use links."
-  ],
-  "donts": [
-    "Do not scroll or wrap tabs into a second row — reconsider the grouping.",
-    "Do not hide required form fields in an unselected tab."
   ],
   "accessibility": {
     "role": "tablist",
@@ -63,5 +41,29 @@
       "Each tab carries aria-selected and aria-controls; each panel is labelled by its tab.",
       "Only the selected tab is in the tab order."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Orientation=Horizontal, Density=Default": "fill muted · radius radius/lg · padding space/1 · gap space/1 · (+1 variant share these)",
+    "Orientation=Horizontal, Density=Compact": "fill muted · radius radius/lg · padding space/0-75 · gap space/0-5 · (+1 variant share these)"
+  },
+  "tokensUsed": [
+    "muted",
+    "radius/lg",
+    "space/0-5",
+    "space/0-75",
+    "space/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

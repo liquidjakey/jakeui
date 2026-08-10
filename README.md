@@ -25,6 +25,9 @@ design-system/
   scripts/computed-type-check.mjs      CI gate — measures the BROWSER, not the source
   scripts/computed-type-exceptions.json  Documented off-ramp divergences, with reasons
   scripts/lib/type-ramp.mjs     Parses the 14-step ramp out of the generated CSS
+  scripts/figma-bindings-query.js  Runs in Figma -> binding dump (the doc-record source)
+  .figma-bindings-dump.json     Committed binding dump the records are generated from
+  scripts/adopt-docs.mjs        Binding dump -> docs/components/*.doc.json
   docs/                     Build documentation — start at docs/README.md
   notes/                    Historical working notes (do not build from these)
 ```
@@ -41,6 +44,23 @@ npm run computed-type:check    # render every story, measure what the BROWSER co
 npm run computed-type:explore  # same pass, but dump the metric distribution instead
 npm run check          # every gate — this is the CI entry point
 ```
+
+### Doc records come from bindings, not from prose
+
+`docs/components/*.doc.json` used to be parsed out of the hand-written Figma
+DESCRIPTION on each component. That source was wrong seven times in two days —
+Badge/Success, Badge/Destructive, Card/Title, Label, Dialog/Title, Tabs/Density
+and Alert/Destructive — each time in a way that shipped a visible bug, and it
+reported 16 unbound text nodes where the file had 469. Because every one of
+those had been corrected in component source, the records were a standing
+hazard: the next `docs:adopt` would have re-imported the wrong values over
+corrections that cost an audit to find.
+
+`adopt-docs.mjs` now generates `states` and `tokensUsed` from the live bindings
+and PRESERVES every prose field (`summary`, `description`, `variants`, `dos`,
+`donts`, `whenToUse`, `whenNotToUse`, `accessibility`). Prose has no binding
+equivalent and is never regenerated; a binding has one source of truth and is
+never hand-maintained. Running `docs:adopt` twice is a no-op.
 
 ### The one gate that does not read source
 

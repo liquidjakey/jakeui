@@ -10,45 +10,23 @@
       "right": "Opens to the right of the trigger."
     }
   },
-  "states": {
-    "Side=Top": "fill foreground · radius radius/lg · text card · type size/12"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
     "Keep it to a short phrase.",
     "Attach it to the control itself, so it is reachable by keyboard focus."
   ],
-  "tokensUsed": [
-    "card",
-    "foreground",
-    "radius/lg",
-    "size/12"
+  "donts": [
+    "Do not put a tooltip on a non-focusable element.",
+    "Do not repeat the visible label verbatim.",
+    "Do not place essential or interactive content inside one."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Name or clarify a control whose purpose is not obvious from its label alone."
   ],
   "whenNotToUse": [
     "Content the user must read to proceed — a tooltip is unreachable on touch and easy to miss.",
     "Anything interactive: links, buttons, or text to copy — use a Popover."
-  ],
-  "donts": [
-    "Do not put a tooltip on a non-focusable element.",
-    "Do not repeat the visible label verbatim.",
-    "Do not place essential or interactive content inside one."
   ],
   "accessibility": {
     "role": "tooltip",
@@ -60,5 +38,29 @@
       "Referenced by the control via aria-describedby.",
       "Stays visible long enough to read, and while the pointer is over it."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Side=Top": "fill foreground · radius radius/lg · padding y space/2-5 x space/3 · text card · type Label/SM · (+3 variants share these)"
+  },
+  "tokensUsed": [
+    "Label/SM",
+    "card",
+    "foreground",
+    "radius/lg",
+    "space/2-5",
+    "space/3"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

@@ -8,45 +8,22 @@
       "horizontal": "Scrolls along the inline axis."
     }
   },
-  "states": {
-    "Axis=Vertical": "fill card · border 1px border · radius radius/lg · text foreground · type size/14"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
     "Leave a visible cue that there is more to see.",
     "Keep native keyboard and wheel scrolling working."
   ],
-  "tokensUsed": [
-    "border",
-    "card",
-    "foreground",
-    "radius/lg",
-    "size/14"
+  "donts": [
+    "Do not nest scroll areas along the same axis.",
+    "Do not hide the scrollbar so thoroughly that the overflow is invisible."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Confine overflow to one region so the page itself does not scroll."
   ],
   "whenNotToUse": [
     "The main page scroll — leave that to the browser.",
     "Hiding content the reader is unlikely to look for."
-  ],
-  "donts": [
-    "Do not nest scroll areas along the same axis.",
-    "Do not hide the scrollbar so thoroughly that the overflow is invisible."
   ],
   "accessibility": {
     "keyboard": [
@@ -56,5 +33,31 @@
       "A scrollable region needs a tabindex and an accessible name.",
       "Do not suppress the native scrollbar on platforms that always show one."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Axis=Vertical": "fill card · border stroke/1 border · radius radius/lg · text foreground · type Body/MD · fill muted · fill muted-foreground · (+1 variant share these)"
+  },
+  "tokensUsed": [
+    "Body/MD",
+    "border",
+    "card",
+    "foreground",
+    "muted",
+    "muted-foreground",
+    "radius/lg",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

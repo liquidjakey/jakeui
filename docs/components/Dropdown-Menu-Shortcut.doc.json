@@ -2,15 +2,12 @@
   "name": "Dropdown Menu / Shortcut",
   "summary": "Right-aligned keyboard shortcut hint for menu commands.",
   "description": "Right-aligned keyboard shortcut hint for menu commands. Source parity baseline: Watermelon Dropdown Menu route, Watermelon shadcn foundation, and current official shadcn/Radix Dropdown Menu anatomy and API.",
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "dos": "best-practice",
-    "donts": "best-practice"
-  },
+  "dos": [
+    "Compose it through the parent rather than reaching for it directly."
+  ],
+  "donts": [
+    "Do not re-implement the parent's keyboard or focus behaviour on the part."
+  ],
   "whenToUse": [
     "Only inside its parent component's composition — this is a part, not a standalone component."
   ],
@@ -18,10 +15,21 @@
     "On its own, outside the parent that owns its behaviour and accessibility wiring.",
     "As a general-purpose layout or text primitive."
   ],
-  "dos": [
-    "Compose it through the parent rather than reaching for it directly."
+  "status": "draft",
+  "states": {
+    "Default": "text muted-foreground · type UNBOUND 11/16 Regular"
+  },
+  "tokensUsed": [
+    "muted-foreground"
   ],
-  "donts": [
-    "Do not re-implement the parent's keyboard or focus behaviour on the part."
-  ]
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "dos": "best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

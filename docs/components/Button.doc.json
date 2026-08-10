@@ -14,16 +14,6 @@
       "medium": "The default in forms and dialogs."
     }
   },
-  "states": {
-    "Style=Primary, Size=Small, State=Default": "fill primary · radius radius/lg · text primary-foreground · type size/13",
-    "Style=Primary, Size=Small, State=Disabled": "fill muted · text muted-foreground",
-    "Style=Primary, Size=Medium, State=Default": "type size/14",
-    "Style=Primary, Size=Medium, State=Hover": "type size/14",
-    "Style=Primary, Size=Medium, State=Disabled": "fill muted · text muted-foreground · type size/14",
-    "Style=Secondary, Size=Small, State=Default": "fill secondary · text secondary-foreground",
-    "Style=Secondary, Size=Small, State=Hover": "fill accent · text secondary-foreground",
-    "Style=Secondary, Size=Small, State=Disabled": "fill muted · text muted-foreground"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -39,6 +29,12 @@
     "Do not stack multiple primary buttons.",
     "Do not disable a button without telling the user why."
   ],
+  "whenToUse": [
+    "Trigger an action or event — submit, confirm, open a dialog."
+  ],
+  "whenNotToUse": [
+    "Navigating between pages or URLs — use a Link."
+  ],
   "accessibility": {
     "notes": [
       "State decomposition applies — see docs/state-decomposition.md. State [Default · Hover · Disabled · Focused] → :hover + :focus-visible CSS-owned, dropped; disabled independent boolean",
@@ -50,35 +46,67 @@
       "Enter and Space activate."
     ]
   },
+  "status": "draft",
+  "states": {
+    "Style=Primary, Size=Small, State=Default": "fill primary · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text primary-foreground · type Label/MD",
+    "Style=Primary, Size=Small, State=Hover": "fill primary-hover · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text primary-foreground · type Label/MD",
+    "Style=Primary, Size=Small, State=Disabled": "fill muted · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text muted-foreground · type Label/MD · (+3 variants share these)",
+    "Style=Primary, Size=Medium, State=Default": "fill primary · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text primary-foreground · type Label/LG",
+    "Style=Primary, Size=Medium, State=Hover": "fill primary-hover · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text primary-foreground · type Label/LG",
+    "Style=Primary, Size=Medium, State=Disabled": "fill muted · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text muted-foreground · type Label/LG · (+3 variants share these)",
+    "Style=Secondary, Size=Small, State=Default": "fill secondary · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text secondary-foreground · type Label/MD",
+    "Style=Secondary, Size=Small, State=Hover": "fill accent-hover · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text secondary-foreground · type Label/MD",
+    "Style=Secondary, Size=Medium, State=Default": "fill secondary · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text secondary-foreground · type Label/LG",
+    "Style=Secondary, Size=Medium, State=Hover": "fill accent-hover · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text secondary-foreground · type Label/LG",
+    "Style=Outline, Size=Small, State=Default": "border stroke/1 border · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text foreground · type Label/MD",
+    "Style=Outline, Size=Small, State=Hover": "fill accent-hover · border stroke/1 border · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text accent-foreground · type Label/MD",
+    "Style=Outline, Size=Medium, State=Default": "border stroke/1 border · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text foreground · type Label/LG",
+    "Style=Outline, Size=Medium, State=Hover": "fill accent-hover · border stroke/1 border · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text accent-foreground · type Label/LG",
+    "Style=Ghost, Size=Small, State=Default": "radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text foreground · type Label/MD",
+    "Style=Ghost, Size=Small, State=Hover": "fill accent-hover · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text accent-foreground · type Label/MD",
+    "Style=Ghost, Size=Medium, State=Default": "radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text foreground · type Label/LG",
+    "Style=Ghost, Size=Medium, State=Hover": "fill accent-hover · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text accent-foreground · type Label/LG",
+    "Style=Primary, Size=Small, State=Focused": "fill primary · border stroke/2 ring · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text primary-foreground · type Label/MD",
+    "Style=Primary, Size=Medium, State=Focused": "fill primary · border stroke/2 ring · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text primary-foreground · type Label/LG",
+    "Style=Secondary, Size=Small, State=Focused": "fill secondary · border stroke/2 ring · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text secondary-foreground · type Label/MD",
+    "Style=Secondary, Size=Medium, State=Focused": "fill secondary · border stroke/2 ring · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text secondary-foreground · type Label/LG",
+    "Style=Outline, Size=Small, State=Focused": "border stroke/2 ring · radius radius/lg · padding y space/1-5 x space/3 · gap space/2 · text foreground · type Label/MD · (+1 variant share these)",
+    "Style=Outline, Size=Medium, State=Focused": "border stroke/2 ring · radius radius/lg · padding y space/2-25 x space/4 · gap space/2 · text foreground · type Label/LG · (+1 variant share these)"
+  },
   "tokensUsed": [
-    "accent",
+    "Label/LG",
+    "Label/MD",
+    "accent-foreground",
+    "accent-hover",
+    "border",
+    "foreground",
     "muted",
     "muted-foreground",
     "primary",
     "primary-foreground",
+    "primary-hover",
     "radius/lg",
+    "ring",
     "secondary",
     "secondary-foreground",
-    "size/13",
-    "size/14"
+    "space/1-5",
+    "space/2",
+    "space/2-25",
+    "space/3",
+    "space/4",
+    "stroke/1",
+    "stroke/2"
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
+  "updatedAt": "2026-08-10",
   "provenance": {
     "description": "imported",
     "variants": "imported+framework",
-    "states": "imported",
     "dos": "imported+best-practice",
     "donts": "imported+best-practice",
-    "accessibility": "imported+w3c-apg",
-    "tokensUsed": "imported",
     "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice"
-  },
-  "whenToUse": [
-    "Trigger an action or event — submit, confirm, open a dialog."
-  ],
-  "whenNotToUse": [
-    "Navigating between pages or URLs — use a Link."
-  ]
+    "whenNotToUse": "best-practice",
+    "accessibility": "imported+w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

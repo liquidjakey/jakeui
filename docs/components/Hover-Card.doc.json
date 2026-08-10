@@ -8,9 +8,6 @@
       "detailed": "Roomier, for richer content than the default carries."
     }
   },
-  "states": {
-    "Density=Compact": "fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/14"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -18,26 +15,10 @@
     "Keep it open while the pointer travels into it.",
     "Treat everything in it as an enhancement of the link's own destination."
   ],
-  "tokensUsed": [
-    "border",
-    "popover",
-    "popover-foreground",
-    "radius/lg",
-    "size/14"
+  "donts": [
+    "Do not place the only copy of an action inside one.",
+    "Do not open it on click — that is a Popover."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Preview the thing behind a link on hover, without making the reader navigate."
   ],
@@ -45,14 +26,40 @@
     "Content the user needs — hover is unavailable on touch and to many keyboard users.",
     "Anything required to complete a task."
   ],
-  "donts": [
-    "Do not place the only copy of an action inside one.",
-    "Do not open it on click — that is a Popover."
-  ],
   "accessibility": {
     "notes": [
       "Reachable on keyboard focus, or its content must exist elsewhere.",
       "Escape dismisses it."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Density=Compact": "fill popover · border stroke/1 border · radius radius/lg · padding space/4 · gap space/2 · text popover-foreground · type Heading/XS · text muted-foreground · type Body/SM",
+    "Density=Detailed": "fill popover · border stroke/1 border · radius radius/lg · padding space/4 · gap space/2 · text popover-foreground · type Heading/XS · text muted-foreground · type Body/SM · type Label/SM"
+  },
+  "tokensUsed": [
+    "Body/SM",
+    "Heading/XS",
+    "Label/SM",
+    "border",
+    "muted-foreground",
+    "popover",
+    "popover-foreground",
+    "radius/lg",
+    "space/2",
+    "space/4",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

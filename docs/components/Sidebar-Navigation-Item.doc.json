@@ -8,49 +8,53 @@
       "active": "The currently selected item in its group."
     }
   },
-  "states": {
-    "State=Default": "radius radius/lg · text sidebar-foreground · type size/14",
-    "State=Active": "fill sidebar-accent · text sidebar-accent-foreground"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
     "Make the whole row the hit target, not just the text.",
     "Show the active state from the route, not from click state."
   ],
-  "tokensUsed": [
-    "radius/lg",
-    "sidebar-accent",
-    "sidebar-accent-foreground",
-    "sidebar-foreground",
-    "size/14"
+  "donts": [
+    "Do not signal the active item by colour alone."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "A single destination within sidebar navigation."
   ],
   "whenNotToUse": [
     "Firing an action rather than navigating — use a Button."
   ],
-  "donts": [
-    "Do not signal the active item by colour alone."
-  ],
   "accessibility": {
     "notes": [
       "It is a link; the active one carries aria-current=\"page\".",
       "Its icon is decorative when the label is visible."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "State=Default": "radius radius/lg · padding y space/2 x space/3 · gap space/2-5 · fill sidebar-foreground · radius radius/0-75 · text sidebar-foreground · type Label/LG",
+    "State=Active": "fill sidebar-accent · radius radius/lg · padding y space/2 x space/3 · gap space/2-5 · fill sidebar-accent-foreground · radius radius/0-75 · text sidebar-accent-foreground · type Label/LG"
+  },
+  "tokensUsed": [
+    "Label/LG",
+    "radius/0-75",
+    "radius/lg",
+    "sidebar-accent",
+    "sidebar-accent-foreground",
+    "sidebar-foreground",
+    "space/2",
+    "space/2-5",
+    "space/3"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

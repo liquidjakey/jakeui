@@ -8,11 +8,6 @@
       "collapsed": "Reduced to a minimal rail."
     }
   },
-  "states": {
-    "Viewport=Desktop, State=Expanded": "fill sidebar · border 1px sidebar-border · radius radius/lg · text sidebar-foreground · type size/15",
-    "Viewport=Desktop, State=Collapsed": "text sidebar-accent-foreground · type size/13",
-    "Viewport=Compact, State=Collapsed": "type size/13"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -25,28 +20,6 @@
     "Do not collapse to icons alone where the metaphors are ambiguous.",
     "Do not let the sidebar scroll the whole page."
   ],
-  "tokensUsed": [
-    "radius/lg",
-    "sidebar",
-    "sidebar-accent-foreground",
-    "sidebar-border",
-    "sidebar-foreground",
-    "size/13",
-    "size/15"
-  ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "donts": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Keep navigation persistently in view alongside the main content."
   ],
@@ -63,5 +36,48 @@
       "The collapse toggle carries aria-expanded.",
       "When collapsed, each item still needs an accessible name."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Viewport=Desktop, State=Expanded": "fill sidebar · border stroke/1 sidebar-border · radius radius/lg · padding y space/5 x space/4 · gap space/4 · gap space/2-5 · fill sidebar-primary · padding space/2 · text sidebar-primary-foreground · type Heading/XS · text sidebar-foreground · type Heading/SM · gap space/1-5 · fill sidebar-accent · padding space/2-5 · gap space/0-5 · text sidebar-accent-foreground · type Label/MD · text muted-foreground · type Caption/XS",
+    "Viewport=Desktop, State=Collapsed": "fill sidebar · border stroke/1 sidebar-border · radius radius/lg · padding y space/5 x space/4 · gap space/4 · fill sidebar-accent · padding space/2-5 · text sidebar-accent-foreground · type Value/Strong · text sidebar-foreground",
+    "Viewport=Compact, State=Expanded": "fill sidebar · border stroke/1 sidebar-border · radius radius/lg · padding y space/4 x space/3-5 · gap space/4 · gap space/2-5 · fill sidebar-primary · padding space/2 · text sidebar-primary-foreground · type Heading/XS · text sidebar-foreground · type Heading/SM · gap space/1-5 · fill sidebar-accent · padding space/2-5 · gap space/0-5 · text sidebar-accent-foreground · type Label/MD · text muted-foreground · type Caption/XS",
+    "Viewport=Compact, State=Collapsed": "fill sidebar · border stroke/1 sidebar-border · radius radius/lg · padding y space/4 x space/3-5 · gap space/4 · padding space/2-5 · text sidebar-foreground · type Value/Strong"
+  },
+  "tokensUsed": [
+    "Caption/XS",
+    "Heading/SM",
+    "Heading/XS",
+    "Label/MD",
+    "Value/Strong",
+    "muted-foreground",
+    "radius/lg",
+    "sidebar",
+    "sidebar-accent",
+    "sidebar-accent-foreground",
+    "sidebar-border",
+    "sidebar-foreground",
+    "sidebar-primary",
+    "sidebar-primary-foreground",
+    "space/0-5",
+    "space/1-5",
+    "space/2",
+    "space/2-5",
+    "space/3-5",
+    "space/4",
+    "space/5",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

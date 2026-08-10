@@ -12,15 +12,23 @@
       "comfortable": "Default spacing, easier to scan and tap."
     }
   },
-  "states": {
-    "Mode=Single, Density=Compact": "fill card · border 1px border · radius radius/lg · text foreground · type size/13"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
     "Allow typing the date as well as picking it.",
     "State the expected format next to the field.",
     "Disable out-of-range dates rather than rejecting them after submit."
+  ],
+  "donts": [
+    "Do not force calendar navigation for dates far from today.",
+    "Do not assume a locale's week start or date order."
+  ],
+  "whenToUse": [
+    "Pick a date, or a start and end pair, where the calendar context matters."
+  ],
+  "whenNotToUse": [
+    "A date the user knows by heart, such as a birthdate — a plain text field is faster.",
+    "Coarse periods like a month or quarter — offer a Select."
   ],
   "accessibility": {
     "notes": [
@@ -33,35 +41,46 @@
       "Escape closes the calendar and returns focus to the field."
     ]
   },
+  "status": "draft",
+  "states": {
+    "Mode=Single, Density=Compact": "fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/3 · text foreground · type Heading/XS · gap space/1 · text muted-foreground · type Label/XS · radius radius/md · type Label/SM · border stroke/1 primary · fill primary · radius radius/16 · text primary-foreground · opacity opacity/50",
+    "Mode=Single, Density=Comfortable": "fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/3 · text foreground · type Heading/XS · gap space/1-5 · text muted-foreground · type Label/XS · radius radius/md · type Label/SM · border stroke/1 primary · fill primary · radius radius/2xl · text primary-foreground · opacity opacity/50",
+    "Mode=Range, Density=Compact": "fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/3 · text foreground · type Heading/XS · gap space/1 · text muted-foreground · type Label/XS · radius radius/md · type Label/SM · border stroke/1 primary · fill primary · radius radius/16 · text primary-foreground · fill accent · text accent-foreground · opacity opacity/50",
+    "Mode=Range, Density=Comfortable": "fill card · border stroke/1 border · radius radius/lg · padding space/4 · gap space/3 · text foreground · type Heading/XS · gap space/1-5 · text muted-foreground · type Label/XS · radius radius/md · type Label/SM · border stroke/1 primary · fill primary · radius radius/2xl · text primary-foreground · fill accent · text accent-foreground · opacity opacity/50"
+  },
   "tokensUsed": [
+    "Heading/XS",
+    "Label/SM",
+    "Label/XS",
+    "accent",
+    "accent-foreground",
     "border",
     "card",
     "foreground",
+    "muted-foreground",
+    "opacity/50",
+    "primary",
+    "primary-foreground",
+    "radius/16",
+    "radius/2xl",
     "radius/lg",
-    "size/13"
+    "radius/md",
+    "space/1",
+    "space/1-5",
+    "space/3",
+    "space/4",
+    "stroke/1"
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
+  "updatedAt": "2026-08-10",
   "provenance": {
     "description": "imported",
     "variants": "imported+framework",
-    "states": "imported",
     "dos": "imported+best-practice",
-    "accessibility": "imported+w3c-apg",
-    "tokensUsed": "imported",
+    "donts": "best-practice",
     "whenToUse": "best-practice",
     "whenNotToUse": "best-practice",
-    "donts": "best-practice"
-  },
-  "whenToUse": [
-    "Pick a date, or a start and end pair, where the calendar context matters."
-  ],
-  "whenNotToUse": [
-    "A date the user knows by heart, such as a birthdate — a plain text field is faster.",
-    "Coarse periods like a month or quarter — offer a Select."
-  ],
-  "donts": [
-    "Do not force calendar navigation for dates far from today.",
-    "Do not assume a locale's week start or date order."
-  ]
+    "accessibility": "imported+w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

@@ -1,4 +1,16 @@
 /**
+ * ⚠️ SUPERSEDED as the doc-record source, 10 Aug 2026.
+ *
+ * `adopt-docs.mjs` no longer reads this dump. Records are generated from
+ * scripts/figma-bindings-query.js instead, because the DESCRIPTIONS this script
+ * captures were proven wrong seven times in two days while the bindings were
+ * right every time. See that file's header for the list.
+ *
+ * This script and `.figma-docs-dump.json` are kept because `npm run docs:verify`
+ * still uses them to detect hand-edits to the Figma descriptions themselves —
+ * which remain useful prose, just not a source of truth for token values.
+ */
+/**
  * Jake UI — documentation adoption, step 1 of 2: dump the live Figma doc surface.
  *
  * WHY THIS EXISTS

@@ -12,11 +12,6 @@
       "true": "Open — the content is revealed."
     }
   },
-  "states": {
-    "Mode=Single, State=Default, Open=False": "text foreground · type size/14",
-    "Mode=Single, State=Disabled, Open=False": "text muted-foreground",
-    "Mode=Range, State=Disabled, Open=False": "text muted-foreground"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -29,6 +24,13 @@
     "Do not force calendar navigation for dates far from today.",
     "Do not assume a locale's week start or date order."
   ],
+  "whenToUse": [
+    "Pick a date, or a start and end pair, where the calendar context matters."
+  ],
+  "whenNotToUse": [
+    "A date the user knows by heart, such as a birthdate — a plain text field is faster.",
+    "Coarse periods like a month or quarter — offer a Select."
+  ],
   "accessibility": {
     "notes": [
       "State decomposition applies — see docs/state-decomposition.md. State [Default · Focused · Error · Disabled] → :focus-visible CSS-owned, dropped; invalid + disabled independent booleans",
@@ -40,29 +42,26 @@
       "Escape closes the calendar and returns focus to the field."
     ]
   },
-  "tokensUsed": [
-    "foreground",
-    "muted-foreground",
-    "size/14"
-  ],
   "status": "draft",
-  "updatedAt": "2026-08-09",
+  "states": {
+    "Mode=Single, State=Default, Open=False": "gap space/2 · (+9 variants share these)",
+    "Mode=Single, State=Error, Open=False": "gap space/2 · text destructive · type Body/XS · (+3 variants share these)"
+  },
+  "tokensUsed": [
+    "Body/XS",
+    "destructive",
+    "space/2"
+  ],
+  "updatedAt": "2026-08-10",
   "provenance": {
     "description": "imported",
     "variants": "imported+framework",
-    "states": "imported",
     "dos": "imported+best-practice",
     "donts": "imported+best-practice",
-    "accessibility": "imported+w3c-apg",
-    "tokensUsed": "imported",
     "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice"
-  },
-  "whenToUse": [
-    "Pick a date, or a start and end pair, where the calendar context matters."
-  ],
-  "whenNotToUse": [
-    "A date the user knows by heart, such as a birthdate — a plain text field is faster.",
-    "Coarse periods like a month or quarter — offer a Select."
-  ]
+    "whenNotToUse": "best-practice",
+    "accessibility": "imported+w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

@@ -12,16 +12,6 @@
       "checked": "Selected."
     }
   },
-  "states": {
-    "Size=Small, Value=Unchecked, State=Default": "fill input · radius radius/full",
-    "Size=Small, Value=Unchecked, State=Hover": "fill accent",
-    "Size=Small, Value=Unchecked, State=Focused": "border 2px ring",
-    "Size=Small, Value=Unchecked, State=Invalid": "border 2px destructive",
-    "Size=Small, Value=Checked, State=Default": "fill primary",
-    "Size=Small, Value=Checked, State=Hover": "fill primary",
-    "Size=Small, Value=Checked, State=Focused": "fill primary · border 2px ring",
-    "Size=Small, Value=Checked, State=Disabled": "fill primary"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -34,6 +24,14 @@
     "Do not use a radio group for multi-select.",
     "Do not use a toggle for choices that only apply after a separate Save."
   ],
+  "whenToUse": [
+    "Checkbox or toggle for an independent on/off value.",
+    "Radio for one-of-many within a group."
+  ],
+  "whenNotToUse": [
+    "A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.",
+    "A choice that only applies after a separate Save — prefer radio or checkbox over a toggle."
+  ],
   "accessibility": {
     "notes": [
       "the switch track is intentionally smaller than a 24px pointer target. Runtime must provide a target of at least 24×24 CSS px or satisfy the permitted spacing exception. State=Invalid must be paired with visible field/group error text and programmatic invalid/error description.",
@@ -45,33 +43,44 @@
       "Radio groups move between options with arrow keys."
     ]
   },
+  "status": "draft",
+  "states": {
+    "Size=Small, Value=Unchecked, State=Default": "fill input · radius radius/full · padding space/0-5 · (+1 variant share these)",
+    "Size=Small, Value=Unchecked, State=Hover": "fill accent-hover · radius radius/full · padding space/0-5 · (+1 variant share these)",
+    "Size=Small, Value=Unchecked, State=Focused": "fill input · border stroke/2 ring · radius radius/full · padding space/0-5 · (+1 variant share these)",
+    "Size=Small, Value=Unchecked, State=Disabled": "fill input · radius radius/full · padding space/0-5 · opacity opacity/50 · (+1 variant share these)",
+    "Size=Small, Value=Unchecked, State=ReadOnly": "fill input · radius radius/full · padding space/0-5 · opacity opacity/80 · (+1 variant share these)",
+    "Size=Small, Value=Unchecked, State=Invalid": "fill input · border stroke/2 destructive · radius radius/full · padding space/0-5 · (+1 variant share these)",
+    "Size=Small, Value=Checked, State=Default": "fill primary · radius radius/full · padding space/0-5 · (+1 variant share these)",
+    "Size=Small, Value=Checked, State=Hover": "fill primary-hover · radius radius/full · padding space/0-5 · (+1 variant share these)",
+    "Size=Small, Value=Checked, State=Focused": "fill primary · border stroke/2 ring · radius radius/full · padding space/0-5 · (+1 variant share these)",
+    "Size=Small, Value=Checked, State=Disabled": "fill primary · radius radius/full · padding space/0-5 · opacity opacity/50 · (+1 variant share these)",
+    "Size=Small, Value=Checked, State=ReadOnly": "fill primary · radius radius/full · padding space/0-5 · opacity opacity/80 · (+1 variant share these)",
+    "Size=Small, Value=Checked, State=Invalid": "fill primary · border stroke/2 destructive · radius radius/full · padding space/0-5 · (+1 variant share these)"
+  },
   "tokensUsed": [
-    "accent",
+    "accent-hover",
     "destructive",
     "input",
+    "opacity/50",
+    "opacity/80",
     "primary",
+    "primary-hover",
     "radius/full",
-    "ring"
+    "ring",
+    "space/0-5",
+    "stroke/2"
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
+  "updatedAt": "2026-08-10",
   "provenance": {
     "description": "imported",
     "variants": "imported+framework",
-    "states": "imported",
     "dos": "imported+best-practice",
     "donts": "imported+best-practice",
-    "accessibility": "imported+w3c-apg",
-    "tokensUsed": "imported",
     "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice"
-  },
-  "whenToUse": [
-    "Checkbox or toggle for an independent on/off value.",
-    "Radio for one-of-many within a group."
-  ],
-  "whenNotToUse": [
-    "A single either/or action that takes effect immediately with no save — prefer a toggle over a checkbox.",
-    "A choice that only applies after a separate Save — prefer radio or checkbox over a toggle."
-  ]
+    "whenNotToUse": "best-practice",
+    "accessibility": "imported+w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

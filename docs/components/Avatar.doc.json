@@ -13,55 +13,58 @@
       "status": "Carries a presence or status indicator."
     }
   },
-  "states": {
-    "Size=Small, Type=Initials": "fill primary · radius radius/16 · text primary-foreground · type size/11",
-    "Size=Medium, Type=Initials": "radius radius/24 · type size/14",
-    "Size=Medium, Type=Status": "radius radius/24 · type size/14",
-    "Size=Large, Type=Initials": "radius radius/32 · type size/18",
-    "Size=Large, Type=Status": "radius radius/32 · type size/18"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
     "Fall back to initials, then to a generic placeholder, when no image loads.",
     "Keep the shape consistent across the product."
   ],
-  "tokensUsed": [
-    "primary",
-    "primary-foreground",
-    "radius/16",
-    "radius/24",
-    "radius/32",
-    "size/11",
-    "size/14",
-    "size/18"
+  "donts": [
+    "Do not put meaning in the avatar alone — pair it with a name where identity matters."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Represent a person, account, or organisation compactly."
   ],
   "whenNotToUse": [
     "Decorative imagery, or a general-purpose image container."
   ],
-  "donts": [
-    "Do not put meaning in the avatar alone — pair it with a name where identity matters."
-  ],
   "accessibility": {
     "notes": [
       "A decorative avatar beside a visible name is alt=\"\"; a standalone one needs the name as its accessible name.",
       "A status dot needs a text equivalent, not colour alone."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Size=Small, Type=Initials": "fill primary · radius radius/16 · text primary-foreground · type UNBOUND 11/14 Semi Bold",
+    "Size=Small, Type=Status": "fill primary · radius radius/16 · text primary-foreground · type UNBOUND 11/14 Semi Bold · fill success · border stroke/2 card",
+    "Size=Medium, Type=Initials": "fill primary · radius radius/24 · text primary-foreground · type Heading/XS",
+    "Size=Medium, Type=Status": "fill primary · radius radius/24 · text primary-foreground · type Heading/XS · fill success · border stroke/2 card",
+    "Size=Large, Type=Initials": "fill primary · radius radius/32 · text primary-foreground · type Heading/LG",
+    "Size=Large, Type=Status": "fill primary · radius radius/32 · text primary-foreground · type Heading/LG · fill success · border stroke/2 card"
+  },
+  "tokensUsed": [
+    "Heading/LG",
+    "Heading/XS",
+    "card",
+    "primary",
+    "primary-foreground",
+    "radius/16",
+    "radius/24",
+    "radius/32",
+    "stroke/2",
+    "success"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

@@ -8,14 +8,6 @@
       "open": "Expanded — the content is revealed."
     }
   },
-  "states": {
-    "Pattern=Basic, State=Closed": "text foreground · type size/13",
-    "Pattern=Basic, State=Open": "text accent-foreground",
-    "Pattern=Align, State=Open": "text accent-foreground",
-    "Pattern=Form, State=Open": "text accent-foreground",
-    "Pattern=RTL, State=Closed": "type size/12",
-    "Pattern=RTL, State=Open": "type size/12"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -28,25 +20,6 @@
     "Do not open one from inside another.",
     "Do not put a long scrolling form in one."
   ],
-  "tokensUsed": [
-    "accent-foreground",
-    "foreground",
-    "size/12",
-    "size/13"
-  ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "donts": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Show secondary content or a small task in context, anchored to its trigger."
   ],
@@ -65,5 +38,26 @@
       "The trigger carries aria-expanded and aria-controls.",
       "A popover holding a form should trap focus; a non-modal one should not."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Pattern=Basic, State=Closed": "gap space/2 · (+5 variants share these)",
+    "Pattern=Align, State=Closed": "gap space/5 · gap space/2 · (+1 variant share these)"
+  },
+  "tokensUsed": [
+    "space/2",
+    "space/5"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

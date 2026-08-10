@@ -12,9 +12,6 @@
       "true": "Shows a pointer aimed at the trigger."
     }
   },
-  "states": {
-    "Size=Small, Arrow=False": "fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/15"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -22,26 +19,10 @@
     "Give it an explicit close affordance.",
     "Return focus to the trigger on close."
   ],
-  "tokensUsed": [
-    "border",
-    "popover",
-    "popover-foreground",
-    "radius/lg",
-    "size/15"
+  "donts": [
+    "Do not open one from inside another.",
+    "Do not put a long scrolling form in one."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Show secondary content or a small task in context, anchored to its trigger."
   ],
@@ -49,10 +30,6 @@
     "A decision that must block the flow — use a Dialog.",
     "A plain text hint — use a Tooltip.",
     "A list of actions — use a menu."
-  ],
-  "donts": [
-    "Do not open one from inside another.",
-    "Do not put a long scrolling form in one."
   ],
   "accessibility": {
     "role": "dialog",
@@ -64,5 +41,37 @@
       "The trigger carries aria-expanded and aria-controls.",
       "A popover holding a form should trap focus; a non-modal one should not."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Size=Small, Arrow=False": "fill popover · border stroke/1 border · radius radius/lg · padding space/4 · gap space/2-5 · text popover-foreground · type UNBOUND 15/22 Medium · text muted-foreground · type Body/SM · fill primary · padding y space/2 x space/3 · gap space/2 · text primary-foreground · type Label/MD · (+3 variants share these)"
+  },
+  "tokensUsed": [
+    "Body/SM",
+    "Label/MD",
+    "border",
+    "muted-foreground",
+    "popover",
+    "popover-foreground",
+    "primary",
+    "primary-foreground",
+    "radius/lg",
+    "space/2",
+    "space/2-5",
+    "space/3",
+    "space/4",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

@@ -8,11 +8,6 @@
       "empty": "No content — show an empty state, not a blank area."
     }
   },
-  "states": {
-    "Viewport=Desktop, State=Populated": "fill card · border 1px border · radius radius/lg · text foreground · type size/18",
-    "Viewport=Desktop, State=Empty": "type size/15",
-    "Viewport=Compact, State=Empty": "type size/15"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -25,27 +20,6 @@
     "Do not hide the only route to an action behind row hover.",
     "Do not let a wide table break the page — let the table itself scroll."
   ],
-  "tokensUsed": [
-    "border",
-    "card",
-    "foreground",
-    "radius/lg",
-    "size/15",
-    "size/18"
-  ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "donts": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Present records across shared columns, for comparison, scanning, or exact reading."
   ],
@@ -62,5 +36,46 @@
       "Header cells are th with the right scope; a caption names the table.",
       "Sortable headers carry aria-sort, and the control is a button inside the th."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Viewport=Desktop, State=Populated": "fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/5 · gap space/4 · gap space/1 · text foreground · type Heading/LG · text muted-foreground · type Body/SM · gap space/3 · gap space/2",
+    "Viewport=Desktop, State=Empty": "fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/5 · gap space/4 · gap space/1 · text foreground · type Heading/LG · text muted-foreground · type Body/SM · gap space/3 · gap space/2 · fill muted · padding y space/10 x space/6 · fill accent · radius radius/24 · type Heading/SM",
+    "Viewport=Compact, State=Populated": "fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/5 · gap space/1-5 · gap space/1 · text foreground · type Heading/LG · text muted-foreground · type Body/SM · gap space/3 · gap space/2",
+    "Viewport=Compact, State=Empty": "fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/5 · gap space/1-5 · gap space/1 · text foreground · type Heading/LG · text muted-foreground · type Body/SM · gap space/3 · gap space/2 · fill muted · padding y space/10 x space/6 · fill accent · radius radius/24 · type Heading/SM"
+  },
+  "tokensUsed": [
+    "Body/SM",
+    "Heading/LG",
+    "Heading/SM",
+    "accent",
+    "border",
+    "card",
+    "foreground",
+    "muted",
+    "muted-foreground",
+    "radius/24",
+    "radius/lg",
+    "space/1",
+    "space/1-5",
+    "space/10",
+    "space/2",
+    "space/3",
+    "space/4",
+    "space/5",
+    "space/6",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

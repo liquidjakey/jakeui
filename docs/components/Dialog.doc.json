@@ -12,11 +12,6 @@
       "large": "Prominent or touch-first contexts."
     }
   },
-  "states": {
-    "Type=Standard, Size=Small": "fill card · border 1px border · radius radius/lg · text foreground · type size/18",
-    "Type=Form, Size=Small": "type size/13",
-    "Type=Form, Size=Large": "type size/13"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -24,36 +19,15 @@
     "Return focus to the trigger on close.",
     "Provide an explicit close affordance."
   ],
-  "tokensUsed": [
-    "border",
-    "card",
-    "foreground",
-    "radius/lg",
-    "size/13",
-    "size/18"
+  "donts": [
+    "Do not stack dialogs.",
+    "Do not put long scrolling forms in a small dialog."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Interrupt for a focused task, or a decision that blocks the flow."
   ],
   "whenNotToUse": [
     "Non-critical messages — use an inline alert or a toast."
-  ],
-  "donts": [
-    "Do not stack dialogs.",
-    "Do not put long scrolling forms in a small dialog."
   ],
   "accessibility": {
     "role": "dialog",
@@ -65,5 +39,44 @@
       "aria-modal=\"true\", labelled by its title via aria-labelledby.",
       "Focus is trapped within while open."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Type=Standard, Size=Small": "fill card · border stroke/1 border · radius radius/lg · padding space/6 · gap space/5 · gap space/3 · gap space/2 · text foreground · type Heading/LG · text muted-foreground · type Body/MD · padding y space/2-25 x space/3-5 · type Label/LG · fill primary · text primary-foreground · (+1 variant share these)",
+    "Type=Form, Size=Small": "fill card · border stroke/1 border · radius radius/lg · padding space/6 · gap space/5 · gap space/3 · gap space/2 · text foreground · type Heading/LG · text muted-foreground · type Body/MD · gap space/1-5 · type Label/MD · padding y space/2-5 x space/3 · padding y space/2-25 x space/3-5 · type Label/LG · fill primary · text primary-foreground · (+1 variant share these)"
+  },
+  "tokensUsed": [
+    "Body/MD",
+    "Heading/LG",
+    "Label/LG",
+    "Label/MD",
+    "border",
+    "card",
+    "foreground",
+    "muted-foreground",
+    "primary",
+    "primary-foreground",
+    "radius/lg",
+    "space/1-5",
+    "space/2",
+    "space/2-25",
+    "space/2-5",
+    "space/3",
+    "space/3-5",
+    "space/5",
+    "space/6",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

@@ -12,38 +12,16 @@
       "interactive": "The whole surface responds to pointer and keyboard."
     }
   },
-  "states": {
-    "Type=Content, State=Default": "fill card · border 1px border · radius radius/lg · text info-foreground · type size/11",
-    "Type=Content, State=Interactive": "border 2px primary",
-    "Type=Media, State=Interactive": "border 2px primary"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
     "Make the primary action obvious.",
     "Keep one main call-to-action per card."
   ],
-  "tokensUsed": [
-    "border",
-    "card",
-    "info-foreground",
-    "primary",
-    "radius/lg",
-    "size/11"
+  "donts": [
+    "Do not nest cards more than one level.",
+    "Do not make the whole card and an inner button separately clickable in conflicting ways."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Group related content and actions about a single subject."
   ],
@@ -51,14 +29,50 @@
     "Primary page layout scaffolding.",
     "A bare list of text."
   ],
-  "donts": [
-    "Do not nest cards more than one level.",
-    "Do not make the whole card and an inner button separately clickable in conflicting ways."
-  ],
   "accessibility": {
     "notes": [
       "If the whole card is a link or button it needs an accessible name.",
       "Do not bury interactive controls where keyboard users reach them out of order."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Type=Content, State=Default": "fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/4 · gap space/3 · gap space/2-5 · gap space/0-5 · text foreground · type Heading/MD · text muted-foreground · type Body/XS · type Body/MD",
+    "Type=Content, State=Interactive": "fill card · border stroke/2 primary · radius radius/lg · padding space/5 · gap space/4 · gap space/3 · gap space/2-5 · gap space/0-5 · text foreground · type Heading/MD · text muted-foreground · type Body/XS · type Body/MD",
+    "Type=Media, State=Default": "fill card · border stroke/1 border · radius radius/lg · padding space/5 · gap space/4 · fill muted · fill chart-1 · radius radius/sm · gap space/3 · gap space/2-5 · gap space/0-5 · text foreground · type Heading/MD · text muted-foreground · type Body/XS · type Body/MD",
+    "Type=Media, State=Interactive": "fill card · border stroke/2 primary · radius radius/lg · padding space/5 · gap space/4 · fill muted · fill chart-1 · radius radius/sm · gap space/3 · gap space/2-5 · gap space/0-5 · text foreground · type Heading/MD · text muted-foreground · type Body/XS · type Body/MD"
+  },
+  "tokensUsed": [
+    "Body/MD",
+    "Body/XS",
+    "Heading/MD",
+    "border",
+    "card",
+    "chart-1",
+    "foreground",
+    "muted",
+    "muted-foreground",
+    "primary",
+    "radius/lg",
+    "radius/sm",
+    "space/0-5",
+    "space/2-5",
+    "space/3",
+    "space/4",
+    "space/5",
+    "stroke/1",
+    "stroke/2"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }

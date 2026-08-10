@@ -13,33 +13,14 @@
       "end": "Aligns to the trigger's end edge."
     }
   },
-  "states": {
-    "Side=Left, Align=Start": "fill popover · border 1px border · radius radius/lg · text popover-foreground · type size/13"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
     "Compose it through the parent rather than reaching for it directly."
   ],
-  "tokensUsed": [
-    "border",
-    "popover",
-    "popover-foreground",
-    "radius/lg",
-    "size/13"
+  "donts": [
+    "Do not re-implement the parent's keyboard or focus behaviour on the part."
   ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "donts": "best-practice"
-  },
   "whenToUse": [
     "Only inside its parent component's composition — this is a part, not a standalone component."
   ],
@@ -47,7 +28,27 @@
     "On its own, outside the parent that owns its behaviour and accessibility wiring.",
     "As a general-purpose layout or text primitive."
   ],
-  "donts": [
-    "Do not re-implement the parent's keyboard or focus behaviour on the part."
-  ]
+  "status": "draft",
+  "states": {
+    "Side=Left, Align=Start": "fill popover · border stroke/1 border · radius radius/lg · padding space/1 · fill accent · (+5 variants share these)"
+  },
+  "tokensUsed": [
+    "accent",
+    "border",
+    "popover",
+    "radius/lg",
+    "space/1",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
+  }
 }

@@ -8,16 +8,6 @@
       "open": "Expanded — the content is revealed."
     }
   },
-  "states": {
-    "Pattern=Basic, State=Closed": "text foreground · type size/13",
-    "Pattern=Basic, State=Open": "text accent-foreground",
-    "Pattern=Submenu, State=Open": "text accent-foreground",
-    "Pattern=Shortcuts, State=Open": "text accent-foreground",
-    "Pattern=Icons, State=Open": "text accent-foreground",
-    "Pattern=Checkboxes, State=Open": "text accent-foreground",
-    "Pattern=Checkbox Icons, State=Open": "text accent-foreground",
-    "Pattern=Radio Group, State=Open": "text accent-foreground"
-  },
   "dos": [
     "Reference variables for every value; never hardcode a hex or px.",
     "Change state through props, never by detaching the instance.",
@@ -30,24 +20,6 @@
     "Do not nest submenus more than one level deep.",
     "Do not hide the only route to a critical action inside a menu."
   ],
-  "tokensUsed": [
-    "accent-foreground",
-    "foreground",
-    "size/13"
-  ],
-  "status": "draft",
-  "updatedAt": "2026-08-09",
-  "provenance": {
-    "description": "imported",
-    "variants": "imported+framework",
-    "states": "imported",
-    "dos": "imported+best-practice",
-    "donts": "imported+best-practice",
-    "tokensUsed": "imported",
-    "whenToUse": "best-practice",
-    "whenNotToUse": "best-practice",
-    "accessibility": "w3c-apg"
-  },
   "whenToUse": [
     "Offer a list of actions from a trigger, when showing them all would crowd the view."
   ],
@@ -66,5 +38,34 @@
       "The trigger carries aria-haspopup and aria-expanded.",
       "Focus moves into the menu on open and back to the trigger on close."
     ]
+  },
+  "status": "draft",
+  "states": {
+    "Pattern=Basic, State=Closed": "gap space/2 · (+11 variants share these)",
+    "Pattern=Basic, State=Open": "gap space/2 · gap space/1 · fill popover · border stroke/1 border · radius radius/lg · padding space/1 · (+10 variants share these)",
+    "Pattern=RTL, State=Open": "gap space/2 · gap space/1 · fill popover · border stroke/1 border · radius radius/lg · padding space/1 · padding y space/1-75 x space/2 · text popover-foreground · type Label/MD"
+  },
+  "tokensUsed": [
+    "Label/MD",
+    "border",
+    "popover",
+    "popover-foreground",
+    "radius/lg",
+    "space/1",
+    "space/1-75",
+    "space/2",
+    "stroke/1"
+  ],
+  "updatedAt": "2026-08-10",
+  "provenance": {
+    "description": "imported",
+    "variants": "imported+framework",
+    "dos": "imported+best-practice",
+    "donts": "imported+best-practice",
+    "whenToUse": "best-practice",
+    "whenNotToUse": "best-practice",
+    "accessibility": "w3c-apg",
+    "states": "live-bindings",
+    "tokensUsed": "live-bindings"
   }
 }
