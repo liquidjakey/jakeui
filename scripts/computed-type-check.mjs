@@ -181,6 +181,22 @@ function exceptionFor(exceptions, node, triple) {
   );
 }
 
+/**
+ * A `documented` entry that excuses nothing is a FAILURE, not a leftover.
+ *
+ * An exception is a standing permission to be wrong in one exact way. Once the
+ * element it was excusing is gone, the permission has to go with it — otherwise
+ * the file accumulates dormant rules, and a dormant rule is a loaded gun pointed
+ * at whichever future element happens to compute the same triple. It would excuse
+ * a real regression silently, which is the precise failure mode this whole gate
+ * exists to prevent.
+ */
+function deadRules(exceptions, hits) {
+  return exceptions
+    .map((e) => ({ e, n: hits.get(e) ?? 0 }))
+    .filter(({ e, n }) => n === 0 || (typeof e.expectedElements === 'number' && n !== e.expectedElements));
+}
+
 async function main() {
   const { steps, fontFamily } = readTypeRamp(join(ROOT, 'tokens/globals.css'));
   const wantFamily = primaryFamily(fontFamily);
@@ -203,6 +219,7 @@ async function main() {
 
   const failures = [];
   const warnings = [];
+  const exceptionHits = new Map();
   const seenTriples = new Map();
   const examples = new Map();
   let measured = 0;
@@ -286,7 +303,11 @@ async function main() {
 
       if (!onRamp) {
         const exc = exceptionFor(exceptions, n, triple);
-        if (exc) { excepted += 1; continue; }
+        if (exc) {
+          excepted += 1;
+          exceptionHits.set(exc, (exceptionHits.get(exc) ?? 0) + 1);
+          continue;
+        }
         failures.push({
           story, node: n, kind: 'off-ramp',
           detail: `computes ${triple}, which is no step in the ramp`,
@@ -330,10 +351,10 @@ async function main() {
     return;
   }
 
-  report({ failures, warnings, stories, measured, skipped, excepted, steps });
+  report({ failures, warnings, stories, measured, skipped, excepted, steps, dead: deadRules(exceptions, exceptionHits) });
 }
 
-function report({ failures, warnings, stories, measured, skipped, excepted, steps }) {
+function report({ failures, warnings, stories, measured, skipped, excepted, steps, dead }) {
   const header =
     `Jake UI computed type — ${stories.length} stories, ${measured} measured element(s), `
     + `${skipped} platform-drawn/hidden, ${excepted} documented divergence(s), ${steps.length}-step ramp.`;
@@ -351,6 +372,22 @@ function report({ failures, warnings, stories, measured, skipped, excepted, step
       console.log(`      inherits from <${w.node.ownerTag}> ${w.node.ownerCls.slice(0, 90) || '(root)'}`);
       console.log('      that element sets no ramp step, so the glyph falls to the inherited size.');
     }
+  }
+
+  if (dead && dead.length > 0) {
+    console.error(`\nFAIL — ${dead.length} stale entr(y/ies) in scripts/computed-type-exceptions.json.\n`);
+    for (const { e, n } of dead) {
+      const want = typeof e.expectedElements === 'number' ? e.expectedElements : 'at least 1';
+      console.error(`  ${e.component} — excused ${n} element(s), expected ${want}`);
+      console.error(`    triple ${e.triple}, requires [${e.requireClasses.join(', ')}]`);
+      console.error(
+        n === 0
+          ? '    Nothing matches it any more. Delete the entry — an exception that excuses'
+          : '    The count moved. Confirm the change was intended, then update expectedElements.',
+      );
+      if (n === 0) console.error('    nothing will silently excuse the next element that computes this triple.');
+    }
+    process.exit(1);
   }
 
   if (failures.length === 0) {
