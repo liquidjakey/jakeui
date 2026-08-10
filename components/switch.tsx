@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
+import { OPACITY_DISABLED, OPACITY_READONLY } from '../lib/opacity.js';
 
 /**
  * Switch — labelled switch.
@@ -104,10 +105,10 @@ export function Switch({
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
           MOTION.colors,
           // Confirmed against Switch / Root: `input` unchecked, `primary` checked.
-          // Disabled binds `input` there — identical to Default, the documented
-          // "disabled is invisible" defect. `muted` is taken from the composed
-          // `Switch` set instead, which is the only place the file distinguishes
-          // a disabled track at all.
+          // Its disabled variant keeps those colours and dims with opacity/50
+          // instead. `muted` is taken from the composed `Switch` set, which is the
+          // only place the file recolours a disabled track — a divergence between
+          // the two sets that is recorded in the findings doc and left as-is.
           disabled ? 'bg-muted' : checked ? 'bg-primary' : 'bg-input',
           disabled && 'cursor-not-allowed',
         )}
@@ -152,9 +153,16 @@ export interface SwitchRootProps {
  * ⚠️ THE ASSERTION MADE IN switch.tsx WAS CORRECT — input unchecked, primary
  * checked. It is now confirmed rather than assumed.
  *
- * ⚠️ Disabled and ReadOnly bind EXACTLY the same tokens as Default. A disabled
- * switch is visually indistinguishable from an operable one, which is a real
- * accessibility problem: only opacity (applied in Switch) separates them.
+ * ✅ CORRECTED 10 Aug 2026. This used to say Disabled and ReadOnly bind exactly
+ * the same tokens as Default and were therefore indistinguishable. The COLOUR
+ * tokens are indeed identical — but the file separates the states with an
+ * OPACITY binding that the original read never looked at:
+ *
+ *   Disabled  opacity/50      ReadOnly  opacity/80      Default  none
+ *
+ * on all eight size×value combinations. So the states are distinguishable, and
+ * the two dimmings are NOT the same value — which is the bug this component had
+ * until now, collapsing both into one `opacity-50` branch.
  */
 export function SwitchRoot({ checked, size = 'default', state = 'default', children }: SwitchRootProps) {
   return (
@@ -171,7 +179,11 @@ export function SwitchRoot({ checked, size = 'default', state = 'default', child
             : 'bg-input',
         state === 'focused' && 'ring-2 ring-ring',
         state === 'invalid' && 'border-destructive',
-        (state === 'disabled' || state === 'readOnly') && 'opacity-50',
+        // Disabled and read-only are NOT the same dimming. The file binds
+        // opacity/50 for Disabled and opacity/80 for ReadOnly; these shared one
+        // branch at opacity-50 until 10 Aug 2026, so read-only rendered too faint.
+        state === 'disabled' && OPACITY_DISABLED,
+        state === 'readOnly' && OPACITY_READONLY,
       )}
     >
       {children}

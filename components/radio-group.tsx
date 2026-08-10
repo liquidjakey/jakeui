@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
+import { OPACITY_DISABLED, OPACITY_READONLY } from '../lib/opacity.js';
 
 /**
  * RadioGroup — labelled exclusive-choice group.
@@ -104,7 +105,7 @@ export function RadioGroup({
                     // focus stroke `ring` at 2px. The assertion was correct.
                     'border-input bg-card',
                     'peer-focus-visible:ring-2 peer-focus-visible:ring-ring',
-                    itemDisabled && 'opacity-50',
+                    itemDisabled && OPACITY_DISABLED,
                   )}
                 >
                   <RadioGroupIndicator checked={checked} />
@@ -170,7 +171,11 @@ export function RadioGroupItem({ checked = false, state = 'default' }: RadioGrou
             : checked
               ? 'border-primary'
               : 'border-input',
-        (state === 'disabled' || state === 'readOnly') && 'opacity-50',
+        // Disabled and read-only are NOT the same dimming. The file binds
+        // opacity/50 for Disabled and opacity/80 for ReadOnly; these shared one
+        // branch at opacity-50 until 10 Aug 2026, so read-only rendered too faint.
+        state === 'disabled' && OPACITY_DISABLED,
+        state === 'readOnly' && OPACITY_READONLY,
       )}
     >
       <RadioGroupIndicator checked={checked} />
