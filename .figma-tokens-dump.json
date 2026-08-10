@@ -1,6 +1,6 @@
 {
   "fileKey": "ovnLtL9xbX8SG5xDw673Un",
-  "generatedAt": "2026-08-10T01:10:05.000Z",
+  "generatedAt": "2026-08-10T01:35:52.000Z",
   "collections": [
     {
       "id": "VariableCollectionId:3:2",
@@ -1665,6 +1665,15 @@
       "cs": "0.6",
       "m": {
         "36:1": 60
+      }
+    },
+    {
+      "n": "opacity/75",
+      "c": "Interaction",
+      "t": "FLOAT",
+      "cs": "0.75",
+      "m": {
+        "36:1": 75
       }
     },
     {

@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
-import { OPACITY_DISABLED, OPACITY_READONLY } from '../lib/opacity.js';
+import { OPACITY_DISABLED, OPACITY_READONLY, OPACITY_THUMB_DISABLED } from '../lib/opacity.js';
 
 /**
  * Switch — labelled switch.
@@ -33,11 +33,23 @@ export interface SwitchThumbProps {
 }
 
 /**
- * The record: "Size follows the Root size; disabled styling is inherited from the
- * Root state." So this asset records no size or disabled deltas of its own and none
- * are applied. radius/full is the correct token for a circle — no raw 9999px.
+ * ⚠️ THE RECORD WAS WRONG ABOUT DISABLED, corrected 10 Aug 2026. It said "Size
+ * follows the Root size; disabled styling is inherited from the Root state," so
+ * no disabled delta was applied here. A live read of the OPACITY axis — the one
+ * the description format does not carry — shows `Switch / Thumb` State=Disabled
+ * has a delta of its own: it dims to 75%, on both sizes.
+ *
+ * That value was a raw 0.75 with nothing to bind to, so `opacity/75` was added to
+ * the Interaction collection and bound on both variants. It now flows through
+ * `npm run tokens:sync` as `--opacity-75` like any other token.
+ *
+ * The two dimmings COMPOUND, exactly as they do in the file: the thumb sits
+ * inside the track, so a disabled switch renders the track at opacity/50 and the
+ * thumb at a further 75% of that.
+ *
+ * radius/full is the correct token for a circle — no raw 9999px.
  */
-export function SwitchThumb({ checked = false, size = 'default' }: SwitchThumbProps) {
+export function SwitchThumb({ checked = false, size = 'default', disabled = false }: SwitchThumbProps) {
   return (
     <span
       aria-hidden="true"
@@ -57,6 +69,7 @@ export function SwitchThumb({ checked = false, size = 'default' }: SwitchThumbPr
         MOTION.transform,
         size === 'small' ? 'size-3.5' : 'size-4',
         checked ? (size === 'small' ? 'translate-x-3.5' : 'translate-x-4') : 'translate-x-0.5',
+        disabled && OPACITY_THUMB_DISABLED,
       )}
     />
   );
@@ -113,7 +126,7 @@ export function Switch({
           disabled && 'cursor-not-allowed',
         )}
       >
-        <SwitchThumb checked={checked} />
+        <SwitchThumb checked={checked} disabled={disabled} />
       </button>
 
       <span className="flex flex-col gap-0.5">

@@ -40,3 +40,23 @@ export const OPACITY_DISABLED = 'opacity-[var(--opacity-50)]';
 
 /** `State=ReadOnly` — the file binds `opacity/80`. Distinct from disabled. */
 export const OPACITY_READONLY = 'opacity-[var(--opacity-80)]';
+
+/**
+ * `Switch / Thumb` at `State=Disabled` — the file binds `opacity/75`.
+ *
+ * This is the thumb's OWN delta, not the track's. Its doc record claimed
+ * "disabled styling is inherited from the Root state", which is another thing the
+ * description format got wrong: the opacity axis is not carried in descriptions
+ * at all, so the delta was invisible until the file was read directly.
+ *
+ * It COMPOUNDS with the track's `opacity/50`, because the thumb is nested inside
+ * it — which is exactly how the file composes them, so the compounding is the
+ * faithful result rather than a bug.
+ *
+ * `opacity/75` did not exist before 10 Aug 2026; the value sat in the file as a
+ * raw 0.75 with no primitive to bind. It was added to the Interaction collection
+ * rather than the value being snapped to the nearby `opacity/80`, because the
+ * file's value is the specification and inventing a 5% shift to avoid a new token
+ * would be the tail wagging the dog.
+ */
+export const OPACITY_THUMB_DISABLED = 'opacity-[var(--opacity-75)]';
