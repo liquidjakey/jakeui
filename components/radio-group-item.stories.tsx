@@ -5,10 +5,13 @@ import { RadioGroupItem, RadioGroupIndicator } from './radio-group.js';
  * `RadioGroupItem` — the circle that `RadioGroup` composes, read directly from live
  * bindings after the description cap blocked it.
  *
- * 🛑 **Disabled is indistinguishable from Default**, exactly as on `SwitchRoot`.
- * `Disabled` and `ReadOnly` bind the same tokens as `Default`; only the opacity
- * applied in *code* separates them. Confirmed across two components, so it is a
- * pattern rather than a one-off.
+ * ✅ **CORRECTED 10 Aug 2026.** This file used to claim that `Disabled` was
+ * indistinguishable from `Default`, on the grounds that both bind the same COLOUR
+ * tokens. The disabled treatment is an **opacity** binding, which the original
+ * pass never looked at: `Disabled` binds `opacity/50` and `ReadOnly` binds
+ * `opacity/80` on both values, and `Radio Group / Indicator` binds `opacity/50`
+ * for its disabled dot. `SwitchRoot` was wrong in the same way and for the same
+ * reason. See the findings doc, item 5.
  */
 
 const meta = {
@@ -31,9 +34,9 @@ type Story = StoryObj<typeof meta>;
 
 const STATES = ['default', 'hover', 'focused', 'disabled', 'readOnly', 'invalid'] as const;
 
-/** 🛑 `RadioGroupItem` — the same defect as `SwitchRoot`, confirming it as a pattern. */
+/** `RadioGroupItem`, every state, shown with the indicator it contains. */
 export const RadioCircle: Story = {
-  name: 'RadioGroupItem — same defect',
+  name: 'RadioGroupItem — every state',
   args: { checked: false },
   render: () => (
     <div className="flex flex-col gap-4">

@@ -6,8 +6,9 @@ import { Accordion } from './accordion.js';
  * Stories for `Accordion`.
  * Contract: docs/components/accordion.md
  *
- * ⚠️ Its Content node is **unbound in Figma** at 13/20 Regular; `Body/SM` 13/18 is
- * used instead. Part of the ramp question in the Figma-side decision memo.
+ * ✅ Its Content node was **unbound in Figma** at 13/20 Regular; the ramp question
+ * was decided Option B on 10 Aug 2026 and it now carries `Body/SM` 13/18, which
+ * is what this code already used.
  *
  * The open/close transition is deliberately absent — the panel unmounts when closed
  * to satisfy a recorded accessibility contract, and a transition cannot animate an

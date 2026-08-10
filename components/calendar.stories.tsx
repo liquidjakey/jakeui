@@ -11,8 +11,9 @@ import { Calendar } from './calendar.js';
  * state below is asserted from precedent elsewhere in the system — the widest
  * promise-to-binding gap in the build.
  *
- * ⚠️ Its day labels are also **unbound in Figma** at 13/20 Medium; `Label/MD` 13/18
- * is used instead. Part of the ramp question in the Figma-side decision memo.
+ * ✅ Its day labels were also **unbound in Figma** at 13/20 Medium. The ramp question
+ * was decided Option B on 10 Aug 2026 and they now carry `Label/MD` 13/18, which is
+ * what this code already used.
  */
 
 const meta = {

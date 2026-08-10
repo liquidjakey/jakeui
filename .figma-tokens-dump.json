@@ -1,6 +1,6 @@
 {
   "fileKey": "ovnLtL9xbX8SG5xDw673Un",
-  "generatedAt": "2026-08-09T07:30:00.000Z",
+  "generatedAt": "2026-08-10T01:10:05.000Z",
   "collections": [
     {
       "id": "VariableCollectionId:3:2",
@@ -2125,6 +2125,44 @@
         },
         "3:1": {
           "alias": "blue/300"
+        }
+      }
+    },
+    {
+      "n": "red/50",
+      "c": "Color Primitives",
+      "t": "COLOR",
+      "cs": "var(--color-red-50)",
+      "m": {
+        "34:0": {
+          "hex": "#fef2f2",
+          "a": 1
+        }
+      }
+    },
+    {
+      "n": "red/950",
+      "c": "Color Primitives",
+      "t": "COLOR",
+      "cs": "var(--color-red-950)",
+      "m": {
+        "34:0": {
+          "hex": "#460809",
+          "a": 1
+        }
+      }
+    },
+    {
+      "n": "destructive-muted",
+      "c": "Jake UI",
+      "t": "COLOR",
+      "cs": "var(--destructive-muted)",
+      "m": {
+        "3:0": {
+          "alias": "red/50"
+        },
+        "3:1": {
+          "alias": "red/950"
         }
       }
     }

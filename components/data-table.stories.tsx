@@ -9,8 +9,9 @@ import { Input } from './input.js';
  * Stories for `DataTable`.
  * Contract: docs/components/data-table.md
  *
- * ⚠️ Its Description node is **unbound in Figma** at 13/20 Regular; `Body/SM` 13/18
- * is used instead. Part of the ramp question in the Figma-side decision memo.
+ * ✅ Its Description node was **unbound in Figma** at 13/20 Regular. The ramp question
+ * was decided Option B on 10 Aug 2026 and it now carries `Body/SM` 13/18, which is
+ * what this code already used.
  */
 
 const meta = {

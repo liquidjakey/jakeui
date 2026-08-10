@@ -7,9 +7,9 @@ import { ButtonGroup } from './button-group.js';
  *
  * Contract: docs/components/button-group.md
  *
- * ⚠️ Its Label node is **unbound in Figma** at 14/22 Medium; `Label/LG` 14/20 is used
- * instead, so the leading runs 2px tighter than the file. Part of the ramp question
- * in the Figma-side decision memo.
+ * ✅ Its Label node was **unbound in Figma** at 14/22 Medium. The ramp question was
+ * decided Option B on 10 Aug 2026; the label is a Button instance and now inherits
+ * `Label/LG` 14/20 from it, which is what this code already used.
  */
 
 const meta = {

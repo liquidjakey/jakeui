@@ -44,12 +44,14 @@ export function SwitchThumb({ checked = false, size = 'default' }: SwitchThumbPr
         // 14x14 small, 16x16 default, fill `card` in EVERY state — read from the
         // `Switch / Thumb` set, which is what figma.map.json binds this export to.
         //
-        // ⚠️ FIGMA CONTRADICTS ITSELF HERE. The composed `Switch` set draws an
-        // 18x18 thumb filled `primary-foreground` when checked, on a 40x22 track.
-        // The atomic `Switch / Root` + `Switch / Thumb` sets draw 36x20 with a
-        // 16x16 `card` thumb. Both are internally coherent (2px inset) and they
-        // disagree with each other. The atoms win here because they are what the
-        // map binds for SwitchThumb and SwitchRoot. Logged in the findings doc.
+        // ✅ THE FIGMA CONTRADICTION IS RESOLVED (10 Aug 2026). The composed
+        // `Switch` set used to draw an 18x18 `primary-foreground` thumb on a 40x22
+        // track, while the atomic `Switch / Root` + `Switch / Thumb` sets drew
+        // 36x20 with a 16x16 `card` thumb. Both were internally coherent and they
+        // disagreed with each other. The atoms won — they are what the map binds
+        // these exports to — and the composed set has been rebuilt onto them:
+        // 36x20 track, 16x16 thumb, `card` fill in every state, 2px inset. This
+        // code was already correct and did not change.
         'pointer-events-none block rounded-full bg-card shadow-sm',
         MOTION.transform,
         size === 'small' ? 'size-3.5' : 'size-4',

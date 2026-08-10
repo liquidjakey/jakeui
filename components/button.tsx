@@ -36,11 +36,15 @@ export interface ButtonProps {
 // space/2-25 are half-step ramp members, written as explicit calcs so they can never
 // degrade to a raw pixel value — the same treatment Input gives space/2-25.
 /**
- * ⚠️ THE LABEL IS UNBOUND IN FIGMA on both sizes: 13/20 Medium and 14/22 Medium.
- * Neither line-height is in the ramp (Label/MD is 13/18, Label/LG is 14/20), so
- * the size and weight match but the leading is 2px tighter here. The semantic
- * label styles are used rather than Body/* + font-medium, which is what this
- * was: the weight was right by override, not by binding.
+ * ✅ THE LABEL IS NOW BOUND IN FIGMA (10 Aug 2026). It was unbound on both sizes
+ * at 13/20 Medium and 14/22 Medium, neither line-height in the ramp, so the size
+ * and weight matched but the leading ran 2px looser in the file than here. The
+ * ramp question was decided Option B — keep the ramp, bind the nodes to it — and
+ * both labels now carry `Label/MD` 13/18 and `Label/LG` 14/20, which is exactly
+ * what this code already used. The divergence is gone and nothing here changed.
+ *
+ * The semantic label styles are used rather than Body/* + font-medium, which is
+ * what this was: the weight was right by override, not by binding.
  */
 const SIZE = {
   small: 'gap-2 px-3 py-[calc(var(--spacing)*1.5)] text-label-md',

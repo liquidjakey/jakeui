@@ -15,26 +15,28 @@ import { cn } from '../lib/cn.js';
  *   info         info-muted + info stroke; title AND description = info
  *   success      success-muted + success stroke; title AND description
  *                = success-muted-foreground
- *   warning      warning-muted + warning stroke; title = warning-muted-foreground
- *                but DESCRIPTION = warning  <- half-rebound, see below
- *   destructive  NO surface fill bound, destructive stroke; title and description
+ *   warning      warning-muted + warning stroke; title AND description
+ *                = warning-muted-foreground
+ *   destructive  destructive-muted + destructive stroke; title and description
  *                = destructive
  *
- * ⚠️ WARNING IS HALF-REBOUND IN FIGMA. Its title moved to warning-muted-foreground
- * but its description did not — one of the two 3.07:1 nodes was fixed and the other
- * was missed. Code applies warning-muted-foreground to BOTH, because shipping a
- * known 3.07:1 failure to match a half-finished rebind would be transcribing a bug.
- * Recorded in the props table and in .figma-blocked-variants.json.
+ * ✅ WARNING'S HALF-REBIND IS FIXED IN FIGMA (10 Aug 2026). Its description bound
+ * `warning` while its title bound `warning-muted-foreground` — one of the two
+ * 3.07:1 nodes had been rebound and the other missed. Code had already applied
+ * warning-muted-foreground to BOTH rather than transcribe a known contrast
+ * failure, so the file has now caught up to the code and the divergence is gone.
+ * This code did not change; only the note did.
  *
  * Info was deliberately NOT rebound — it already passed at 4.82/4.88.
  *
- * ⚠️ DESTRUCTIVE DOES HAVE A SURFACE FILL, AND IT IS UNTOKENISED. Re-read on
- * 9 Aug 2026: the variant carries a solid #fdeae9 with no bound variable. An
- * earlier note here said "live bindings show no surface fill at all", which was
- * wrong. It is left unfilled in code rather than hardcoded, because the archetype's
- * first do is "reference variables for every value; never hardcode a hex". Figma
- * needs a `destructive-muted` token — it is the only tone missing one, and until
- * it exists this variant cannot match the file without breaking that rule.
+ * ✅ DESTRUCTIVE'S SURFACE IS NOW TOKENISED (10 Aug 2026). The variant carried a
+ * solid #fdeae9 with no bound variable, and was left unfilled here rather than
+ * hardcoded, because the archetype's first do is "reference variables for every
+ * value; never hardcode a hex". `destructive-muted` now exists in the Jake UI
+ * collection — light `red/50`, dark `red/950`, the same shape as the other three
+ * tones — and the variant binds it, so this component fills the surface like
+ * every other tone. Light mode moved #fdeae9 -> #fef2f2, since red/50 is the
+ * Tailwind v4 value the rest of the primitive ramp follows.
  *
  * Type comes from the live bindings: Title = Label/LG (14/20 medium),
  * Description = Body/SM (13/18). Both were previously rendering at Body/MD
@@ -70,9 +72,7 @@ const TONE = {
     Glyph: Warning,
   },
   destructive: {
-    // Figma carries an untokenised #fdeae9 here. Left unfilled until a
-    // `destructive-muted` token exists — see the header note.
-    surface: 'border-destructive',
+    surface: 'bg-destructive-muted border-destructive',
     text: 'text-destructive',
     icon: 'bg-destructive',
     Glyph: WarningOctagon,

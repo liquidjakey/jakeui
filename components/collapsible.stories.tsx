@@ -6,8 +6,9 @@ import { Collapsible } from './collapsible.js';
  * Stories for `Collapsible`.
  * Contract: docs/components/collapsible.md
  *
- * ⚠️ Its Content node is **unbound in Figma** at 13/20 Regular; `Body/SM` 13/18 is
- * used instead. Part of the ramp question in the Figma-side decision memo.
+ * ✅ Its Content node was **unbound in Figma** at 13/20 Regular; the ramp question
+ * was decided Option B on 10 Aug 2026 and it now carries `Body/SM` 13/18, which
+ * is what this code already used.
  *
  * Like `Accordion`, it unmounts its panel when closed and therefore ships without a
  * disclosure transition — see `lib/motion.ts` for why `MOTION.disclosure` exists but

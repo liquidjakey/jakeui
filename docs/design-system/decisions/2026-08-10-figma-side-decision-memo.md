@@ -1,7 +1,16 @@
 # Decision memo — the five Figma-side defects
 
 **Date:** 10 Aug 2026
-**Status:** ⏳ **Open. Nothing here is decided, and no Figma edit has been made.**
+**Status:** ✅ **Decided and applied, 10 Aug 2026.** The recommendations for #2,
+#3 and #4 were approved and applied. #1 was decided **Option B** — the ramp
+stays, the nodes were bound to it. #5 was **withdrawn on inspection**: the
+premise was wrong, and nothing was changed. See
+[`findings/2026-08-09-figma-side-defects.md`](../findings/2026-08-09-figma-side-defects.md)
+for what landed, including two corrections to this memo's own facts:
+the ramp problem was 469 nodes rather than 16, and item #5 was never a defect.
+
+Everything below is the memo as written *before* the decisions, kept as the
+record of what the choices were.
 **Subject:** the five items in
 [`findings/2026-08-09-figma-side-defects.md`](../findings/2026-08-09-figma-side-defects.md)
 **Audience:** whoever owns the Figma file — every one of these needs a design call,

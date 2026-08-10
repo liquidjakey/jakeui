@@ -5,9 +5,10 @@ import { Breadcrumb } from './breadcrumb.js';
  * Stories for `Breadcrumb`.
  * Contract: docs/components/breadcrumb.md
  *
- * ⚠️ Both its text nodes are **unbound in Figma** — all items 13/20 Regular, the
- * current item 13/20 Medium. `Body/SM` and `Label/MD`, both 13/18, are used instead.
- * Part of the ramp question in the Figma-side decision memo.
+ * ✅ Both its text nodes were **unbound in Figma** — all items 13/20 Regular, the
+ * current item 13/20 Medium. The ramp question was decided Option B on 10 Aug 2026
+ * and they now carry `Body/SM` and `Label/MD`, both 13/18, which is what this code
+ * already used.
  */
 
 const meta = {

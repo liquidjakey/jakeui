@@ -6,10 +6,11 @@ import { Avatar } from './avatar.js';
  *
  * Contract: docs/components/avatar.md
  *
- * ⚠️ The Initials text is **unbound in Figma on all three sizes** — 11/14, 14/18 and
- * 18/22, all Semi Bold, none of those line-heights in the ramp. The nearest semibold
- * step is used for each, so sizes match and line-heights run 2–4px looser. Listed in
- * the Figma fix list and carried as a documented divergence in
+ * ⚠️ PARTLY RESOLVED. The Initials text was unbound on all three sizes — 11/14,
+ * 14/18 and 18/22, all Semi Bold. Under the Option B decision of 10 Aug 2026,
+ * medium and large now bind `Heading/XS` and `Heading/LG`. **Small cannot be
+ * bound: the ramp has no 11px semibold step**, so it composes `text-label-xs`
+ * with `font-semibold` and stays a documented divergence in
  * `scripts/computed-type-exceptions.json`.
  */
 

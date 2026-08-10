@@ -33,10 +33,17 @@ export interface AvatarProps {
  * radius/32 — exactly half of each, so every size is a true circle. Medium was
  * 40px and large was 56px, both a full step small.
  *
- * ⚠️ The Initials text is UNBOUND in Figma on all three sizes: 11/14, 14/18 and
- * 18/22, all Semi Bold. None of those line-heights is in the ramp. The nearest
- * semibold step is used for each so the avatar stays on the type system; the
- * sizes match, the line-heights are 2-4px looser. Listed in the Figma fix list.
+ * ⚠️ PARTLY RESOLVED (10 Aug 2026). The Initials text was unbound on all three
+ * sizes — 11/14, 14/18 and 18/22, all Semi Bold, none of those line-heights in
+ * the ramp. Under the Option B decision, medium and large are now bound in Figma
+ * to `Heading/XS` 14/20 and `Heading/LG` 18/26, matching what this code uses.
+ *
+ * **Small is still unbound, and cannot be bound: the ramp has no 11px semibold
+ * step.** `Label/XS` is 11/16 MEDIUM, so `small` below composes it with
+ * `font-semibold` to reach the weight the file draws. That is why Avatar is one
+ * of the three entries in scripts/computed-type-exceptions.json — the computed
+ * 11/16/600 is off-ramp on purpose. Adding an 11px semibold step, or moving the
+ * small initials to medium weight, is the open decision.
  */
 const SIZE = {
   small: 'size-8 text-label-xs font-semibold rounded-[calc(var(--radius-16))]',

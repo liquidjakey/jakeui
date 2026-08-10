@@ -18,17 +18,18 @@ import { MOTION } from '../lib/motion.js';
  * right reason — `foreground` and `card-foreground` resolve identically in both
  * modes (neutral/950 light, neutral/50 dark). It now binds what the file binds.
  *
- * ⚠️ CARD'S TEXT IS UNBOUND IN FIGMA. None of its four text nodes carries a text
- * style, and their metrics are off-ramp:
+ * ✅ CARD'S TEXT IS NOW BOUND IN FIGMA (10 Aug 2026). None of its four text nodes
+ * carried a text style, and all four metrics were off-ramp:
  *
- *   Title        16 / 22 Semi Bold   nearest ramp Heading/MD 16/24
- *   Description  14 / 21 Regular     nearest ramp Body/MD    14/20
- *   Label        13 / 20 Medium      nearest ramp Label/MD   13/18
- *   Initials     14 / 18 Semi Bold   nearest ramp Heading/XS 14/20
+ *   Title        16 / 22 Semi Bold   ->  Heading/MD 16/24
+ *   Description  14 / 21 Regular     ->  Body/MD    14/20
+ *   Label        13 / 20 Medium      ->  Label/MD   13/18
+ *   Initials     14 / 18 Semi Bold   ->  Heading/XS 14/20
  *
- * The ramp steps are used here so the card stays on the type system. The Figma
- * nodes need the styles applied — until then this is the one place the code
- * cannot be literally identical to the file without inventing line-heights.
+ * The ramp question was decided Option B — keep the ramp, bind the nodes to it —
+ * so the file now carries exactly the steps this code already used. Card is no
+ * longer the one place code cannot be literally identical to the file, and
+ * nothing here changed.
  *
  * The previous title size was `text-body-xs` (12px) with a note transcribing
  * "size/11" from the record. The file says 16px. That was the record being wrong
