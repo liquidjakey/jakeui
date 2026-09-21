@@ -52,7 +52,7 @@
     "consumer:check": "node scripts/consumer-check.mjs",
     "interaction:check": "node scripts/interaction-check.mjs",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build && node scripts/og-title.mjs",
     "docs:check": "node scripts/agent-generate.mjs --check && node scripts/agent-check.mjs"
   },
   "peerDependencies": {
