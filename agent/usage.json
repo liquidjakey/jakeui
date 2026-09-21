@@ -1,0 +1,973 @@
+{
+  "Accordion": {
+    "kind": "component",
+    "summary": "Disclosure component for vertically stacked question-and-answer or settings sections.",
+    "whenToUse": [
+      "Let the reader collapse secondary content so the page stays scannable."
+    ],
+    "whenNotToUse": [
+      "Content the reader almost always needs — show it instead of hiding it.",
+      "Switching between peer views — use Tabs."
+    ]
+  },
+  "Alert": {
+    "kind": "component",
+    "summary": "Inline feedback message for informational, successful, warning, and destructive states.",
+    "whenToUse": [
+      "Deliver an in-page message about the state of the view or a task."
+    ],
+    "whenNotToUse": [
+      "A decision that must block the flow — use a Dialog.",
+      "A toast notification: no toast component is exported; use inline Alert or request an extension."
+    ]
+  },
+  "Alert Dialog": {
+    "kind": "component",
+    "summary": "Modal confirmation surface for consequential actions.",
+    "whenToUse": [
+      "Confirm a consequential action with explicit cancel and confirm choices."
+    ],
+    "whenNotToUse": [
+      "General forms or custom focused tasks: use Dialog.",
+      "Nonblocking feedback: use Alert."
+    ],
+    "constraints": [
+      "Consequential confirmation with explicit cancel/confirm callbacks. Description is required; backdrop does not dismiss. This is not a general content modal.",
+      "Initial focus goes to Cancel. Escape invokes onCancel; the caller closes controlled open state. Use destructive only for irreversible loss."
+    ]
+  },
+  "Avatar": {
+    "kind": "component",
+    "summary": "Compact identity representation using initials and optional presence status.",
+    "whenToUse": [
+      "Represent a person, account, or organisation compactly."
+    ],
+    "whenNotToUse": [
+      "Decorative imagery, or a general-purpose image container."
+    ],
+    "constraints": [
+      "Supply name independently of initials. decorative hides the identity image when nearby text already names it; status still has separate accessible text. Small typography is an internal scoped exception, not a consumer style."
+    ]
+  },
+  "Badge": {
+    "kind": "component",
+    "summary": "Compact status label.",
+    "whenToUse": [
+      "A short status, count, or category label."
+    ],
+    "whenNotToUse": [
+      "Interactive primary actions — use a Button."
+    ]
+  },
+  "Breadcrumb": {
+    "kind": "component",
+    "summary": "Hierarchical location trail.",
+    "whenToUse": [
+      "Show where the current page sits in a hierarchy, and offer a way back up."
+    ],
+    "whenNotToUse": [
+      "Flat sites with no hierarchy.",
+      "Step-by-step progress through a flow — use an application-owned sequence with explicit current-step semantics."
+    ]
+  },
+  "Button": {
+    "kind": "component",
+    "summary": "Action button with primary, secondary, outline and ghost styles.",
+    "whenToUse": [
+      "Trigger an action or event — submit, confirm, open a dialog."
+    ],
+    "whenNotToUse": [
+      "Navigating between pages or URLs — use a native anchor or router link."
+    ],
+    "constraints": [
+      "Content is children, not label. Variants use style, not variant. Sizes are small/medium, not sm/lg. style is a variant string, not a CSS object. Native button events, attributes and ref are forwarded.",
+      "The leadingIcon slot owns direct SVG sizing: 16px for small, 20px for medium. Use Phosphor components, not text glyphs."
+    ]
+  },
+  "Button Group": {
+    "kind": "component",
+    "summary": "Layout group for related Button instances.",
+    "whenToUse": [
+      "Keep related actions together using existing Button children."
+    ],
+    "whenNotToUse": [
+      "Exclusive selection: use RadioGroup or ToggleGroup.",
+      "Page navigation: use native anchors or router links."
+    ]
+  },
+  "Calendar": {
+    "kind": "component",
+    "summary": "Month calendar supporting single-date and date-range selection in compact and comfortable densities.",
+    "whenToUse": [
+      "Pick a date, or a start and end pair, where the calendar context matters."
+    ],
+    "whenNotToUse": [
+      "A date the user knows by heart, such as a birthdate — a plain text field is faster.",
+      "Coarse periods like a month or quarter — offer a NativeSelect."
+    ],
+    "constraints": [
+      "Controlled month and selection. onSelect emits one Date; the caller owns assembling a range. English weekday names and Sunday week start are currently fixed; monthLabel alone does not localize the grid."
+    ]
+  },
+  "Card": {
+    "kind": "component",
+    "summary": "Content container for related information and actions.",
+    "whenToUse": [
+      "Group related content and actions about a single subject."
+    ],
+    "whenNotToUse": [
+      "Primary page layout scaffolding.",
+      "A bare list of text."
+    ],
+    "constraints": [
+      "href makes the whole card a link. Keep nested actions outside an interactive card to avoid nested interactive elements; use a static card with explicit links/buttons otherwise."
+    ]
+  },
+  "Chart": {
+    "kind": "component",
+    "summary": "Token-bound chart container for compact documentation and dashboard examples.",
+    "whenToUse": [
+      "Reveal a pattern, comparison, or trend that a table would bury."
+    ],
+    "whenNotToUse": [
+      "Precise values the reader needs to read off exactly — use a table.",
+      "A single number — use a stat or a Badge."
+    ],
+    "constraints": [
+      "Presentation wrapper, not a charting engine. Supply the renderer, data and textual takeaway; use approved chart token roles for series colours."
+    ]
+  },
+  "Checkbox": {
+    "kind": "component",
+    "summary": "Controlled labelled checkbox for independent form choices.",
+    "whenToUse": [
+      "NativeSelect one or more independent choices applied on Save or submit; represent partial group selection with indeterminate."
+    ],
+    "whenNotToUse": [
+      "An immediate boolean setting: use Switch.",
+      "Mutually exclusive options: use RadioGroup."
+    ],
+    "constraints": [
+      "Use checked and onCheckedChange, not value. Indeterminate is the string 'indeterminate'; a click resolves it to a boolean."
+    ]
+  },
+  "Collapsible": {
+    "kind": "component",
+    "summary": "Single disclosure region for optional controls or secondary information.",
+    "whenToUse": [
+      "Let the reader collapse secondary content so the page stays scannable."
+    ],
+    "whenNotToUse": [
+      "Content the reader almost always needs — show it instead of hiding it.",
+      "Switching between peer views — use Tabs."
+    ]
+  },
+  "Command": {
+    "kind": "anatomy",
+    "summary": "Option anatomy for a command interface; not a complete palette.",
+    "whenToUse": [
+      "Render an option inside an approved command-interface owner that supplies search, keyboard navigation and activation."
+    ],
+    "whenNotToUse": [
+      "A ready-made command palette: none is exported.",
+      "A fixed action list: use DropdownMenu. A form choice: use NativeSelect."
+    ],
+    "prefer": "No complete command palette is exported.",
+    "constraints": [
+      "An option primitive only. A parent must implement search, active-descendant navigation and keyboard activation; do not present this as a ready-made command palette."
+    ]
+  },
+  "Data Table": {
+    "kind": "component",
+    "summary": "Data-management composition built from Input, Button, Table, and Pagination.",
+    "whenToUse": [
+      "Present records across shared columns, for comparison, scanning, or exact reading."
+    ],
+    "whenNotToUse": [
+      "Page layout — use a grid.",
+      "A handful of key-value pairs — use a description list."
+    ],
+    "constraints": [
+      "Composition shell, not a data engine. Caller owns filtering, sorting, pagination and data fetching. Pass empty={rows.length===0} for an opaque Table child. Supply loading/error explicitly."
+    ]
+  },
+  "Date Picker": {
+    "kind": "component",
+    "summary": "Controlled single-date or tuple-range selection with a calendar popup and native date-entry fields.",
+    "whenToUse": [
+      "Pick a date, or a start and end pair, where the calendar context matters."
+    ],
+    "whenNotToUse": [
+      "A date the user knows by heart, such as a birthdate — a plain text field is faster.",
+      "Coarse periods like a month or quarter — offer a NativeSelect."
+    ],
+    "constraints": [
+      "Discriminated interface: single uses Date, range uses [Date, Date?]; match the callback to mode. Open state is internal. Native date fields support typing. There is no public min/max/isDisabled prop; request an extension when date restrictions are required."
+    ]
+  },
+  "Dialog": {
+    "kind": "component",
+    "summary": "General-purpose modal surface for focused tasks and forms.",
+    "whenToUse": [
+      "Interrupt for a focused task, or a decision that blocks the flow."
+    ],
+    "whenNotToUse": [
+      "Non-critical messages — use Alert."
+    ],
+    "constraints": [
+      "type is content classification exposed as data-type; both types use Heading/LG. size controls width. Compose body/footer through slots."
+    ]
+  },
+  "Drawer": {
+    "kind": "component",
+    "summary": "Modal side surface for a focused secondary task.",
+    "whenToUse": [
+      "Present contextual controls or a focused task in a modal edge panel."
+    ],
+    "whenNotToUse": [
+      "Persistent nonblocking content: use an application layout region.",
+      "Nonblocking feedback: use Alert."
+    ],
+    "constraints": [
+      "Modal side surface. Currently shares behavior/visual language with Sheet; neither is a persistent nonmodal panel."
+    ]
+  },
+  "Dropdown Menu": {
+    "kind": "component",
+    "summary": "Controlled action menu with keyboard navigation and linked-trigger positioning.",
+    "whenToUse": [
+      "Offer actions from a trigger when showing all actions would crowd the view."
+    ],
+    "whenNotToUse": [
+      "A primary form-choice control: use NativeSelect or RadioGroup. Checkable menu items support secondary menu settings.",
+      "Primary navigation: use NavigationMenu or Sidebar."
+    ],
+    "constraints": [
+      "Pair id with DropdownMenuTrigger controls, and conditionally mount from shared open state. Unique ids are required. A linked menu portals and positions itself; an unlinked menu is inline. Use nested SubTrigger/SubContent with matching controls/id."
+    ]
+  },
+  "Dropdown Menu / Checkbox Item": {
+    "kind": "part",
+    "summary": "Checkable menu item with unchecked, checked, and indeterminate values plus default, highlighted, and disabled states.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Render inside a menu. checked/onCheckedChange; toggling keeps the menu open."
+    ]
+  },
+  "Dropdown Menu / Content": {
+    "kind": "anatomy",
+    "summary": "Unanchored menu anatomy with keyboard navigation.",
+    "whenToUse": [
+      "Provide a menu surface within a composition that owns positioning, trigger wiring and open state."
+    ],
+    "whenNotToUse": [
+      "An automatically anchored popup: use DropdownMenu."
+    ],
+    "prefer": "DropdownMenu",
+    "constraints": [
+      "Unanchored menu surface. Keyboard behavior is present, but side/align do not anchor the surface to a trigger."
+    ]
+  },
+  "Dropdown Menu / Item": {
+    "kind": "part",
+    "summary": "Standard command item.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Render inside DropdownMenu or DropdownMenuContent so keyboard navigation and activation are provided.",
+      "shortcut is visual text only and does not install a keyboard shortcut."
+    ]
+  },
+  "Dropdown Menu / Label": {
+    "kind": "part",
+    "summary": "Non-focusable group label with standard or inset alignment.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Noninteractive label inside a menu; it is not a selectable action."
+    ]
+  },
+  "Dropdown Menu / Radio Item": {
+    "kind": "part",
+    "summary": "Menu option whose caller owns exclusive checked state.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Render inside a menu. Caller owns exclusive selection and checked state; onSelect invokes the choice."
+    ]
+  },
+  "Dropdown Menu / Sub Content": {
+    "kind": "part",
+    "summary": "Nested menu surface anchored to its linked submenu trigger.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Pair id with its SubTrigger controls. Selection dismisses the ancestor popup chain. Caller should clear child open states when removing the parent."
+    ]
+  },
+  "Dropdown Menu / Sub Trigger": {
+    "kind": "part",
+    "summary": "Submenu trigger with closed, open, highlighted, and disabled states plus optional inset alignment.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Use inside a menu, with shared open state and controls matching SubContent.id. Parent menu provides keyboard navigation."
+    ]
+  },
+  "Dropdown Menu / Trigger": {
+    "kind": "part",
+    "summary": "Controlled trigger button linked to a DropdownMenu by controls/id.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Share controlled open state with conditional menu mounting. controls must match the menu id; use a unique id per instance."
+    ]
+  },
+  "Field": {
+    "kind": "component",
+    "summary": "Label, control and validation composition using a render-prop child.",
+    "whenToUse": [
+      "Wrap a form control with its label, helper text, and error message as one unit."
+    ],
+    "whenNotToUse": [
+      "A bare control that is already labelled by its surroundings.",
+      "Page layout — it composes one field, not a form."
+    ],
+    "constraints": [
+      "Render-prop composition: spread the supplied control props into Input, Textarea, NativeSelect or Select. Field owns label, required marker, error and description wiring; the child owns value and onChange.",
+      "Pass errorMessage to Field only, not also to the child control. Spread all supplied control props so invalid styling, required state and description links stay connected."
+    ]
+  },
+  "Hover Card": {
+    "kind": "component",
+    "summary": "Contextual preview surface revealed on pointer hover or keyboard focus.",
+    "whenToUse": [
+      "Preview the thing behind a link on hover, without making the reader navigate."
+    ],
+    "whenNotToUse": [
+      "Content the user needs — hover is unavailable on touch and to many keyboard users.",
+      "Anything required to complete a task."
+    ],
+    "constraints": [
+      "Optional supplementary information only. Trigger must forward events/ref. Essential information needs a visible or explicit click-accessible path, particularly on touch devices."
+    ]
+  },
+  "Input": {
+    "kind": "component",
+    "summary": "Single-line text input primitive.",
+    "whenToUse": [
+      "Collect a single line of free-form text."
+    ],
+    "whenNotToUse": [
+      "Choosing from a fixed set — use NativeSelect or RadioGroup.",
+      "Long multi-line text — use Textarea."
+    ],
+    "constraints": [
+      "Controlled: supply value and onChange. Use Field for visible labels and validation. Standalone controls need a linked label or aria-label; a placeholder is not a label."
+    ]
+  },
+  "Label": {
+    "kind": "component",
+    "summary": "Form control label primitive.",
+    "whenToUse": [
+      "Name a form control, so it is identifiable before and after it is filled."
+    ],
+    "whenNotToUse": [
+      "Helper text, format hints, or validation messages — those are separate elements.",
+      "A section heading — use a heading."
+    ],
+    "constraints": [
+      "requirement is a decorative marker only. Set required or aria-required on the linked control; disabled only dims the label."
+    ]
+  },
+  "Native Select": {
+    "kind": "component",
+    "summary": "Controlled single-choice native select.",
+    "whenToUse": [
+      "Choose one option from a fixed list using the platform menu; supply an accessible label."
+    ],
+    "whenNotToUse": [
+      "Free-form input: use Input.",
+      "A short visible choice list: use RadioGroup.",
+      "Multiple selection, search or rich option content: these are not exposed by this component; compose existing controls or request an extension.",
+      "Consistent below-field popup styling: use Select."
+    ],
+    "constraints": [
+      "Controlled native select. Its open state belongs to the browser; do not pass open or implement a second popup.",
+      "The inset Phosphor indicator is decorative. The native popup's placement and styling belong to the browser/OS; use Select when a consistently anchored popup is required."
+    ]
+  },
+  "Navigation Menu": {
+    "kind": "component",
+    "summary": "Flat navigation links with a controlled compact toggle.",
+    "whenToUse": [
+      "Present top-level destinations with desktop and compact layouts."
+    ],
+    "whenNotToUse": [
+      "Nested navigation groups: this interface has no nested item shape.",
+      "Actions: use DropdownMenu."
+    ],
+    "constraints": [
+      "Links come from items. Supply open/onOpenChange for the compact toggle. This is not the similarly named shadcn/Radix primitive interface."
+    ]
+  },
+  "Pagination": {
+    "kind": "component",
+    "summary": "Navigate paged datasets or long collections.",
+    "whenToUse": [
+      "Break a long result set into pages the reader can move through and return to."
+    ],
+    "whenNotToUse": [
+      "A feed meant to be browsed continuously — use infinite scroll or a load-more control.",
+      "Result sets short enough to show at once."
+    ],
+    "constraints": [
+      "Pages are 1-based. pageCount is total pages, not item count. Narrow containers show Previous/Next and a summary; wide ones show a bounded page window."
+    ]
+  },
+  "Popover": {
+    "kind": "component",
+    "summary": "Controlled anchored interactive popup with optional modal focus management.",
+    "whenToUse": [
+      "Show secondary content or a small task in context, anchored to its trigger."
+    ],
+    "whenNotToUse": [
+      "A decision that must block the flow — use a Dialog.",
+      "A plain text hint — use a Tooltip.",
+      "A list of actions — use a menu."
+    ],
+    "constraints": [
+      "Use for anchored interactive content. Supply open/onOpenChange and a single trigger that forwards props and ref (Button or a native element). modal owns focus containment, outside inertness and scroll lock. Placement may flip at edges."
+    ]
+  },
+  "Popover / Arrow": {
+    "kind": "anatomy",
+    "summary": "Pointing Arrow for all four popup sides.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Decorative arrow only. Anchored Popover uses its positioning engine's arrow."
+    ]
+  },
+  "Popover / Backdrop": {
+    "kind": "anatomy",
+    "summary": "Visual scrim anatomy; modality is owned by Popover.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "prefer": "Popover",
+    "constraints": [
+      "Visual scrim only. mode does not implement a focus trap; Popover owns modality."
+    ]
+  },
+  "Popover / Close": {
+    "kind": "anatomy",
+    "summary": "Explicit close control for Popover content.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Close button only; wire onClose to its parent state."
+    ]
+  },
+  "Popover / Content": {
+    "kind": "anatomy",
+    "summary": "Unanchored presentation surface without popup behavior.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "prefer": "Popover",
+    "constraints": [
+      "Unanchored presentation surface only. side/align are geometry metadata; this export does not provide positioning, dialog semantics, dismissal or focus management."
+    ]
+  },
+  "Popover / Trigger": {
+    "kind": "anatomy",
+    "summary": "Controlled button for opening or closing a Popover.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "prefer": "Popover with Button trigger",
+    "constraints": [
+      "Controlled button. Prefer passing Button to Popover; this trigger can also compose with Popover without duplicating state changes."
+    ]
+  },
+  "Popover / Viewport": {
+    "kind": "anatomy",
+    "summary": "Presentation viewport that hides and inerts previous content.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Previous content stays inert and invisible. This surface is not an animation engine or a focus manager."
+    ]
+  },
+  "Progress": {
+    "kind": "component",
+    "summary": "Linear progress primitive.",
+    "whenToUse": [
+      "Show that work is underway, and how far along it is when that is known."
+    ],
+    "whenNotToUse": [
+      "Waits short enough that the indicator flashes — show nothing.",
+      "Content-shaped placeholders while a view loads — use Skeleton."
+    ],
+    "constraints": [
+      "Omit value for indeterminate progress; 0 is determinate. For determinate progress supply a finite value from 0 to a positive finite max (default 100)."
+    ]
+  },
+  "Radio Group": {
+    "kind": "component",
+    "summary": "Controlled group of native radios for one-of-many selection.",
+    "whenToUse": [
+      "NativeSelect one option from a visible set of mutually exclusive choices."
+    ],
+    "whenNotToUse": [
+      "Independent multiple choices: use Checkbox.",
+      "An immediate boolean setting: use Switch."
+    ],
+    "constraints": [
+      "Supply label, items, value and onValueChange. RadioGroup owns native radio semantics and keyboard behavior; anatomy exports do not."
+    ]
+  },
+  "Radio Group / Indicator": {
+    "kind": "anatomy",
+    "summary": "Checked-state indicator nested inside RadioGroup / Item.",
+    "whenToUse": [
+      "Inspect or compose visual anatomy under an owner that provides the full control semantics; prefer RadioGroup for application work."
+    ],
+    "whenNotToUse": [
+      "A standalone interactive control: use RadioGroup."
+    ],
+    "prefer": "RadioGroup",
+    "constraints": [
+      "Decorative checked dot only."
+    ]
+  },
+  "Radio Group / Item": {
+    "kind": "anatomy",
+    "summary": "Decorative radio circle with visual state previews.",
+    "whenToUse": [
+      "Inspect or compose visual anatomy under an owner that provides the full control semantics; prefer RadioGroup for application work."
+    ],
+    "whenNotToUse": [
+      "A standalone interactive control: use RadioGroup."
+    ],
+    "prefer": "RadioGroup",
+    "constraints": [
+      "Decorative circle, aria-hidden, not an interactive radio input."
+    ]
+  },
+  "Radio Group / Root": {
+    "kind": "anatomy",
+    "summary": "Presentation fieldset; child controls own exclusive selection.",
+    "whenToUse": [
+      "Inspect or compose visual anatomy under an owner that provides the full control semantics; prefer RadioGroup for application work."
+    ],
+    "whenNotToUse": [
+      "A standalone interactive control: use RadioGroup."
+    ],
+    "prefer": "RadioGroup",
+    "constraints": [
+      "Presentation fieldset only. Does not own value, onValueChange or exclusive selection; children supply controls. disabled disables descendant native controls and dims the legend; invalid/readOnly do not propagate visual state to children."
+    ]
+  },
+  "Scroll Area": {
+    "kind": "component",
+    "summary": "Named focusable scroll region using native scrollbars.",
+    "whenToUse": [
+      "Confine overflow to one region so the page itself does not scroll."
+    ],
+    "whenNotToUse": [
+      "The main page scroll — leave that to the browser.",
+      "Hiding content the reader is unlikely to look for."
+    ]
+  },
+  "Segmented Tab": {
+    "kind": "part",
+    "summary": "Single tab item for a Tabs-owned tablist and panel.",
+    "whenToUse": [
+      "Switch between peer views of the same subject, within one context."
+    ],
+    "whenNotToUse": [
+      "Steps in a sequence — use an application-owned sequence with explicit current-step semantics.",
+      "Content the reader needs to compare side by side, or to find with the browser's search.",
+      "Navigating to a different page — use links."
+    ],
+    "prefer": "Tabs",
+    "constraints": [
+      "One tab item, not a complete tablist. Tabs supplies group keyboard navigation and linked panels. Standalone items require a tablist owner, roving focus and aria-controls/id wiring."
+    ]
+  },
+  "Separator": {
+    "kind": "component",
+    "summary": "Visual separator for grouping adjacent content.",
+    "whenToUse": [
+      "Mark a boundary between groups that spacing alone does not make clear."
+    ],
+    "whenNotToUse": [
+      "Where whitespace already separates the groups.",
+      "Decoration, or as a border around a region."
+    ]
+  },
+  "Sheet": {
+    "kind": "component",
+    "summary": "Modal edge-attached surface for a focused secondary task.",
+    "whenToUse": [
+      "Present a focused task in a modal panel attached to a viewport edge."
+    ],
+    "whenNotToUse": [
+      "Persistent nonblocking content: use an application layout region.",
+      "Nonblocking feedback: use Alert."
+    ],
+    "constraints": [
+      "Modal dialog surface, not a persistent nonblocking sidebar. Use a layout region for persistent adjacent content."
+    ]
+  },
+  "Sidebar": {
+    "kind": "component",
+    "summary": "Application sidebar with desktop and compact structures.",
+    "whenToUse": [
+      "Keep navigation persistently in view alongside the main content."
+    ],
+    "whenNotToUse": [
+      "Fewer than about five destinations — a horizontal bar reads faster.",
+      "Page content or filters that belong in the main column."
+    ],
+    "constraints": [
+      "collapsed propagates to SidebarNavigationItem. Application shell owns responsive placement and route state; this is not a mobile drawer."
+    ]
+  },
+  "Sidebar Navigation Item": {
+    "kind": "part",
+    "summary": "Navigation item with Sidebar-owned collapse state.",
+    "whenToUse": [
+      "A single destination within sidebar navigation."
+    ],
+    "whenNotToUse": [
+      "Firing an action rather than navigating — use a Button."
+    ],
+    "constraints": [
+      "Use inside Sidebar for collapse propagation. active is route state, not a Figma state enum. Supply the actual destination or action appropriate to the exported props."
+    ]
+  },
+  "Skeleton": {
+    "kind": "component",
+    "summary": "Loading placeholders for text, avatar rows, cards, and table rows.",
+    "whenToUse": [
+      "Hold the shape of content that is loading, so the layout does not jump when it arrives."
+    ],
+    "whenNotToUse": [
+      "Waits short enough that it flashes.",
+      "Work with a known duration or total — use Progress.",
+      "An error or an empty result — those need their own states."
+    ],
+    "constraints": [
+      "The component owns a status region; its shapes are aria-hidden. Use one meaningful loading announcement per region rather than duplicating nested announcements."
+    ]
+  },
+  "Slider": {
+    "kind": "component",
+    "summary": "Continuous value selection primitive.",
+    "whenToUse": [
+      "Pick from a continuous or coarsely stepped range where the relative position matters more than the exact figure."
+    ],
+    "whenNotToUse": [
+      "A precise value the user knows — use a number input.",
+      "Ranges so wide that a pixel is worth many units.",
+      "Fewer than about five discrete options — use radios or a segmented control."
+    ]
+  },
+  "Switch": {
+    "kind": "component",
+    "summary": "Controlled labelled switch for an immediate boolean setting.",
+    "whenToUse": [
+      "An independent boolean setting that takes effect immediately."
+    ],
+    "whenNotToUse": [
+      "A choice applied after Save or submit: use Checkbox.",
+      "Exclusive options: use RadioGroup. An action command: use Button."
+    ],
+    "constraints": [
+      "Use checked and onCheckedChange. This is the interactive labelled control; SwitchRoot is only its visual track."
+    ]
+  },
+  "Switch / Root": {
+    "kind": "anatomy",
+    "summary": "Decorative switch track with visual state previews.",
+    "whenToUse": [
+      "Inspect or compose visual anatomy under an owner that provides the full control semantics; prefer Switch for application work."
+    ],
+    "whenNotToUse": [
+      "A standalone interactive control: use Switch."
+    ],
+    "prefer": "Switch",
+    "constraints": [
+      "Visual span only, not a focusable switch. The state enum previews appearance, not independent runtime conditions."
+    ]
+  },
+  "Switch / Thumb": {
+    "kind": "anatomy",
+    "summary": "Movable Switch thumb.",
+    "whenToUse": [
+      "Inspect or compose visual anatomy under an owner that provides the full control semantics; prefer Switch for application work."
+    ],
+    "whenNotToUse": [
+      "A standalone interactive control: use Switch."
+    ],
+    "prefer": "Switch",
+    "constraints": [
+      "Visual thumb only. Match the size of its track; no keyboard or pointer behavior is provided."
+    ]
+  },
+  "Table": {
+    "kind": "component",
+    "summary": "Jake UI extension for structured tabular data with compact and comfortable density variants plus optional selected-row treatment.",
+    "whenToUse": [
+      "Present records across shared columns, for comparison, scanning, or exact reading."
+    ],
+    "whenNotToUse": [
+      "Page layout — use a grid.",
+      "A handful of key-value pairs — use a description list."
+    ],
+    "constraints": [
+      "Use native thead/tbody/tfoot with TableRow, TableHead and TableCell; TableHeader/TableBody/TableFooter are not exported components. Table density propagates to rows."
+    ]
+  },
+  "Table / Action Trigger": {
+    "kind": "part",
+    "summary": "Icon-only row-action trigger used with Dropdown Menu.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Supply a context-specific label and onClick. This button does not anchor a menu by itself; DropdownMenuTrigger provides controls/id pairing for anchored menus."
+    ]
+  },
+  "Table / Caption": {
+    "kind": "part",
+    "summary": "Accessible descriptive caption for a table.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Place first inside the native table, before thead/tbody. Use either Table.caption or one TableCaption child, not both."
+    ]
+  },
+  "Table / Cell": {
+    "kind": "part",
+    "summary": "Semantic table data cell with alignment and text-emphasis options.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Body cell. Content is children, not value. Use emphasis='strong' selectively."
+    ]
+  },
+  "Table / Container": {
+    "kind": "part",
+    "summary": "Responsive overflow wrapper used by the Table root.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "prefer": "Table",
+    "constraints": [
+      "Overflow wrapper only. Table already includes it; avoid nesting two scroll containers. If using the anatomy directly, provide a named native table with caption and semantic sections."
+    ]
+  },
+  "Table / Head": {
+    "kind": "part",
+    "summary": "Semantic table column header.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Header cell. Content is children, not label."
+    ]
+  },
+  "Table / Row": {
+    "kind": "part",
+    "summary": "Table row patterns for header, body, and footer sections.",
+    "whenToUse": [
+      "Only inside its parent component's composition — this is a part, not a standalone component."
+    ],
+    "whenNotToUse": [
+      "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+      "As a general-purpose layout or text primitive."
+    ],
+    "constraints": [
+      "Inside a table only. For selection supply selected/onSelect; nested action buttons do not select the row."
+    ]
+  },
+  "Tabs": {
+    "kind": "component",
+    "summary": "Grouped navigation for switching between peer views without leaving the current context.",
+    "whenToUse": [
+      "Switch between peer views of the same subject, within one context."
+    ],
+    "whenNotToUse": [
+      "Steps in a sequence — use an application-owned sequence with explicit current-step semantics.",
+      "Content the reader needs to compare side by side, or to find with the browser's search.",
+      "Navigating to a different page — use links."
+    ],
+    "constraints": [
+      "Complete controlled tablist and panels. Supply items, selectedId and onSelect; the component composes SegmentedTab and owns group keyboard navigation."
+    ]
+  },
+  "Textarea": {
+    "kind": "component",
+    "summary": "Multiline text input for longer freeform content.",
+    "whenToUse": [
+      "Collect free-form text long enough to need more than one line."
+    ],
+    "whenNotToUse": [
+      "A single short value — use Input.",
+      "Rich or formatted content — use a rich-text editor, not a plain textarea."
+    ],
+    "constraints": [
+      "Controlled: supply value and onChange. Use Field for label and validation wiring.",
+      "rows sets a fixed editing viewport; long content scrolls and user resizing is disabled. maxLength adds a described character counter, not a per-keystroke live announcement."
+    ]
+  },
+  "Toggle": {
+    "kind": "component",
+    "summary": "Two-state action button for formatting, view controls, or other reversible selections.",
+    "whenToUse": [
+      "A reversible on/off action that takes effect immediately — bold, mute, pin, show grid.",
+      "Use the group form when several such actions belong together in a toolbar."
+    ],
+    "whenNotToUse": [
+      "A form value that is only applied on Save — use Checkbox or RadioGroup.",
+      "One-of-many where the options are the data, not actions — use RadioGroup.",
+      "A one-way action that cannot be un-done — use a Button."
+    ]
+  },
+  "Toggle Group": {
+    "kind": "component",
+    "summary": "Grouped toggle controls for choosing one or multiple persistent options.",
+    "whenToUse": [
+      "A reversible on/off action that takes effect immediately — bold, mute, pin, show grid.",
+      "Use the group form when several such actions belong together in a toolbar."
+    ],
+    "whenNotToUse": [
+      "A form value that is only applied on Save — use Checkbox or RadioGroup.",
+      "One-of-many where the options are the data, not actions — use RadioGroup.",
+      "A one-way action that cannot be un-done — use a Button."
+    ]
+  },
+  "Tooltip": {
+    "kind": "component",
+    "summary": "Optional noninteractive explanation on hover or focus.",
+    "whenToUse": [
+      "Clarify an already named control with short, nonessential text."
+    ],
+    "whenNotToUse": [
+      "A control's only accessible name or essential instructions: provide a label or visible text.",
+      "Interactive content: use Popover."
+    ],
+    "constraints": [
+      "Noninteractive, nonessential text only. Trigger must forward events/ref and have its own accessible name. For interactive content use Popover; for a disabled button place guidance on a focusable wrapper or show it inline."
+    ]
+  },
+  "Select": {
+    "kind": "component",
+    "summary": "Controlled single-choice select with an anchored, styled listbox.",
+    "whenToUse": [
+      "A plain-text form choice that needs consistent popup styling and field-aligned positioning across desktop browsers."
+    ],
+    "whenNotToUse": [
+      "Platform-native mobile pickers: use NativeSelect.",
+      "Searchable choices, multiple selection or rich option content: request an extension.",
+      "Commands or navigation: use DropdownMenu or navigation components."
+    ],
+    "constraints": [
+      "Supply value and onValueChange; this callback receives a string, not NativeSelect's DOM change event. Options need unique nonempty values.",
+      "Use Field or a linked label. Spread Field's control props and pass errorMessage to Field only.",
+      "Arrow keys, Home/End, PageUp/PageDown and typeahead preview choices. Enter/Space/Tab commit; Escape cancels. Focus stays on the trigger.",
+      "The popup opens below with an 8px gap, matches the field width and flips when space is insufficient. Its list scrolls; it does not overlap the field.",
+      "name and required participate in native forms through a hidden select. Keep value controlled, including form reset handling. Disabled or wholly unavailable option lists cannot open.",
+      "An approved code-only extension; do not invent a Figma node or copy the similarly named API from another library."
+    ]
+  }
+}

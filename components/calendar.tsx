@@ -1,48 +1,30 @@
+import { useLayoutEffect, useRef, useState } from 'react';
+import type { KeyboardEvent } from 'react';
 import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 import { CaretLeft, CaretRight } from '@phosphor-icons/react';
 
-/**
- * Calendar — month grid with single-date and range selection.
- *
- * Figma: `Calendar`, node 132:0, 4 variants.
- * Contract: docs/components/calendar.md
- *
- * 🛑 FIVE STATES NAMED IN PROSE, ZERO IN TOKENS. The record's description ends
- * "Includes today, selected, range, disabled, and out-of-month …", but tokensUsed
- * is border / card / foreground / radius-lg / size-13 — five CONTAINER tokens and
- * not one day-state colour. This is the widest gap between what a record promises
- * and what it binds anywhere in this build.
- *
- * The day states are asserted from precedent already established elsewhere:
- *   selected      primary / primary-foreground   (Radio Group / Indicator)
- *   range         accent / accent-foreground     (Command, Toggle, menus)
- *   today         primary stroke                 (CONFIRMED by the Date Picker read)
- *   disabled      muted-foreground               (shared convention)
- *   out-of-month  muted-foreground               (shared convention)
- *
- * Figma owes day-state bindings. This is the least-transcribed component in the
- * build and its props table's checklist box is left unticked.
- */
 export interface CalendarProps {
   month: Date;
-  /** Kept as a prop rather than derived: month naming is locale-dependent. */
   monthLabel: string;
   onMonthChange: (month: Date) => void;
   mode?: 'single' | 'range';
-  selected?: Date | [Date, Date];
+  selected?: Date | [Date, Date?];
   onSelect: (value: Date) => void;
   density?: 'compact' | 'comfortable';
   isDisabled?: (date: Date) => boolean;
 }
 
 const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-function sameDay(a: Date, b: Date) {
-  return (
-    a.getFullYear() === b.getFullYear() &&
-    a.getMonth() === b.getMonth() &&
-    a.getDate() === b.getDate()
+const dateKey = (d: Date) => `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+const sameDay = (a: Date, b: Date) => dateKey(a) === dateKey(b);
+const addDays = (d: Date, n: number) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+function addMonths(d: Date, n: number) {
+  const first = new Date(d.getFullYear(), d.getMonth() + n, 1);
+  return new Date(
+    first.getFullYear(),
+    first.getMonth(),
+    Math.min(d.getDate(), new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate()),
   );
 }
 
@@ -56,42 +38,85 @@ export function Calendar({
   density = 'compact',
   isDisabled,
 }: CalendarProps) {
-  const year = month.getFullYear();
-  const monthIndex = month.getMonth();
-  const first = new Date(year, monthIndex, 1);
-  const startOffset = first.getDay();
+  const year = month.getFullYear(),
+    monthIndex = month.getMonth();
   const today = new Date();
+  const grid = useRef<HTMLTableElement>(null);
+  const pendingFocus = useRef(false);
+  const [focused, setFocused] = useState<Date>();
+  const first = new Date(year, monthIndex, 1);
+  const cells = Array.from({ length: 42 }, (_, i) => addDays(first, i - first.getDay()));
+  const inMonth = (d: Date) => d.getFullYear() === year && d.getMonth() === monthIndex;
+  const enabled = (d: Date) => !isDisabled?.(d);
+  const selectedStart = Array.isArray(selected) ? selected[0] : selected;
+  const tabDate = [focused, selectedStart, today, ...cells.filter(inMonth)].find(
+    (d) => d && inMonth(d) && enabled(d),
+  );
 
-  // Six rows of seven always, so the grid does not change height between months —
-  // a jumping calendar is the classic layout-shift bug in this component.
-  const cells: Array<Date> = [];
-  for (let i = 0; i < 42; i++) {
-    cells.push(new Date(year, monthIndex, i + 1 - startOffset));
-  }
+  useLayoutEffect(() => {
+    if (!pendingFocus.current || !tabDate) return;
+    grid.current?.querySelector<HTMLButtonElement>(`[data-date="${dateKey(tabDate)}"]`)?.focus();
+    pendingFocus.current = false;
+  }, [tabDate]);
 
-  const isSelected = (d: Date) => {
-    if (!selected) return false;
-    if (Array.isArray(selected)) return sameDay(selected[0], d) || sameDay(selected[1], d);
-    return sameDay(selected, d);
-  };
-  const inRange = (d: Date) => {
-    if (mode !== 'range' || !Array.isArray(selected)) return false;
-    return d > selected[0] && d < selected[1];
+  const navigate = (e: KeyboardEvent<HTMLButtonElement>, date: Date) => {
+    const rtl = getComputedStyle(e.currentTarget).direction === 'rtl';
+    let next: Date;
+    let direction = 1;
+    switch (e.key) {
+      case 'ArrowRight':
+        direction = rtl ? -1 : 1;
+        next = addDays(date, direction);
+        break;
+      case 'ArrowLeft':
+        direction = rtl ? 1 : -1;
+        next = addDays(date, direction);
+        break;
+      case 'ArrowDown':
+        next = addDays(date, 7);
+        break;
+      case 'ArrowUp':
+        direction = -1;
+        next = addDays(date, -7);
+        break;
+      case 'Home':
+        next = addDays(date, -date.getDay());
+        break;
+      case 'End':
+        direction = -1;
+        next = addDays(date, 6 - date.getDay());
+        break;
+      case 'PageDown':
+        next = addMonths(date, e.shiftKey ? 12 : 1);
+        break;
+      case 'PageUp':
+        direction = -1;
+        next = addMonths(date, e.shiftKey ? -12 : -1);
+        break;
+      default:
+        return;
+    }
+    e.preventDefault();
+    // Bounded search also handles calendars where every date is disabled.
+    let attempts = 0;
+    while (!enabled(next) && attempts++ < 366) next = addDays(next, direction);
+    if (!enabled(next)) return;
+    pendingFocus.current = true;
+    setFocused(next);
+    if (!inMonth(next)) onMonthChange(new Date(next.getFullYear(), next.getMonth(), 1));
   };
 
   return (
-    <div // padding `space/4` (16px), not `space/3` (12px).
-    className="inline-block rounded-lg border border-border bg-card p-4 text-body-sm text-foreground">
+    <div className="inline-block max-w-full rounded-lg border border-border bg-card p-4 text-body-sm text-foreground">
       <div className="mb-2 flex items-center justify-between gap-2">
         <button
           type="button"
           aria-label="Previous month"
           onClick={() => onMonthChange(new Date(year, monthIndex - 1, 1))}
-          className="rounded-lg px-2 py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          className="flex size-8 items-center justify-center rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         >
-          <CaretLeft size={14} weight="bold" aria-hidden="true" />
+          <CaretLeft size={14} aria-hidden="true" />
         </button>
-        {/* aria-live so a month change is announced without moving focus. */}
         <span aria-live="polite" className="font-medium">
           {monthLabel}
         </span>
@@ -99,17 +124,15 @@ export function Calendar({
           type="button"
           aria-label="Next month"
           onClick={() => onMonthChange(new Date(year, monthIndex + 1, 1))}
-          className="rounded-lg px-2 py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          className="flex size-8 items-center justify-center rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         >
-          <CaretRight size={14} weight="bold" aria-hidden="true" />
+          <CaretRight size={14} aria-hidden="true" />
         </button>
       </div>
-
-      <table role="grid" className="border-collapse">
+      <table ref={grid} role="grid" aria-label={monthLabel} className="w-full border-collapse">
         <thead>
           <tr>
             {DAY_NAMES.map((d) => (
-              // Abbreviated visually, full name available to screen readers.
               <th key={d} scope="col" className="p-1 font-normal text-muted-foreground">
                 <span aria-hidden="true">{d.slice(0, 2)}</span>
                 <span className="sr-only">{d}</span>
@@ -121,43 +144,48 @@ export function Calendar({
           {Array.from({ length: 6 }, (_, week) => (
             <tr key={week}>
               {cells.slice(week * 7, week * 7 + 7).map((d) => {
-                const outside = d.getMonth() !== monthIndex;
-                const disabled = isDisabled?.(d) ?? false;
-                const sel = isSelected(d);
-                const range = inRange(d);
-                const isToday = sameDay(d, today);
+                const disabled = !enabled(d);
+                const end = Array.isArray(selected) ? selected[1] : undefined;
+                const sel = Boolean(
+                  selectedStart && (sameDay(selectedStart, d) || (end && sameDay(end, d))),
+                );
+                const range =
+                  mode === 'range' && selectedStart && end && d > selectedStart && d < end;
                 return (
-                  <td key={d.toISOString()} className="p-0.5">
+                  <td key={dateKey(d)} aria-selected={sel || Boolean(range)} className="p-0.5">
                     <button
                       type="button"
-                      aria-selected={sel}
-                      aria-disabled={disabled || undefined}
-                      // Roving tabindex: only one day is tabbable, not 42.
-                      tabIndex={sel || (!selected && isToday) ? 0 : -1}
+                      data-date={dateKey(d)}
+                      aria-label={d.toLocaleDateString('en', {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                      })}
+                      aria-current={sameDay(d, today) ? 'date' : undefined}
+                      tabIndex={tabDate && sameDay(tabDate, d) ? 0 : -1}
                       disabled={disabled}
-                      onClick={() => onSelect(d)}
+                      onFocus={() => setFocused(d)}
+                      onKeyDown={(e) => navigate(e, d)}
+                      onClick={() => {
+                        setFocused(d);
+                        onSelect(d);
+                      }}
                       className={cn(
-                        'flex items-center justify-center rounded-lg',
-                        density === 'comfortable' ? 'h-9 w-9' : 'h-8 w-8',
-                        'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+                        'flex w-full min-w-0 items-center justify-center rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+                        density === 'comfortable' ? 'h-9 min-w-8' : 'h-8 min-w-7',
                         MOTION.colors,
-                        // 🛑 every line below is ASSERTED — see the block above.
-                        sel && 'bg-primary text-primary-foreground',
-                        !sel && range && 'bg-accent text-accent-foreground',
-                        // CORRECTED 9 Aug 2026 from the Date Picker live read:
-                        // `today` is a PRIMARY STROKE, not the ring outline that
-                        // was asserted here. The other four day states were right.
-                        !sel && !range && isToday && 'border border-primary',
-                        (outside || disabled) && 'text-muted-foreground',
+                        sel
+                          ? 'bg-primary text-primary-foreground'
+                          : range
+                            ? 'bg-accent text-accent-foreground'
+                            : 'hover:bg-accent',
+                        !sel && !range && sameDay(d, today) && 'border border-primary',
+                        !sel && (!inMonth(d) || disabled) && 'text-muted-foreground',
                         disabled && 'cursor-not-allowed',
                       )}
                     >
-                      {/* Announce the full date, not just the number. */}
-                      <span aria-hidden="true">{d.getDate()}</span>
-                      <span className="sr-only">
-                        {DAY_NAMES[d.getDay()]} {d.getDate()} {d.toLocaleString('en', { month: 'long' })}{' '}
-                        {d.getFullYear()}
-                      </span>
+                      {d.getDate()}
                     </button>
                   </td>
                 );

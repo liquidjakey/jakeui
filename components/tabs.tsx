@@ -4,16 +4,10 @@ import { SegmentedTab } from './segmented-tab.js';
 import { cn } from '../lib/cn.js';
 
 /**
- * Tabs — the CONTAINER half of the tab control.
- *
- * Figma: `Tabs`, 4 variants.
- * Contract: docs/components/tabs.md
- *
- * The record binds only a container fill (`muted`) and has NO selected-state
- * treatment at all. The selected/unselected pair lives on `Segmented Tab`, which is
- * why this renders SegmentedTab items rather than styling its own.
- *
- * Neither Orientation nor Density carries a token delta, so both are layout-only.
+ * Controlled tablist and associated panels, composed from SegmentedTab items.
+ * Owns roving focus, orientation-aware keys and selection. Density adjusts
+ * container padding and gap using spacing tokens.
+ * Consumer contract: docs/agent/components/tabs.md.
  */
 export interface TabItem {
   id: string;
@@ -81,10 +75,7 @@ export function Tabs({
         className={cn(
           'inline-flex rounded-lg bg-muted',
           orientation === 'vertical' ? 'flex-col' : 'flex-row',
-          // Density IS tokenised in the file — the note that said otherwise was
-          // reading the doc record, not the bindings:
-          //   default  padding space/1    (4)  gap space/1   (4)
-          //   compact  padding space/0-75 (3)  gap space/0-5 (2)
+          // Density changes spacing without changing tab typography.
           density === 'compact'
             ? 'gap-0.5 p-[calc(var(--spacing)*0.75)]'
             : 'gap-1 p-1',

@@ -4,23 +4,11 @@ import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 
 /**
- * ModalSurface — INTERNAL. Not exported from components/index.ts.
- *
- * The shared native `<dialog>` surface behind Dialog, AlertDialog, Drawer and
- * Sheet. All four bind the same tokens (card / border / radius-lg / foreground)
- * and carry the same accessibility contract, so they share one implementation
- * rather than four that drift apart.
- *
- * WHY NATIVE <dialog>: showModal() supplies the focus trap, Escape-to-close, the
- * top layer and ::backdrop from the platform. Every item marked "platform" in
- * docs/components/dialog.md Table 4 comes free and correct. This follows the
- * precedent set by NativeSelect — prefer the platform's own behaviour over a
- * re-implementation that will be subtly wrong.
- *
- * What is NOT free and is implemented here:
- *   - backdrop click (a <dialog> has no such behaviour)
- *   - page scroll lock (the top layer blocks interaction, not scrolling)
- *   - keeping controlled `open` in sync with platform-initiated closes
+ * INTERNAL modal foundation, not a public export. showModal() supplies modal
+ * focus containment and the top layer; an open attribute alone is nonmodal.
+ * This wrapper synchronizes platform cancellation with controlled state, locks
+ * page scrolling, and implements configurable backdrop dismissal.
+ * Public callers own content, naming and task-specific initial focus.
  */
 export interface ModalSurfaceProps {
   open: boolean;
@@ -34,27 +22,17 @@ export interface ModalSurfaceProps {
   className?: string;
   /** Where the panel sits in the viewport. */
   layout?: 'center' | 'left' | 'right';
+  role?: 'dialog' | 'alertdialog';
 }
 
-/**
- * Tokens transcribed from the four records, which are identical:
- * fill `card` · border 1px `border` · radius `radius/lg` · text `foreground`.
- *
- * NOTE the recorded mismatch: AlertDialog binds `card-foreground` for this same
- * surface while the other three bind `foreground`. They resolve to the same
- * primitives today, so this is invisible — but `card-foreground` is the correct
- * pairing for a `card` fill. Callers pass their own text token so each component
- * stays faithful to its own record; see docs/components/dialog.md Table 3.
- */
+/** Shared modal surface. Callers style their own title and description text. */
 const BASE = [
   'bg-card border border-border rounded-lg',
   MOTION.overlay,
   'p-6 shadow-lg',
-  // The backdrop has no token in any of the four records. A neutral black at low
-  // alpha stands in until Figma binds one. Recorded in every props table.
-  'backdrop:bg-black/50',
-  // gap is `space/5` (20px) on Dialog and Drawer; it was `space/4` (16px).
-  // Sheet binds `space/4-5` (18px) and overrides this through className.
+  // The approved scrim remains dark in both themes; see agent/exceptions.json.
+  'backdrop:bg-scrim',
+  // Sheet overrides the shared gap through className.
   'open:flex open:flex-col open:gap-5',
 ].join(' ');
 
@@ -73,6 +51,7 @@ export function ModalSurface({
   children,
   className,
   layout = 'center',
+  role = 'dialog',
 }: ModalSurfaceProps) {
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -113,6 +92,7 @@ export function ModalSurface({
 
   return (
     <dialog
+      role={role}
       ref={ref}
       aria-labelledby={labelledBy}
       aria-describedby={describedBy}
@@ -121,7 +101,15 @@ export function ModalSurface({
         if (!dismissOnBackdrop) return;
         // A <dialog> fills the top layer, so a click on the backdrop reports the
         // dialog itself as the target. Anything inside reports a descendant.
-        if (e.target === ref.current) onClose();
+        if (e.target !== ref.current) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        if (
+          e.clientX < rect.left ||
+          e.clientX > rect.right ||
+          e.clientY < rect.top ||
+          e.clientY > rect.bottom
+        )
+          onClose();
       }}
     >
       {children}

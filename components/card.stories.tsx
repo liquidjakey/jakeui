@@ -2,15 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Card } from './card.js';
 
 /**
- * Stories for `Card`.
- * Contract: docs/components/card.md
- *
- * 🛑 **Card is the one component whose code deliberately does not match its
- * record.** `Card.doc.json` binds text to `info-foreground`, which is inverted
- * relative to `card-foreground` — near-white on a white card in Light, near-black
- * on near-black in Dark, roughly 1:1 contrast either way. The code binds
- * `card-foreground` instead. Switch the toolbar Theme to "Side by side": the text
- * is readable in both, which it would not be if the record had been followed.
+ * Static, media and whole-card-link previews. Keep nested actions outside links.
+ * Consumer contract: docs/agent/components/card.md.
  */
 
 const meta = {
@@ -43,13 +36,7 @@ export const Default: Story = {
   ),
 };
 
-/**
- * Interactive — driven by `href`, not by a `state` prop.
- *
- * ⚠️ Note the border: `2px primary`, which is the same treatment `Input` uses for
- * **focus**. An interactive card therefore looks focused at rest, and nothing is
- * left free for real focus. Transcribed as recorded, but flagged in the props table.
- */
+/** Interactive cards use href, not a visual state prop. Check the resting primary border and keyboard focus in both themes. */
 export const Interactive: Story = {
   args: { title: 'Card' },
   render: () => (

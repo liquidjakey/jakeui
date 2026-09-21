@@ -1,8 +1,8 @@
 {
   "$schema": "./figma.map.schema.json",
   "fileKey": "ovnLtL9xbX8SG5xDw673Un",
-  "generatedAt": "2026-08-09T10:05:51.276Z",
-  "note": "Code Connect substitute — this plan has no Dev/Full seat. Hand-owned; CI-checked by validate-map.mjs.",
+  "generatedAt": "2026-09-11T00:25:05.253Z",
+  "note": "Figma correspondence only. Public interfaces are compiler-derived in agent/manifest.json. Transform entries are not props.",
   "components": {
     "Sidebar Navigation Item": {
       "figmaNodeId": "17:13",
@@ -11,16 +11,24 @@
       "codeExport": "SidebarNavigationItem",
       "props": {
         "Label#17:0": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/sidebar-navigation-item.md"
         },
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'default' | 'active'"
+          "designCode": "state",
+          "targets": [
+            "active"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/sidebar-navigation-item.md"
         }
       }
     },
@@ -34,13 +42,15 @@
           "kind": "prop",
           "figma": "Label",
           "code": "label",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Selected": {
           "kind": "prop",
           "figma": "Selected",
           "code": "selected",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -54,31 +64,36 @@
           "kind": "prop",
           "figma": "Title",
           "code": "title",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Description#66:3": {
           "kind": "prop",
           "figma": "Description",
           "code": "description",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Cancel label#66:6": {
           "kind": "prop",
           "figma": "Cancel label",
           "code": "cancelLabel",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Action label#66:9": {
           "kind": "prop",
           "figma": "Action label",
           "code": "actionLabel",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Tone": {
           "kind": "prop",
           "figma": "Tone",
           "code": "tone",
-          "type": "'default' | 'destructive'"
+          "type": "\"default\" | \"destructive\" | undefined",
+          "required": false
         }
       }
     },
@@ -92,13 +107,15 @@
           "kind": "prop",
           "figma": "Title",
           "code": "title",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Type": {
           "kind": "prop",
           "figma": "Type",
           "code": "type",
-          "type": "'bar' | 'line'"
+          "type": "\"bar\" | \"line\" | undefined",
+          "required": false
         }
       }
     },
@@ -109,22 +126,28 @@
       "codeExport": "Command",
       "props": {
         "Label#67:3": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/command.md"
         },
         "Shortcut#67:6": {
           "kind": "prop",
           "figma": "Shortcut",
           "code": "shortcut",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Selected": {
           "kind": "prop",
           "figma": "Selected",
           "code": "selected",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -138,19 +161,25 @@
           "kind": "prop",
           "figma": "Label",
           "code": "label",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Value#67:14": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Value",
-          "code": "value",
-          "type": "string"
+          "designCode": "value",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/field.md"
         },
         "Helper text#67:19": {
           "kind": "prop",
           "figma": "Helper text",
           "code": "helperText",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "State": {
           "kind": "decompose",
@@ -169,7 +198,11 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "invalid",
+            "disabled"
+          ]
         }
       }
     },
@@ -183,19 +216,22 @@
           "kind": "prop",
           "figma": "Title",
           "code": "title",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Description#69:3": {
           "kind": "prop",
           "figma": "Description",
           "code": "description",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Density": {
           "kind": "prop",
           "figma": "Density",
           "code": "density",
-          "type": "'compact' | 'detailed'"
+          "type": "\"compact\" | \"detailed\" | undefined",
+          "required": false
         }
       }
     },
@@ -209,7 +245,8 @@
           "kind": "prop",
           "figma": "Value",
           "code": "value",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "State": {
           "kind": "decompose",
@@ -228,7 +265,11 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "invalid",
+            "disabled"
+          ]
         }
       }
     },
@@ -239,22 +280,34 @@
       "codeExport": "Label",
       "props": {
         "Label#70:5": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/label.md"
         },
         "Type": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Type",
-          "code": "type",
-          "type": "'required' | 'optional'"
+          "designCode": "type",
+          "targets": [
+            "requirement"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/label.md"
         },
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'default' | 'disabled'"
+          "designCode": "state",
+          "targets": [
+            "disabled"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/label.md"
         }
       }
     },
@@ -268,7 +321,8 @@
           "kind": "prop",
           "figma": "Value",
           "code": "value",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "State": {
           "kind": "decompose",
@@ -290,7 +344,11 @@
           "controlled": [
             "open"
           ],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "invalid",
+            "disabled"
+          ]
         }
       }
     },
@@ -301,10 +359,14 @@
       "codeExport": "Progress",
       "props": {
         "Type": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Type",
-          "code": "type",
-          "type": "'determinate' | 'indeterminate'"
+          "designCode": "type",
+          "targets": [
+            "value"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/progress.md"
         }
       }
     },
@@ -318,7 +380,8 @@
           "kind": "prop",
           "figma": "Axis",
           "code": "axis",
-          "type": "'vertical' | 'horizontal'"
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false
         }
       }
     },
@@ -332,7 +395,8 @@
           "kind": "prop",
           "figma": "Orientation",
           "code": "orientation",
-          "type": "'horizontal' | 'vertical'"
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false
         }
       }
     },
@@ -357,7 +421,10 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         }
       }
     },
@@ -368,35 +435,43 @@
       "codeExport": "Button",
       "props": {
         "Label#76:0": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/button.md"
         },
         "Show leading icon#76:25": {
           "kind": "slot-toggle",
           "figma": "Show leading icon",
           "code": "leadingIcon",
-          "type": "React.ReactNode",
-          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+          "type": "ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears.",
+          "required": false
         },
         "Leading icon#214:0": {
           "kind": "slot",
           "figma": "Leading icon",
           "code": "leadingIcon",
-          "type": "React.ReactNode"
+          "type": "ReactNode",
+          "required": false
         },
         "Style": {
           "kind": "prop",
           "figma": "Style",
           "code": "style",
-          "type": "'primary' | 'secondary' | 'outline' | 'ghost'"
+          "type": "\"primary\" | \"secondary\" | \"outline\" | \"ghost\" | undefined",
+          "required": false
         },
         "Size": {
           "kind": "prop",
           "figma": "Size",
           "code": "size",
-          "type": "'small' | 'medium'"
+          "type": "\"small\" | \"medium\" | undefined",
+          "required": false
         },
         "State": {
           "kind": "decompose",
@@ -415,7 +490,10 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         }
       }
     },
@@ -429,13 +507,15 @@
           "kind": "prop",
           "figma": "Orientation",
           "code": "orientation",
-          "type": "'horizontal' | 'vertical'"
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false
         },
         "Attached": {
           "kind": "prop",
           "figma": "Attached",
           "code": "attached",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -449,13 +529,18 @@
           "kind": "prop",
           "figma": "Label",
           "code": "label",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Value": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Value",
-          "code": "value",
-          "type": "'unchecked' | 'checked' | 'indeterminate'"
+          "designCode": "value",
+          "targets": [
+            "checked"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/checkbox.md"
         },
         "State": {
           "kind": "decompose",
@@ -472,7 +557,10 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         }
       }
     },
@@ -486,13 +574,15 @@
           "kind": "prop",
           "figma": "Label",
           "code": "label",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Value": {
           "kind": "prop",
           "figma": "Value",
           "code": "value",
-          "type": "'unselected' | 'selected'"
+          "type": "string",
+          "required": true
         },
         "State": {
           "kind": "decompose",
@@ -509,7 +599,10 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         }
       }
     },
@@ -523,13 +616,18 @@
           "kind": "prop",
           "figma": "Label",
           "code": "label",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Value": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Value",
-          "code": "value",
-          "type": "'unchecked' | 'checked'"
+          "designCode": "value",
+          "targets": [
+            "checked"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/switch.md"
         },
         "State": {
           "kind": "decompose",
@@ -546,7 +644,10 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         }
       }
     },
@@ -560,13 +661,15 @@
           "kind": "prop",
           "figma": "Label",
           "code": "label",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Pressed": {
           "kind": "prop",
           "figma": "Pressed",
           "code": "pressed",
-          "type": "'false' | 'true'"
+          "type": "boolean",
+          "required": true
         },
         "State": {
           "kind": "decompose",
@@ -585,7 +688,10 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         }
       }
     },
@@ -599,13 +705,15 @@
           "kind": "prop",
           "figma": "Selection",
           "code": "selection",
-          "type": "'single' | 'multiple'"
+          "type": "\"single\" | \"multiple\" | undefined",
+          "required": false
         },
         "Orientation": {
           "kind": "prop",
           "figma": "Orientation",
           "code": "orientation",
-          "type": "'horizontal' | 'vertical'"
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false
         }
       }
     },
@@ -619,13 +727,15 @@
           "kind": "prop",
           "figma": "Value",
           "code": "value",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Helper#82:14": {
           "kind": "prop",
           "figma": "Helper",
           "code": "helper",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "State": {
           "kind": "decompose",
@@ -644,7 +754,11 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "invalid",
+            "disabled"
+          ]
         }
       }
     },
@@ -658,13 +772,18 @@
           "kind": "prop",
           "figma": "Size",
           "code": "size",
-          "type": "'small' | 'default'"
+          "type": "\"default\" | \"small\" | undefined",
+          "required": false
         },
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'default' | 'disabled'"
+          "designCode": "state",
+          "targets": [
+            "disabled"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/switch-thumb.md"
         }
       }
     },
@@ -678,13 +797,18 @@
           "kind": "prop",
           "figma": "Size",
           "code": "size",
-          "type": "'small' | 'default'"
+          "type": "\"default\" | \"small\" | undefined",
+          "required": false
         },
         "Value": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Value",
-          "code": "value",
-          "type": "'unchecked' | 'checked'"
+          "designCode": "value",
+          "targets": [
+            "checked"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/switch-root.md"
         },
         "State": {
           "kind": "decompose",
@@ -707,7 +831,10 @@
             "invalid"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Visual anatomy only: state previews appearance, not a standalone interactive control. Use Switch or RadioGroup in application code.",
+          "targets": [
+            "state"
+          ]
         }
       }
     },
@@ -740,10 +867,14 @@
       "codeExport": "RadioGroupIndicator",
       "props": {
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'default' | 'disabled'"
+          "designCode": "state",
+          "targets": [
+            "disabled"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/radio-group-indicator.md"
         }
       }
     },
@@ -754,10 +885,14 @@
       "codeExport": "RadioGroupItem",
       "props": {
         "Value": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Value",
-          "code": "value",
-          "type": "'unchecked' | 'checked'"
+          "designCode": "value",
+          "targets": [
+            "checked"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/radio-group-item.md"
         },
         "State": {
           "kind": "decompose",
@@ -780,7 +915,10 @@
             "invalid"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Visual anatomy only: state previews appearance, not a standalone interactive control. Use Switch or RadioGroup in application code.",
+          "targets": [
+            "state"
+          ]
         }
       }
     },
@@ -791,34 +929,51 @@
       "codeExport": "RadioGroupRoot",
       "props": {
         "Option 1#174:0": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Option 1",
-          "code": "option1",
-          "type": "string"
+          "designCode": "option1",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/radio-group-root.md"
         },
         "Option 2#174:25": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Option 2",
-          "code": "option2",
-          "type": "string"
+          "designCode": "option2",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/radio-group-root.md"
         },
         "Option 3#174:50": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Option 3",
-          "code": "option3",
-          "type": "string"
+          "designCode": "option3",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/radio-group-root.md"
         },
         "Orientation": {
           "kind": "prop",
           "figma": "Orientation",
           "code": "orientation",
-          "type": "'vertical' | 'horizontal'"
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false
         },
         "Selection": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Selection",
-          "code": "selection",
-          "type": "'first' | 'second' | 'none'"
+          "designCode": "selection",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/radio-group-root.md"
         },
         "State": {
           "kind": "decompose",
@@ -836,7 +991,10 @@
             "invalid"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Visual anatomy only: state previews appearance, not a standalone interactive control. Use Switch or RadioGroup in application code.",
+          "targets": [
+            "state"
+          ]
         }
       }
     },
@@ -869,28 +1027,44 @@
       "codeExport": "Accordion",
       "props": {
         "Title#85:0": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Title",
-          "code": "title",
-          "type": "string"
+          "designCode": "title",
+          "targets": [
+            "items"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/accordion.md"
         },
         "Content#85:5": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Content",
-          "code": "content",
-          "type": "string"
+          "designCode": "content",
+          "targets": [
+            "items"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/accordion.md"
         },
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'closed' | 'open'"
+          "designCode": "state",
+          "targets": [
+            "openIds"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/accordion.md"
         },
         "Disabled": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Disabled",
-          "code": "disabled",
-          "type": "'false' | 'true'"
+          "designCode": "disabled",
+          "targets": [
+            "items"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/accordion.md"
         }
       }
     },
@@ -901,28 +1075,41 @@
       "codeExport": "Breadcrumb",
       "props": {
         "Home label#88:0": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Home label",
-          "code": "homeLabel",
-          "type": "string"
+          "designCode": "homeLabel",
+          "targets": [
+            "items"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/breadcrumb.md"
         },
         "Parent label#88:3": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Parent label",
-          "code": "parentLabel",
-          "type": "string"
+          "designCode": "parentLabel",
+          "targets": [
+            "items"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/breadcrumb.md"
         },
         "Current label#88:6": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Current label",
-          "code": "currentLabel",
-          "type": "string"
+          "designCode": "currentLabel",
+          "targets": [
+            "items"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/breadcrumb.md"
         },
         "Collapsed": {
           "kind": "prop",
           "figma": "Collapsed",
           "code": "collapsed",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -936,25 +1123,35 @@
           "kind": "prop",
           "figma": "Trigger label",
           "code": "triggerLabel",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Content#89:5": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Content",
-          "code": "content",
-          "type": "string"
+          "designCode": "content",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/collapsible.md"
         },
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'closed' | 'open'"
+          "designCode": "state",
+          "targets": [
+            "open"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/collapsible.md"
         },
         "Disabled": {
           "kind": "prop",
           "figma": "Disabled",
           "code": "disabled",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -977,7 +1174,8 @@
           "kind": "prop",
           "figma": "Open",
           "code": "open",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -997,10 +1195,15 @@
           "note": "Breakpoint fixture. Not a prop unless code deliberately exposes one."
         },
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'default' | 'disabled'"
+          "designCode": "state",
+          "targets": [
+            "page",
+            "pageCount"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/pagination.md"
         }
       }
     },
@@ -1014,13 +1217,15 @@
           "kind": "prop",
           "figma": "Orientation",
           "code": "orientation",
-          "type": "'horizontal' | 'vertical'"
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false
         },
         "Density": {
           "kind": "prop",
           "figma": "Density",
           "code": "density",
-          "type": "'default' | 'compact'"
+          "type": "\"default\" | \"compact\" | undefined",
+          "required": false
         }
       }
     },
@@ -1040,10 +1245,14 @@
           "note": "Breakpoint fixture. Not a prop unless code deliberately exposes one."
         },
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'expanded' | 'collapsed'"
+          "designCode": "state",
+          "targets": [
+            "collapsed"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/sidebar.md"
         }
       }
     },
@@ -1057,19 +1266,22 @@
           "kind": "prop",
           "figma": "Title",
           "code": "title",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Description#103:5": {
           "kind": "prop",
           "figma": "Description",
           "code": "description",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Tone": {
           "kind": "prop",
           "figma": "Tone",
           "code": "tone",
-          "type": "'info' | 'success' | 'warning' | 'destructive'"
+          "type": "\"destructive\" | \"info\" | \"success\" | \"warning\" | undefined",
+          "required": false
         }
       }
     },
@@ -1083,25 +1295,29 @@
           "kind": "prop",
           "figma": "Title",
           "code": "title",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Description#105:5": {
           "kind": "prop",
           "figma": "Description",
           "code": "description",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Type": {
           "kind": "prop",
           "figma": "Type",
           "code": "type",
-          "type": "'standard' | 'form'"
+          "type": "\"form\" | \"standard\" | undefined",
+          "required": false
         },
         "Size": {
           "kind": "prop",
           "figma": "Size",
           "code": "size",
-          "type": "'small' | 'large'"
+          "type": "\"small\" | \"large\" | undefined",
+          "required": false
         }
       }
     },
@@ -1115,25 +1331,29 @@
           "kind": "prop",
           "figma": "Title",
           "code": "title",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Description#106:5": {
           "kind": "prop",
           "figma": "Description",
           "code": "description",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Placement": {
           "kind": "prop",
           "figma": "Placement",
           "code": "placement",
-          "type": "'left' | 'right'"
+          "type": "\"left\" | \"right\" | undefined",
+          "required": false
         },
         "Width": {
           "kind": "prop",
           "figma": "Width",
           "code": "width",
-          "type": "'compact' | 'wide'"
+          "type": "\"compact\" | \"wide\" | undefined",
+          "required": false
         }
       }
     },
@@ -1144,28 +1364,38 @@
       "codeExport": "DropdownMenu",
       "props": {
         "Primary item label#109:0": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Primary item label",
-          "code": "primaryItemLabel",
-          "type": "string"
+          "designCode": "primaryItemLabel",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/dropdown-menu.md"
         },
         "Primary shortcut#109:5": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Primary shortcut",
-          "code": "primaryShortcut",
-          "type": "string"
+          "designCode": "primaryShortcut",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/dropdown-menu.md"
         },
         "Type": {
           "kind": "prop",
           "figma": "Type",
           "code": "type",
-          "type": "'standard' | 'checkbox'"
+          "type": "\"checkbox\" | \"standard\" | undefined",
+          "required": false
         },
         "Density": {
           "kind": "prop",
           "figma": "Density",
           "code": "density",
-          "type": "'compact' | 'comfortable'"
+          "type": "\"compact\" | \"comfortable\" | undefined",
+          "required": false
         }
       }
     },
@@ -1179,25 +1409,29 @@
           "kind": "prop",
           "figma": "Title",
           "code": "title",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Description#111:5": {
           "kind": "prop",
           "figma": "Description",
           "code": "description",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Size": {
           "kind": "prop",
           "figma": "Size",
           "code": "size",
-          "type": "'small' | 'large'"
+          "type": "\"small\" | \"large\" | undefined",
+          "required": false
         },
         "Arrow": {
           "kind": "prop",
           "figma": "Arrow",
           "code": "arrow",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -1211,25 +1445,29 @@
           "kind": "prop",
           "figma": "Title",
           "code": "title",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Description#111:15": {
           "kind": "prop",
           "figma": "Description",
           "code": "description",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Side": {
           "kind": "prop",
           "figma": "Side",
           "code": "side",
-          "type": "'left' | 'right'"
+          "type": "\"left\" | \"right\" | undefined",
+          "required": false
         },
         "Width": {
           "kind": "prop",
           "figma": "Width",
           "code": "width",
-          "type": "'compact' | 'wide'"
+          "type": "\"compact\" | \"wide\" | undefined",
+          "required": false
         }
       }
     },
@@ -1243,13 +1481,15 @@
           "kind": "prop",
           "figma": "Label",
           "code": "label",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Side": {
           "kind": "prop",
           "figma": "Side",
           "code": "side",
-          "type": "'top' | 'bottom' | 'left' | 'right'"
+          "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | undefined",
+          "required": false
         }
       }
     },
@@ -1263,7 +1503,8 @@
           "kind": "prop",
           "figma": "Type",
           "code": "type",
-          "type": "'button' | 'avatar'"
+          "type": "\"button\" | \"avatar\" | undefined",
+          "required": false
         },
         "State": {
           "kind": "decompose",
@@ -1284,7 +1525,11 @@
             "closed",
             "open"
           ],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled",
+            "open"
+          ]
         }
       }
     },
@@ -1295,42 +1540,51 @@
       "codeExport": "DropdownMenuItem",
       "props": {
         "Label#144:0": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/dropdown-menu-item.md"
         },
         "Show icon#144:13": {
           "kind": "slot-toggle",
           "figma": "Show icon",
           "code": "icon",
-          "type": "React.ReactNode",
-          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+          "type": "ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears.",
+          "required": false
         },
         "Shortcut#144:26": {
           "kind": "prop",
           "figma": "Shortcut",
           "code": "shortcut",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Show shortcut#144:39": {
           "kind": "slot-toggle",
           "figma": "Show shortcut",
           "code": "shortcut",
-          "type": "React.ReactNode",
-          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+          "type": "string | undefined",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears.",
+          "required": false
         },
         "Icon#259:0": {
           "kind": "slot",
           "figma": "Icon",
           "code": "icon",
-          "type": "React.ReactNode"
+          "type": "ReactNode",
+          "required": false
         },
         "Tone": {
           "kind": "prop",
           "figma": "Tone",
           "code": "tone",
-          "type": "'default' | 'destructive'"
+          "type": "\"default\" | \"destructive\" | undefined",
+          "required": false
         },
         "State": {
           "kind": "decompose",
@@ -1347,13 +1601,17 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         },
         "Inset": {
           "kind": "prop",
           "figma": "Inset",
           "code": "inset",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -1364,29 +1622,39 @@
       "codeExport": "DropdownMenuCheckboxItem",
       "props": {
         "Label#144:52": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/dropdown-menu-checkbox-item.md"
         },
         "Show icon#146:0": {
           "kind": "slot-toggle",
           "figma": "Show icon",
           "code": "icon",
-          "type": "React.ReactNode",
-          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+          "type": "ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears.",
+          "required": false
         },
         "Icon#259:13": {
           "kind": "slot",
           "figma": "Icon",
           "code": "icon",
-          "type": "React.ReactNode"
+          "type": "ReactNode",
+          "required": false
         },
         "Value": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Value",
-          "code": "value",
-          "type": "'unchecked' | 'checked' | 'indeterminate'"
+          "designCode": "value",
+          "targets": [
+            "checked"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/dropdown-menu-checkbox-item.md"
         },
         "State": {
           "kind": "decompose",
@@ -1403,7 +1671,10 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         }
       }
     },
@@ -1414,29 +1685,39 @@
       "codeExport": "DropdownMenuRadioItem",
       "props": {
         "Label#144:62": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/dropdown-menu-radio-item.md"
         },
         "Show icon#146:20": {
           "kind": "slot-toggle",
           "figma": "Show icon",
           "code": "icon",
-          "type": "React.ReactNode",
-          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+          "type": "ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears.",
+          "required": false
         },
         "Icon#259:23": {
           "kind": "slot",
           "figma": "Icon",
           "code": "icon",
-          "type": "React.ReactNode"
+          "type": "ReactNode",
+          "required": false
         },
         "Value": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Value",
-          "code": "value",
-          "type": "'unchecked' | 'checked'"
+          "designCode": "value",
+          "targets": [
+            "checked"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/dropdown-menu-radio-item.md"
         },
         "State": {
           "kind": "decompose",
@@ -1453,7 +1734,10 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         }
       }
     },
@@ -1464,16 +1748,21 @@
       "codeExport": "DropdownMenuLabel",
       "props": {
         "Label#144:69": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/dropdown-menu-label.md"
         },
         "Inset": {
           "kind": "prop",
           "figma": "Inset",
           "code": "inset",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -1484,23 +1773,29 @@
       "codeExport": "DropdownMenuSubTrigger",
       "props": {
         "Label#144:73": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/dropdown-menu-sub-trigger.md"
         },
         "Show icon#146:34": {
           "kind": "slot-toggle",
           "figma": "Show icon",
           "code": "icon",
-          "type": "React.ReactNode",
-          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+          "type": "ReactNode",
+          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears.",
+          "required": false
         },
         "Icon#259:30": {
           "kind": "slot",
           "figma": "Icon",
           "code": "icon",
-          "type": "React.ReactNode"
+          "type": "ReactNode",
+          "required": false
         },
         "State": {
           "kind": "decompose",
@@ -1521,13 +1816,18 @@
             "closed",
             "open"
           ],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled",
+            "open"
+          ]
         },
         "Inset": {
           "kind": "prop",
           "figma": "Inset",
           "code": "inset",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -1541,19 +1841,22 @@
           "kind": "prop",
           "figma": "Side",
           "code": "side",
-          "type": "'top' | 'right' | 'bottom' | 'left'"
+          "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | undefined",
+          "required": false
         },
         "Align": {
           "kind": "prop",
           "figma": "Align",
           "code": "align",
-          "type": "'start' | 'center' | 'end'"
+          "type": "\"start\" | \"center\" | \"end\" | undefined",
+          "required": false
         },
         "Arrow": {
           "kind": "prop",
           "figma": "Arrow",
           "code": "arrow",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -1567,13 +1870,15 @@
           "kind": "prop",
           "figma": "Side",
           "code": "side",
-          "type": "'left' | 'right'"
+          "type": "\"left\" | \"right\" | undefined",
+          "required": false
         },
         "Align": {
           "kind": "prop",
           "figma": "Align",
           "code": "align",
-          "type": "'start' | 'center' | 'end'"
+          "type": "\"start\" | \"center\" | \"end\" | undefined",
+          "required": false
         }
       }
     },
@@ -1620,7 +1925,8 @@
           "kind": "prop",
           "figma": "Type",
           "code": "type",
-          "type": "'button' | 'rTL'"
+          "type": "\"button\" | \"submit\" | \"reset\" | undefined",
+          "required": false
         },
         "State": {
           "kind": "decompose",
@@ -1643,7 +1949,11 @@
             "closed",
             "open"
           ],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled",
+            "open"
+          ]
         }
       }
     },
@@ -1657,13 +1967,18 @@
           "kind": "prop",
           "figma": "Mode",
           "code": "mode",
-          "type": "'modal' | 'trapFocus'"
+          "type": "\"modal\" | \"trapFocus\" | undefined",
+          "required": false
         },
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'closed' | 'open'"
+          "designCode": "state",
+          "targets": [
+            "open"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/popover-backdrop.md"
         }
       }
     },
@@ -1690,7 +2005,10 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         }
       }
     },
@@ -1704,7 +2022,8 @@
           "kind": "prop",
           "figma": "Side",
           "code": "side",
-          "type": "'top' | 'right' | 'bottom' | 'left'"
+          "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | undefined",
+          "required": false
         }
       }
     },
@@ -1715,16 +2034,22 @@
       "codeExport": "PopoverViewport",
       "props": {
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'current' | 'previous'"
+          "designCode": "state",
+          "targets": [
+            "children",
+            "previous"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/popover-viewport.md"
         },
         "Direction": {
           "kind": "prop",
           "figma": "Direction",
           "code": "direction",
-          "type": "'top' | 'right' | 'bottom' | 'left'"
+          "type": "PopoverSide | undefined",
+          "required": false
         }
       }
     },
@@ -1735,48 +2060,63 @@
       "codeExport": "PopoverContent",
       "props": {
         "Show header#179:0": {
-          "kind": "slot-toggle",
+          "kind": "transform",
           "figma": "Show header",
-          "code": "header",
-          "type": "React.ReactNode",
-          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+          "designCode": "header",
+          "targets": [
+            "title",
+            "description"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/popover-content.md"
         },
         "Show close#179:49": {
-          "kind": "slot-toggle",
+          "kind": "transform",
           "figma": "Show close",
-          "code": "close",
-          "type": "React.ReactNode",
-          "note": "Boolean toggles a placeholder in Figma; in code the slot is nullable and the boolean disappears."
+          "designCode": "close",
+          "targets": [
+            "onClose"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/popover-content.md"
         },
         "Body text#179:98": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Body text",
-          "code": "bodyText",
-          "type": "string"
+          "designCode": "bodyText",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/popover-content.md"
         },
         "Size": {
           "kind": "prop",
           "figma": "Size",
           "code": "size",
-          "type": "'small' | 'large'"
+          "type": "\"small\" | \"large\" | undefined",
+          "required": false
         },
         "Side": {
           "kind": "prop",
           "figma": "Side",
           "code": "side",
-          "type": "'top' | 'right' | 'bottom' | 'left'"
+          "type": "PopoverSide | undefined",
+          "required": false
         },
         "Align": {
           "kind": "prop",
           "figma": "Align",
           "code": "align",
-          "type": "'start' | 'center' | 'end'"
+          "type": "\"start\" | \"center\" | \"end\" | undefined",
+          "required": false
         },
         "Arrow": {
           "kind": "prop",
           "figma": "Arrow",
           "code": "arrow",
-          "type": "'false' | 'true'"
+          "type": "boolean | undefined",
+          "required": false
         }
       }
     },
@@ -1815,19 +2155,27 @@
           "kind": "prop",
           "figma": "Initials",
           "code": "initials",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Size": {
           "kind": "prop",
           "figma": "Size",
           "code": "size",
-          "type": "'small' | 'medium' | 'large'"
+          "type": "\"small\" | \"medium\" | \"large\" | undefined",
+          "required": false
         },
         "Type": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Type",
-          "code": "type",
-          "type": "'initials' | 'status'"
+          "designCode": "type",
+          "targets": [
+            "src",
+            "initials",
+            "status"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/avatar.md"
         }
       }
     },
@@ -1838,22 +2186,28 @@
       "codeExport": "Badge",
       "props": {
         "Label#111:32": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/badge.md"
         },
         "Tone": {
           "kind": "prop",
           "figma": "Tone",
           "code": "tone",
-          "type": "'neutral' | 'info' | 'success' | 'warning' | 'destructive'"
+          "type": "\"destructive\" | \"info\" | \"success\" | \"warning\" | \"neutral\" | undefined",
+          "required": false
         },
         "Size": {
           "kind": "prop",
           "figma": "Size",
           "code": "size",
-          "type": "'small' | 'medium'"
+          "type": "\"small\" | \"medium\" | undefined",
+          "required": false
         }
       }
     },
@@ -1867,25 +2221,35 @@
           "kind": "prop",
           "figma": "Title",
           "code": "title",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Description#126:5": {
           "kind": "prop",
           "figma": "Description",
           "code": "description",
-          "type": "string"
+          "type": "string | undefined",
+          "required": false
         },
         "Type": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Type",
-          "code": "type",
-          "type": "'content' | 'media'"
+          "designCode": "type",
+          "targets": [
+            "media"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/card.md"
         },
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'default' | 'interactive'"
+          "designCode": "state",
+          "targets": [
+            "href"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/card.md"
         }
       }
     },
@@ -1899,7 +2263,8 @@
           "kind": "prop",
           "figma": "Type",
           "code": "type",
-          "type": "'text' | 'avatar' | 'card' | 'tableRow'"
+          "type": "\"text\" | \"avatar\" | \"card\" | \"tableRow\" | undefined",
+          "required": false
         }
       }
     },
@@ -1910,28 +2275,41 @@
       "codeExport": "Table",
       "props": {
         "First row label#130:0": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "First row label",
-          "code": "firstRowLabel",
-          "type": "string"
+          "designCode": "firstRowLabel",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/table.md"
         },
         "Second row label#130:5": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Second row label",
-          "code": "secondRowLabel",
-          "type": "string"
+          "designCode": "secondRowLabel",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/table.md"
         },
         "Density": {
           "kind": "prop",
           "figma": "Density",
           "code": "density",
-          "type": "'compact' | 'comfortable'"
+          "type": "TableDensity | undefined",
+          "required": false
         },
         "Selection": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Selection",
-          "code": "selection",
-          "type": "'none' | 'selected'"
+          "designCode": "selection",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/table.md"
         }
       }
     },
@@ -1959,16 +2337,21 @@
       "codeExport": "TableCaption",
       "props": {
         "Caption#161:0": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Caption",
-          "code": "caption",
-          "type": "string"
+          "designCode": "caption",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/table-caption.md"
         },
         "Position": {
           "kind": "prop",
           "figma": "Position",
           "code": "position",
-          "type": "'top' | 'bottom'"
+          "type": "\"top\" | \"bottom\" | undefined",
+          "required": false
         }
       }
     },
@@ -1979,16 +2362,21 @@
       "codeExport": "TableHead",
       "props": {
         "Label#161:3": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Label",
-          "code": "label",
-          "type": "string"
+          "designCode": "label",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/table-head.md"
         },
         "Alignment": {
           "kind": "prop",
           "figma": "Alignment",
           "code": "alignment",
-          "type": "'left' | 'center' | 'right'"
+          "type": "TableAlignment | undefined",
+          "required": false
         }
       }
     },
@@ -1999,22 +2387,28 @@
       "codeExport": "TableCell",
       "props": {
         "Value#161:7": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Value",
-          "code": "value",
-          "type": "string"
+          "designCode": "value",
+          "targets": [
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/table-cell.md"
         },
         "Alignment": {
           "kind": "prop",
           "figma": "Alignment",
           "code": "alignment",
-          "type": "'left' | 'center' | 'right'"
+          "type": "TableAlignment | undefined",
+          "required": false
         },
         "Emphasis": {
           "kind": "prop",
           "figma": "Emphasis",
           "code": "emphasis",
-          "type": "'default' | 'strong'"
+          "type": "\"default\" | \"strong\" | undefined",
+          "required": false
         }
       }
     },
@@ -2028,7 +2422,8 @@
           "kind": "prop",
           "figma": "Type",
           "code": "type",
-          "type": "'header' | 'body' | 'footer'"
+          "type": "\"header\" | \"body\" | \"footer\" | undefined",
+          "required": false
         },
         "State": {
           "kind": "decompose",
@@ -2045,13 +2440,17 @@
           "controlled": [
             "selected"
           ],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "selected"
+          ]
         },
         "Density": {
           "kind": "prop",
           "figma": "Density",
           "code": "density",
-          "type": "'compact' | 'comfortable'"
+          "type": "TableDensity | undefined",
+          "required": false
         }
       }
     },
@@ -2078,7 +2477,10 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "disabled"
+          ]
         }
       }
     },
@@ -2120,19 +2522,22 @@
           "kind": "prop",
           "figma": "Month label",
           "code": "monthLabel",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Mode": {
           "kind": "prop",
           "figma": "Mode",
           "code": "mode",
-          "type": "'single' | 'range'"
+          "type": "\"single\" | \"range\" | undefined",
+          "required": false
         },
         "Density": {
           "kind": "prop",
           "figma": "Density",
           "code": "density",
-          "type": "'compact' | 'comfortable'"
+          "type": "\"compact\" | \"comfortable\" | undefined",
+          "required": false
         }
       }
     },
@@ -2146,7 +2551,8 @@
           "kind": "prop",
           "figma": "Mode",
           "code": "mode",
-          "type": "'single' | 'range'"
+          "type": "\"single\" | \"range\" | undefined",
+          "required": false
         },
         "State": {
           "kind": "decompose",
@@ -2165,13 +2571,19 @@
             "disabled"
           ],
           "controlled": [],
-          "note": "Figma enum packs states that co-occur at runtime. Never emit as an enum prop."
+          "note": "Design-state classification. Only targets are public props; other states are internal/browser-owned or opposite values of a controlled prop.",
+          "targets": [
+            "invalid",
+            "disabled"
+          ]
         },
         "Open": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "Open",
-          "code": "open",
-          "type": "'false' | 'true'"
+          "designCode": "open",
+          "targets": [],
+          "reason": "State is internal to the component; there is no public setter.",
+          "reference": "docs/agent/components/date-picker.md"
         }
       }
     },
@@ -2185,7 +2597,8 @@
           "kind": "prop",
           "figma": "Title",
           "code": "title",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "Viewport": {
           "kind": "responsive-fixture",
@@ -2197,12 +2610,20 @@
           "note": "Breakpoint fixture. Not a prop unless code deliberately exposes one."
         },
         "State": {
-          "kind": "prop",
+          "kind": "transform",
           "figma": "State",
-          "code": "state",
-          "type": "'populated' | 'empty'"
+          "designCode": "state",
+          "targets": [
+            "empty",
+            "loading",
+            "error",
+            "children"
+          ],
+          "reason": "Figma presentation is represented by composition or runtime state; consult the current component reference and target props.",
+          "reference": "docs/agent/components/data-table.md"
         }
       }
     }
-  }
+  },
+  "schemaVersion": 2
 }

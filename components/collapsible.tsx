@@ -4,19 +4,9 @@ import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 
 /**
- * Collapsible — single disclosure region.
- *
- * Figma: `Collapsible`, node 89:*, 4 variants.
- * Contract: docs/components/collapsible.md
- *
- * Token-identical to Accordion. That is defensible rather than a duplication
- * problem: the Figma master models ONE disclosure item, which is what a
- * Collapsible is, while an Accordion is a group of the same item. The difference
- * is real in code — Accordion takes items[] and openIds[], this takes one boolean.
- *
- * The map types State as 'closed' | 'open' and Disabled as 'false' | 'true'.
- * Both are emitted as real booleans: a stringly-typed boolean is a Figma artefact,
- * not an API.
+ * Single controlled disclosure. Use Accordion for a group of headed sections.
+ * Closed content unmounts; stateful children should lift state if it must persist.
+ * Consumer contract: docs/agent/components/collapsible.md.
  */
 export interface CollapsibleProps {
   triggerLabel: string;
@@ -45,8 +35,7 @@ export function Collapsible({
     >
       <button
         type="button"
-        // The record: "The trigger is a button carrying aria-expanded and
-        // aria-controls." Deliberately NOT wrapped in a heading — see the props
+        // The trigger exposes expanded state and its controlled panel ID.
         // table; a lone Collapsible usually sits inside content that already has
         // one, and a second would pollute the outline.
         aria-expanded={open}
@@ -57,7 +46,7 @@ export function Collapsible({
           // px is `space/3-5` (14px), not `space/4` (16px); the trigger binds
           // Label/LG (14/20 medium), not Body/MD (14/20 regular).
           'flex w-full items-center justify-between gap-2 px-[calc(var(--spacing)*3.5)] py-3 text-left text-label-lg',
-          // Asserted, not transcribed: no focus token is recorded on this set.
+          // Keep a visible keyboard focus ring.
           'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-inset',
           MOTION.colors,
           disabled && 'cursor-not-allowed',
@@ -67,15 +56,7 @@ export function Collapsible({
         <span aria-hidden="true">{open ? '−' : '+'}</span>
       </button>
 
-      {/*
-        The record: "The panel stays in the accessibility tree only while open."
-        Unmounted when closed, not hidden with CSS — display:none would still be
-        in the DOM for some tooling, and the record asks for absence.
-
-        ⚠️ No open/close height animation, for the reason documented at length in
-        accordion.tsx: the grid-row technique does not survive the transition in
-        Chrome, and the two components stay behaviour-identical.
-      */}
+      {/* Closed content unmounts, so only trigger colours animate. */}
       {open ? (
         <div id={panelId} className="px-4 pb-3 text-body-md">
           {children}

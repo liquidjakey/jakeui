@@ -4,7 +4,7 @@ import { Textarea } from './textarea.js';
 import type { TextareaProps } from './textarea.js';
 
 /**
- * Stories for `Textarea`. Contract: docs/components/textarea.md
+ * Stories for `Textarea`. Contract: docs/agent/components/textarea.md
  *
  * Textarea is controlled — `value` and `onChange` are required — so every story
  * drives it through local state. That makes the placeholder/filled distinction
@@ -30,7 +30,7 @@ const meta = {
         component:
           'Multiline text input. Shares Input’s visual contract token-for-token. The Figma `State` ' +
           'enum (Default · Focused · Error · Disabled) is decomposed: `invalid` and `disabled` are ' +
-          'independent booleans and focus is browser-owned. See docs/state-decomposition.md.',
+          'independent booleans and focus is browser-owned. See docs/agent/figma-sync.md.',
       },
     },
   },

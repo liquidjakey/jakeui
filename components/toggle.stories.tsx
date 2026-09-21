@@ -3,13 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Toggle } from './toggle.js';
 
 /**
- * Stories for `Toggle`.
- * Contract: docs/components/toggle.md
- *
- * A **button** with `aria-pressed`, not a checkbox with `aria-checked`. The record
- * said otherwise until 9 Aug 2026: it was mapped to the `choice` archetype, which
- * told it to use `aria-checked` and referenced radio-group arrow keys. A
- * `togglebutton` archetype was added and the record re-enriched.
+ * Controlled button with aria-pressed. Space and Enter activate it.
+ * Consumer contract: docs/agent/components/toggle.md.
  */
 
 const meta = {
@@ -29,19 +24,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `Toggle` — a **button** with `aria-pressed`, not a checkbox with `aria-checked`.
- *
- * The record said otherwise until 9 Aug 2026: it was mapped to the `choice`
- * archetype, which told it to use `aria-checked` and referenced radio-group arrow
- * keys. A `togglebutton` archetype was added and the record re-enriched.
- *
- * ⚠️ Two recorded oddities visible here. **Pressed + hover binds the same tokens as
- * pressed at rest**, so a pressed toggle gives no hover feedback. And **pressed +
- * disabled loses the pressed state entirely** — it looks identical to unpressed +
- * disabled. `aria-pressed` still reports it, so assistive technology is correct,
- * but a sighted user cannot tell.
- */
+/** A pressed button, activated with Space or Enter. */
 export const Toggles: Story = {
   name: 'Toggle — states',
   args: { label: 'Toggle', pressed: false, onPressedChange: () => {} },
@@ -59,7 +42,7 @@ function ToggleDemo() {
         <Toggle label="Pressed + disabled" pressed onPressedChange={() => {}} disabled />
       </div>
       <p className="text-caption-sm text-muted-foreground">
-        The last two render identically — that is the recorded gap, not a bug in the code.
+        The last two share the same disabled styling; pressed semantics remain distinct.
       </p>
     </div>
   );

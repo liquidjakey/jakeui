@@ -3,18 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RadioGroup } from './radio-group.js';
 
 /**
- * Stories for `RadioGroup`.
- * Contracts: docs/components/radio-group.md · radio-group-indicator.md
- *
- * **This story also stands in for `Radio Group / Field Composition`**, which is
- * `kind: story-only` (*"Storybook story, never a prop"*) and therefore not bound to
- * code — the same treatment given to the Table and Popover root compositions.
- *
- * 🛑 **Its circle is asserted**, because the asset that holds it — `Radio Group /
- * Root`, 24 variants — is blocked by the 8-row cap. It asserts `primary` on one real
- * precedent: `Radio Group / Indicator` binds `fill primary` for its checked dot,
- * which is the only recorded checked-state colour in the system. Re-verify when the
- * row cap is raised.
+ * Controlled exclusive-choice groups using native radio inputs.
+ * Field-composition variants are examples, not additional public props.
+ * Consumer contract: docs/agent/components/radio-group.md.
  */
 
 const meta = {

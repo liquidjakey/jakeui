@@ -1,0 +1,22 @@
+{
+  "$comment": "Current unavailable design assets. These names have no public React export; compose existing exports or request an extension. Remove a name when its implementation becomes public.",
+  "names": [
+    "Command Panel",
+    "Dropdown Menu / Group",
+    "Dropdown Menu / Radio Group",
+    "Dropdown Menu / Root Composition",
+    "Dropdown Menu / Separator",
+    "Dropdown Menu / Shortcut",
+    "Icon",
+    "Popover / Form Content",
+    "Popover / Header",
+    "Popover / RTL Content",
+    "Popover / Root Composition",
+    "Radio Group / Field Composition",
+    "Switch / Field Composition",
+    "Table / Body",
+    "Table / Footer",
+    "Table / Header",
+    "Table / Root Composition"
+  ]
+}

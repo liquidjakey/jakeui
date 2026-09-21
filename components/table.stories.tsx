@@ -2,28 +2,15 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   Table,
+  TableCaption,
+  TableContainer,
   TableRow,
   TableHead,
   TableCell,
   TableActionTrigger,
 } from './table.js';
 
-/**
- * Stories for the Table family.
- * Contracts: docs/components/table.md · table-row.md · table-cell.md ·
- * table-head.md · table-caption.md · table-container.md · table-action-trigger.md
- *
- * **These stories are `Table / Root Composition`.** That Figma asset is deliberately
- * not bound to code: its only properties are `Pattern` (`kind: story-only` —
- * *"Storybook story, never a prop"*) and `Viewport` (`kind: responsive-fixture`).
- * Its four patterns — Basic, Footer, Actions, RTL — are the four stories below.
- *
- * ⚠️ **Look at the body text colour.** A default `TableCell` binds
- * `muted-foreground`, so ordinary table data renders muted and only `strong` cells
- * get full contrast. That is backwards from the usual convention, where the body is
- * primary and de-emphasis is the exception. It is transcribed faithfully from the
- * record, and it affects every cell in every table — worth a design review.
- */
+/** Table composition examples: Basic, Footer, Actions and RTL. Pattern and Viewport are fixtures, not props. TableCell uses muted-foreground by default; emphasis=strong uses foreground. Preserve the selected density and verify actual contrast. */
 
 const meta = {
   title: 'Content/Table',
@@ -32,9 +19,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Density carries no token delta anywhere in this family — verified, not assumed: ' +
-          'Table / Row shows three Compact/Comfortable pairs and all three bind identical tokens. ' +
-          'Density changes row height only, and no spacing token exists here, so row height is raw.',
+          "Native table composition with shared density. Density adjusts row height; existing geometry is scoped by agent/exceptions.json. Applications reuse the components rather than copying internal dimensions.",
       },
     },
   },
@@ -48,6 +33,20 @@ const INVOICES = [
   { id: 'INV-002', status: 'Pending', method: 'PayPal', amount: '$150.00' },
   { id: 'INV-003', status: 'Unpaid', method: 'Bank Transfer', amount: '$350.00' },
 ];
+
+/** Anatomy only. Application consumers normally use Table, which owns this wrapper. */
+export const Anatomy: Story = {
+  args: { children: null },
+  render: () => (
+    <TableContainer label="Anatomy example">
+      <table className="w-full border-collapse text-body-sm">
+        <TableCaption>Container and caption anatomy</TableCaption>
+        <thead><TableRow type="header"><TableHead>Name</TableHead></TableRow></thead>
+        <tbody><TableRow><TableCell>Ada Lovelace</TableCell></TableRow></tbody>
+      </table>
+    </TableContainer>
+  ),
+};
 
 /** Pattern = Basic. */
 export const Basic: Story = {
@@ -108,12 +107,7 @@ export const WithFooter: Story = {
   ),
 };
 
-/**
- * Pattern = Actions, plus row selection.
- *
- * The action trigger's `label` is **required by the type**, because the record
- * demands a name identifying the context — "Open actions for INV-001", not "More".
- */
+/** Row actions and selection. Supply a context-specific accessible label, such as Open actions for INV-001. */
 export const WithActions: Story = {
   name: 'Pattern = Actions + selection',
   args: { children: null },

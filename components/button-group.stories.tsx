@@ -2,14 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ButtonGroup } from './button-group.js';
 
 /**
- * Stories for `ButtonGroup`, recovered from the 8-row state cap by proof on
- * 9 Aug 2026.
- *
- * Contract: docs/components/button-group.md
- *
- * ✅ Its Label node was **unbound in Figma** at 14/22 Medium. The ramp question was
- * decided Option B on 10 Aug 2026; the label is a Button instance and now inherits
- * `Label/LG` 14/20 from it, which is what this code already used.
+ * Related Button controls with horizontal, vertical and attached layouts.
+ * Each button remains a separate action and focus stop.
+ * Consumer contract: docs/agent/components/button-group.md.
  */
 
 const meta = {

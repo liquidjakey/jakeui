@@ -2,14 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ToggleGroup } from './toggle-group.js';
 
-/**
- * Stories for `ToggleGroup`.
- * Contract: docs/components/toggle-group.md
- *
- * ⚠️ The group's record has only two tokens and one of them (`accent-foreground`)
- * looks like a stray binding — a foreground token on a container with no fill. It
- * is implemented as layout-only.
- */
+/** ToggleGroup composes pressed buttons in a layout-only wrapper. */
 
 const meta = {
   title: 'Controls/ToggleGroup',
@@ -29,19 +22,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `ToggleGroup` — `role="group"`, **not** `radiogroup`, even in single mode. Its
- * members are toggle buttons with `aria-pressed`, so Tab moves between them and
- * arrow keys are not used.
- *
- * Single mode has no "must have one" guard: unlike a radio group, all members may
- * be off, which is legitimate when the members are actions rather than data. Click
- * the pressed member to see it turn everything off.
- *
- * ⚠️ The group's record has only two tokens and one of them (`accent-foreground`)
- * looks like a stray binding — a foreground token on a container with no fill. It
- * is implemented as layout-only.
- */
+/** ToggleGroup uses role=group and aria-pressed buttons, not radio semantics. Tab moves between buttons. Single mode permits no pressed item; use RadioGroup when a persistent one-of-many selection is required. */
 export const Groups: Story = {
   name: 'ToggleGroup — single vs multiple',
   args: { items: [], pressedIds: [], onPressedChange: () => {}, label: 'Toggle group' },

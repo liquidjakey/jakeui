@@ -7,8 +7,7 @@ dist/
 build/
 *.log
 
-# Secrets — never commit. FIGMA_ACCESS_TOKEN belongs in your environment
-# (this machine sets it via `launchctl setenv`), never in a file here.
+# Secrets — never commit. FIGMA_ACCESS_TOKEN belongs in the environment.
 .env
 .env.local
 .env.*.local

@@ -3,18 +3,9 @@ import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 
 /**
- * Slider — range input.
- *
- * Figma: `Slider`, 3 variants.
- * Contract: docs/components/slider.md
- *
- * Its description could only ever say "no root-level bindings" — every token lives on
- * child nodes (Track, Range, Thumb) that the description generator does not read. Read
- * from live bindings instead; see .figma-blocked-variants.json.
- *
- *   Track   muted, every state
- *   Range   primary / primary / muted-foreground (default / focused / disabled)
- *   Thumb   card fill, with a primary / ring / muted-foreground STROKE
+ * Controlled native range input with decorative track, fill and thumb.
+ * Keep the native input operable and named; visual anatomy follows its value.
+ * Consumer contract: docs/agent/components/slider.md.
  */
 export interface SliderProps {
   value: number;
@@ -51,7 +42,7 @@ export function Slider({
       <div className="relative h-5">
         {/* Track and range are decorative — the real control is the native input
             beneath them, which keeps all the platform keyboard behaviour. */}
-        {/* Track is 6px tall in the file (space/1-5) and binds radius/lg; it was 4px. */}
+        {/* Track uses 6px (space/1-5) and radius/lg. */}
         <div aria-hidden="true" className="absolute inset-x-0 top-1.5 h-1.5 rounded-lg bg-muted">
           <div
             className={cn('h-full rounded-lg', MOTION.colors, disabled ? 'bg-muted-foreground' : 'bg-primary')}
@@ -76,7 +67,7 @@ export function Slider({
         <span
           aria-hidden="true"
           className={cn(
-            // Thumb is 20x20 in the file with a stroke/2 border; it was 12x12.
+            // Thumb uses 20x20 geometry with a stroke/2 border.
             // Focus swaps the stroke to `ring` at stroke/3.
             'pointer-events-none absolute top-0 size-5 -translate-x-1/2 rounded-full border-2 bg-card',
             MOTION.colors,

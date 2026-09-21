@@ -4,14 +4,9 @@ import { PopoverContent, PopoverTrigger, PopoverBackdrop } from './popover.js';
 import { PopoverArrow } from './popover-arrow.js';
 
 /**
- * `PopoverContent`, shown with `PopoverTrigger`, `PopoverArrow` and
- * `PopoverBackdrop` — the parts `Popover` composes, read directly from live bindings
- * after the description cap blocked them.
- *
- * 🔎 **`PopoverContent`'s action link binds `primary-readable`** — one of the three
- * tokens the 9 Aug rebind introduced, appearing in **no description anywhere**. That
- * is the single clearest proof that the bindings are current while the descriptions
- * are stale; it was inferred from the dump's silence and is now observed directly.
+ * Unanchored anatomy previews with trigger, arrow and visual backdrop parts.
+ * Use Popover for positioning, dismissal and focus management.
+ * Consumer contract: docs/agent/components/popover-content.md.
  */
 
 const meta = {
@@ -79,8 +74,8 @@ function PopoverPartsDemo() {
       <div className="relative h-20 overflow-hidden rounded-lg border border-border">
         <PopoverBackdrop open onClick={() => {}} />
         <p className="relative z-50 p-3 text-body-sm text-card">
-          🛑 PopoverBackdrop binds `foreground`, which inverts — near-black in light, near-white
-          in dark. Switch themes: it should darken in both, and it does not.
+          PopoverBackdrop uses the scrim token to darken both themes. This anatomy preview
+          provides no focus trap; use Popover for modal behavior.
         </p>
       </div>
     </div>

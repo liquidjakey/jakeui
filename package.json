@@ -10,15 +10,30 @@
   },
   "files": [
     "tokens/globals.css",
+    "tokens/index.css",
+    "tokens/runtime.css",
+    "tokens/fonts.css",
     "icons/phosphor-map.ts",
     "components",
     "lib",
-    "figma.map.json"
+    "figma.map.json",
+    "figma.map.schema.json",
+    "agent",
+    "docs/agent",
+    "docs/README.md",
+    "docs/tokens",
+    "examples/recipes.tsx",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "!components/*.stories.tsx"
   ],
   "exports": {
-    "./tokens.css": "./tokens/globals.css",
+    "./tokens.css": "./tokens/index.css",
     "./icons": "./icons/phosphor-map.ts",
     "./map": "./figma.map.json",
+    "./manifest": "./agent/manifest.json",
+    "./fonts.css": "./tokens/fonts.css",
+    "./utils": "./lib/public.ts",
     ".": "./components/index.ts"
   },
   "scripts": {
@@ -29,34 +44,30 @@
     "typecheck": "tsc --noEmit",
     "computed-type:check": "node scripts/computed-type-check.mjs",
     "computed-type:explore": "node scripts/computed-type-check.mjs --explore",
-    "check": "npm run tokens:check && npm run map:check && npm run docs:check && npm run typecheck && npm run computed-type:check",
+    "check": "npm run tokens:check && npm run map:check && npm run docs:check && npm run agent:check && npm run typecheck && npm run consumer:check && npm run interaction:check",
+    "agent": "node scripts/agent.mjs",
+    "agent:sync": "node scripts/agent-generate.mjs",
+    "agent:check": "node scripts/agent-generate.mjs --check && node scripts/agent-check.mjs && node --test scripts/agent.test.mjs && npm run agent:lint -- --path examples/recipes.tsx",
+    "agent:lint": "node scripts/agent-lint.mjs",
+    "consumer:check": "node scripts/consumer-check.mjs",
+    "interaction:check": "node scripts/interaction-check.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "docs:adopt": "node scripts/adopt-docs.mjs",
-    "docs:check": "node scripts/docs-check.mjs && node scripts/docs-digest.mjs --check && node scripts/props-table-check.mjs",
-    "docs:enrich": "node scripts/enrich-docs.mjs",
-    "docs:digest": "node scripts/docs-digest.mjs",
-    "docs:verify": "node scripts/verify-docs-dump.mjs --compare .figma-docs-hashes.json",
-    "docs:props-check": "node scripts/props-table-check.mjs"
+    "docs:check": "node scripts/agent-generate.mjs --check && node scripts/agent-check.mjs"
   },
   "peerDependencies": {
     "@phosphor-icons/react": "^2.1.10",
     "react": "^18.0.0 || ^19.0.0",
-    "tailwind-merge": "^3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@phosphor-icons/react": {
-      "optional": true
-    }
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@fontsource/inter": "^5.3.0",
     "@phosphor-icons/react": "^2.1.10",
     "@storybook/react-vite": "^9.1.20",
     "@storybook/test-runner": "^0.23.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.2.4",
+    "playwright-core": "^1.62.1",
     "react": "^19.0.0",
     "react-dom": "^19.2.8",
     "storybook": "^9.1.20",
@@ -65,6 +76,8 @@
     "vite": "^6.4.3"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@floating-ui/react": "^0.27.20",
     "tailwind-merge": "^3.0.0"
   }
 }

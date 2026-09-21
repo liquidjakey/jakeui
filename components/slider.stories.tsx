@@ -2,17 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Slider } from './slider.js';
 
-/**
- * Stories for `Slider` — a component whose token contract existed **only on child
- * nodes**, and which was built from live bindings.
- *
- * `Slider`, `Skeleton` and `Popover / Arrow` each had a description that could only
- * ever read **"no root-level bindings"**, because the generator reads the root and
- * every token here lives on a child (Track, Range, Thumb).
- *
- * ✅ `Slider` turned out to have the **most complete contract of anything read** —
- * every state distinguishable, which several root-level records are not.
- */
+/** Controlled Slider examples. Check pointer/keyboard values, focus, invalid and disabled states. */
 
 const meta = {
   title: 'Controls/Slider',
@@ -48,7 +38,7 @@ function SliderDemo() {
       <Slider label="Locked" value={25} onValueChange={() => {}} disabled />
       <p className="text-caption-sm text-muted-foreground">
         Tab to a slider and use the arrow keys. Disabled swaps the range and thumb stroke to
-        `muted-foreground` — a real, recorded distinction, unlike Switch and Radio.
+        `muted-foreground`. Switch and RadioGroup keep their own disabled treatments.
       </p>
     </div>
   );

@@ -1,23 +1,13 @@
 import { cn } from '../lib/cn.js';
 
 /**
- * Skeleton — loading placeholder.
- *
- * Figma: `Skeleton`, 4 variants.
- * Contract: docs/components/skeleton.md
- *
- * Another "no root-level bindings" record — every shape's fill lives on a child. Read
- * from live bindings: EVERY shape in EVERY variant binds `muted`, and the four types
- * differ only in which shapes are present:
- *
- *   text      3 lines
- *   avatar    circle + 2 lines
- *   card      media block, title, 2 description lines, meta, action
- *   tableRow  5 cells
+ * Loading placeholder with its own status region; decorative shapes are hidden.
+ * Use one meaningful loading announcement per loading region.
+ * Consumer contract: docs/agent/components/skeleton.md.
  */
 export interface SkeletonProps {
   type?: 'text' | 'avatar' | 'card' | 'tableRow';
-  /** Announced once by the caller; the shapes themselves are hidden. */
+  /** Text for this component's status region; shapes are hidden from assistive technology. */
   label?: string;
 }
 
@@ -25,8 +15,7 @@ const bar = 'rounded bg-muted';
 
 export function Skeleton({ type = 'text', label = 'Loading' }: SkeletonProps) {
   return (
-    // Hidden from assistive technology: the loading state is announced ONCE by the
-    // caller's live region, not by every placeholder shape.
+    // The wrapper announces loading; individual placeholder shapes are decorative.
     <div
       role="status"
       aria-label={label}

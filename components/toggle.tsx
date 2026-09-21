@@ -3,20 +3,9 @@ import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 
 /**
- * Toggle — two-state action button.
- *
- * Figma: `Toggle`, node 82:*, 8 variants.
- * Contract: docs/components/toggle.md
- *
- * THE RECORD'S ACCESSIBILITY CONTRACT WAS WRONG UNTIL 9 AUG 2026. Toggle was
- * mapped to the `choice` archetype, which told it to expose state via aria-checked
- * and referenced radio-group arrow keys. A toggle button is the W3C APG Toggle
- * Button pattern: aria-pressed, and BOTH Space and Enter activate it (a native
- * <button> gives that for free — a checkbox-style Space-only handler would be
- * wrong). A `togglebutton` archetype was added and the record re-enriched.
- *
- * 8 variants is exactly at the description generator's 8-row cap, so nothing is
- * truncated here. One more variant and it would have been.
+ * Two-state action button using aria-pressed. Native Space and Enter activate it.
+ * Keep the accessible action label stable as pressed changes.
+ * Consumer contract: docs/agent/components/toggle.md.
  */
 export interface ToggleProps {
   label: string;
@@ -54,14 +43,12 @@ export function Toggle({
         MOTION.colors,
         'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
         pressed
-          ? // Pressed + hover binds the SAME tokens as pressed at rest, so there is
-            // deliberately no hover change here. Transcribed as recorded and
-            // flagged — every other interactive component does change on hover.
+          ? // Pressed keeps the same fill on hover.
             'border-transparent bg-accent text-accent-foreground'
           : 'border-border bg-card text-foreground',
         // Pressed + disabled loses the pressed state entirely — it renders exactly
         // like unpressed + disabled. aria-pressed still reports it correctly, so
-        // assistive technology is fine, but a sighted user cannot tell. Recorded.
+        // assistive technology, but the visual state is not differentiated.
         disabled && 'cursor-not-allowed border-transparent bg-muted text-muted-foreground',
       )}
     >

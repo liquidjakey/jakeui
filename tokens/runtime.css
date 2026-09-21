@@ -1,0 +1,13 @@
+/* Code-side semantic aliases pending Figma adoption. The exported Figma dump is untouched. */
+:root {
+  --destructive-readable: var(--color-red-700);
+  --scrim: color-mix(in srgb, var(--color-neutral-950) 50%, transparent);
+}
+.dark {
+  color-scheme: dark;
+  --destructive-readable: var(--color-red-300);
+}
+@theme inline {
+  --color-destructive-readable: var(--destructive-readable);
+  --color-scrim: var(--scrim);
+}

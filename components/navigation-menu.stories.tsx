@@ -1,29 +1,22 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { NavigationMenu } from './navigation-menu.js';
+import { useState } from "react";
+import { PreviewNavigation } from "../.storybook/preview-navigation.js";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { NavigationMenu } from "./navigation-menu.js";
 
 /**
- * Stories for `NavigationMenu`, recovered from the 8-row state cap by proof on
- * 9 Aug 2026.
- *
- * Contract: docs/components/navigation-menu.md
- *
- * 🛑 **This is the second component whose code deliberately diverges from its
- * record.** It binds `fill card` + `text primary-foreground`, and
- * `primary-foreground` is near-white in *both* modes — so on a white card in Light
- * the text is invisible. The code binds `foreground`. Switch the toolbar Theme to
- * "Side by side": readable in both, which it would not be if the record had been
- * followed. Same cause as `Card`.
+ * Navigation and compact-menu previews. Foreground on card preserves readable
+ * resting links; current links use the accent pair.
+ * Consumer contract: docs/agent/components/navigation-menu.md.
  */
 
 const meta = {
-  title: 'Navigation/NavigationMenu',
+  title: "Navigation/NavigationMenu",
   component: NavigationMenu,
   parameters: {
     docs: {
       description: {
         component:
-          'One of two components carrying a deliberate, recorded divergence from its ' +
-          'doc record — do not "restore" it to match the record without reading the rationale.',
+          "Flat navigation links with a controlled compact toggle. Action-colored text uses primary-readable; preserve readable foreground pairing in both themes.",
       },
     },
   },
@@ -32,20 +25,28 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `NavigationMenu`. 🛑 The record's text token would be invisible in light mode —
- * see the note at the top. Check this one in both themes.
- */
+/** Check navigation text and active destinations in both themes. */
 export const Navigation: Story = {
   args: { items: [] },
-  render: () => (
-    <NavigationMenu
-      label="Product"
-      items={[
-        { href: '#', label: 'Overview', current: true },
-        { href: '#', label: 'Patients' },
-        { href: '#', label: 'Billing' },
-      ]}
-    />
-  ),
+  render: () => <NavigationDemo />,
 };
+
+function NavigationDemo() {
+  const [open, setOpen] = useState(false);
+  return (
+    <PreviewNavigation initial="/overview">
+      {(destination) => (
+        <NavigationMenu
+          label="Product"
+          open={open}
+          onOpenChange={setOpen}
+          items={[
+            { href: "/overview", label: "Overview" },
+            { href: "/patients", label: "Patients" },
+            { href: "/billing", label: "Billing" },
+          ].map((item) => ({ ...item, current: item.href === destination }))}
+        />
+      )}
+    </PreviewNavigation>
+  );
+}

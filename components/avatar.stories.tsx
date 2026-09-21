@@ -2,16 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Avatar } from './avatar.js';
 
 /**
- * Stories for `Avatar`, recovered from the 8-row state cap by proof on 9 Aug 2026.
- *
- * Contract: docs/components/avatar.md
- *
- * ⚠️ PARTLY RESOLVED. The Initials text was unbound on all three sizes — 11/14,
- * 14/18 and 18/22, all Semi Bold. Under the Option B decision of 10 Aug 2026,
- * medium and large now bind `Heading/XS` and `Heading/LG`. **Small cannot be
- * bound: the ramp has no 11px semibold step**, so it composes `text-label-xs`
- * with `font-semibold` and stays a documented divergence in
- * `scripts/computed-type-exceptions.json`.
+ * Identity and presence previews. Small initials use the scoped typography
+ * exception in agent/exceptions.json.
+ * Consumer contract: docs/agent/components/avatar.md.
  */
 
 const meta = {

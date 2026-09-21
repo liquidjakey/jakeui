@@ -1,21 +1,10 @@
 import { cn } from '../lib/cn.js';
+import { useState } from 'react';
 
 /**
- * Avatar — identity representation using initials, image and presence.
- *
- * Figma: `Avatar`, node 111:25, 6 variants.
- * Contract: docs/components/avatar.md
- *
- * Unblocked 9 Aug 2026 by a CORRECTION, not new information: it had been flagged as
- * carrying pre-rebind stale tokens, but the detection regex matched
- * `text primary-foreground` while looking for `text primary`. See handoff §5.
- *
- * This record pairs its fill and text CORRECTLY (primary + primary-foreground) —
- * worth noting, because Navigation Menu binds that same primary-foreground on a
- * `card` fill where it is invisible. The token is right; that usage is wrong.
- *
- * Size is one of the few places a dimension is genuinely tokenised: radius/16,
- * radius/24, radius/32 are real variables rather than raw values.
+ * Identity image with initials fallback and optional presence.
+ * Supply a meaningful name; use decorative when adjacent text already names it.
+ * Consumer contract: docs/agent/components/avatar.md.
  */
 export interface AvatarProps {
   initials: string;
@@ -29,21 +18,9 @@ export interface AvatarProps {
 }
 
 /**
- * Diameters read from the file: 32 / 48 / 64, with radius/16, radius/24 and
- * radius/32 — exactly half of each, so every size is a true circle. Medium was
- * 40px and large was 56px, both a full step small.
- *
- * ⚠️ PARTLY RESOLVED (10 Aug 2026). The Initials text was unbound on all three
- * sizes — 11/14, 14/18 and 18/22, all Semi Bold, none of those line-heights in
- * the ramp. Under the Option B decision, medium and large are now bound in Figma
- * to `Heading/XS` 14/20 and `Heading/LG` 18/26, matching what this code uses.
- *
- * **Small is still unbound, and cannot be bound: the ramp has no 11px semibold
- * step.** `Label/XS` is 11/16 MEDIUM, so `small` below composes it with
- * `font-semibold` to reach the weight the file draws. That is why Avatar is one
- * of the three entries in scripts/computed-type-exceptions.json — the computed
- * 11/16/600 is off-ramp on purpose. Adding an 11px semibold step, or moving the
- * small initials to medium weight, is the open decision.
+ * Small initials use the approved 11/16/600 typography exception.
+ * Scope and retirement criteria: agent/exceptions.json; exact computed checks:
+ * scripts/computed-type-exceptions.json. Medium and large use heading tokens.
  */
 const SIZE = {
   small: 'size-8 text-label-xs font-semibold rounded-[calc(var(--radius-16))]',
@@ -58,8 +35,7 @@ const STATUS_SIZE = {
   large: 'size-2.5',
 } as const;
 
-// No presence colour is recorded — tokensUsed is eight entries and none is a status
-// colour. Asserted from the semantic families; Figma owes presence bindings.
+// Semantic presence colours are supplemented by status text below.
 const STATUS = {
   online: 'bg-success',
   offline: 'bg-muted-foreground',
@@ -74,6 +50,7 @@ export function Avatar({
   src,
   decorative = false,
 }: AvatarProps) {
+  const [failedSrc, setFailedSrc] = useState<string>();
   return (
     <span className="relative inline-flex shrink-0">
       <span
@@ -82,15 +59,19 @@ export function Avatar({
         aria-hidden={decorative || undefined}
         className={cn(
           'inline-flex items-center justify-center overflow-hidden',
-          // The Initials are Semi Bold in the file; this was font-medium.
           'bg-primary text-primary-foreground',
           SIZE[size],
         )}
       >
-        {src ? (
+        {src && src !== failedSrc ? (
           // Fallback chain: image -> initials. alt="" because the wrapper already
           // carries the accessible name.
-          <img src={src} alt="" className="h-full w-full object-cover" />
+          <img
+            src={src}
+            alt=""
+            onError={() => setFailedSrc(src)}
+            className="h-full w-full object-cover"
+          />
         ) : (
           initials
         )}

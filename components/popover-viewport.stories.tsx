@@ -2,10 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PopoverViewport } from './popover.js';
 
 /**
- * Stories for `PopoverViewport`.
- * Contract: docs/components/popover-viewport.md
- *
- * The component whose vocabulary was the **last unresolved doc block in the system**.
+ * Anatomy preview: previous content stays mounted but inert and invisible.
+ * Direction describes activation order, not popup placement.
+ * Consumer contract: docs/agent/components/popover-viewport.md.
  */
 
 const meta = {
@@ -15,9 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          '`direction` is an ACTIVATION direction (data-activation-direction), not anchored ' +
-          'placement — the `side` axis already owns top/right/bottom/left for placement. That ' +
-          'distinction is why the block was left owed rather than guessed.',
+          "direction describes activation order, not anchored placement. Previous content is mounted but inert and invisible; this anatomy surface does not implement a transition engine.",
       },
     },
   },
@@ -26,18 +23,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `PopoverViewport` — the component whose vocabulary was the **last unresolved doc
- * block in the system**.
- *
- * `direction` is an *activation* direction (`data-activation-direction`), not
- * anchored placement — that distinction is exactly why it was left owed rather than
- * guessed: the `side` axis already owns top/right/bottom/left for placement. Reading
- * this asset's own description settled it.
- *
- * Note `State` did **not** become an enum: current and previous both render at once
- * during a transition, and an enum could only ever show one.
- */
+/** Previous content is mounted but inert and invisible; only current content is usable. */
 export const Viewport: Story = {
   name: 'PopoverViewport — current + previous',
   args: { children: null },

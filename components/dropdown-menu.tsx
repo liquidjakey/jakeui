@@ -1,28 +1,17 @@
-import { useId } from 'react';
+import { useId, useLayoutEffect } from 'react';
 import { CaretRight } from '@phosphor-icons/react';
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
+import { useMenu } from '../lib/menu.js';
+import { PopoverArrow } from './popover-arrow.js';
+import { ThemedPortal, useAnchoredSurface } from '../lib/floating.js';
+import { useMergeRefs } from '@floating-ui/react';
 
 /**
- * The Dropdown Menu family — six of eleven assets.
- *
- * Figma: `Dropdown Menu` (109:*) plus `Dropdown Menu / *`.
- * Contracts: docs/components/dropdown-menu.md · dropdown-menu-trigger.md ·
- *            dropdown-menu-label.md · dropdown-menu-radio-item.md ·
- *            dropdown-menu-sub-trigger.md · dropdown-menu-sub-content.md
- *
- * / Item and / Checkbox Item were RECOVERED from the 8-row cap on 9 Aug 2026 — see
- * their own doc blocks below for the proofs.
- *
- * STILL BLOCKED by the cap: / Content (24 variants, 1 state row) and
- * / Root Composition (24, 8). Nothing can be inferred from 1 of 24 — unlike
- * Table / Row, whose missing rows sat on a provably inert axis.
- *
- * NOT MAPPED to code at all: / Group, / Radio Group, / Separator, / Shortcut. They
- * have doc records but no map entry, so they owe no codePath.
- *
- * PLACEMENT IS NOT COLLISION-AWARE, same limitation as Popover.
+ * Controlled command-menu family. Link the trigger's controls to the menu id.
+ * Linked menus use collision-aware portals; unlinked surfaces remain inline.
+ * Consumer contracts: docs/agent/components/dropdown-menu.md and sibling part refs.
  */
 
 /* ─────────────────────────── Trigger ──────────────────────────── */
@@ -38,14 +27,7 @@ export interface DropdownMenuTriggerProps {
   label?: string;
 }
 
-/**
- * NOTE THE CONTRAST WITH NativeSelect. Both maps annotate State with `controlled`
- * containing an open state. There it was deliberately NOT emitted, because a native
- * select's menu is platform-owned and its open state is neither observable nor
- * stylable. Here the menu is ours: it can be opened programmatically, its state is
- * observable, and aria-expanded needs it. Same annotation, opposite conclusion —
- * the difference is who owns the popup.
- */
+/** Caller owns open state and links controls to the menu id for focus management. */
 export function DropdownMenuTrigger({
   children,
   open,
@@ -63,12 +45,34 @@ export function DropdownMenuTrigger({
       aria-controls={open ? controls : undefined}
       aria-label={type === 'avatar' ? label : undefined}
       disabled={disabled}
-      onClick={() => onOpenChange(!open)}
+      onClick={() => {
+        onOpenChange(!open);
+        if (!open && controls)
+          requestAnimationFrame(() =>
+            document
+              .getElementById(controls)
+              ?.querySelector<HTMLElement>('[role^="menuitem"]:not([aria-disabled="true"])')
+              ?.focus(),
+          );
+      }}
       onKeyDown={(e) => {
+        if (e.key === 'Escape' && open) {
+          e.preventDefault();
+          onOpenChange(false);
+          return;
+        }
         // Down Arrow opens too — the APG convention for menu buttons.
-        if (e.key === 'ArrowDown' && !open) {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
           e.preventDefault();
           onOpenChange(true);
+          requestAnimationFrame(() => {
+            const items = controls
+              ? document
+                  .getElementById(controls)
+                  ?.querySelectorAll<HTMLElement>('[role^="menuitem"]:not([aria-disabled="true"])')
+              : undefined;
+            (e.key === 'ArrowUp' ? items?.[items.length - 1] : items?.[0])?.focus();
+          });
         }
       }}
       className={cn(
@@ -76,14 +80,10 @@ export function DropdownMenuTrigger({
         'inline-flex items-center gap-2 rounded-lg px-3 py-[calc(var(--spacing)*1.75)]',
         'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
         type === 'button' && 'border border-border bg-card text-label-md text-foreground',
-        // Avatar/closed binds accent-foreground with NO fill. accent-foreground is
-        // the text colour FOR the accent fill, so with nothing behind it it sits on
-        // whatever is beneath — the same class of mismatch as Card's
-        // info-foreground, though far less severe. Transcribed and flagged.
+        // The avatar trigger is transparent at rest; open adds the accent surface.
         type === 'avatar' && 'text-body-xs text-accent-foreground',
         open && 'bg-accent text-accent-foreground',
-        // Recorded disabled changes TEXT ONLY, with no fill change — unlike every
-        // other disabled control here, which moves to `muted`. Transcribed.
+        // Disabled dims text while preserving the current fill.
         disabled && 'cursor-not-allowed text-muted-foreground',
       )}
     >
@@ -102,19 +102,26 @@ export interface DropdownMenuProps {
   id?: string;
 }
 
-export function DropdownMenu({
-  children,
-  density = 'compact',
-  label,
-  id,
-}: DropdownMenuProps) {
-  return (
+export function DropdownMenu({ children, density = 'compact', label, id }: DropdownMenuProps) {
+  const menu = useMenu(id);
+  const floating = useAnchoredSurface(true, () => {}, 'bottom-start');
+  const ref = useMergeRefs([menu.ref, floating.refs.setFloating]);
+  useLayoutEffect(() => {
+    if (id)
+      floating.refs.setReference(
+        document.querySelector(`[aria-haspopup="menu"][aria-controls="${CSS.escape(id)}"]`),
+      );
+  }, [id, floating.refs]);
+  const content = (
     <div
+      {...menu}
+      ref={ref}
+      style={floating.elements.domReference ? floating.floatingStyles : undefined}
       id={id}
       role="menu"
       aria-label={label}
       className={cn(
-        'min-w-48 rounded-lg border border-border bg-popover text-label-md text-popover-foreground shadow-md',
+        'z-50 w-max min-w-48 max-w-full overflow-y-auto rounded-lg border border-border bg-popover text-label-md text-popover-foreground shadow-md',
         // Density padding on the container is not itself bound in the file; the
         // ITEMS are (px space/2, py space/1-5), and those are transcribed below.
         density === 'comfortable' ? 'p-2' : 'p-1',
@@ -122,6 +129,11 @@ export function DropdownMenu({
     >
       {children}
     </div>
+  );
+  return floating.elements.domReference ? (
+    <ThemedPortal reference={floating.elements.domReference}>{content}</ThemedPortal>
+  ) : (
+    content
   );
 }
 
@@ -132,14 +144,7 @@ export interface DropdownMenuLabelProps {
   inset?: boolean;
 }
 
-/**
- * The record: "Non-focusable." role="presentation" so it is skipped by arrow-key
- * navigation — a label announced as an item is a dead end for keyboard users.
- *
- * It binds full-strength popover-foreground, the SAME colour as the items it
- * labels, so a label looks exactly like the things beneath it. muted-foreground
- * would be the usual treatment. Transcribed as recorded and flagged.
- */
+/** Non-focusable section label; uses popover-foreground like the menu items. */
 export function DropdownMenuLabel({ children, inset = false }: DropdownMenuLabelProps) {
   return (
     <div
@@ -165,16 +170,7 @@ export interface DropdownMenuRadioItemProps {
   disabled?: boolean;
 }
 
-/**
- * 🛑 THE CHECKED STATE HAS NO RECORDED VISUAL. Both "Checked" rows in the record are
- * Highlighted rows, and they are identical to the unchecked highlighted row — there
- * is no recorded way to tell a checked radio item from an unchecked one.
- *
- * For an exclusive-choice control that is the one state that must be visible, so a
- * check indicator is rendered here: ASSERTED, not transcribed. aria-checked carries
- * it correctly either way, so assistive technology is fine — this is a sighted-user
- * gap. Figma owes a checked indicator.
- */
+/** Preserve the visible check indicator. Caller owns exclusivity across radio items. */
 export function DropdownMenuRadioItem({
   children,
   checked = false,
@@ -195,12 +191,12 @@ export function DropdownMenuRadioItem({
         'hover:bg-accent hover:text-accent-foreground',
         MOTION.colors,
         'focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:outline-none',
-        // No disabled tokens are recorded; shared convention asserted.
+        // Disabled items are skipped by menu navigation.
         disabled && 'pointer-events-none text-muted-foreground',
       )}
     >
       <span aria-hidden="true" className="inline-flex w-4 shrink-0 justify-center">
-        {checked ? '•' : icon ?? null}
+        {checked ? '•' : (icon ?? null)}
       </span>
       {children}
     </div>
@@ -219,15 +215,7 @@ export interface DropdownMenuSubTriggerProps {
   controls?: string;
 }
 
-/**
- * Open and Highlighted bind IDENTICAL tokens (accent fill, accent-foreground text),
- * so a sub trigger looks the same whether its submenu is open or merely hovered.
- * Transcribed as recorded and flagged in the props table.
- *
- * Inset is provably inert: both Inset pairs present in the record — Open and
- * Highlighted — bind identical tokens, the same reasoning that recovered
- * Table / Row. Padding only, and no spacing token, so the indent is raw.
- */
+/** Open and hover share accent styling. Inset reserves leading-icon alignment. */
 export function DropdownMenuSubTrigger({
   children,
   open,
@@ -247,9 +235,21 @@ export function DropdownMenuSubTrigger({
       tabIndex={disabled ? undefined : -1}
       onClick={disabled ? undefined : () => onOpenChange(!open)}
       onKeyDown={(e) => {
-        // Right opens and moves in, Left closes and returns. Flips in RTL.
-        if (e.key === 'ArrowRight') onOpenChange(true);
-        if (e.key === 'ArrowLeft') onOpenChange(false);
+        if (disabled) return;
+        const rtl = getComputedStyle(e.currentTarget).direction === 'rtl';
+        if (e.key === (rtl ? 'ArrowLeft' : 'ArrowRight')) {
+          e.preventDefault();
+          e.stopPropagation();
+          onOpenChange(true);
+          requestAnimationFrame(
+            () =>
+              controls &&
+              document
+                .getElementById(controls)
+                ?.querySelector<HTMLElement>('[role^="menuitem"]:not([aria-disabled="true"])')
+                ?.focus(),
+          );
+        }
       }}
       className={cn(
         'flex cursor-pointer items-center gap-2 px-2 py-1.5',
@@ -257,6 +257,7 @@ export function DropdownMenuSubTrigger({
         'hover:bg-accent hover:text-accent-foreground',
         open && 'bg-accent text-accent-foreground',
         inset && 'pl-8',
+        'focus-visible:bg-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
         disabled && 'pointer-events-none text-muted-foreground',
       )}
     >
@@ -266,7 +267,7 @@ export function DropdownMenuSubTrigger({
         </span>
       ) : null}
       <span className="flex-1">{children}</span>
-      {/* No indicator token is recorded — inherits currentColor. */}
+      {/* The decorative submenu arrow inherits the item's colour. */}
       <CaretRight size={12} weight="bold" aria-hidden="true" />
     </div>
   );
@@ -279,6 +280,7 @@ export interface DropdownMenuSubContentProps {
   side?: 'left' | 'right';
   align?: 'start' | 'center' | 'end';
   label?: string;
+  id?: string;
 }
 
 /**
@@ -293,22 +295,54 @@ export function DropdownMenuSubContent({
   side = 'right',
   align = 'start',
   label,
+  id: providedId,
 }: DropdownMenuSubContentProps) {
-  const id = useId();
-  return (
+  const autoId = useId();
+  const id = providedId ?? autoId;
+  const menu = useMenu(id);
+  const floating = useAnchoredSurface(
+    true,
+    () => {},
+    align === 'center' ? side : `${side}-${align}`,
+  );
+  const ref = useMergeRefs([menu.ref, floating.refs.setFloating]);
+  useLayoutEffect(() => {
+    floating.refs.setReference(document.querySelector(`[aria-controls="${CSS.escape(id)}"]`));
+  }, [id, floating.refs]);
+  const content = (
     <div
+      ref={ref}
+      style={floating.elements.domReference ? floating.floatingStyles : undefined}
+      onClick={menu.onClick}
+      onKeyDown={(e) => {
+        const rtl = getComputedStyle(e.currentTarget).direction === 'rtl';
+        if (e.key === (rtl ? 'ArrowRight' : 'ArrowLeft')) {
+          e.preventDefault();
+          e.stopPropagation();
+          const trigger = document.querySelector<HTMLElement>(
+            `[aria-controls="${CSS.escape(id)}"]`,
+          );
+          trigger?.click();
+          trigger?.focus();
+        } else menu.onKeyDown(e);
+      }}
       id={id}
       role="menu"
       aria-label={label}
       data-side={side}
       data-align={align}
       className={cn(
-        'min-w-40 rounded-lg border border-border bg-popover p-1',
+        'z-50 min-w-40 overflow-y-auto rounded-lg border border-border bg-popover p-1',
         'text-body-sm text-popover-foreground shadow-md',
       )}
     >
       {children}
     </div>
+  );
+  return floating.elements.domReference ? (
+    <ThemedPortal reference={floating.elements.domReference}>{content}</ThemedPortal>
+  ) : (
+    content
   );
 }
 
@@ -324,20 +358,7 @@ export interface DropdownMenuItemProps {
   disabled?: boolean;
 }
 
-/**
- * RECOVERED FROM THE 8-ROW CAP. 12 variants = Tone(2) x State(3) x Inset(2); 8 rows
- * present. Inset is PROVABLY INERT — all three pairs present bind identical tokens
- * (Destructive/Default, Destructive/Highlighted, Default/Highlighted) — so the two
- * Inset-only gaps carry nothing new.
- *
- * The two Default/Disabled gaps rest on a WEAKER inference: Destructive/Disabled is
- * identical to Destructive/Default, so Disabled contributes no delta there, but that
- * is one observation extended across the Tone axis rather than three. Consistent
- * with this whole family recording no disabled tokens; flagged in the props table.
- *
- * Both `Show icon` and `Show shortcut` are kind: slot-toggle — the booleans
- * disappear and the nullable slots are the API.
- */
+/** Action item. Icon and shortcut are optional content, not visibility booleans. */
 export function DropdownMenuItem({
   children,
   onSelect,
@@ -356,15 +377,12 @@ export function DropdownMenuItem({
       className={cn(
         'flex cursor-pointer items-center gap-2 px-2 py-1.5',
         'rounded-[calc(var(--radius-4))]',
-        // Destructive keeps `destructive` text even when highlighted — deliberate in
-        // the record, but that pairing is not one the token system defines, so its
-        // contrast on `accent` is unverified.
-        tone === 'destructive' ? 'text-destructive' : 'text-popover-foreground',
-        tone === 'destructive'
-          ? 'hover:bg-accent'
-          : 'hover:bg-accent hover:text-accent-foreground',
+        // The readable destructive alias is retained on the highlighted surface.
+        tone === 'destructive' ? 'text-destructive-readable' : 'text-popover-foreground',
+        tone === 'destructive' ? 'hover:bg-accent' : 'hover:bg-accent hover:text-accent-foreground',
         inset && 'pl-8',
         disabled && 'pointer-events-none text-muted-foreground',
+        'focus-visible:bg-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
       )}
     >
       {icon ? (
@@ -395,18 +413,8 @@ export interface DropdownMenuCheckboxItemProps {
 }
 
 /**
- * RECOVERED FROM THE CAP: all three Highlighted rows (Unchecked, Checked,
- * Indeterminate) bind identical tokens, so Value is provably inert and the two
- * missing Default rows match Unchecked/Default.
- *
- * 🛑 AND THAT INERTNESS IS ITSELF THE DEFECT — the same one as the radio item.
- * Value being inert means there is NO RECORDED WAY to tell a checked item from an
- * unchecked one. For a multi-select control that is the state that must be visible,
- * so an indicator is asserted. aria-checked carries it correctly regardless, so
- * this is a sighted-user gap.
- *
- * The icon slot and the indicator compete for the leading position; the indicator
- * wins when checked — forced by the missing token, not a design choice.
+ * Multi-select item; keep the menu open while toggling. The visible checked or
+ * mixed indicator takes the leading slot; the optional icon appears when unchecked.
  */
 export function DropdownMenuCheckboxItem({
   children,
@@ -428,6 +436,7 @@ export function DropdownMenuCheckboxItem({
         'flex cursor-pointer items-center gap-2 px-2 py-1.5',
         'rounded-[calc(var(--radius-4))] text-popover-foreground',
         'hover:bg-accent hover:text-accent-foreground',
+        'focus-visible:bg-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
         disabled && 'pointer-events-none text-muted-foreground',
       )}
     >
@@ -447,19 +456,12 @@ export interface DropdownMenuContentProps {
   align?: 'start' | 'center' | 'end';
   arrow?: boolean;
   label?: string;
+  id?: string;
 }
 
 /**
- * Read from LIVE BINDINGS — its description showed 1 of 24 rows, so nothing could be
- * inferred. The read settles it in one line:
- *
- * SIDE AND ALIGN CARRY NO COLOUR DELTA AT ALL. 24 variants collapse to just THREE
- * distinct binding sets, and the only difference between those is whether the Arrow
- * node is present and where it sits in z-order. Both axes are purely geometric.
- *
- * Surface popover + border. Items: popover at rest, accent when highlighted, with
- * labels popover-foreground / accent-foreground and destructive items in destructive.
- * Shortcuts and indicators are muted-foreground.
+ * Inline menu surface and keyboard scope. Side/align annotate anatomy; use the
+ * linked DropdownMenu for anchored placement. An arrow is optional decoration.
  */
 export function DropdownMenuContent({
   children,
@@ -467,9 +469,13 @@ export function DropdownMenuContent({
   align = 'start',
   arrow = false,
   label,
+  id,
 }: DropdownMenuContentProps) {
+  const menu = useMenu(id);
   return (
     <div
+      {...menu}
+      id={id}
       role="menu"
       aria-label={label}
       data-side={side}
@@ -479,13 +485,7 @@ export function DropdownMenuContent({
         'text-body-sm text-popover-foreground shadow-md',
       )}
     >
-      {arrow ? (
-        <span
-          aria-hidden="true"
-          className="absolute h-2 w-2 rotate-45 border border-border bg-popover"
-          style={{ [side === 'top' ? 'bottom' : 'top']: '-5px', left: 'calc(50% - 4px)' }}
-        />
-      ) : null}
+      {arrow ? <PopoverArrow side={side} /> : null}
       {children}
     </div>
   );

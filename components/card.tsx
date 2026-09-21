@@ -3,38 +3,9 @@ import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 
 /**
- * Card — content container for related information and actions.
- *
- * Figma: `Card`, node 126:*, 4 variants.
- * Contract: docs/components/card.md
- *
- * ✅ THE `info-foreground` CONFLICT IS RESOLVED. Card.doc.json bound the card's
- * text to `info-foreground`, which on a `card` fill is roughly 1:1 contrast and
- * would have been invisible in both modes. This file therefore overrode it with
- * `card-foreground` and recorded that Figma owed a rebind.
- *
- * Re-read from the live bindings on 9 Aug 2026: the Title node binds `foreground`.
- * The record was stale, and the override was reaching the right answer for the
- * right reason — `foreground` and `card-foreground` resolve identically in both
- * modes (neutral/950 light, neutral/50 dark). It now binds what the file binds.
- *
- * ✅ CARD'S TEXT IS NOW BOUND IN FIGMA (10 Aug 2026). None of its four text nodes
- * carried a text style, and all four metrics were off-ramp:
- *
- *   Title        16 / 22 Semi Bold   ->  Heading/MD 16/24
- *   Description  14 / 21 Regular     ->  Body/MD    14/20
- *   Label        13 / 20 Medium      ->  Label/MD   13/18
- *   Initials     14 / 18 Semi Bold   ->  Heading/XS 14/20
- *
- * The ramp question was decided Option B — keep the ramp, bind the nodes to it —
- * so the file now carries exactly the steps this code already used. Card is no
- * longer the one place code cannot be literally identical to the file, and
- * nothing here changed.
- *
- * The previous title size was `text-body-xs` (12px) with a note transcribing
- * "size/11" from the record. The file says 16px. That was the record being wrong
- * by a full four steps of the scale, and it is the largest single visual error
- * found in this audit.
+ * Content container. href makes the entire card a link; keep nested interactive
+ * content outside that link, or use a static card with explicit actions.
+ * Consumer contract: docs/agent/components/card.md.
  */
 export interface CardProps {
   title: string;
@@ -62,15 +33,9 @@ export function Card({ title, description, children, media, href }: CardProps) {
   );
 
   const className = cn(
-    // padding `space/5` (20px) and gap `space/4` (16px), read from the file.
-    // Previously p-4 / gap-3, which was 16 / 12.
     'flex flex-col gap-4 rounded-lg bg-card p-5',
-    // Transcribed: Interactive binds `2px primary`. Flagged in the props table —
-    // this is the same treatment Input uses for FOCUS, so an interactive card
-    // looks focused at rest and nothing is left free for real focus.
+    // A primary border identifies the link at rest; keyboard focus adds a ring.
     interactive ? 'border-2 border-primary' : 'border border-border',
-    // Asserted, not transcribed: no focus token is recorded on this set. Uses the
-    // `ring` treatment shared with every other interactive component here.
     interactive && 'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
     MOTION.colors,
   );

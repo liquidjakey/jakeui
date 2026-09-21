@@ -3,17 +3,10 @@ import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 
 /**
- * Command — command menu ITEM primitive (not the palette; Command Panel is a
- * separate asset and not part of this build).
- *
- * Figma: `Command`, node 67:3, 2 variants.
- * Contract: docs/components/command.md
- *
- * The record is precise about what Selected means: "Selected=True is the
- * highlighted command o[ption]" — it is the ACTIVE DESCENDANT, not a chosen value.
- * A command palette selects nothing; it runs things. So focus never lands here: it
- * stays in the search input, which points at this item via aria-activedescendant,
- * which is why `id` is a prop. Moving real focus per keystroke would break typing.
+ * Command option anatomy, not a complete palette. A parent must own search,
+ * active-descendant navigation and activation. Keep focus on the parent input
+ * and point aria-activedescendant at the option id.
+ * Consumer contract: docs/agent/components/command.md.
  */
 export interface CommandProps {
   children: ReactNode;
@@ -53,7 +46,7 @@ export function Command({
       <span className="flex-1">{children}</span>
       {shortcut ? (
         // Decorative: screen readers announce the label, and the glyphs would be
-        // read as punctuation. No token is recorded for it; muted asserted.
+        // read as punctuation. Use muted-foreground.
         <span aria-hidden="true" className="text-caption-sm text-muted-foreground">
           {shortcut}
         </span>

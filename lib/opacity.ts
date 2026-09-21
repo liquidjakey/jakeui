@@ -1,62 +1,16 @@
 /**
- * State opacity, bound to the Figma `Interaction` collection.
- *
- * WHY THIS EXISTS
- * A live read on 10 Aug 2026 found the file distinguishes two dimmed states that
- * the code had collapsed into one:
- *
- *   State=Disabled  -> opacity/50   on Switch / Root and Radio Group / Item
- *   State=ReadOnly  -> opacity/80   on the same two sets, and Radio Group / Root
- *
- * `switch.tsx` and `radio-group.tsx` both wrote
- * `(state === 'disabled' || state === 'readOnly') && 'opacity-50'`, so a
- * read-only control rendered at 50% where the file draws 80% — noticeably more
- * dimmed than intended, and indistinguishable from disabled. Splitting the
- * branch is the fix; these constants are where the two values now live.
- *
- * WHY NOT TAILWIND'S `opacity-50` / `opacity-80`
- * They resolve to the same 0.5 and 0.8 today, and that is exactly the trap.
- * `lib/motion.ts` records the same reasoning for duration and easing: matching by
- * coincidence is the kind of silent drift the token layer exists to prevent. If
- * Figma retunes `opacity/80`, a hardcoded `opacity-80` would not follow, and
- * nothing would fail. These reference the variables, so a retune propagates
- * through `npm run tokens:sync` on its own.
- *
- * SCOPE — read this before reusing these elsewhere.
- * `opacity/50` for disabled is a real system-wide convention: the live read found
- * it bound on 13 sets (both disclosure menus' items, Popover / Trigger and
- * / Close, Table / Action Trigger, Calendar and Date Picker dates, and the two
- * here). `opacity/80` for read-only is bound on 3, and read-only exists as a
- * state on very few components.
- *
- * `Checkbox` and `Segmented Tab` also dim when disabled in CODE, but their Figma
- * variants carry NO opacity change at all — that dimming is asserted, and
- * recorded as such in their source. They deliberately do not use these constants,
- * because doing so would dress an assertion up as a binding.
+ * Token-bound state opacity. Disabled and read-only are distinct states;
+ * do not interchange them or apply read-only dimming to unrelated components.
  */
 
-/** `State=Disabled` — the file binds `opacity/50` on 13 component sets. */
+/** Disabled opacity for components using the system's opacity/50 role. */
 export const OPACITY_DISABLED = 'opacity-[var(--opacity-50)]';
 
-/** `State=ReadOnly` — the file binds `opacity/80`. Distinct from disabled. */
+/** Read-only opacity, distinct from disabled. */
 export const OPACITY_READONLY = 'opacity-[var(--opacity-80)]';
 
 /**
- * `Switch / Thumb` at `State=Disabled` — the file binds `opacity/75`.
- *
- * This is the thumb's OWN delta, not the track's. Its doc record claimed
- * "disabled styling is inherited from the Root state", which is another thing the
- * description format got wrong: the opacity axis is not carried in descriptions
- * at all, so the delta was invisible until the file was read directly.
- *
- * It COMPOUNDS with the track's `opacity/50`, because the thumb is nested inside
- * it — which is exactly how the file composes them, so the compounding is the
- * faithful result rather than a bug.
- *
- * `opacity/75` did not exist before 10 Aug 2026; the value sat in the file as a
- * raw 0.75 with no primitive to bind. It was added to the Interaction collection
- * rather than the value being snapped to the nearby `opacity/80`, because the
- * file's value is the specification and inventing a 5% shift to avoid a new token
- * would be the tail wagging the dog.
+ * Switch thumb's own disabled opacity. It compounds with the track's
+ * opacity/50 because the thumb is nested; do not remove either layer.
  */
 export const OPACITY_THUMB_DISABLED = 'opacity-[var(--opacity-75)]';

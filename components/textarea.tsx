@@ -4,20 +4,9 @@ import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 
 /**
- * Textarea — multiline text input for longer freeform content.
- *
- * Figma: `Textarea`, node 82:522, 4 variants.
- * Contract: docs/components/textarea.md · docs/state-decomposition.md
- *
- * The Figma `State` axis (Default · Focused · Error · Disabled) is NOT a prop.
- * `figma.map.json` marks it `kind: decompose` and it resolves to:
- *   - `Focused`  → `:focus-visible`, browser-owned, no prop
- *   - `Error`    → `invalid`  (independent boolean)
- *   - `Disabled` → `disabled` (independent boolean)
- *
- * Textarea shares Input's visual contract token-for-token, so the three build
- * blockers resolved for Input on 9 Aug 2026 apply here unchanged rather than
- * being re-decided. See docs/components/input.md §3.
+ * Controlled multiline input with a fixed editing viewport and optional counter.
+ * Invalid and disabled are independent; focus is browser-owned.
+ * Consumer contract: docs/agent/components/textarea.md.
  */
 export interface TextareaProps {
   /** Current field value. Renders in `--foreground`. */
@@ -32,7 +21,7 @@ export interface TextareaProps {
   maxLength?: number;
   /** Applies the error border. Independent of `disabled`. */
   invalid?: boolean;
-  /** Announced to assistive tech. Required when `invalid` is true. */
+  /** Standalone invalid controls need an error message. Inside Field, pass it to Field only. */
   errorMessage?: string;
   /** Blocks input. Independent of `invalid`. */
   disabled?: boolean;
@@ -45,29 +34,18 @@ export interface TextareaProps {
   required?: boolean;
   /** Required only when no visible `<label>` exists. */
   'aria-label'?: string;
+  'aria-describedby'?: string;
+  'aria-invalid'?: boolean | 'true' | 'false' | 'grammar' | 'spelling';
 }
 
 /**
- * Container tokens, per docs/components/textarea.md Table 3 — identical to
- * Input's, transcribed from the same four Figma state rows.
- *
- * `py` is `space/2-25` (9px), a half-step ramp member, written as an explicit
- * calc against `--spacing` so it resolves identically in any Tailwind v4 setup
- * and never degrades to a raw pixel value.
- *
- * `resize-none` is deliberate. The record's description sets a product-level
- * sizing policy: *"Textarea intentionally uses a fixed editing viewport height.
- * Long input scrolls or expands according to the runtime textarea contract; do
- * not convert the Figma value region to automatic component height without a
- * product-level behavior change."* A user-draggable handle defeats that and can
- * break surrounding layout. Changing it is a product decision, not a style one.
+ * Fixed editing viewport: long content scrolls, and rows sets the initial height.
+ * User resizing or automatic growth requires a scoped behavior change.
  */
 const BASE = [
   'block w-full resize-none',
   'rounded-lg border border-input bg-card',
-  // Textarea binds py `space/3` (12px), NOT the `space/2-25` (9px) that Input
-  // and NativeSelect use. It is a taller control in the file and this was
-  // copied across from Input.
+  // Textarea uses space/3 padding on both axes.
   'px-3 py-3',
   'text-body-md text-foreground',
   'placeholder:text-muted-foreground',
@@ -110,6 +88,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
     id,
     required = false,
     'aria-label': ariaLabel,
+    'aria-describedby': externalDescription,
+    'aria-invalid': externalInvalid,
   },
   ref,
 ) {
@@ -120,12 +100,20 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
   const countId = `${fieldId}-count`;
 
   const showError = invalid && Boolean(errorMessage);
+  const isInvalid =
+    invalid ||
+    (externalInvalid !== undefined && externalInvalid !== false && externalInvalid !== 'false');
   const showCount = typeof maxLength === 'number';
 
   // Helper text is NOT replaced by the error — a user usually needs both, per
   // the `textarea` archetype's donts.
   const describedBy =
-    [helper ? helperId : null, showCount ? countId : null, showError ? errorId : null]
+    [
+      externalDescription,
+      helper ? helperId : null,
+      showCount ? countId : null,
+      showError ? errorId : null,
+    ]
       .filter(Boolean)
       .join(' ') || undefined;
 
@@ -142,7 +130,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
         required={required}
         maxLength={maxLength}
         aria-label={ariaLabel}
-        aria-invalid={invalid || undefined}
+        aria-invalid={externalInvalid ?? (invalid || undefined)}
         aria-describedby={describedBy}
         onChange={onChange}
         onFocus={onFocus}
@@ -150,10 +138,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
         className={cn(
           BASE,
           !disabled && FOCUS,
-          // Error and Disabled are independent and may co-occur. The combined
-          // visual (muted fill + destructive border) has no Figma variant —
-          // inherited from Input decision 3, recorded in docs/components/textarea.md.
-          invalid && 'border-destructive',
+          // Invalid styling remains visible when the control is disabled.
+          isInvalid && 'border-destructive',
           disabled && 'bg-muted text-muted-foreground cursor-not-allowed',
         )}
       />
@@ -182,10 +168,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       {showError ? (
         <p
           id={errorId}
-          // aria-live="polite", NOT role="alert". Aligned across every control on
-          // 9 Aug 2026 to Field's recorded contract: the error "is announced
-          // politely; it is not a role='alert' per keystroke." An assertive region
-          // interrupts the user mid-keystroke on every validation pass.
+          // Polite feedback avoids interrupting typing on every validation pass.
           aria-live="polite"
           className="mt-1 text-caption-sm text-destructive"
         >

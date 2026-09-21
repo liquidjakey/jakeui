@@ -1,16 +1,6 @@
 import { cn } from '../lib/cn.js';
 
-/**
- * Separator — visual separator for grouping adjacent content.
- *
- * Figma: `Separator`, node 70:405, 2 variants.
- * Contract: docs/components/separator.md
- *
- * `decorative` has no Figma property and must exist: the record splits this
- * component in two semantically with no visual difference between the halves.
- * A purely visual rule is `aria-hidden`; one that genuinely divides groups keeps
- * `role="separator"`. Defaults to decorative, which is the common case.
- */
+/** Visual separator for content groups. decorative defaults to true and hides the rule from assistive technology; semantic divisions retain role=separator. */
 export interface SeparatorProps {
   /** Axis the rule runs along. */
   orientation?: 'horizontal' | 'vertical';

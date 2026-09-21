@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "policy": "Approved runtime exceptions override Figma correspondence only in their named scope. New exceptions require explicit design/engineering review; do not broaden an exception by analogy.",
+  "entries": [
+    {
+      "id": "runtime-readable-destructive",
+      "scope": [
+        "tokens/runtime.css",
+        "components/alert.tsx",
+        "components/dropdown-menu.tsx",
+        "components/date-picker.tsx",
+        "components/data-table.tsx",
+        "components/select.tsx",
+        "components/native-select.tsx",
+        "components/field.tsx"
+      ],
+      "decision": "Use destructive-readable for destructive text that needs contrast on tinted surfaces. It is not text on a solid destructive button.",
+      "status": "code-approved; Figma adoption pending",
+      "retirement": "Adopt the semantic alias in Figma and export it; preserve readable contrast in both themes."
+    },
+    {
+      "id": "runtime-scrim",
+      "scope": [
+        "tokens/runtime.css",
+        "components/popover.tsx",
+        "components/modal-surface.tsx"
+      ],
+      "decision": "Use scrim, a dark neutral with alpha in both themes; foreground is not a scrim token.",
+      "status": "code-approved; Figma adoption pending",
+      "retirement": "Adopt the scrim alias in Figma and export it."
+    },
+    {
+      "id": "surface-foreground-corrections",
+      "scope": [
+        "components/card.tsx",
+        "components/navigation-menu.tsx"
+      ],
+      "decision": "Use card-foreground on Card surfaces and primary-readable for action-colored navigation text. Preserve readable pairing in both themes.",
+      "status": "runtime correction retained",
+      "retirement": "Verify current Figma bindings and reconcile evidence without reducing contrast."
+    },
+    {
+      "id": "visual-anatomy-state",
+      "scope": [
+        "components/switch.tsx",
+        "components/radio-group.tsx"
+      ],
+      "decision": "SwitchRoot, RadioGroupItem and RadioGroupRoot retain appearance-preview state enums. They are anatomy, not replacement interactive controls; applications use Switch and RadioGroup.",
+      "status": "supported anatomy only",
+      "retirement": "Engineering review if the anatomy interface is redesigned."
+    },
+    {
+      "id": "documented-type-divergences",
+      "scope": [
+        "scripts/computed-type-exceptions.json"
+      ],
+      "decision": "The existing exact-class/exact-metric exceptions are the only permitted off-ramp typography cases. Do not copy them into applications.",
+      "status": "measured and narrowly gated",
+      "retirement": "Resolve each associated design decision, then remove its exception; counts remain checked."
+    },
+    {
+      "id": "unbound-layout-geometry",
+      "scope": [
+        "components",
+        "lib/floating.tsx"
+      ],
+      "decision": "Existing component geometry includes internal raw widths and positioning offsets. Applications must reuse these components rather than copy those literals. New layout uses the approved spacing/container rules.",
+      "status": "scoped internal implementation; not a consumer allowance",
+      "retirement": "Replace individual dimensions only through reviewed token adoption and visual verification."
+    }
+  ]
+}

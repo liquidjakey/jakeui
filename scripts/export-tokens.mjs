@@ -191,7 +191,7 @@ function interactionPrimitives() {
     } else if (figmaValue === 0) {
       out.push(`  --opacity-${tail(v.n)}: 0;`);
     } else {
-      // A 0-1 value means Figma is still on the old scale and is rendering this
+      // A 0-1 value means the input uses the wrong scale and is rendering this
       // 100x too transparent. Emit the correct CSS but make the drift loud.
       console.warn(
         `⚠ opacity/${tail(v.n)} holds ${figmaValue} (0-1 scale). Figma renders that as ` +
@@ -252,7 +252,7 @@ function themeColours() {
  * The type ramp, generated from the Figma text styles via the Typography
  * Primitives each one is BOUND to. Because every value here is a var()
  * reference, changing size/13 in Figma moves label-md and body-sm in code
- * automatically — the two cannot drift.
+ * automatically — the generated references stay synchronized.
  */
 function themeTypeRamp() {
   const notes = ann.textRampNotes || {};
@@ -302,7 +302,7 @@ function themeTypeRamp() {
   return out.join('\n');
 }
 
-/** Figma effect styles -> --shadow-*. Previously absent from CSS entirely. */
+/** Figma effect styles -> --shadow-*. */
 function themeShadows() {
   const out = [];
   for (const s of dump.effectStyles) {
@@ -408,7 +408,7 @@ ${themeDimensions()}
 
   /* --- Type ramp ---------------------------------------------------------
    * ${counts.textStyles} semantic steps, mirroring the Figma text styles 1:1. Every value is
-   * a var() onto a Typography Primitive, so Figma and code cannot drift.
+   * a var() onto a Typography Primitive, so the output follows its committed input.
    * Tailwind generates \`text-label-md\` etc. from these.
    * Usage guidance lives in each Figma style's description and in
    * docs/tokens/typography.md.

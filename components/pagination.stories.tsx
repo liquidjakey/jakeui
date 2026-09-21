@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Pagination } from './pagination.js';
+import { useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Pagination } from "./pagination.js";
 
 /**
  * Stories for `Pagination`.
- * Contract: docs/components/pagination.md
+ * Contract: docs/agent/components/pagination.md
  */
 
 const meta = {
-  title: 'Navigation/Pagination',
+  title: "Navigation/Pagination",
   component: Pagination,
   parameters: {
     docs: {
       description: {
         component:
-          'Boundary controls disable themselves from `page` and `pageCount` — that is ' +
-          'arithmetic, not a prop. Disabled boundary controls stay announced rather than ' +
-          'being removed from the DOM.',
+          "Boundary controls disable themselves from `page` and `pageCount` — that is " +
+          "arithmetic, not a prop. Disabled boundary controls stay announced rather than " +
+          "being removed from the DOM.",
       },
     },
   },
@@ -37,8 +37,12 @@ function PaginationDemo() {
     <div className="flex flex-col gap-4">
       <Pagination page={page} pageCount={5} onPageChange={setPage} />
       <Pagination page={page} pageCount={5} onPageChange={setPage} compact />
-      <p className="text-body-sm text-muted-foreground">
-        Page 1 disables Previous; page 5 disables Next. That is arithmetic, not a prop.
+      <p
+        role="status"
+        className="text-body-sm tabular-nums text-muted-foreground"
+      >
+        Showing page {page} of 5. Pagination updates this preview without
+        navigating away.
       </p>
     </div>
   );

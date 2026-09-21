@@ -3,17 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Accordion } from './accordion.js';
 
 /**
- * Stories for `Accordion`.
- * Contract: docs/components/accordion.md
- *
- * ✅ Its Content node was **unbound in Figma** at 13/20 Regular; the ramp question
- * was decided Option B on 10 Aug 2026 and it now carries `Body/SM` 13/18, which
- * is what this code already used.
- *
- * The open/close transition is deliberately absent — the panel unmounts when closed
- * to satisfy a recorded accessibility contract, and a transition cannot animate an
- * element that does not exist. `MOTION.disclosure` ships unused for this reason; see
- * the write-up in `accordion.tsx` and `lib/motion.ts` for the `calc-size()` route out.
+ * Multiple controlled disclosure sections. Closed panels unmount with no height
+ * animation. Current panel typography follows the implementation.
+ * Consumer contract: docs/agent/components/accordion.md.
  */
 
 const meta = {

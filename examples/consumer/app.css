@@ -1,0 +1,2 @@
+/* This fixture imports a recipe outside its application root. */
+@source '../recipes.tsx';

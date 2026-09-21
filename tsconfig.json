@@ -15,12 +15,13 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "dist",
+    "rootDir": ".",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["components", "icons", "lib", ".storybook"],
+  "include": ["components", "icons", "lib", ".storybook", "examples"],
   "exclude": ["node_modules", "dist"]
 }

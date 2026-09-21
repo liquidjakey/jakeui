@@ -1,32 +1,19 @@
 #!/usr/bin/env node
 /**
- * Jake UI — Code Connect replacement, step 2 of 2: validate the manifest.
- *
- * Code Connect would fail a build when a Figma component and its code
- * counterpart drift apart. This does the same job in CI, for the parts that
- * can be checked without a Dev seat:
- *
- *   1. Every property is classified — nothing left `unclassified`.
- *   2. No `decompose` axis was quietly turned into an enum prop.
- *   3. Every mapped `codePath` exists on disk and exports `codeExport`.
- *   4. Every implemented component has a props-table doc.
- *   5. Every `decompose` entry appears in docs/state-decomposition.md.
- *   6. Icon slots reference the Phosphor map, not text glyphs.
- *
- * Exit code 1 on any error. Warnings do not fail the build.
- *
- *   node design-system/scripts/validate-map.mjs
+ * Validate Figma correspondence against compiler-derived props and reviewed
+ * transforms. Every implemented asset must have a current component reference.
+ * Design state classifications never create public props.
  */
 
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readPublicApi } from './lib/public-api.mjs';
+import { reconcileMap, validateMapShape } from './lib/figma-contract.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const MAP = resolve(ROOT, 'figma.map.json');
-// Docs moved under design-system/ on 9 Aug 2026 so the repo is self-contained.
-const DECOMP = resolve(ROOT, 'docs/state-decomposition.md');
-const DOCS_DIR = resolve(ROOT, 'docs/components');
+const DOCS_DIR = resolve(ROOT, 'docs/agent/components');
 
 const errors = [];
 const warnings = [];
@@ -43,8 +30,10 @@ function main() {
     process.exit(1);
   }
   const manifest = JSON.parse(readFileSync(MAP, 'utf8'));
-  const decompDoc = existsSync(DECOMP) ? readFileSync(DECOMP, 'utf8') : '';
-  if (!decompDoc) err(`Missing ${DECOMP} — the decomposition contract is required.`);
+  validateMapShape(manifest);
+  const api = readPublicApi();
+  const expected = reconcileMap(manifest, api.components);
+  if (JSON.stringify(expected) !== JSON.stringify(manifest)) err('Manifest differs from compiler-derived public types or reviewed transforms. Run npm run agent:sync, then review the diff.');
 
   let implemented = 0;
   let decomposeCount = 0;
@@ -69,10 +58,6 @@ function main() {
       if (!p.booleans?.length && !p.controlled?.length) {
         err(`${where} "${key}" decomposes to nothing. Every conflated axis must yield booleans or controlled state.`);
       }
-      // 5. must be documented
-      if (decompDoc && !decompDoc.includes(`\`${name}\``)) {
-        err(`${where} has a conflated axis but is absent from state-decomposition.md.`);
-      }
     }
 
     // 3. code target resolves
@@ -89,10 +74,10 @@ function main() {
         if (!exported) err(`${where} "${c.codeExport}" is not exported from ${c.codePath}.`);
       }
 
-      // 4. implemented components need a props-table doc
+      // 4. implemented components need a current public reference
       const doc = resolve(DOCS_DIR, `${slug(name)}.md`);
       if (!existsSync(doc)) {
-        err(`${where} is implemented but has no props table at docs/components/${slug(name)}.md`);
+        err(`${where} is implemented but has no current reference at docs/agent/components/${slug(name)}.md`);
       }
     } else {
       warn(`${where} not yet mapped to code (codePath is null).`);
@@ -100,7 +85,7 @@ function main() {
 
     // 6. icon slots must be nodes
     for (const [key, p] of Object.entries(c.props)) {
-      if (p.kind === 'slot' && p.type !== 'React.ReactNode') {
+      if (p.kind === 'slot' && !p.type?.includes('ReactNode')) {
         err(`${where} slot "${key}" must be typed React.ReactNode, got "${p.type}".`);
       }
       if (p.kind === 'prop' && /icon/i.test(p.figma ?? '') && p.type === 'string') {

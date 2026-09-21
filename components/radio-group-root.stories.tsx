@@ -2,12 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RadioGroupItem, RadioGroupRoot } from './radio-group.js';
 
 /**
- * `RadioGroupRoot` — the labelled wrapper, read directly from live bindings after
- * the 8-row description cap blocked its 24 variants.
- *
- * The read collapsed those 24 variants to **9 binding sets**: orientation carries no
- * colour delta at all, and `default` and `readOnly` are identical. None of that
- * could have been inferred from the record.
+ * Labelled anatomy wrapper. Orientation affects layout; child controls own
+ * selection and interaction. Use RadioGroup for a complete group.
+ * Consumer contract: docs/agent/components/radio-group-root.md.
  */
 
 const meta = {

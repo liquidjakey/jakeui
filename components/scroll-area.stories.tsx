@@ -3,7 +3,7 @@ import { ScrollArea } from './scroll-area.js';
 
 /**
  * Stories for `ScrollArea`.
- * Contract: docs/components/scroll-area.md
+ * Contract: docs/agent/components/scroll-area.md
  */
 
 const meta = {
@@ -24,15 +24,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * ScrollArea. **Tab to it, then use the arrow keys.** The focusable, named region is
- * the whole point — a region that scrolls but cannot be focused is unreachable by
- * keyboard, the most common failure of custom scroll areas.
- *
- * 🛑 The record promises "visible track and thumb anatomy" but binds neither, so the
- * **native scrollbar is kept** rather than inventing two colours — the same decision
- * as `NativeSelect`'s chevron.
- */
+/** Named focusable overflow region. Tab to it and use arrow keys. Keep native scrollbars; do not invent custom track/thumb styling. */
 export const ScrollAreas: Story = {
   name: 'ScrollArea — both axes',
   args: { children: null, label: 'Scroll area' },

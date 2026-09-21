@@ -1,7 +1,6 @@
 // GENERATED - Jake UI icon map (Figma "Icon" set -> @phosphor-icons/react)
 //
-// Source: Figma component set 158:4066, rebuilt 8 Aug 2026 from the real
-// Phosphor regular SVG paths in @phosphor-icons/core. Figma variant names are
+// Source: Figma component set 158:4066, using Phosphor regular SVG paths in @phosphor-icons/core. Figma variant names are
 // Phosphor component names verbatim, with one exception: SidebarSimpleRight,
 // which Phosphor has no icon for and which renders as <SidebarSimple mirrored />.
 //
@@ -134,59 +133,3 @@ export const ICONS = {
 } as const satisfies Record<string, IconEntry>;
 
 export type IconName = keyof typeof ICONS;
-
-/** Names used before the Phosphor migration (2026-08-08). For codemods only. */
-export const LEGACY_ALIASES: Record<string, IconName> = {
-  "Add": "Plus",
-  "Minus": "Minus",
-  "Check": "Check",
-  "Close": "X",
-  "Chevron Down": "CaretDown",
-  "Chevron Up": "CaretUp",
-  "Chevron Left": "CaretLeft",
-  "Chevron Right": "CaretRight",
-  "Arrow Left": "ArrowLeft",
-  "Arrow Right": "ArrowRight",
-  "Arrow Up": "ArrowUp",
-  "Arrow Down": "ArrowDown",
-  "Calendar": "CalendarBlank",
-  "Search": "MagnifyingGlass",
-  "Filter": "Funnel",
-  "Download": "DownloadSimple",
-  "Upload": "UploadSimple",
-  "More Horizontal": "DotsThree",
-  "More Vertical": "DotsThreeVertical",
-  "Info": "Info",
-  "Circle Check": "CheckCircle",
-  "Circle Alert": "WarningCircle",
-  "Triangle Alert": "Warning",
-  "Menu": "List",
-  "User": "User",
-  "Users": "Users",
-  "Settings": "Gear",
-  "Bell": "Bell",
-  "Mail": "Envelope",
-  "Link": "Link",
-  "Copy": "Copy",
-  "Trash": "Trash",
-  "Edit": "PencilSimple",
-  "External Link": "ArrowSquareOut",
-  "Eye": "Eye",
-  "Eye Off": "EyeSlash",
-  "Lock": "Lock",
-  "Unlock": "LockOpen",
-  "Folder": "Folder",
-  "File": "File",
-  "Home": "House",
-  "Refresh": "ArrowsClockwise",
-  "Sort Ascending": "SortAscending",
-  "Sort Descending": "SortDescending",
-  "Panel Left": "SidebarSimple",
-  "Panel Right": "SidebarSimpleRight",
-  "Circle Plus": "PlusCircle",
-  "Circle Minus": "MinusCircle",
-  "Clock": "Clock",
-  "Help": "Question",
-  "Play": "Play",
-  "Pause": "Pause",
-};

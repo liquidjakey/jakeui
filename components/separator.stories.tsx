@@ -3,7 +3,7 @@ import { Separator } from './separator.js';
 
 /**
  * Stories for `Separator`.
- * Contract: docs/components/separator.md
+ * Contract: docs/agent/components/separator.md
  */
 
 const meta = {

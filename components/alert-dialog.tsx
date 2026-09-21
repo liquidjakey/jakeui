@@ -3,22 +3,10 @@ import { ModalSurface } from './modal-surface.js';
 import { cn } from '../lib/cn.js';
 
 /**
- * AlertDialog — modal confirmation for consequential actions.
- *
- * Figma: `Alert Dialog`, node 66:*, 2 variants.
- * Contract: docs/components/alert-dialog.md
- *
- * Two deliberate differences from Dialog, both accessibility decisions:
- *
- * 1. BACKDROP CLICK DOES NOT CLOSE. A Dialog is dismissible by clicking away; an
- *    AlertDialog is a decision, and dismissing a decision by misclick is how
- *    people lose data. Escape still cancels — that is unambiguous intent and the
- *    platform contract users rely on.
- * 2. `description` is REQUIRED. A confirmation whose only text is a title cannot
- *    tell the user what they are agreeing to. Enforced by the type.
- *
- * No children and no footer slots: the content is fixed on purpose. A slot would
- * let a caller turn this back into a Dialog.
+ * Consequential modal confirmation with a required description and fixed actions.
+ * Initial focus is Cancel. Escape cancels; backdrop clicks do not dismiss.
+ * Use Dialog for general content or custom footer composition.
+ * Consumer contract: docs/agent/components/alert-dialog.md.
  */
 export interface AlertDialogProps {
   open: boolean;
@@ -30,12 +18,7 @@ export interface AlertDialogProps {
   description: string;
   cancelLabel?: string;
   actionLabel: string;
-  /**
-   * Per this component's own description: "Use Tone=Destructive only when the
-   * primary action causes irreversible loss." Note the shared `tone` vocabulary
-   * in archetypes.json defines destructive as "an error that blocks progress",
-   * which is Alert's meaning, not this one. The description wins.
-   */
+  /** Use destructive only when the action causes irreversible loss. */
   tone?: 'default' | 'destructive';
 }
 
@@ -62,6 +45,7 @@ export function AlertDialog({
 
   return (
     <ModalSurface
+      role="alertdialog"
       open={open}
       onClose={onCancel}
       dismissOnBackdrop={false}
@@ -74,7 +58,7 @@ export function AlertDialog({
           This component binds `card-foreground`, which is the correct pairing for
           a `card` fill. Dialog, Drawer and Sheet bind plain `foreground` on the
           same fill; they resolve identically today, so nothing is visibly wrong.
-          See docs/components/dialog.md Table 3.
+          Preserve the Dialog heading treatment.
         */}
         {/* Heading/LG (18/26) in the file, not Heading/MD (16/24). */}
         <h2 id={titleId} className="text-heading-lg text-card-foreground">
@@ -99,9 +83,7 @@ export function AlertDialog({
           onClick={onAction}
           className={cn(
             'rounded-lg px-3 py-2 text-body-sm',
-            // No button token is recorded on this set — tokensUsed lists five and
-            // none is an action colour. Asserted rather than transcribed, and
-            // flagged in the props table. Revisit when Button is built and bound.
+            // Consequential tone belongs to the action; Cancel stays visually neutral.
             tone === 'destructive'
               ? 'bg-destructive text-destructive-foreground'
               : 'bg-primary text-primary-foreground',

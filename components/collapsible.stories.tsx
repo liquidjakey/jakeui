@@ -3,16 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Collapsible } from './collapsible.js';
 
 /**
- * Stories for `Collapsible`.
- * Contract: docs/components/collapsible.md
- *
- * ✅ Its Content node was **unbound in Figma** at 13/20 Regular; the ramp question
- * was decided Option B on 10 Aug 2026 and it now carries `Body/SM` 13/18, which
- * is what this code already used.
- *
- * Like `Accordion`, it unmounts its panel when closed and therefore ships without a
- * disclosure transition — see `lib/motion.ts` for why `MOTION.disclosure` exists but
- * is unused.
+ * Single controlled disclosure. Closed content unmounts; trigger colours transition.
+ * Consumer contract: docs/agent/components/collapsible.md.
  */
 
 const meta = {

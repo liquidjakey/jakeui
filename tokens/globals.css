@@ -152,7 +152,7 @@
   --secondary-foreground: var(--color-zinc-900);
 
   --muted: var(--color-neutral-50);
-  --muted-foreground: var(--color-neutral-600); /* 9 Aug 2026: light neutral/500 -> neutral/600 for AA on tinted surfaces; dark unchanged at neutral/400 */
+  --muted-foreground: var(--color-neutral-600); /* secondary text; light neutral/600, dark neutral/400 */
 
   --accent: var(--color-neutral-100);
   --accent-foreground: var(--color-neutral-900);
@@ -199,11 +199,11 @@
   --primary-hover: var(--color-blue-800);
   --primary-active: var(--color-blue-900);
 
-  --accent-hover: var(--color-neutral-200); /* dark now steps to neutral/700, no longer borrowing zinc/800 */
+  --accent-hover: var(--color-neutral-200); /* hover tint; dark neutral/700 */
 
   --destructive-hover: var(--color-red-700);
 
-  --primary-readable: var(--color-blue-700); /* bind TEXT to this, never to --primary (2.03:1 on popover in dark) */
+  --primary-readable: var(--color-blue-700); /* foreground for action-colored text on neutral surfaces; not text on a solid primary fill */
 
   --destructive-muted: var(--color-red-50);
 }
@@ -227,7 +227,7 @@
   --secondary-foreground: var(--color-neutral-50);
 
   --muted: var(--color-neutral-800);
-  --muted-foreground: var(--color-neutral-400); /* 9 Aug 2026: light neutral/500 -> neutral/600 for AA on tinted surfaces; dark unchanged at neutral/400 */
+  --muted-foreground: var(--color-neutral-400); /* secondary text; light neutral/600, dark neutral/400 */
 
   --accent: var(--color-neutral-800);
   --accent-foreground: var(--color-neutral-50);
@@ -274,11 +274,11 @@
   --primary-hover: var(--color-blue-700);
   --primary-active: var(--color-blue-600);
 
-  --accent-hover: var(--color-neutral-700); /* dark now steps to neutral/700, no longer borrowing zinc/800 */
+  --accent-hover: var(--color-neutral-700); /* hover tint; dark neutral/700 */
 
   --destructive-hover: var(--color-red-300);
 
-  --primary-readable: var(--color-blue-300); /* bind TEXT to this, never to --primary (2.03:1 on popover in dark) */
+  --primary-readable: var(--color-blue-300); /* foreground for action-colored text on neutral surfaces; not text on a solid primary fill */
 
   --destructive-muted: var(--color-red-950);
 }
@@ -362,7 +362,7 @@
 
   /* --- Type ramp ---------------------------------------------------------
    * 14 semantic steps, mirroring the Figma text styles 1:1. Every value is
-   * a var() onto a Typography Primitive, so Figma and code cannot drift.
+   * a var() onto a Typography Primitive, so the output follows its committed input.
    * Tailwind generates `text-label-md` etc. from these.
    * Usage guidance lives in each Figma style's description and in
    * docs/tokens/typography.md.
@@ -445,16 +445,6 @@
  * ---------------------------------------------------------------------- */
 
 /* --- Half-step ramp members --------------------------------------------
- * Formerly labelled "exception tokens pending reconciliation". Resolved
- * 9 Aug 2026: they are PROMOTED to first-class ramp members. Do not delete.
- *
- * A binding census over all 58 pages found 4,814 live bindings across 24 of
- * these 26 tokens. The two largest are not strays — they are the spine of the
- * type system: size/13 (1,345 bindings) and line-height/18 (1,359) together
- * are 13/18, which is Label/MD ("THE default UI label") and Body/SM ("THE
- * default UI body"). Snapping them to the coarse ramp would have shifted the
- * most-used type in the library. The ramp was incomplete; these values were
- * never the anomaly.
- *
- * size/20 and line-height/12 carried zero bindings and were deleted 9 Aug 2026.
+ * First-class scale values. Do not delete or snap to a coarser step.
+ * size/13 and line-height/18 support Label/MD and Body/SM.
  * ---------------------------------------------------------------------- */

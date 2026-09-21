@@ -3,25 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Switch } from './switch.js';
 
 /**
- * Stories for `Switch`.
- * Contracts: docs/components/switch.md · switch-thumb.md
- *
- * **This story also stands in for `Switch / Field Composition`**, which is
- * `kind: story-only` (*"Storybook story, never a prop"*) and therefore not bound to
- * code — the same treatment given to the Table and Popover root compositions.
- *
- * 🛑 **Its track is asserted**, because the asset that holds it — `Switch / Root`,
- * 24 variants — is blocked by the 8-row cap. It asserts `primary` on one real
- * precedent: `Radio Group / Indicator` binds `fill primary` for its checked dot,
- * which is the only recorded checked-state colour in the system. `RadioGroup` and
- * `Progress` assert the same thing on the same precedent. Re-verify when the row
- * cap is raised.
- *
- * ⚠️ **Figma contradicts itself on this component's geometry** — the composed
- * `Switch` set draws 40x22 with an 18x18 `primary-foreground` thumb, the atomic
- * `Switch / Root` + `Switch / Thumb` sets draw 36x20 with a 16x16 `card` thumb. The
- * atoms win, because that is what figma.map.json binds these exports to. See the
- * Figma-side decision memo, item 3.
+ * Controlled labelled settings and composition previews. The default track uses
+ * input unchecked and primary checked; the disabled composed track uses muted.
+ * Consumer contract: docs/agent/components/switch.md.
  */
 
 const meta = {

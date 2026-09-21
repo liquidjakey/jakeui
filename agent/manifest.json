@@ -1,0 +1,5440 @@
+{
+  "schemaVersion": 1,
+  "authority": "Generated from TypeScript public interfaces. Usage constraints are curated in agent/usage.json. Figma correspondence is not a prop schema.",
+  "setup": "docs/agent/setup.md",
+  "design": "docs/agent/design.md",
+  "workflow": "docs/agent/workflow.md",
+  "exceptions": "agent/exceptions.json",
+  "components": [
+    {
+      "name": "Accordion",
+      "export": "Accordion",
+      "source": "components/accordion.tsx",
+      "propsType": "AccordionProps",
+      "import": "import { Accordion } from 'jakeui';",
+      "props": [
+        {
+          "name": "items",
+          "type": "AccordionItem[]",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "openIds",
+          "type": "string[]",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onToggle",
+          "type": "(id: string) => void",
+          "required": true,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "AccordionItem",
+          "source": "components/accordion.tsx",
+          "declaration": "export interface AccordionItem {\n  id: string;\n  title: string;\n  content: ReactNode;\n  disabled?: boolean;\n}"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Disclosure component for vertically stacked question-and-answer or settings sections.",
+      "whenToUse": [
+        "Let the reader collapse secondary content so the page stays scannable."
+      ],
+      "whenNotToUse": [
+        "Content the reader almost always needs — show it instead of hiding it.",
+        "Switching between peer views — use Tabs."
+      ],
+      "reference": "docs/agent/components/accordion.md",
+      "stories": [
+        "components/accordion.stories.tsx"
+      ]
+    },
+    {
+      "name": "Alert",
+      "export": "Alert",
+      "source": "components/alert.tsx",
+      "propsType": "AlertProps",
+      "import": "import { Alert } from 'jakeui';",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "action",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "tone",
+          "type": "\"destructive\" | \"info\" | \"success\" | \"warning\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'info'"
+        },
+        {
+          "name": "onDismiss",
+          "type": "(() => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "live",
+          "type": "\"off\" | \"assertive\" | \"polite\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'off'",
+          "description": "Defaults to off: an alert on page load must not interrupt."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Inline feedback message for informational, successful, warning, and destructive states.",
+      "whenToUse": [
+        "Deliver an in-page message about the state of the view or a task."
+      ],
+      "whenNotToUse": [
+        "A decision that must block the flow — use a Dialog.",
+        "A toast notification: no toast component is exported; use inline Alert or request an extension."
+      ],
+      "reference": "docs/agent/components/alert.md",
+      "stories": [
+        "components/alert.stories.tsx"
+      ]
+    },
+    {
+      "name": "Alert Dialog",
+      "export": "AlertDialog",
+      "source": "components/alert-dialog.tsx",
+      "propsType": "AlertDialogProps",
+      "import": "import { AlertDialog } from 'jakeui';",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onCancel",
+          "type": "() => void",
+          "required": true,
+          "inherited": false,
+          "description": "The safe path. Also fired by Escape."
+        },
+        {
+          "name": "onAction",
+          "type": "() => void",
+          "required": true,
+          "inherited": false,
+          "description": "The consequential path."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "cancelLabel",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'Cancel'"
+        },
+        {
+          "name": "actionLabel",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "tone",
+          "type": "\"default\" | \"destructive\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'default'",
+          "description": "Use destructive only when the action causes irreversible loss."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Modal confirmation surface for consequential actions.",
+      "whenToUse": [
+        "Confirm a consequential action with explicit cancel and confirm choices."
+      ],
+      "whenNotToUse": [
+        "General forms or custom focused tasks: use Dialog.",
+        "Nonblocking feedback: use Alert."
+      ],
+      "constraints": [
+        "Consequential confirmation with explicit cancel/confirm callbacks. Description is required; backdrop does not dismiss. This is not a general content modal.",
+        "Initial focus goes to Cancel. Escape invokes onCancel; the caller closes controlled open state. Use destructive only for irreversible loss."
+      ],
+      "reference": "docs/agent/components/alert-dialog.md",
+      "stories": [
+        "components/alert-dialog.stories.tsx"
+      ]
+    },
+    {
+      "name": "Avatar",
+      "export": "Avatar",
+      "source": "components/avatar.tsx",
+      "propsType": "AvatarProps",
+      "import": "import { Avatar } from 'jakeui';",
+      "props": [
+        {
+          "name": "initials",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "inherited": false,
+          "description": "The accessible name. \"AL\" read aloud is meaningless."
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | \"large\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'medium'"
+        },
+        {
+          "name": "status",
+          "type": "\"online\" | \"offline\" | \"busy\" | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "src",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "decorative",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "True when a visible name sits beside it — avoids announcing it twice."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Compact identity representation using initials and optional presence status.",
+      "whenToUse": [
+        "Represent a person, account, or organisation compactly."
+      ],
+      "whenNotToUse": [
+        "Decorative imagery, or a general-purpose image container."
+      ],
+      "constraints": [
+        "Supply name independently of initials. decorative hides the identity image when nearby text already names it; status still has separate accessible text. Small typography is an internal scoped exception, not a consumer style."
+      ],
+      "reference": "docs/agent/components/avatar.md",
+      "stories": [
+        "components/avatar.stories.tsx"
+      ]
+    },
+    {
+      "name": "Badge",
+      "export": "Badge",
+      "source": "components/badge.tsx",
+      "propsType": "BadgeProps",
+      "import": "import { Badge } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "tone",
+          "type": "\"destructive\" | \"info\" | \"success\" | \"warning\" | \"neutral\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'neutral'"
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'small'"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Compact status label.",
+      "whenToUse": [
+        "A short status, count, or category label."
+      ],
+      "whenNotToUse": [
+        "Interactive primary actions — use a Button."
+      ],
+      "reference": "docs/agent/components/badge.md",
+      "stories": [
+        "components/badge.stories.tsx"
+      ]
+    },
+    {
+      "name": "Breadcrumb",
+      "export": "Breadcrumb",
+      "source": "components/breadcrumb.tsx",
+      "propsType": "BreadcrumbProps",
+      "import": "import { Breadcrumb } from 'jakeui';",
+      "props": [
+        {
+          "name": "items",
+          "type": "BreadcrumbItem[]",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "collapsed",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'Breadcrumb'"
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "BreadcrumbItem",
+          "source": "components/breadcrumb.tsx",
+          "declaration": "export interface BreadcrumbItem {\n  label: string;\n  href?: string;\n}"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Hierarchical location trail.",
+      "whenToUse": [
+        "Show where the current page sits in a hierarchy, and offer a way back up."
+      ],
+      "whenNotToUse": [
+        "Flat sites with no hierarchy.",
+        "Step-by-step progress through a flow — use an application-owned sequence with explicit current-step semantics."
+      ],
+      "reference": "docs/agent/components/breadcrumb.md",
+      "stories": [
+        "components/breadcrumb.stories.tsx"
+      ]
+    },
+    {
+      "name": "Button",
+      "export": "Button",
+      "source": "components/button.tsx",
+      "propsType": "ButtonProps",
+      "import": "import { Button } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onClick",
+          "type": "import(\"react\").MouseEventHandler<HTMLButtonElement> | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "style",
+          "type": "\"primary\" | \"secondary\" | \"outline\" | \"ghost\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "\"primary\""
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "\"medium\""
+        },
+        {
+          "name": "leadingIcon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false,
+          "description": "Decorative icon slot. Direct SVGs render at 16px in small and 20px in medium buttons."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "type",
+          "type": "\"button\" | \"submit\" | \"reset\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "\"button\"",
+          "description": "Defaults to \"button\": an untyped <button> inside a form submits it."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [
+        "value",
+        "onChange",
+        "onFocus",
+        "onBlur",
+        "name",
+        "id",
+        "aria-label",
+        "aria-describedby",
+        "aria-invalid",
+        "form",
+        "formAction",
+        "formEncType",
+        "formMethod",
+        "formNoValidate",
+        "formTarget",
+        "defaultChecked",
+        "defaultValue",
+        "suppressContentEditableWarning",
+        "suppressHydrationWarning",
+        "accessKey",
+        "autoCapitalize",
+        "autoFocus",
+        "className",
+        "contentEditable",
+        "contextMenu",
+        "dir",
+        "draggable",
+        "enterKeyHint",
+        "hidden",
+        "lang",
+        "nonce",
+        "slot",
+        "spellCheck",
+        "tabIndex",
+        "title",
+        "translate",
+        "radioGroup",
+        "role",
+        "about",
+        "content",
+        "datatype",
+        "inlist",
+        "prefix",
+        "property",
+        "rel",
+        "resource",
+        "rev",
+        "typeof",
+        "vocab",
+        "autoCorrect",
+        "autoSave",
+        "color",
+        "itemProp",
+        "itemScope",
+        "itemType",
+        "itemID",
+        "itemRef",
+        "results",
+        "security",
+        "unselectable",
+        "popover",
+        "popoverTargetAction",
+        "popoverTarget",
+        "inert",
+        "inputMode",
+        "is",
+        "exportparts",
+        "part",
+        "aria-activedescendant",
+        "aria-atomic",
+        "aria-autocomplete",
+        "aria-braillelabel",
+        "aria-brailleroledescription",
+        "aria-busy",
+        "aria-checked",
+        "aria-colcount",
+        "aria-colindex",
+        "aria-colindextext",
+        "aria-colspan",
+        "aria-controls",
+        "aria-current",
+        "aria-description",
+        "aria-details",
+        "aria-disabled",
+        "aria-dropeffect",
+        "aria-errormessage",
+        "aria-expanded",
+        "aria-flowto",
+        "aria-grabbed",
+        "aria-haspopup",
+        "aria-hidden",
+        "aria-keyshortcuts",
+        "aria-labelledby",
+        "aria-level",
+        "aria-live",
+        "aria-modal",
+        "aria-multiline",
+        "aria-multiselectable",
+        "aria-orientation",
+        "aria-owns",
+        "aria-placeholder",
+        "aria-posinset",
+        "aria-pressed",
+        "aria-readonly",
+        "aria-relevant",
+        "aria-required",
+        "aria-roledescription",
+        "aria-rowcount",
+        "aria-rowindex",
+        "aria-rowindextext",
+        "aria-rowspan",
+        "aria-selected",
+        "aria-setsize",
+        "aria-sort",
+        "aria-valuemax",
+        "aria-valuemin",
+        "aria-valuenow",
+        "aria-valuetext",
+        "dangerouslySetInnerHTML",
+        "onCopy",
+        "onCopyCapture",
+        "onCut",
+        "onCutCapture",
+        "onPaste",
+        "onPasteCapture",
+        "onCompositionEnd",
+        "onCompositionEndCapture",
+        "onCompositionStart",
+        "onCompositionStartCapture",
+        "onCompositionUpdate",
+        "onCompositionUpdateCapture",
+        "onFocusCapture",
+        "onBlurCapture",
+        "onChangeCapture",
+        "onBeforeInput",
+        "onBeforeInputCapture",
+        "onInput",
+        "onInputCapture",
+        "onReset",
+        "onResetCapture",
+        "onSubmit",
+        "onSubmitCapture",
+        "onInvalid",
+        "onInvalidCapture",
+        "onLoad",
+        "onLoadCapture",
+        "onError",
+        "onErrorCapture",
+        "onKeyDown",
+        "onKeyDownCapture",
+        "onKeyPress",
+        "onKeyPressCapture",
+        "onKeyUp",
+        "onKeyUpCapture",
+        "onAbort",
+        "onAbortCapture",
+        "onCanPlay",
+        "onCanPlayCapture",
+        "onCanPlayThrough",
+        "onCanPlayThroughCapture",
+        "onDurationChange",
+        "onDurationChangeCapture",
+        "onEmptied",
+        "onEmptiedCapture",
+        "onEncrypted",
+        "onEncryptedCapture",
+        "onEnded",
+        "onEndedCapture",
+        "onLoadedData",
+        "onLoadedDataCapture",
+        "onLoadedMetadata",
+        "onLoadedMetadataCapture",
+        "onLoadStart",
+        "onLoadStartCapture",
+        "onPause",
+        "onPauseCapture",
+        "onPlay",
+        "onPlayCapture",
+        "onPlaying",
+        "onPlayingCapture",
+        "onProgress",
+        "onProgressCapture",
+        "onRateChange",
+        "onRateChangeCapture",
+        "onSeeked",
+        "onSeekedCapture",
+        "onSeeking",
+        "onSeekingCapture",
+        "onStalled",
+        "onStalledCapture",
+        "onSuspend",
+        "onSuspendCapture",
+        "onTimeUpdate",
+        "onTimeUpdateCapture",
+        "onVolumeChange",
+        "onVolumeChangeCapture",
+        "onWaiting",
+        "onWaitingCapture",
+        "onAuxClick",
+        "onAuxClickCapture",
+        "onClickCapture",
+        "onContextMenu",
+        "onContextMenuCapture",
+        "onDoubleClick",
+        "onDoubleClickCapture",
+        "onDrag",
+        "onDragCapture",
+        "onDragEnd",
+        "onDragEndCapture",
+        "onDragEnter",
+        "onDragEnterCapture",
+        "onDragExit",
+        "onDragExitCapture",
+        "onDragLeave",
+        "onDragLeaveCapture",
+        "onDragOver",
+        "onDragOverCapture",
+        "onDragStart",
+        "onDragStartCapture",
+        "onDrop",
+        "onDropCapture",
+        "onMouseDown",
+        "onMouseDownCapture",
+        "onMouseEnter",
+        "onMouseLeave",
+        "onMouseMove",
+        "onMouseMoveCapture",
+        "onMouseOut",
+        "onMouseOutCapture",
+        "onMouseOver",
+        "onMouseOverCapture",
+        "onMouseUp",
+        "onMouseUpCapture",
+        "onSelect",
+        "onSelectCapture",
+        "onTouchCancel",
+        "onTouchCancelCapture",
+        "onTouchEnd",
+        "onTouchEndCapture",
+        "onTouchMove",
+        "onTouchMoveCapture",
+        "onTouchStart",
+        "onTouchStartCapture",
+        "onPointerDown",
+        "onPointerDownCapture",
+        "onPointerMove",
+        "onPointerMoveCapture",
+        "onPointerUp",
+        "onPointerUpCapture",
+        "onPointerCancel",
+        "onPointerCancelCapture",
+        "onPointerEnter",
+        "onPointerLeave",
+        "onPointerOver",
+        "onPointerOverCapture",
+        "onPointerOut",
+        "onPointerOutCapture",
+        "onGotPointerCapture",
+        "onGotPointerCaptureCapture",
+        "onLostPointerCapture",
+        "onLostPointerCaptureCapture",
+        "onScroll",
+        "onScrollCapture",
+        "onScrollEnd",
+        "onScrollEndCapture",
+        "onWheel",
+        "onWheelCapture",
+        "onAnimationStart",
+        "onAnimationStartCapture",
+        "onAnimationEnd",
+        "onAnimationEndCapture",
+        "onAnimationIteration",
+        "onAnimationIterationCapture",
+        "onToggle",
+        "onBeforeToggle",
+        "onTransitionCancel",
+        "onTransitionCancelCapture",
+        "onTransitionEnd",
+        "onTransitionEndCapture",
+        "onTransitionRun",
+        "onTransitionRunCapture",
+        "onTransitionStart",
+        "onTransitionStartCapture"
+      ],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Action button with primary, secondary, outline and ghost styles.",
+      "whenToUse": [
+        "Trigger an action or event — submit, confirm, open a dialog."
+      ],
+      "whenNotToUse": [
+        "Navigating between pages or URLs — use a native anchor or router link."
+      ],
+      "constraints": [
+        "Content is children, not label. Variants use style, not variant. Sizes are small/medium, not sm/lg. style is a variant string, not a CSS object. Native button events, attributes and ref are forwarded.",
+        "The leadingIcon slot owns direct SVG sizing: 16px for small, 20px for medium. Use Phosphor components, not text glyphs."
+      ],
+      "reference": "docs/agent/components/button.md",
+      "stories": [
+        "components/alert.stories.tsx",
+        "components/button.stories.tsx",
+        "components/native-select.stories.tsx",
+        "components/select.stories.tsx"
+      ]
+    },
+    {
+      "name": "Button Group",
+      "export": "ButtonGroup",
+      "source": "components/button-group.tsx",
+      "propsType": "ButtonGroupProps",
+      "import": "import { ButtonGroup } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'horizontal'"
+        },
+        {
+          "name": "attached",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Layout group for related Button instances.",
+      "whenToUse": [
+        "Keep related actions together using existing Button children."
+      ],
+      "whenNotToUse": [
+        "Exclusive selection: use RadioGroup or ToggleGroup.",
+        "Page navigation: use native anchors or router links."
+      ],
+      "reference": "docs/agent/components/button-group.md",
+      "stories": [
+        "components/button-group.stories.tsx"
+      ]
+    },
+    {
+      "name": "Calendar",
+      "export": "Calendar",
+      "source": "components/calendar.tsx",
+      "propsType": "CalendarProps",
+      "import": "import { Calendar } from 'jakeui';",
+      "props": [
+        {
+          "name": "month",
+          "type": "Date",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "monthLabel",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onMonthChange",
+          "type": "(month: Date) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "mode",
+          "type": "\"single\" | \"range\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'single'"
+        },
+        {
+          "name": "selected",
+          "type": "Date | [Date, (Date | undefined)?] | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "onSelect",
+          "type": "(value: Date) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "density",
+          "type": "\"compact\" | \"comfortable\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'compact'"
+        },
+        {
+          "name": "isDisabled",
+          "type": "((date: Date) => boolean) | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Month calendar supporting single-date and date-range selection in compact and comfortable densities.",
+      "whenToUse": [
+        "Pick a date, or a start and end pair, where the calendar context matters."
+      ],
+      "whenNotToUse": [
+        "A date the user knows by heart, such as a birthdate — a plain text field is faster.",
+        "Coarse periods like a month or quarter — offer a NativeSelect."
+      ],
+      "constraints": [
+        "Controlled month and selection. onSelect emits one Date; the caller owns assembling a range. English weekday names and Sunday week start are currently fixed; monthLabel alone does not localize the grid."
+      ],
+      "reference": "docs/agent/components/calendar.md",
+      "stories": [
+        "components/calendar.stories.tsx"
+      ]
+    },
+    {
+      "name": "Card",
+      "export": "Card",
+      "source": "components/card.tsx",
+      "propsType": "CardProps",
+      "import": "import { Card } from 'jakeui';",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "media",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false,
+          "description": "Leading media. Its PRESENCE is what makes this a media card — Figma's `Type` axis."
+        },
+        {
+          "name": "href",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "When set the whole card is a link. Its presence is Figma's `State=Interactive`."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Content container for related information and actions.",
+      "whenToUse": [
+        "Group related content and actions about a single subject."
+      ],
+      "whenNotToUse": [
+        "Primary page layout scaffolding.",
+        "A bare list of text."
+      ],
+      "constraints": [
+        "href makes the whole card a link. Keep nested actions outside an interactive card to avoid nested interactive elements; use a static card with explicit links/buttons otherwise."
+      ],
+      "reference": "docs/agent/components/card.md",
+      "stories": [
+        "components/card.stories.tsx"
+      ]
+    },
+    {
+      "name": "Chart",
+      "export": "Chart",
+      "source": "components/chart.tsx",
+      "propsType": "ChartProps",
+      "import": "import { Chart } from 'jakeui';",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "type",
+          "type": "\"bar\" | \"line\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'bar'"
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Text alternative. A chart must state its TAKEAWAY, not its chart type —\n\"Revenue rose 12% in Q3\", not \"bar chart\"."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Token-bound chart container for compact documentation and dashboard examples.",
+      "whenToUse": [
+        "Reveal a pattern, comparison, or trend that a table would bury."
+      ],
+      "whenNotToUse": [
+        "Precise values the reader needs to read off exactly — use a table.",
+        "A single number — use a stat or a Badge."
+      ],
+      "constraints": [
+        "Presentation wrapper, not a charting engine. Supply the renderer, data and textual takeaway; use approved chart token roles for series colours."
+      ],
+      "reference": "docs/agent/components/chart.md",
+      "stories": [
+        "components/chart.stories.tsx"
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "export": "Checkbox",
+      "source": "components/checkbox.tsx",
+      "propsType": "CheckboxProps",
+      "import": "import { Checkbox } from 'jakeui';",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "checked",
+          "type": "boolean | \"indeterminate\"",
+          "required": true,
+          "inherited": false,
+          "description": "Three states, so not a plain boolean. Indeterminate is never user-selectable."
+        },
+        {
+          "name": "onCheckedChange",
+          "type": "(checked: boolean) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Controlled labelled checkbox for independent form choices.",
+      "whenToUse": [
+        "NativeSelect one or more independent choices applied on Save or submit; represent partial group selection with indeterminate."
+      ],
+      "whenNotToUse": [
+        "An immediate boolean setting: use Switch.",
+        "Mutually exclusive options: use RadioGroup."
+      ],
+      "constraints": [
+        "Use checked and onCheckedChange, not value. Indeterminate is the string 'indeterminate'; a click resolves it to a boolean."
+      ],
+      "reference": "docs/agent/components/checkbox.md",
+      "stories": [
+        "components/checkbox.stories.tsx"
+      ]
+    },
+    {
+      "name": "Collapsible",
+      "export": "Collapsible",
+      "source": "components/collapsible.tsx",
+      "propsType": "CollapsibleProps",
+      "import": "import { Collapsible } from 'jakeui';",
+      "props": [
+        {
+          "name": "triggerLabel",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onOpenChange",
+          "type": "(open: boolean) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Single disclosure region for optional controls or secondary information.",
+      "whenToUse": [
+        "Let the reader collapse secondary content so the page stays scannable."
+      ],
+      "whenNotToUse": [
+        "Content the reader almost always needs — show it instead of hiding it.",
+        "Switching between peer views — use Tabs."
+      ],
+      "reference": "docs/agent/components/collapsible.md",
+      "stories": [
+        "components/collapsible.stories.tsx"
+      ]
+    },
+    {
+      "name": "Command",
+      "export": "Command",
+      "source": "components/command.tsx",
+      "propsType": "CommandProps",
+      "import": "import { Command } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "shortcut",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "selected",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "onSelect",
+          "type": "() => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "id",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Option anatomy for a command interface; not a complete palette.",
+      "whenToUse": [
+        "Render an option inside an approved command-interface owner that supplies search, keyboard navigation and activation."
+      ],
+      "whenNotToUse": [
+        "A ready-made command palette: none is exported.",
+        "A fixed action list: use DropdownMenu. A form choice: use NativeSelect."
+      ],
+      "prefer": "No complete command palette is exported.",
+      "constraints": [
+        "An option primitive only. A parent must implement search, active-descendant navigation and keyboard activation; do not present this as a ready-made command palette."
+      ],
+      "reference": "docs/agent/components/command.md",
+      "stories": [
+        "components/command.stories.tsx"
+      ]
+    },
+    {
+      "name": "Data Table",
+      "export": "DataTable",
+      "source": "components/data-table.tsx",
+      "propsType": "DataTableProps",
+      "import": "import { DataTable } from 'jakeui';",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "toolbar",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "pagination",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "emptyMessage",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'No results.'"
+        },
+        {
+          "name": "empty",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "loading",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "error",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Data-management composition built from Input, Button, Table, and Pagination.",
+      "whenToUse": [
+        "Present records across shared columns, for comparison, scanning, or exact reading."
+      ],
+      "whenNotToUse": [
+        "Page layout — use a grid.",
+        "A handful of key-value pairs — use a description list."
+      ],
+      "constraints": [
+        "Composition shell, not a data engine. Caller owns filtering, sorting, pagination and data fetching. Pass empty={rows.length===0} for an opaque Table child. Supply loading/error explicitly."
+      ],
+      "reference": "docs/agent/components/data-table.md",
+      "stories": [
+        "components/data-table.stories.tsx"
+      ]
+    },
+    {
+      "name": "Date Picker",
+      "export": "DatePicker",
+      "source": "components/date-picker.tsx",
+      "propsType": "DatePickerProps",
+      "import": "import { DatePicker } from 'jakeui';",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "invalid",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "errorMessage",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "format",
+          "type": "((d: Date) => string) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "mode",
+          "type": "\"single\" | \"range\" | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "value",
+          "type": "Date | DateRange | undefined",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onChange",
+          "type": "((date: Date) => void) | ((range: DateRange) => void)",
+          "required": true,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "DateRange",
+          "source": "components/date-picker.tsx",
+          "declaration": "export type DateRange = [Date, Date?];"
+        }
+      ],
+      "branches": [
+        [
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "inherited": false
+          },
+          {
+            "name": "invalid",
+            "type": "boolean | undefined",
+            "required": false,
+            "inherited": false
+          },
+          {
+            "name": "errorMessage",
+            "type": "string | undefined",
+            "required": false,
+            "inherited": false
+          },
+          {
+            "name": "disabled",
+            "type": "boolean | undefined",
+            "required": false,
+            "inherited": false
+          },
+          {
+            "name": "format",
+            "type": "((d: Date) => string) | undefined",
+            "required": false,
+            "inherited": false
+          },
+          {
+            "name": "mode",
+            "type": "\"single\" | undefined",
+            "required": false,
+            "inherited": false
+          },
+          {
+            "name": "value",
+            "type": "Date | undefined",
+            "required": true,
+            "inherited": false
+          },
+          {
+            "name": "onChange",
+            "type": "(date: Date) => void",
+            "required": true,
+            "inherited": false
+          }
+        ],
+        [
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "inherited": false
+          },
+          {
+            "name": "invalid",
+            "type": "boolean | undefined",
+            "required": false,
+            "inherited": false
+          },
+          {
+            "name": "errorMessage",
+            "type": "string | undefined",
+            "required": false,
+            "inherited": false
+          },
+          {
+            "name": "disabled",
+            "type": "boolean | undefined",
+            "required": false,
+            "inherited": false
+          },
+          {
+            "name": "format",
+            "type": "((d: Date) => string) | undefined",
+            "required": false,
+            "inherited": false
+          },
+          {
+            "name": "mode",
+            "type": "\"range\"",
+            "required": true,
+            "inherited": false
+          },
+          {
+            "name": "value",
+            "type": "DateRange | undefined",
+            "required": true,
+            "inherited": false
+          },
+          {
+            "name": "onChange",
+            "type": "(range: DateRange) => void",
+            "required": true,
+            "inherited": false
+          }
+        ]
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Controlled single-date or tuple-range selection with a calendar popup and native date-entry fields.",
+      "whenToUse": [
+        "Pick a date, or a start and end pair, where the calendar context matters."
+      ],
+      "whenNotToUse": [
+        "A date the user knows by heart, such as a birthdate — a plain text field is faster.",
+        "Coarse periods like a month or quarter — offer a NativeSelect."
+      ],
+      "constraints": [
+        "Discriminated interface: single uses Date, range uses [Date, Date?]; match the callback to mode. Open state is internal. Native date fields support typing. There is no public min/max/isDisabled prop; request an extension when date restrictions are required."
+      ],
+      "reference": "docs/agent/components/date-picker.md",
+      "stories": [
+        "components/date-picker.stories.tsx"
+      ]
+    },
+    {
+      "name": "Dialog",
+      "export": "Dialog",
+      "source": "components/dialog.tsx",
+      "propsType": "DialogProps",
+      "import": "import { Dialog } from 'jakeui';",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "type",
+          "type": "\"form\" | \"standard\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'standard'",
+          "description": "Content classification exposed as data-type; both types use Heading/LG."
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"large\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'small'",
+          "description": "Selects the content width; see the scoped overlay geometry exception."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "General-purpose modal surface for focused tasks and forms.",
+      "whenToUse": [
+        "Interrupt for a focused task, or a decision that blocks the flow."
+      ],
+      "whenNotToUse": [
+        "Non-critical messages — use Alert."
+      ],
+      "constraints": [
+        "type is content classification exposed as data-type; both types use Heading/LG. size controls width. Compose body/footer through slots."
+      ],
+      "reference": "docs/agent/components/dialog.md",
+      "stories": [
+        "components/dialog.stories.tsx"
+      ]
+    },
+    {
+      "name": "Drawer",
+      "export": "Drawer",
+      "source": "components/drawer.tsx",
+      "propsType": "DrawerProps",
+      "import": "import { Drawer } from 'jakeui';",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "placement",
+          "type": "\"left\" | \"right\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'right'",
+          "description": "Figma axis `Placement`. Opening edge."
+        },
+        {
+          "name": "width",
+          "type": "\"compact\" | \"wide\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'compact'",
+          "description": "Existing overlay width preset; geometry is scoped in agent/exceptions.json."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Modal side surface for a focused secondary task.",
+      "whenToUse": [
+        "Present contextual controls or a focused task in a modal edge panel."
+      ],
+      "whenNotToUse": [
+        "Persistent nonblocking content: use an application layout region.",
+        "Nonblocking feedback: use Alert."
+      ],
+      "constraints": [
+        "Modal side surface. Currently shares behavior/visual language with Sheet; neither is a persistent nonmodal panel."
+      ],
+      "reference": "docs/agent/components/drawer.md",
+      "stories": [
+        "components/drawer-sheet.stories.tsx"
+      ]
+    },
+    {
+      "name": "Dropdown Menu",
+      "export": "DropdownMenu",
+      "source": "components/dropdown-menu.tsx",
+      "propsType": "DropdownMenuProps",
+      "import": "import { DropdownMenu } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "type",
+          "type": "\"checkbox\" | \"standard\" | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "density",
+          "type": "\"compact\" | \"comfortable\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'compact'"
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "id",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Controlled action menu with keyboard navigation and linked-trigger positioning.",
+      "whenToUse": [
+        "Offer actions from a trigger when showing all actions would crowd the view."
+      ],
+      "whenNotToUse": [
+        "A primary form-choice control: use NativeSelect or RadioGroup. Checkable menu items support secondary menu settings.",
+        "Primary navigation: use NavigationMenu or Sidebar."
+      ],
+      "constraints": [
+        "Pair id with DropdownMenuTrigger controls, and conditionally mount from shared open state. Unique ids are required. A linked menu portals and positions itself; an unlinked menu is inline. Use nested SubTrigger/SubContent with matching controls/id."
+      ],
+      "reference": "docs/agent/components/dropdown-menu.md",
+      "stories": [
+        "components/dropdown-menu-item.stories.tsx",
+        "components/dropdown-menu.stories.tsx"
+      ]
+    },
+    {
+      "name": "Dropdown Menu / Checkbox Item",
+      "export": "DropdownMenuCheckboxItem",
+      "source": "components/dropdown-menu.tsx",
+      "propsType": "DropdownMenuCheckboxItemProps",
+      "import": "import { DropdownMenuCheckboxItem } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "checked",
+          "type": "boolean | \"indeterminate\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "onCheckedChange",
+          "type": "(checked: boolean) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Checkable menu item with unchecked, checked, and indeterminate values plus default, highlighted, and disabled states.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Render inside a menu. checked/onCheckedChange; toggling keeps the menu open."
+      ],
+      "reference": "docs/agent/components/dropdown-menu-checkbox-item.md",
+      "stories": [
+        "components/dropdown-menu-item.stories.tsx"
+      ]
+    },
+    {
+      "name": "Dropdown Menu / Content",
+      "export": "DropdownMenuContent",
+      "source": "components/dropdown-menu.tsx",
+      "propsType": "DropdownMenuContentProps",
+      "import": "import { DropdownMenuContent } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "side",
+          "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'bottom'"
+        },
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'start'"
+        },
+        {
+          "name": "arrow",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "id",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Unanchored menu anatomy with keyboard navigation.",
+      "whenToUse": [
+        "Provide a menu surface within a composition that owns positioning, trigger wiring and open state."
+      ],
+      "whenNotToUse": [
+        "An automatically anchored popup: use DropdownMenu."
+      ],
+      "prefer": "DropdownMenu",
+      "constraints": [
+        "Unanchored menu surface. Keyboard behavior is present, but side/align do not anchor the surface to a trigger."
+      ],
+      "reference": "docs/agent/components/dropdown-menu-content.md",
+      "stories": [
+        "components/dropdown-menu-content.stories.tsx"
+      ]
+    },
+    {
+      "name": "Dropdown Menu / Item",
+      "export": "DropdownMenuItem",
+      "source": "components/dropdown-menu.tsx",
+      "propsType": "DropdownMenuItemProps",
+      "import": "import { DropdownMenuItem } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onSelect",
+          "type": "() => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "tone",
+          "type": "\"default\" | \"destructive\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'default'"
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "shortcut",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "inset",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Standard command item.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Render inside DropdownMenu or DropdownMenuContent so keyboard navigation and activation are provided.",
+        "shortcut is visual text only and does not install a keyboard shortcut."
+      ],
+      "reference": "docs/agent/components/dropdown-menu-item.md",
+      "stories": [
+        "components/dropdown-menu-content.stories.tsx",
+        "components/dropdown-menu-item.stories.tsx"
+      ]
+    },
+    {
+      "name": "Dropdown Menu / Label",
+      "export": "DropdownMenuLabel",
+      "source": "components/dropdown-menu.tsx",
+      "propsType": "DropdownMenuLabelProps",
+      "import": "import { DropdownMenuLabel } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "inset",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Non-focusable group label with standard or inset alignment.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Noninteractive label inside a menu; it is not a selectable action."
+      ],
+      "reference": "docs/agent/components/dropdown-menu-label.md",
+      "stories": [
+        "components/dropdown-menu-content.stories.tsx",
+        "components/dropdown-menu.stories.tsx"
+      ]
+    },
+    {
+      "name": "Dropdown Menu / Radio Item",
+      "export": "DropdownMenuRadioItem",
+      "source": "components/dropdown-menu.tsx",
+      "propsType": "DropdownMenuRadioItemProps",
+      "import": "import { DropdownMenuRadioItem } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "checked",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "onSelect",
+          "type": "() => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Menu option whose caller owns exclusive checked state.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Render inside a menu. Caller owns exclusive selection and checked state; onSelect invokes the choice."
+      ],
+      "reference": "docs/agent/components/dropdown-menu-radio-item.md",
+      "stories": [
+        "components/dropdown-menu.stories.tsx"
+      ]
+    },
+    {
+      "name": "Dropdown Menu / Sub Content",
+      "export": "DropdownMenuSubContent",
+      "source": "components/dropdown-menu.tsx",
+      "propsType": "DropdownMenuSubContentProps",
+      "import": "import { DropdownMenuSubContent } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "side",
+          "type": "\"left\" | \"right\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'right'"
+        },
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'start'"
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "id",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Nested menu surface anchored to its linked submenu trigger.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Pair id with its SubTrigger controls. Selection dismisses the ancestor popup chain. Caller should clear child open states when removing the parent."
+      ],
+      "reference": "docs/agent/components/dropdown-menu-sub-content.md",
+      "stories": [
+        "components/dropdown-menu.stories.tsx"
+      ]
+    },
+    {
+      "name": "Dropdown Menu / Sub Trigger",
+      "export": "DropdownMenuSubTrigger",
+      "source": "components/dropdown-menu.tsx",
+      "propsType": "DropdownMenuSubTriggerProps",
+      "import": "import { DropdownMenuSubTrigger } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onOpenChange",
+          "type": "(open: boolean) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "inset",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "controls",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Submenu trigger with closed, open, highlighted, and disabled states plus optional inset alignment.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Use inside a menu, with shared open state and controls matching SubContent.id. Parent menu provides keyboard navigation."
+      ],
+      "reference": "docs/agent/components/dropdown-menu-sub-trigger.md",
+      "stories": [
+        "components/dropdown-menu.stories.tsx"
+      ]
+    },
+    {
+      "name": "Dropdown Menu / Trigger",
+      "export": "DropdownMenuTrigger",
+      "source": "components/dropdown-menu.tsx",
+      "propsType": "DropdownMenuTriggerProps",
+      "import": "import { DropdownMenuTrigger } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onOpenChange",
+          "type": "(open: boolean) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "type",
+          "type": "\"button\" | \"avatar\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'button'"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "controls",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Required when type=\"avatar\" and there is no visible text."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Controlled trigger button linked to a DropdownMenu by controls/id.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Share controlled open state with conditional menu mounting. controls must match the menu id; use a unique id per instance."
+      ],
+      "reference": "docs/agent/components/dropdown-menu-trigger.md",
+      "stories": [
+        "components/dropdown-menu.stories.tsx"
+      ]
+    },
+    {
+      "name": "Field",
+      "export": "Field",
+      "source": "components/field.tsx",
+      "propsType": "FieldProps",
+      "import": "import { Field } from 'jakeui';",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "(control: FieldControlProps) => ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "helperText",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "errorMessage",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "requirement",
+          "type": "\"required\" | \"optional\" | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "invalid",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Independent of `disabled`."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Independent of `invalid`."
+        },
+        {
+          "name": "id",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "FieldControlProps",
+          "source": "components/field.tsx",
+          "declaration": "export interface FieldControlProps {\n  id: string;\n  \"aria-describedby\": string | undefined;\n  \"aria-invalid\": true | undefined;\n  disabled: boolean;\n  required: boolean;\n  invalid: boolean;\n}"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Label, control and validation composition using a render-prop child.",
+      "whenToUse": [
+        "Wrap a form control with its label, helper text, and error message as one unit."
+      ],
+      "whenNotToUse": [
+        "A bare control that is already labelled by its surroundings.",
+        "Page layout — it composes one field, not a form."
+      ],
+      "constraints": [
+        "Render-prop composition: spread the supplied control props into Input, Textarea, NativeSelect or Select. Field owns label, required marker, error and description wiring; the child owns value and onChange.",
+        "Pass errorMessage to Field only, not also to the child control. Spread all supplied control props so invalid styling, required state and description links stay connected."
+      ],
+      "reference": "docs/agent/components/field.md",
+      "stories": [
+        "components/field.stories.tsx",
+        "components/popover.stories.tsx",
+        "components/select.stories.tsx"
+      ]
+    },
+    {
+      "name": "Hover Card",
+      "export": "HoverCard",
+      "source": "components/hover-card.tsx",
+      "propsType": "HoverCardProps",
+      "import": "import { HoverCard } from 'jakeui';",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactElement<unknown, string | import(\"react\").JSXElementConstructor<any>>",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "meta",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "density",
+          "type": "\"compact\" | \"detailed\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'compact'"
+        },
+        {
+          "name": "openDelay",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "500"
+        },
+        {
+          "name": "closeDelay",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "200"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Contextual preview surface revealed on pointer hover or keyboard focus.",
+      "whenToUse": [
+        "Preview the thing behind a link on hover, without making the reader navigate."
+      ],
+      "whenNotToUse": [
+        "Content the user needs — hover is unavailable on touch and to many keyboard users.",
+        "Anything required to complete a task."
+      ],
+      "constraints": [
+        "Optional supplementary information only. Trigger must forward events/ref. Essential information needs a visible or explicit click-accessible path, particularly on touch devices."
+      ],
+      "reference": "docs/agent/components/hover-card.md",
+      "stories": [
+        "components/hover-card.stories.tsx"
+      ]
+    },
+    {
+      "name": "Input",
+      "export": "Input",
+      "source": "components/input.tsx",
+      "propsType": "InputProps",
+      "import": "import { Input } from 'jakeui';",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": true,
+          "inherited": false,
+          "description": "Current field value. Renders in `--foreground`."
+        },
+        {
+          "name": "placeholder",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Shown when `value` is empty. Renders in `--muted-foreground` (code-only state — no Figma variant)."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false,
+          "description": "Slot before the value. Pass a `@phosphor-icons/react` component."
+        },
+        {
+          "name": "trailingIcon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false,
+          "description": "Slot after the value."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Applies the error border. Independent of `disabled`."
+        },
+        {
+          "name": "errorMessage",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Standalone invalid controls need an error message. Inside Field, pass it to Field only."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Blocks input. Independent of `invalid`."
+        },
+        {
+          "name": "onChange",
+          "type": "(e: ChangeEvent<HTMLInputElement>) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onFocus",
+          "type": "((e: FocusEvent<HTMLInputElement>) => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "onBlur",
+          "type": "((e: FocusEvent<HTMLInputElement>) => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "name",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "id",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Ties the field to its `<label>`. Auto-generated when omitted."
+        },
+        {
+          "name": "type",
+          "type": "\"text\" | \"email\" | \"password\" | \"tel\" | \"url\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'text'"
+        },
+        {
+          "name": "required",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "aria-label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Required only when no visible `<label>` exists."
+        },
+        {
+          "name": "aria-describedby",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "aria-invalid",
+          "type": "boolean | \"true\" | \"false\" | \"grammar\" | \"spelling\" | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Single-line text input primitive.",
+      "whenToUse": [
+        "Collect a single line of free-form text."
+      ],
+      "whenNotToUse": [
+        "Choosing from a fixed set — use NativeSelect or RadioGroup.",
+        "Long multi-line text — use Textarea."
+      ],
+      "constraints": [
+        "Controlled: supply value and onChange. Use Field for visible labels and validation. Standalone controls need a linked label or aria-label; a placeholder is not a label."
+      ],
+      "reference": "docs/agent/components/input.md",
+      "stories": [
+        "components/data-table.stories.tsx",
+        "components/field.stories.tsx",
+        "components/input.stories.tsx",
+        "components/popover.stories.tsx"
+      ]
+    },
+    {
+      "name": "Label",
+      "export": "Label",
+      "source": "components/label.tsx",
+      "propsType": "LabelProps",
+      "import": "import { Label } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false,
+          "description": "The label text. A ReactNode so a marker or inline code can be composed in."
+        },
+        {
+          "name": "htmlFor",
+          "type": "string",
+          "required": true,
+          "inherited": false,
+          "description": "The id of the control this labels."
+        },
+        {
+          "name": "requirement",
+          "type": "\"required\" | \"optional\" | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Appends a marker. `undefined` means no marker at all."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Dims the label to match a disabled control. Visual only."
+        },
+        {
+          "name": "className",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Form control label primitive.",
+      "whenToUse": [
+        "Name a form control, so it is identifiable before and after it is filled."
+      ],
+      "whenNotToUse": [
+        "Helper text, format hints, or validation messages — those are separate elements.",
+        "A section heading — use a heading."
+      ],
+      "constraints": [
+        "requirement is a decorative marker only. Set required or aria-required on the linked control; disabled only dims the label."
+      ],
+      "reference": "docs/agent/components/label.md",
+      "stories": [
+        "components/label.stories.tsx"
+      ]
+    },
+    {
+      "name": "Native Select",
+      "export": "NativeSelect",
+      "source": "components/native-select.tsx",
+      "propsType": "NativeSelectProps",
+      "import": "import { NativeSelect } from 'jakeui';",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": true,
+          "inherited": false,
+          "description": "Currently selected option value. Renders in `--foreground`."
+        },
+        {
+          "name": "options",
+          "type": "NativeSelectOption[]",
+          "required": true,
+          "inherited": false,
+          "description": "The option list. Code-only — Figma models the closed control only."
+        },
+        {
+          "name": "placeholder",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Rendered as a disabled, unselectable first option while `value` is empty."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Applies the error border. Independent of `disabled`."
+        },
+        {
+          "name": "errorMessage",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Standalone invalid controls need an error message. Inside Field, pass it to Field only."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Blocks selection. Independent of `invalid`."
+        },
+        {
+          "name": "onChange",
+          "type": "(e: ChangeEvent<HTMLSelectElement>) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onFocus",
+          "type": "((e: FocusEvent<HTMLSelectElement>) => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "onBlur",
+          "type": "((e: FocusEvent<HTMLSelectElement>) => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "name",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "id",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Ties the field to its `<label>`. Auto-generated when omitted."
+        },
+        {
+          "name": "required",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "aria-label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Required only when no visible `<label>` exists."
+        },
+        {
+          "name": "aria-describedby",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "aria-invalid",
+          "type": "boolean | \"true\" | \"false\" | \"grammar\" | \"spelling\" | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "NativeSelectOption",
+          "source": "components/native-select.tsx",
+          "declaration": "export interface NativeSelectOption {\n  value: string;\n  label: string;\n  disabled?: boolean;\n}"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Controlled single-choice native select.",
+      "whenToUse": [
+        "Choose one option from a fixed list using the platform menu; supply an accessible label."
+      ],
+      "whenNotToUse": [
+        "Free-form input: use Input.",
+        "A short visible choice list: use RadioGroup.",
+        "Multiple selection, search or rich option content: these are not exposed by this component; compose existing controls or request an extension.",
+        "Consistent below-field popup styling: use Select."
+      ],
+      "constraints": [
+        "Controlled native select. Its open state belongs to the browser; do not pass open or implement a second popup.",
+        "The inset Phosphor indicator is decorative. The native popup's placement and styling belong to the browser/OS; use Select when a consistently anchored popup is required."
+      ],
+      "reference": "docs/agent/components/native-select.md",
+      "stories": [
+        "components/field.stories.tsx",
+        "components/native-select.stories.tsx"
+      ]
+    },
+    {
+      "name": "Navigation Menu",
+      "export": "NavigationMenu",
+      "source": "components/navigation-menu.tsx",
+      "propsType": "NavigationMenuProps",
+      "import": "import { NavigationMenu } from 'jakeui';",
+      "props": [
+        {
+          "name": "items",
+          "type": "NavItem[]",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "open",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "\"Main\""
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "NavItem",
+          "source": "components/navigation-menu.tsx",
+          "declaration": "export interface NavItem {\n  href: string;\n  label: string;\n  current?: boolean;\n}"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Flat navigation links with a controlled compact toggle.",
+      "whenToUse": [
+        "Present top-level destinations with desktop and compact layouts."
+      ],
+      "whenNotToUse": [
+        "Nested navigation groups: this interface has no nested item shape.",
+        "Actions: use DropdownMenu."
+      ],
+      "constraints": [
+        "Links come from items. Supply open/onOpenChange for the compact toggle. This is not the similarly named shadcn/Radix primitive interface."
+      ],
+      "reference": "docs/agent/components/navigation-menu.md",
+      "stories": [
+        "components/navigation-menu.stories.tsx"
+      ]
+    },
+    {
+      "name": "Pagination",
+      "export": "Pagination",
+      "source": "components/pagination.tsx",
+      "propsType": "PaginationProps",
+      "import": "import { Pagination } from 'jakeui';",
+      "props": [
+        {
+          "name": "page",
+          "type": "number",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "pageCount",
+          "type": "number",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onPageChange",
+          "type": "(page: number) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "compact",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "\"Pagination\""
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Navigate paged datasets or long collections.",
+      "whenToUse": [
+        "Break a long result set into pages the reader can move through and return to."
+      ],
+      "whenNotToUse": [
+        "A feed meant to be browsed continuously — use infinite scroll or a load-more control.",
+        "Result sets short enough to show at once."
+      ],
+      "constraints": [
+        "Pages are 1-based. pageCount is total pages, not item count. Narrow containers show Previous/Next and a summary; wide ones show a bounded page window."
+      ],
+      "reference": "docs/agent/components/pagination.md",
+      "stories": [
+        "components/data-table.stories.tsx",
+        "components/pagination.stories.tsx"
+      ]
+    },
+    {
+      "name": "Popover",
+      "export": "Popover",
+      "source": "components/popover.tsx",
+      "propsType": "PopoverProps",
+      "import": "import { Popover } from 'jakeui';",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onOpenChange",
+          "type": "(open: boolean) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "trigger",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "title",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"large\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'small'"
+        },
+        {
+          "name": "arrow",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "side",
+          "type": "PopoverSide | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'bottom'"
+        },
+        {
+          "name": "modal",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "PopoverSide",
+          "source": "components/popover.tsx",
+          "declaration": "export type PopoverSide = 'top' | 'right' | 'bottom' | 'left';"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Controlled anchored interactive popup with optional modal focus management.",
+      "whenToUse": [
+        "Show secondary content or a small task in context, anchored to its trigger."
+      ],
+      "whenNotToUse": [
+        "A decision that must block the flow — use a Dialog.",
+        "A plain text hint — use a Tooltip.",
+        "A list of actions — use a menu."
+      ],
+      "constraints": [
+        "Use for anchored interactive content. Supply open/onOpenChange and a single trigger that forwards props and ref (Button or a native element). modal owns focus containment, outside inertness and scroll lock. Placement may flip at edges."
+      ],
+      "reference": "docs/agent/components/popover.md",
+      "stories": [
+        "components/popover.stories.tsx"
+      ]
+    },
+    {
+      "name": "Popover / Arrow",
+      "export": "PopoverArrow",
+      "source": "components/popover-arrow.tsx",
+      "propsType": "PopoverArrowProps",
+      "import": "import { PopoverArrow } from 'jakeui';",
+      "props": [
+        {
+          "name": "side",
+          "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'bottom'"
+        },
+        {
+          "name": "className",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Pointing Arrow for all four popup sides.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Decorative arrow only. Anchored Popover uses its positioning engine's arrow."
+      ],
+      "reference": "docs/agent/components/popover-arrow.md",
+      "stories": [
+        "components/popover-content.stories.tsx"
+      ]
+    },
+    {
+      "name": "Popover / Backdrop",
+      "export": "PopoverBackdrop",
+      "source": "components/popover.tsx",
+      "propsType": "PopoverBackdropProps",
+      "import": "import { PopoverBackdrop } from 'jakeui';",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "mode",
+          "type": "\"modal\" | \"trapFocus\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'modal'"
+        },
+        {
+          "name": "onClick",
+          "type": "(() => void) | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Visual scrim anatomy; modality is owned by Popover.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "prefer": "Popover",
+      "constraints": [
+        "Visual scrim only. mode does not implement a focus trap; Popover owns modality."
+      ],
+      "reference": "docs/agent/components/popover-backdrop.md",
+      "stories": [
+        "components/popover-content.stories.tsx"
+      ]
+    },
+    {
+      "name": "Popover / Close",
+      "export": "PopoverClose",
+      "source": "components/popover.tsx",
+      "propsType": "PopoverCloseProps",
+      "import": "import { PopoverClose } from 'jakeui';",
+      "props": [
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'Close'"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Explicit close control for Popover content.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Close button only; wire onClose to its parent state."
+      ],
+      "reference": "docs/agent/components/popover-close.md",
+      "stories": [
+        "components/popover.stories.tsx"
+      ]
+    },
+    {
+      "name": "Popover / Content",
+      "export": "PopoverContent",
+      "source": "components/popover.tsx",
+      "propsType": "PopoverContentProps",
+      "import": "import { PopoverContent } from 'jakeui';",
+      "props": [
+        {
+          "name": "title",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "action",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "onClose",
+          "type": "(() => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"large\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'small'"
+        },
+        {
+          "name": "side",
+          "type": "PopoverSide | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'bottom'"
+        },
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'start'"
+        },
+        {
+          "name": "arrow",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "PopoverSide",
+          "source": "components/popover.tsx",
+          "declaration": "export type PopoverSide = 'top' | 'right' | 'bottom' | 'left';"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Unanchored presentation surface without popup behavior.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "prefer": "Popover",
+      "constraints": [
+        "Unanchored presentation surface only. side/align are geometry metadata; this export does not provide positioning, dialog semantics, dismissal or focus management."
+      ],
+      "reference": "docs/agent/components/popover-content.md",
+      "stories": [
+        "components/popover-content.stories.tsx"
+      ]
+    },
+    {
+      "name": "Popover / Trigger",
+      "export": "PopoverTrigger",
+      "source": "components/popover.tsx",
+      "propsType": "PopoverTriggerProps",
+      "import": "import { PopoverTrigger } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onOpenChange",
+          "type": "(open: boolean) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "controls",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [
+        "value",
+        "onFocus",
+        "onBlur",
+        "name",
+        "id",
+        "type",
+        "aria-label",
+        "aria-describedby",
+        "aria-invalid",
+        "style",
+        "onClick",
+        "form",
+        "formAction",
+        "formEncType",
+        "formMethod",
+        "formNoValidate",
+        "formTarget",
+        "defaultChecked",
+        "defaultValue",
+        "suppressContentEditableWarning",
+        "suppressHydrationWarning",
+        "accessKey",
+        "autoCapitalize",
+        "autoFocus",
+        "className",
+        "contentEditable",
+        "contextMenu",
+        "dir",
+        "draggable",
+        "enterKeyHint",
+        "hidden",
+        "lang",
+        "nonce",
+        "slot",
+        "spellCheck",
+        "tabIndex",
+        "title",
+        "translate",
+        "radioGroup",
+        "role",
+        "about",
+        "content",
+        "datatype",
+        "inlist",
+        "prefix",
+        "property",
+        "rel",
+        "resource",
+        "rev",
+        "typeof",
+        "vocab",
+        "autoCorrect",
+        "autoSave",
+        "color",
+        "itemProp",
+        "itemScope",
+        "itemType",
+        "itemID",
+        "itemRef",
+        "results",
+        "security",
+        "unselectable",
+        "popover",
+        "popoverTargetAction",
+        "popoverTarget",
+        "inert",
+        "inputMode",
+        "is",
+        "exportparts",
+        "part",
+        "aria-activedescendant",
+        "aria-atomic",
+        "aria-autocomplete",
+        "aria-braillelabel",
+        "aria-brailleroledescription",
+        "aria-busy",
+        "aria-checked",
+        "aria-colcount",
+        "aria-colindex",
+        "aria-colindextext",
+        "aria-colspan",
+        "aria-controls",
+        "aria-current",
+        "aria-description",
+        "aria-details",
+        "aria-disabled",
+        "aria-dropeffect",
+        "aria-errormessage",
+        "aria-expanded",
+        "aria-flowto",
+        "aria-grabbed",
+        "aria-haspopup",
+        "aria-hidden",
+        "aria-keyshortcuts",
+        "aria-labelledby",
+        "aria-level",
+        "aria-live",
+        "aria-modal",
+        "aria-multiline",
+        "aria-multiselectable",
+        "aria-orientation",
+        "aria-owns",
+        "aria-placeholder",
+        "aria-posinset",
+        "aria-pressed",
+        "aria-readonly",
+        "aria-relevant",
+        "aria-required",
+        "aria-roledescription",
+        "aria-rowcount",
+        "aria-rowindex",
+        "aria-rowindextext",
+        "aria-rowspan",
+        "aria-selected",
+        "aria-setsize",
+        "aria-sort",
+        "aria-valuemax",
+        "aria-valuemin",
+        "aria-valuenow",
+        "aria-valuetext",
+        "dangerouslySetInnerHTML",
+        "onCopy",
+        "onCopyCapture",
+        "onCut",
+        "onCutCapture",
+        "onPaste",
+        "onPasteCapture",
+        "onCompositionEnd",
+        "onCompositionEndCapture",
+        "onCompositionStart",
+        "onCompositionStartCapture",
+        "onCompositionUpdate",
+        "onCompositionUpdateCapture",
+        "onFocusCapture",
+        "onBlurCapture",
+        "onChangeCapture",
+        "onBeforeInput",
+        "onBeforeInputCapture",
+        "onInput",
+        "onInputCapture",
+        "onReset",
+        "onResetCapture",
+        "onSubmit",
+        "onSubmitCapture",
+        "onInvalid",
+        "onInvalidCapture",
+        "onLoad",
+        "onLoadCapture",
+        "onError",
+        "onErrorCapture",
+        "onKeyDown",
+        "onKeyDownCapture",
+        "onKeyPress",
+        "onKeyPressCapture",
+        "onKeyUp",
+        "onKeyUpCapture",
+        "onAbort",
+        "onAbortCapture",
+        "onCanPlay",
+        "onCanPlayCapture",
+        "onCanPlayThrough",
+        "onCanPlayThroughCapture",
+        "onDurationChange",
+        "onDurationChangeCapture",
+        "onEmptied",
+        "onEmptiedCapture",
+        "onEncrypted",
+        "onEncryptedCapture",
+        "onEnded",
+        "onEndedCapture",
+        "onLoadedData",
+        "onLoadedDataCapture",
+        "onLoadedMetadata",
+        "onLoadedMetadataCapture",
+        "onLoadStart",
+        "onLoadStartCapture",
+        "onPause",
+        "onPauseCapture",
+        "onPlay",
+        "onPlayCapture",
+        "onPlaying",
+        "onPlayingCapture",
+        "onProgress",
+        "onProgressCapture",
+        "onRateChange",
+        "onRateChangeCapture",
+        "onSeeked",
+        "onSeekedCapture",
+        "onSeeking",
+        "onSeekingCapture",
+        "onStalled",
+        "onStalledCapture",
+        "onSuspend",
+        "onSuspendCapture",
+        "onTimeUpdate",
+        "onTimeUpdateCapture",
+        "onVolumeChange",
+        "onVolumeChangeCapture",
+        "onWaiting",
+        "onWaitingCapture",
+        "onAuxClick",
+        "onAuxClickCapture",
+        "onClickCapture",
+        "onContextMenu",
+        "onContextMenuCapture",
+        "onDoubleClick",
+        "onDoubleClickCapture",
+        "onDrag",
+        "onDragCapture",
+        "onDragEnd",
+        "onDragEndCapture",
+        "onDragEnter",
+        "onDragEnterCapture",
+        "onDragExit",
+        "onDragExitCapture",
+        "onDragLeave",
+        "onDragLeaveCapture",
+        "onDragOver",
+        "onDragOverCapture",
+        "onDragStart",
+        "onDragStartCapture",
+        "onDrop",
+        "onDropCapture",
+        "onMouseDown",
+        "onMouseDownCapture",
+        "onMouseEnter",
+        "onMouseLeave",
+        "onMouseMove",
+        "onMouseMoveCapture",
+        "onMouseOut",
+        "onMouseOutCapture",
+        "onMouseOver",
+        "onMouseOverCapture",
+        "onMouseUp",
+        "onMouseUpCapture",
+        "onSelect",
+        "onSelectCapture",
+        "onTouchCancel",
+        "onTouchCancelCapture",
+        "onTouchEnd",
+        "onTouchEndCapture",
+        "onTouchMove",
+        "onTouchMoveCapture",
+        "onTouchStart",
+        "onTouchStartCapture",
+        "onPointerDown",
+        "onPointerDownCapture",
+        "onPointerMove",
+        "onPointerMoveCapture",
+        "onPointerUp",
+        "onPointerUpCapture",
+        "onPointerCancel",
+        "onPointerCancelCapture",
+        "onPointerEnter",
+        "onPointerLeave",
+        "onPointerOver",
+        "onPointerOverCapture",
+        "onPointerOut",
+        "onPointerOutCapture",
+        "onGotPointerCapture",
+        "onGotPointerCaptureCapture",
+        "onLostPointerCapture",
+        "onLostPointerCaptureCapture",
+        "onScroll",
+        "onScrollCapture",
+        "onScrollEnd",
+        "onScrollEndCapture",
+        "onWheel",
+        "onWheelCapture",
+        "onAnimationStart",
+        "onAnimationStartCapture",
+        "onAnimationEnd",
+        "onAnimationEndCapture",
+        "onAnimationIteration",
+        "onAnimationIterationCapture",
+        "onToggle",
+        "onBeforeToggle",
+        "onTransitionCancel",
+        "onTransitionCancelCapture",
+        "onTransitionEnd",
+        "onTransitionEndCapture",
+        "onTransitionRun",
+        "onTransitionRunCapture",
+        "onTransitionStart",
+        "onTransitionStartCapture"
+      ],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Controlled button for opening or closing a Popover.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "prefer": "Popover with Button trigger",
+      "constraints": [
+        "Controlled button. Prefer passing Button to Popover; this trigger can also compose with Popover without duplicating state changes."
+      ],
+      "reference": "docs/agent/components/popover-trigger.md",
+      "stories": [
+        "components/popover-content.stories.tsx"
+      ]
+    },
+    {
+      "name": "Popover / Viewport",
+      "export": "PopoverViewport",
+      "source": "components/popover.tsx",
+      "propsType": "PopoverViewportProps",
+      "import": "import { PopoverViewport } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "previous",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "direction",
+          "type": "PopoverSide | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'bottom'"
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "PopoverSide",
+          "source": "components/popover.tsx",
+          "declaration": "export type PopoverSide = 'top' | 'right' | 'bottom' | 'left';"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Presentation viewport that hides and inerts previous content.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Previous content stays inert and invisible. This surface is not an animation engine or a focus manager."
+      ],
+      "reference": "docs/agent/components/popover-viewport.md",
+      "stories": [
+        "components/popover-viewport.stories.tsx"
+      ]
+    },
+    {
+      "name": "Progress",
+      "export": "Progress",
+      "source": "components/progress.tsx",
+      "propsType": "ProgressProps",
+      "import": "import { Progress } from 'jakeui';",
+      "props": [
+        {
+          "name": "value",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Finite value from 0 to max. Omit for indeterminate progress; 0 is determinate."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false,
+          "description": "Required: an unnamed progress bar announces a number with no subject."
+        },
+        {
+          "name": "max",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "100",
+          "description": "Positive finite upper bound for determinate progress."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Linear progress primitive.",
+      "whenToUse": [
+        "Show that work is underway, and how far along it is when that is known."
+      ],
+      "whenNotToUse": [
+        "Waits short enough that the indicator flashes — show nothing.",
+        "Content-shaped placeholders while a view loads — use Skeleton."
+      ],
+      "constraints": [
+        "Omit value for indeterminate progress; 0 is determinate. For determinate progress supply a finite value from 0 to a positive finite max (default 100)."
+      ],
+      "reference": "docs/agent/components/progress.md",
+      "stories": [
+        "components/progress.stories.tsx"
+      ]
+    },
+    {
+      "name": "Radio Group",
+      "export": "RadioGroup",
+      "source": "components/radio-group.tsx",
+      "propsType": "RadioGroupProps",
+      "import": "import { RadioGroup } from 'jakeui';",
+      "props": [
+        {
+          "name": "items",
+          "type": "RadioItem[]",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onValueChange",
+          "type": "(value: string) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'vertical'"
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "RadioItem",
+          "source": "components/radio-group.tsx",
+          "declaration": "export interface RadioItem {\n  value: string;\n  label: string;\n  description?: string;\n  disabled?: boolean;\n}"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Controlled group of native radios for one-of-many selection.",
+      "whenToUse": [
+        "NativeSelect one option from a visible set of mutually exclusive choices."
+      ],
+      "whenNotToUse": [
+        "Independent multiple choices: use Checkbox.",
+        "An immediate boolean setting: use Switch."
+      ],
+      "constraints": [
+        "Supply label, items, value and onValueChange. RadioGroup owns native radio semantics and keyboard behavior; anatomy exports do not."
+      ],
+      "reference": "docs/agent/components/radio-group.md",
+      "stories": [
+        "components/radio-group.stories.tsx"
+      ]
+    },
+    {
+      "name": "Radio Group / Indicator",
+      "export": "RadioGroupIndicator",
+      "source": "components/radio-group.tsx",
+      "propsType": "RadioGroupIndicatorProps",
+      "import": "import { RadioGroupIndicator } from 'jakeui';",
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "forceMount",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Keeps the decorative indicator mounted when unchecked for animation or measurement."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Checked-state indicator nested inside RadioGroup / Item.",
+      "whenToUse": [
+        "Inspect or compose visual anatomy under an owner that provides the full control semantics; prefer RadioGroup for application work."
+      ],
+      "whenNotToUse": [
+        "A standalone interactive control: use RadioGroup."
+      ],
+      "prefer": "RadioGroup",
+      "constraints": [
+        "Decorative checked dot only."
+      ],
+      "reference": "docs/agent/components/radio-group-indicator.md",
+      "stories": [
+        "components/radio-group-item.stories.tsx"
+      ]
+    },
+    {
+      "name": "Radio Group / Item",
+      "export": "RadioGroupItem",
+      "source": "components/radio-group.tsx",
+      "propsType": "RadioGroupItemProps",
+      "import": "import { RadioGroupItem } from 'jakeui';",
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "state",
+          "type": "RadioState | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'default'"
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "RadioState",
+          "source": "components/radio-group.tsx",
+          "declaration": "export type RadioState = 'default' | 'hover' | 'focused' | 'disabled' | 'readOnly' | 'invalid';"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Decorative radio circle with visual state previews.",
+      "whenToUse": [
+        "Inspect or compose visual anatomy under an owner that provides the full control semantics; prefer RadioGroup for application work."
+      ],
+      "whenNotToUse": [
+        "A standalone interactive control: use RadioGroup."
+      ],
+      "prefer": "RadioGroup",
+      "constraints": [
+        "Decorative circle, aria-hidden, not an interactive radio input."
+      ],
+      "reference": "docs/agent/components/radio-group-item.md",
+      "stories": [
+        "components/radio-group-item.stories.tsx",
+        "components/radio-group-root.stories.tsx"
+      ]
+    },
+    {
+      "name": "Radio Group / Root",
+      "export": "RadioGroupRoot",
+      "source": "components/radio-group.tsx",
+      "propsType": "RadioGroupRootProps",
+      "import": "import { RadioGroupRoot } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "import(\"react\").ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'vertical'"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "state",
+          "type": "\"default\" | \"invalid\" | \"disabled\" | \"readOnly\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'default'",
+          "description": "Only disabled affects this wrapper; other states do not propagate to children."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Presentation fieldset; child controls own exclusive selection.",
+      "whenToUse": [
+        "Inspect or compose visual anatomy under an owner that provides the full control semantics; prefer RadioGroup for application work."
+      ],
+      "whenNotToUse": [
+        "A standalone interactive control: use RadioGroup."
+      ],
+      "prefer": "RadioGroup",
+      "constraints": [
+        "Presentation fieldset only. Does not own value, onValueChange or exclusive selection; children supply controls. disabled disables descendant native controls and dims the legend; invalid/readOnly do not propagate visual state to children."
+      ],
+      "reference": "docs/agent/components/radio-group-root.md",
+      "stories": [
+        "components/radio-group-root.stories.tsx"
+      ]
+    },
+    {
+      "name": "Scroll Area",
+      "export": "ScrollArea",
+      "source": "components/scroll-area.tsx",
+      "propsType": "ScrollAreaProps",
+      "import": "import { ScrollArea } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "axis",
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'vertical'"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false,
+          "description": "Required: a focusable region with no name is an unexplained tab stop."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Named focusable scroll region using native scrollbars.",
+      "whenToUse": [
+        "Confine overflow to one region so the page itself does not scroll."
+      ],
+      "whenNotToUse": [
+        "The main page scroll — leave that to the browser.",
+        "Hiding content the reader is unlikely to look for."
+      ],
+      "reference": "docs/agent/components/scroll-area.md",
+      "stories": [
+        "components/scroll-area.stories.tsx"
+      ]
+    },
+    {
+      "name": "Segmented Tab",
+      "export": "SegmentedTab",
+      "source": "components/segmented-tab.tsx",
+      "propsType": "SegmentedTabProps",
+      "import": "import { SegmentedTab } from 'jakeui';",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "selected",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "onSelect",
+          "type": "() => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "controls",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Id of the panel this tab controls."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "id",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "tabIndex",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Set by the parent Tabs; a standalone tab cannot know its siblings."
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Single tab item for a Tabs-owned tablist and panel.",
+      "whenToUse": [
+        "Switch between peer views of the same subject, within one context."
+      ],
+      "whenNotToUse": [
+        "Steps in a sequence — use an application-owned sequence with explicit current-step semantics.",
+        "Content the reader needs to compare side by side, or to find with the browser's search.",
+        "Navigating to a different page — use links."
+      ],
+      "prefer": "Tabs",
+      "constraints": [
+        "One tab item, not a complete tablist. Tabs supplies group keyboard navigation and linked panels. Standalone items require a tablist owner, roving focus and aria-controls/id wiring."
+      ],
+      "reference": "docs/agent/components/segmented-tab.md",
+      "stories": [
+        "components/segmented-tab.stories.tsx"
+      ]
+    },
+    {
+      "name": "Select",
+      "export": "Select",
+      "source": "components/select.tsx",
+      "propsType": "SelectProps",
+      "import": "import { Select } from 'jakeui';",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": true,
+          "inherited": false,
+          "description": "Controlled value; an empty string displays the placeholder."
+        },
+        {
+          "name": "options",
+          "type": "SelectOption[]",
+          "required": true,
+          "inherited": false,
+          "description": "Single-choice plain-text options. Search and multiple selection are not supported."
+        },
+        {
+          "name": "onValueChange",
+          "type": "(value: string) => void",
+          "required": true,
+          "inherited": false,
+          "description": "Commits a value, not a DOM change event. Arrow navigation alone does not commit."
+        },
+        {
+          "name": "placeholder",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "\"Choose an option\""
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "invalid",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "errorMessage",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Inside Field, pass errorMessage to Field only."
+        },
+        {
+          "name": "name",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Participates in native form submission through a hidden native select."
+        },
+        {
+          "name": "required",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Participates in native required validation; invalid submission focuses the trigger."
+        },
+        {
+          "name": "id",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "aria-label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "aria-labelledby",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "aria-describedby",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "aria-invalid",
+          "type": "boolean | \"true\" | \"false\" | \"grammar\" | \"spelling\" | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "onFocus",
+          "type": "((event: FocusEvent<HTMLButtonElement>) => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "onBlur",
+          "type": "((event: FocusEvent<HTMLButtonElement>) => void) | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "SelectOption",
+          "source": "components/select.tsx",
+          "declaration": "export interface SelectOption {\n  /** Unique, nonempty form value. */\n  value: string;\n  label: string;\n  disabled?: boolean;\n}"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Controlled single-choice select with an anchored, styled listbox.",
+      "whenToUse": [
+        "A plain-text form choice that needs consistent popup styling and field-aligned positioning across desktop browsers."
+      ],
+      "whenNotToUse": [
+        "Platform-native mobile pickers: use NativeSelect.",
+        "Searchable choices, multiple selection or rich option content: request an extension.",
+        "Commands or navigation: use DropdownMenu or navigation components."
+      ],
+      "constraints": [
+        "Supply value and onValueChange; this callback receives a string, not NativeSelect's DOM change event. Options need unique nonempty values.",
+        "Use Field or a linked label. Spread Field's control props and pass errorMessage to Field only.",
+        "Arrow keys, Home/End, PageUp/PageDown and typeahead preview choices. Enter/Space/Tab commit; Escape cancels. Focus stays on the trigger.",
+        "The popup opens below with an 8px gap, matches the field width and flips when space is insufficient. Its list scrolls; it does not overlap the field.",
+        "name and required participate in native forms through a hidden select. Keep value controlled, including form reset handling. Disabled or wholly unavailable option lists cannot open.",
+        "An approved code-only extension; do not invent a Figma node or copy the similarly named API from another library."
+      ],
+      "reference": "docs/agent/components/select.md",
+      "stories": [
+        "components/select.stories.tsx"
+      ]
+    },
+    {
+      "name": "Separator",
+      "export": "Separator",
+      "source": "components/separator.tsx",
+      "propsType": "SeparatorProps",
+      "import": "import { Separator } from 'jakeui';",
+      "props": [
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'horizontal'",
+          "description": "Axis the rule runs along."
+        },
+        {
+          "name": "decorative",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "true",
+          "description": "Visual only (default) vs a real semantic boundary."
+        },
+        {
+          "name": "className",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Visual separator for grouping adjacent content.",
+      "whenToUse": [
+        "Mark a boundary between groups that spacing alone does not make clear."
+      ],
+      "whenNotToUse": [
+        "Where whitespace already separates the groups.",
+        "Decoration, or as a border around a region."
+      ],
+      "reference": "docs/agent/components/separator.md",
+      "stories": [
+        "components/separator.stories.tsx"
+      ]
+    },
+    {
+      "name": "Sheet",
+      "export": "Sheet",
+      "source": "components/sheet.tsx",
+      "propsType": "SheetProps",
+      "import": "import { Sheet } from 'jakeui';",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "side",
+          "type": "\"left\" | \"right\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'right'",
+          "description": "Viewport edge to attach to; this surface is not anchored to a trigger."
+        },
+        {
+          "name": "width",
+          "type": "\"compact\" | \"wide\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'compact'",
+          "description": "Existing overlay width preset; geometry is scoped in agent/exceptions.json."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Modal edge-attached surface for a focused secondary task.",
+      "whenToUse": [
+        "Present a focused task in a modal panel attached to a viewport edge."
+      ],
+      "whenNotToUse": [
+        "Persistent nonblocking content: use an application layout region.",
+        "Nonblocking feedback: use Alert."
+      ],
+      "constraints": [
+        "Modal dialog surface, not a persistent nonblocking sidebar. Use a layout region for persistent adjacent content."
+      ],
+      "reference": "docs/agent/components/sheet.md",
+      "stories": [
+        "components/drawer-sheet.stories.tsx"
+      ]
+    },
+    {
+      "name": "Sidebar",
+      "export": "Sidebar",
+      "source": "components/sidebar.tsx",
+      "propsType": "SidebarProps",
+      "import": "import { Sidebar } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "collapsed",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "onCollapsedChange",
+          "type": "((collapsed: boolean) => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "\"Main\""
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Application sidebar with desktop and compact structures.",
+      "whenToUse": [
+        "Keep navigation persistently in view alongside the main content."
+      ],
+      "whenNotToUse": [
+        "Fewer than about five destinations — a horizontal bar reads faster.",
+        "Page content or filters that belong in the main column."
+      ],
+      "constraints": [
+        "collapsed propagates to SidebarNavigationItem. Application shell owns responsive placement and route state; this is not a mobile drawer."
+      ],
+      "reference": "docs/agent/components/sidebar.md",
+      "stories": [
+        "components/sidebar.stories.tsx"
+      ]
+    },
+    {
+      "name": "Sidebar Navigation Item",
+      "export": "SidebarNavigationItem",
+      "source": "components/sidebar.tsx",
+      "propsType": "SidebarNavigationItemProps",
+      "import": "import { SidebarNavigationItem } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "active",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "collapsed",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Set by Sidebar. Hides the label visually while keeping the accessible name."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Navigation item with Sidebar-owned collapse state.",
+      "whenToUse": [
+        "A single destination within sidebar navigation."
+      ],
+      "whenNotToUse": [
+        "Firing an action rather than navigating — use a Button."
+      ],
+      "constraints": [
+        "Use inside Sidebar for collapse propagation. active is route state, not a Figma state enum. Supply the actual destination or action appropriate to the exported props."
+      ],
+      "reference": "docs/agent/components/sidebar-navigation-item.md",
+      "stories": [
+        "components/sidebar.stories.tsx"
+      ]
+    },
+    {
+      "name": "Skeleton",
+      "export": "Skeleton",
+      "source": "components/skeleton.tsx",
+      "propsType": "SkeletonProps",
+      "import": "import { Skeleton } from 'jakeui';",
+      "props": [
+        {
+          "name": "type",
+          "type": "\"text\" | \"avatar\" | \"card\" | \"tableRow\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'text'"
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'Loading'",
+          "description": "Text for this component's status region; shapes are hidden from assistive technology."
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Loading placeholders for text, avatar rows, cards, and table rows.",
+      "whenToUse": [
+        "Hold the shape of content that is loading, so the layout does not jump when it arrives."
+      ],
+      "whenNotToUse": [
+        "Waits short enough that it flashes.",
+        "Work with a known duration or total — use Progress.",
+        "An error or an empty result — those need their own states."
+      ],
+      "constraints": [
+        "The component owns a status region; its shapes are aria-hidden. Use one meaningful loading announcement per region rather than duplicating nested announcements."
+      ],
+      "reference": "docs/agent/components/skeleton.md",
+      "stories": [
+        "components/skeleton.stories.tsx"
+      ]
+    },
+    {
+      "name": "Slider",
+      "export": "Slider",
+      "source": "components/slider.tsx",
+      "propsType": "SliderProps",
+      "import": "import { Slider } from 'jakeui';",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onValueChange",
+          "type": "(value: number) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "min",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "0"
+        },
+        {
+          "name": "max",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "100"
+        },
+        {
+          "name": "step",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "1"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Continuous value selection primitive.",
+      "whenToUse": [
+        "Pick from a continuous or coarsely stepped range where the relative position matters more than the exact figure."
+      ],
+      "whenNotToUse": [
+        "A precise value the user knows — use a number input.",
+        "Ranges so wide that a pixel is worth many units.",
+        "Fewer than about five discrete options — use radios or a segmented control."
+      ],
+      "reference": "docs/agent/components/slider.md",
+      "stories": [
+        "components/slider.stories.tsx"
+      ]
+    },
+    {
+      "name": "Switch",
+      "export": "Switch",
+      "source": "components/switch.tsx",
+      "propsType": "SwitchProps",
+      "import": "import { Switch } from 'jakeui';",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "checked",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onCheckedChange",
+          "type": "(checked: boolean) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Controlled labelled switch for an immediate boolean setting.",
+      "whenToUse": [
+        "An independent boolean setting that takes effect immediately."
+      ],
+      "whenNotToUse": [
+        "A choice applied after Save or submit: use Checkbox.",
+        "Exclusive options: use RadioGroup. An action command: use Button."
+      ],
+      "constraints": [
+        "Use checked and onCheckedChange. This is the interactive labelled control; SwitchRoot is only its visual track."
+      ],
+      "reference": "docs/agent/components/switch.md",
+      "stories": [
+        "components/switch.stories.tsx"
+      ]
+    },
+    {
+      "name": "Switch / Root",
+      "export": "SwitchRoot",
+      "source": "components/switch.tsx",
+      "propsType": "SwitchRootProps",
+      "import": "import { SwitchRoot } from 'jakeui';",
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "size",
+          "type": "\"default\" | \"small\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'default'"
+        },
+        {
+          "name": "state",
+          "type": "\"default\" | \"invalid\" | \"disabled\" | \"hover\" | \"focused\" | \"readOnly\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'default'",
+          "description": "Visual preview state only; does not implement interaction or semantics."
+        },
+        {
+          "name": "children",
+          "type": "import(\"react\").ReactNode",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Decorative switch track with visual state previews.",
+      "whenToUse": [
+        "Inspect or compose visual anatomy under an owner that provides the full control semantics; prefer Switch for application work."
+      ],
+      "whenNotToUse": [
+        "A standalone interactive control: use Switch."
+      ],
+      "prefer": "Switch",
+      "constraints": [
+        "Visual span only, not a focusable switch. The state enum previews appearance, not independent runtime conditions."
+      ],
+      "reference": "docs/agent/components/switch-root.md",
+      "stories": [
+        "components/switch-root.stories.tsx"
+      ]
+    },
+    {
+      "name": "Switch / Thumb",
+      "export": "SwitchThumb",
+      "source": "components/switch.tsx",
+      "propsType": "SwitchThumbProps",
+      "import": "import { SwitchThumb } from 'jakeui';",
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "size",
+          "type": "\"default\" | \"small\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'default'"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "anatomy",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Movable Switch thumb.",
+      "whenToUse": [
+        "Inspect or compose visual anatomy under an owner that provides the full control semantics; prefer Switch for application work."
+      ],
+      "whenNotToUse": [
+        "A standalone interactive control: use Switch."
+      ],
+      "prefer": "Switch",
+      "constraints": [
+        "Visual thumb only. Match the size of its track; no keyboard or pointer behavior is provided."
+      ],
+      "reference": "docs/agent/components/switch-thumb.md",
+      "stories": [
+        "components/switch-root.stories.tsx"
+      ]
+    },
+    {
+      "name": "Table",
+      "export": "Table",
+      "source": "components/table.tsx",
+      "propsType": "TableProps",
+      "import": "import { Table } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "caption",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "captionPosition",
+          "type": "\"top\" | \"bottom\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'top'"
+        },
+        {
+          "name": "density",
+          "type": "TableDensity | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'compact'"
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "TableDensity",
+          "source": "components/table.tsx",
+          "declaration": "export type TableDensity = 'compact' | 'comfortable';"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Jake UI extension for structured tabular data with compact and comfortable density variants plus optional selected-row treatment.",
+      "whenToUse": [
+        "Present records across shared columns, for comparison, scanning, or exact reading."
+      ],
+      "whenNotToUse": [
+        "Page layout — use a grid.",
+        "A handful of key-value pairs — use a description list."
+      ],
+      "constraints": [
+        "Use native thead/tbody/tfoot with TableRow, TableHead and TableCell; TableHeader/TableBody/TableFooter are not exported components. Table density propagates to rows."
+      ],
+      "reference": "docs/agent/components/table.md",
+      "stories": [
+        "components/data-table.stories.tsx",
+        "components/table.stories.tsx"
+      ]
+    },
+    {
+      "name": "Table / Action Trigger",
+      "export": "TableActionTrigger",
+      "source": "components/table.tsx",
+      "propsType": "TableActionTriggerProps",
+      "import": "import { TableActionTrigger } from 'jakeui';",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false,
+          "description": "Accessible action name that identifies the row or task context."
+        },
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "expanded",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Icon-only row-action trigger used with Dropdown Menu.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Supply a context-specific label and onClick. This button does not anchor a menu by itself; DropdownMenuTrigger provides controls/id pairing for anchored menus."
+      ],
+      "reference": "docs/agent/components/table-action-trigger.md",
+      "stories": [
+        "components/table.stories.tsx"
+      ]
+    },
+    {
+      "name": "Table / Caption",
+      "export": "TableCaption",
+      "source": "components/table.tsx",
+      "propsType": "TableCaptionProps",
+      "import": "import { TableCaption } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "position",
+          "type": "\"top\" | \"bottom\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'top'"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Accessible descriptive caption for a table.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Place first inside the native table, before thead/tbody. Use either Table.caption or one TableCaption child, not both."
+      ],
+      "reference": "docs/agent/components/table-caption.md",
+      "stories": [
+        "components/table.stories.tsx"
+      ]
+    },
+    {
+      "name": "Table / Cell",
+      "export": "TableCell",
+      "source": "components/table.tsx",
+      "propsType": "TableCellProps",
+      "import": "import { TableCell } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "alignment",
+          "type": "TableAlignment | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'left'"
+        },
+        {
+          "name": "emphasis",
+          "type": "\"default\" | \"strong\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'default'"
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "TableAlignment",
+          "source": "components/table.tsx",
+          "declaration": "export type TableAlignment = 'left' | 'center' | 'right';"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Semantic table data cell with alignment and text-emphasis options.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Body cell. Content is children, not value. Use emphasis='strong' selectively."
+      ],
+      "reference": "docs/agent/components/table-cell.md",
+      "stories": [
+        "components/data-table.stories.tsx",
+        "components/table.stories.tsx"
+      ]
+    },
+    {
+      "name": "Table / Container",
+      "export": "TableContainer",
+      "source": "components/table.tsx",
+      "propsType": "TableContainerProps",
+      "import": "import { TableContainer } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'Table'"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Responsive overflow wrapper used by the Table root.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "prefer": "Table",
+      "constraints": [
+        "Overflow wrapper only. Table already includes it; avoid nesting two scroll containers. If using the anatomy directly, provide a named native table with caption and semantic sections."
+      ],
+      "reference": "docs/agent/components/table-container.md",
+      "stories": [
+        "components/table.stories.tsx"
+      ]
+    },
+    {
+      "name": "Table / Head",
+      "export": "TableHead",
+      "source": "components/table.tsx",
+      "propsType": "TableHeadProps",
+      "import": "import { TableHead } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "alignment",
+          "type": "TableAlignment | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'left'"
+        },
+        {
+          "name": "scope",
+          "type": "\"row\" | \"col\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'col'",
+          "description": "Header association; defaults to col. Use row for a row header."
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "TableAlignment",
+          "source": "components/table.tsx",
+          "declaration": "export type TableAlignment = 'left' | 'center' | 'right';"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Semantic table column header.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Header cell. Content is children, not label."
+      ],
+      "reference": "docs/agent/components/table-head.md",
+      "stories": [
+        "components/data-table.stories.tsx",
+        "components/table.stories.tsx"
+      ]
+    },
+    {
+      "name": "Table / Row",
+      "export": "TableRow",
+      "source": "components/table.tsx",
+      "propsType": "TableRowProps",
+      "import": "import { TableRow } from 'jakeui';",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "type",
+          "type": "\"header\" | \"body\" | \"footer\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'body'"
+        },
+        {
+          "name": "selected",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "onSelect",
+          "type": "(() => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "density",
+          "type": "TableDensity | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "TableDensity",
+          "source": "components/table.tsx",
+          "declaration": "export type TableDensity = 'compact' | 'comfortable';"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "part",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Table row patterns for header, body, and footer sections.",
+      "whenToUse": [
+        "Only inside its parent component's composition — this is a part, not a standalone component."
+      ],
+      "whenNotToUse": [
+        "On its own, outside the parent that owns its behaviour and accessibility wiring.",
+        "As a general-purpose layout or text primitive."
+      ],
+      "constraints": [
+        "Inside a table only. For selection supply selected/onSelect; nested action buttons do not select the row."
+      ],
+      "reference": "docs/agent/components/table-row.md",
+      "stories": [
+        "components/data-table.stories.tsx",
+        "components/table.stories.tsx"
+      ]
+    },
+    {
+      "name": "Tabs",
+      "export": "Tabs",
+      "source": "components/tabs.tsx",
+      "propsType": "TabsProps",
+      "import": "import { Tabs } from 'jakeui';",
+      "props": [
+        {
+          "name": "items",
+          "type": "TabItem[]",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "selectedId",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onSelect",
+          "type": "(id: string) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'horizontal'"
+        },
+        {
+          "name": "density",
+          "type": "\"default\" | \"compact\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'default'"
+        },
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "TabItem",
+          "source": "components/tabs.tsx",
+          "declaration": "export interface TabItem {\n  id: string;\n  label: string;\n  content: ReactNode;\n  disabled?: boolean;\n}"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Grouped navigation for switching between peer views without leaving the current context.",
+      "whenToUse": [
+        "Switch between peer views of the same subject, within one context."
+      ],
+      "whenNotToUse": [
+        "Steps in a sequence — use an application-owned sequence with explicit current-step semantics.",
+        "Content the reader needs to compare side by side, or to find with the browser's search.",
+        "Navigating to a different page — use links."
+      ],
+      "constraints": [
+        "Complete controlled tablist and panels. Supply items, selectedId and onSelect; the component composes SegmentedTab and owns group keyboard navigation."
+      ],
+      "reference": "docs/agent/components/tabs.md",
+      "stories": [
+        "components/tabs.stories.tsx"
+      ]
+    },
+    {
+      "name": "Textarea",
+      "export": "Textarea",
+      "source": "components/textarea.tsx",
+      "propsType": "TextareaProps",
+      "import": "import { Textarea } from 'jakeui';",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": true,
+          "inherited": false,
+          "description": "Current field value. Renders in `--foreground`."
+        },
+        {
+          "name": "placeholder",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Shown when `value` is empty. Renders in `--muted-foreground` (code-only state — no Figma variant)."
+        },
+        {
+          "name": "helper",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Helper text below the field. Figma property `Helper#82:14`."
+        },
+        {
+          "name": "rows",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "4",
+          "description": "Initial visible height in lines. Code-only — see the sizing policy below."
+        },
+        {
+          "name": "maxLength",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Character limit. When set, a counter is rendered and linked via `aria-describedby`."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Applies the error border. Independent of `disabled`."
+        },
+        {
+          "name": "errorMessage",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Standalone invalid controls need an error message. Inside Field, pass it to Field only."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false",
+          "description": "Blocks input. Independent of `invalid`."
+        },
+        {
+          "name": "onChange",
+          "type": "(e: ChangeEvent<HTMLTextAreaElement>) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onFocus",
+          "type": "((e: FocusEvent<HTMLTextAreaElement>) => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "onBlur",
+          "type": "((e: FocusEvent<HTMLTextAreaElement>) => void) | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "name",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "id",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Ties the field to its `<label>`. Auto-generated when omitted."
+        },
+        {
+          "name": "required",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "aria-label",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false,
+          "description": "Required only when no visible `<label>` exists."
+        },
+        {
+          "name": "aria-describedby",
+          "type": "string | undefined",
+          "required": false,
+          "inherited": false
+        },
+        {
+          "name": "aria-invalid",
+          "type": "boolean | \"true\" | \"false\" | \"grammar\" | \"spelling\" | undefined",
+          "required": false,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Multiline text input for longer freeform content.",
+      "whenToUse": [
+        "Collect free-form text long enough to need more than one line."
+      ],
+      "whenNotToUse": [
+        "A single short value — use Input.",
+        "Rich or formatted content — use a rich-text editor, not a plain textarea."
+      ],
+      "constraints": [
+        "Controlled: supply value and onChange. Use Field for label and validation wiring.",
+        "rows sets a fixed editing viewport; long content scrolls and user resizing is disabled. maxLength adds a described character counter, not a per-keystroke live announcement."
+      ],
+      "reference": "docs/agent/components/textarea.md",
+      "stories": [
+        "components/field.stories.tsx",
+        "components/textarea.stories.tsx"
+      ]
+    },
+    {
+      "name": "Toggle",
+      "export": "Toggle",
+      "source": "components/toggle.tsx",
+      "propsType": "ToggleProps",
+      "import": "import { Toggle } from 'jakeui';",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "pressed",
+          "type": "boolean",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onPressedChange",
+          "type": "(pressed: boolean) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "inherited": false,
+          "description": "When set and label is used as the name only, this renders icon-only."
+        },
+        {
+          "name": "iconOnly",
+          "type": "boolean | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "false"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Two-state action button for formatting, view controls, or other reversible selections.",
+      "whenToUse": [
+        "A reversible on/off action that takes effect immediately — bold, mute, pin, show grid.",
+        "Use the group form when several such actions belong together in a toolbar."
+      ],
+      "whenNotToUse": [
+        "A form value that is only applied on Save — use Checkbox or RadioGroup.",
+        "One-of-many where the options are the data, not actions — use RadioGroup.",
+        "A one-way action that cannot be un-done — use a Button."
+      ],
+      "reference": "docs/agent/components/toggle.md",
+      "stories": [
+        "components/toggle.stories.tsx"
+      ]
+    },
+    {
+      "name": "Toggle Group",
+      "export": "ToggleGroup",
+      "source": "components/toggle-group.tsx",
+      "propsType": "ToggleGroupProps",
+      "import": "import { ToggleGroup } from 'jakeui';",
+      "props": [
+        {
+          "name": "items",
+          "type": "ToggleGroupItem[]",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "pressedIds",
+          "type": "string[]",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "onPressedChange",
+          "type": "(ids: string[]) => void",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "selection",
+          "type": "\"single\" | \"multiple\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'single'"
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'horizontal'"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        }
+      ],
+      "supportingTypes": [
+        {
+          "name": "ToggleGroupItem",
+          "source": "components/toggle-group.tsx",
+          "declaration": "export interface ToggleGroupItem {\n  id: string;\n  label: string;\n  icon?: ReactNode;\n  disabled?: boolean;\n}"
+        }
+      ],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Grouped toggle controls for choosing one or multiple persistent options.",
+      "whenToUse": [
+        "A reversible on/off action that takes effect immediately — bold, mute, pin, show grid.",
+        "Use the group form when several such actions belong together in a toolbar."
+      ],
+      "whenNotToUse": [
+        "A form value that is only applied on Save — use Checkbox or RadioGroup.",
+        "One-of-many where the options are the data, not actions — use RadioGroup.",
+        "A one-way action that cannot be un-done — use a Button."
+      ],
+      "reference": "docs/agent/components/toggle-group.md",
+      "stories": [
+        "components/toggle-group.stories.tsx"
+      ]
+    },
+    {
+      "name": "Tooltip",
+      "export": "Tooltip",
+      "source": "components/tooltip.tsx",
+      "propsType": "TooltipProps",
+      "import": "import { Tooltip } from 'jakeui';",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "children",
+          "type": "ReactElement<unknown, string | import(\"react\").JSXElementConstructor<any>>",
+          "required": true,
+          "inherited": false
+        },
+        {
+          "name": "side",
+          "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "'top'"
+        },
+        {
+          "name": "delay",
+          "type": "number | undefined",
+          "required": false,
+          "inherited": false,
+          "defaultExpression": "400"
+        }
+      ],
+      "supportingTypes": [],
+      "inheritedProps": [],
+      "kind": "component",
+      "status": "implemented; see verification report for tested scope",
+      "summary": "Optional noninteractive explanation on hover or focus.",
+      "whenToUse": [
+        "Clarify an already named control with short, nonessential text."
+      ],
+      "whenNotToUse": [
+        "A control's only accessible name or essential instructions: provide a label or visible text.",
+        "Interactive content: use Popover."
+      ],
+      "constraints": [
+        "Noninteractive, nonessential text only. Trigger must forward events/ref and have its own accessible name. For interactive content use Popover; for a disabled button place guidance on a focusable wrapper or show it inline."
+      ],
+      "reference": "docs/agent/components/tooltip.md",
+      "stories": [
+        "components/tooltip.stories.tsx"
+      ]
+    }
+  ],
+  "designOnly": [
+    {
+      "name": "Command Panel",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Dropdown Menu / Group",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Dropdown Menu / Radio Group",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Dropdown Menu / Root Composition",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Dropdown Menu / Separator",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Dropdown Menu / Shortcut",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Icon",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Popover / Form Content",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Popover / Header",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Popover / RTL Content",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Popover / Root Composition",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Radio Group / Field Composition",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Switch / Field Composition",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Table / Body",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Table / Footer",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Table / Header",
+      "status": "design-only; no public component export"
+    },
+    {
+      "name": "Table / Root Composition",
+      "status": "design-only; no public component export"
+    }
+  ]
+}

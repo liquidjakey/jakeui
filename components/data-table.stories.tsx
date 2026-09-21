@@ -6,12 +6,9 @@ import { Table, TableRow, TableHead, TableCell } from './table.js';
 import { Input } from './input.js';
 
 /**
- * Stories for `DataTable`.
- * Contract: docs/components/data-table.md
- *
- * ✅ Its Description node was **unbound in Figma** at 13/20 Regular. The ramp question
- * was decided Option B on 10 Aug 2026 and it now carries `Body/SM` 13/18, which is
- * what this code already used.
+ * Illustrative composition shell. For functional filtering and pagination,
+ * start from RecordsTable in examples/recipes.tsx; these rows are static fixtures.
+ * Consumer contract: docs/agent/components/data-table.md.
  */
 
 const meta = {
@@ -21,9 +18,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A composition rather than a control: the toolbar, table and pagination are all ' +
-          'slots. Its state is derived from whether there are children — a "populated" table ' +
-          'with no rows contradicts itself.',
+          "Composition shell with toolbar, content and pagination slots. Pass empty explicitly for opaque table children and loading/error for fetch states. These static rows do not implement filtering or pagination; use the RecordsTable recipe for a functional example.",
       },
     },
   },
@@ -32,14 +27,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `DataTable`, populated and empty. The state is derived from whether there are
- * children — a "populated" table with no rows contradicts itself.
- *
- * ⚠️ The toolbar is a **slot** rather than pre-composed: the record says this
- * composition is built from Input, Button, Table and Pagination, and **Button is
- * still blocked** by the 8-row cap.
- */
+/** Populated and empty shell previews. Toolbar and pagination are caller-owned slots. */
 export const DataTables: Story = {
   args: { title: 'Data table' },
   render: () => <DataTableDemo />,

@@ -4,17 +4,9 @@ import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 
 /**
- * Accordion — vertically stacked disclosure sections.
- *
- * Figma: `Accordion`, node 85:*, 4 variants.
- * Contract: docs/components/accordion.md
- *
- * Figma models a SINGLE item; an Accordion is a group of them. `items[]` and
- * `openIds[]` are the code-side expression of that, and the reason this differs
- * from Collapsible despite identical tokens.
- *
- * `openIds` is an ARRAY rather than one id: several sections may be open at once,
- * which the Figma State enum cannot express.
+ * Controlled group of headed disclosure sections. openIds permits several open
+ * sections; onToggle delegates selection policy to the caller.
+ * Consumer contract: docs/agent/components/accordion.md.
  */
 export interface AccordionItem {
   id: string;
@@ -47,12 +39,7 @@ export function Accordion({ items, openIds, onToggle }: AccordionProps) {
               disabled ? 'bg-muted text-muted-foreground' : 'bg-card text-foreground',
             )}
           >
-            {/*
-              Wrapped in a heading so sections are navigable by heading — the
-              difference from Collapsible, whose lone trigger is not. The APG
-              reserves arrow keys for tablists, so Tab (not arrows) moves between
-              these triggers; nothing custom is bound.
-            */}
+            {/* Headings expose section structure; Tab moves between triggers. */}
             <h3 className="m-0">
               <button
                 type="button"
@@ -74,27 +61,8 @@ export function Accordion({ items, openIds, onToggle }: AccordionProps) {
               </button>
             </h3>
 
-            {/*
-              Unmounted when closed: "the panel stays in the accessibility tree
-              only while open."
-
-              ⚠️ THERE IS DELIBERATELY NO OPEN/CLOSE HEIGHT ANIMATION, and this
-              is the one place in the system where motion was attempted and
-              backed out. A transition cannot animate an element that does not
-              exist when closed, so animating this means keeping it mounted. The
-              standard `grid-template-rows: 0fr -> 1fr` technique was tried, with
-              `aria-hidden` + `inert` preserving the record's contract. It does
-              not survive the transition in Chrome: measured in Storybook, an
-              opened panel settled at 0px against a 32px content height, because
-              an animating `fr` row is interpolated against zero free space in an
-              auto-height grid. Forcing `1fr` with the transition OFF resolved to
-              32px correctly, which isolates it to the animation, not the layout.
-
-              A max-height cap would work but needs a magic pixel number, which
-              the archetype's first do forbids. Revisit with `calc-size()` /
-              `interpolate-size: allow-keywords` once it can be emitted into the
-              generated stylesheet. The trigger still animates its colours.
-            */}
+            {/* Closed panels unmount and have no height animation. Lift child state
+                to preserve it across closing; trigger colours still transition. */}
             {open ? (
               <div id={panelId} className="px-4 pb-3 text-body-md">
                 {item.content}

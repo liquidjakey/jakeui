@@ -3,17 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Calendar } from './calendar.js';
 
 /**
- * Stories for `Calendar`.
- * Contract: docs/components/calendar.md
- *
- * 🛑 **Mostly asserted rather than transcribed.** Its record names *"today, selected,
- * range, disabled, and out-of-month"* in prose and binds **none** of them. Every day
- * state below is asserted from precedent elsewhere in the system — the widest
- * promise-to-binding gap in the build.
- *
- * ✅ Its day labels were also **unbound in Figma** at 13/20 Medium. The ramp question
- * was decided Option B on 10 Aug 2026 and they now carry `Label/MD` 13/18, which is
- * what this code already used.
+ * Controlled month and selection previews. Verify day navigation and range
+ * selection; the caller owns assembling range endpoints. Six rows keep grid height stable.
+ * Consumer contract: docs/agent/components/calendar.md.
  */
 
 const meta = {
@@ -33,11 +25,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `Calendar`. **Every day state below is asserted**, not transcribed — see the 🛑
- * note at the top. Six rows are always rendered so the grid does not change height
- * between months.
- */
+/** Day-state fixture with six rows to keep month navigation height stable. */
 export const Calendars: Story = {
   args: {
     month: new Date(2026, 7, 1),
@@ -52,7 +40,7 @@ function CalendarDemo() {
   const [month, setMonth] = useState(new Date(2026, 7, 1));
   const [selected, setSelected] = useState<Date>(new Date(2026, 7, 14));
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-wrap gap-6">
       <Calendar
         month={month}
         monthLabel={month.toLocaleString('en', { month: 'long', year: 'numeric' })}

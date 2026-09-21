@@ -3,20 +3,10 @@ import type { ReactNode } from 'react';
 import { ModalSurface } from './modal-surface.js';
 
 /**
- * Drawer — edge-aligned overlay panel for filters and supplemental controls.
- *
- * Figma: `Drawer`, node 106:*, 4 variants.
- * Contract: docs/components/drawer.md
- *
- * ⚠️ DRAWER AND SHEET ARE INDISTINGUISHABLE IN THE DESIGN FILE. Identical tokens,
- * identical state rows, identical variants, identical props, identical a11y. The
- * only difference is that this component's placement axis is called `Placement`
- * and Sheet's is called `Side` — same two values. The distinction exists only as
- * prose ("Sheet for persistent side tasks; Drawer for transient filtering").
- *
- * Both were built as specified rather than merged, because collapsing them is a
- * design decision, not an implementation one. They share ModalSurface so they
- * cannot drift further apart. Full comparison in docs/components/drawer.md.
+ * Modal edge-aligned surface for a secondary task. Shares ModalSurface with
+ * Sheet; placement selects a viewport edge. Use a layout region for a persistent,
+ * nonblocking panel.
+ * Consumer contract: docs/agent/components/drawer.md.
  */
 export interface DrawerProps {
   open: boolean;
@@ -26,11 +16,11 @@ export interface DrawerProps {
   children?: ReactNode;
   /** Figma axis `Placement`. Opening edge. */
   placement?: 'left' | 'right';
-  /** Figma axis `Width`. NO token backing — see the props table. */
+  /** Existing overlay width preset; geometry is scoped in agent/exceptions.json. */
   width?: 'compact' | 'wide';
 }
 
-/** No width or container tokens exist in the file. Raw, and flagged as such. */
+/** Existing width presets are scoped by agent/exceptions.json. */
 const WIDTH = { compact: 'w-[min(20rem,90vw)]', wide: 'w-[min(32rem,90vw)]' } as const;
 
 export function Drawer({

@@ -2,13 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AlertDialog } from './alert-dialog.js';
 
-/**
- * Stories for `AlertDialog`.
- * Contract: docs/components/alert-dialog.md
- *
- * ⚠️ Its Title binds `Heading/LG` on BOTH sizes, not the "Standard size/18, Form
- * size/13" the record claimed — corrected in code against the live bindings.
- */
+/** Consequential confirmation examples. The title uses Heading/LG in both sizes. */
 
 const meta = {
   title: 'Overlays/AlertDialog',

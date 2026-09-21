@@ -4,21 +4,9 @@ import { Alert } from './alert.js';
 import { Button } from './button.js';
 
 /**
- * Stories for `Alert`. Contract: docs/components/alert.md
- *
- * Alert was the last component still blocked by stale tokens, and its live bindings
- * settled both open questions — one of them worse than expected.
- *
- * 🛑 **Warning is half-rebound in Figma.** The 9 Aug rebind moved its *title* to
- * `warning-muted-foreground` but left its *description* on plain `warning`. One of
- * the two 3.07:1 nodes was fixed and the other was missed. **The code applies the
- * readable token to both** — shipping a known contrast failure to match a
- * half-finished rebind would be transcribing a bug, not a contract.
- *
- * ⚠️ **Destructive has no surface fill at all.** The description reported `fill card`,
- * but the live read shows nothing bound — that was an unbound literal. Combined with
- * `destructive-muted` not existing, the most severe tone ends up the least visually
- * distinct. Look at the four together below and it is obvious.
+ * Tone, action and announcement previews. All tones use muted surfaces;
+ * warning title and description share warning-muted-foreground.
+ * Consumer contract: docs/agent/components/alert.md.
  */
 
 const meta = {
@@ -28,9 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          '`live` defaults to "off" deliberately: an alert rendered on page load with role="alert" ' +
-          'interrupts a screen-reader user for a message they never asked for. The record is ' +
-          'explicit that only an urgent, interrupting message should be assertive.',
+          "Inline feedback with four muted tone surfaces. live defaults to off; use polite for updates and assertive only for urgent interruptions.",
       },
     },
   },
@@ -39,10 +25,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * All four tones. **Note how much weaker Destructive looks** — no tinted surface,
- * because `destructive-muted` does not exist and nothing is bound in its place.
- */
+/** Compare all four tinted surfaces and readable text in both themes. */
 export const Tones: Story = {
   args: { title: 'Alert' },
   render: () => (
@@ -52,7 +35,7 @@ export const Tones: Story = {
       <Alert
         tone="warning"
         title="Insurance expires soon"
-        description="This description is the half-rebound node — it renders readable here, not as the file has it."
+        description="Update the policy details before the next appointment."
       />
       <Alert
         tone="destructive"
@@ -60,8 +43,7 @@ export const Tones: Story = {
         description="The connection dropped. No changes were lost."
       />
       <p className="text-caption-sm text-muted-foreground">
-        Info, Success and Warning each get a tinted `*-muted` surface. Destructive gets none —
-        the token does not exist.
+        All four tones use a tinted muted surface with a tone-appropriate readable foreground.
       </p>
     </div>
   ),
@@ -98,11 +80,7 @@ function ActionsDemo() {
   );
 }
 
-/**
- * Severity must never be carried by colour alone (WCAG 1.4.1) — which is why `icon`
- * exists despite having no Figma property. Without it the component cannot satisfy
- * its own recorded don't.
- */
+/** Built-in icons supplement severity text; colour is not the only signal. */
 export const WithIcons: Story = {
   args: { title: 'Alert' },
   render: () => (

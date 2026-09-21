@@ -1,57 +1,58 @@
-import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { NativeSelect } from './native-select.js';
-import type { NativeSelectProps, NativeSelectOption } from './native-select.js';
+import { useId, useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Button } from "./button.js";
+import { NativeSelect } from "./native-select.js";
+import type { NativeSelectProps, NativeSelectOption } from "./native-select.js";
 
 /**
- * Stories for `NativeSelect`. Contract: docs/components/native-select.md
- *
- * This is the **native** control on purpose. The option menu is drawn by the OS
- * and cannot be themed — only the closed control is ours to style. Open the menu
- * in the canvas and you are looking at the platform, not at Jake UI.
- *
- * Note what is NOT here: an `Open` story driven by a prop. The Figma master has an
- * `Open` variant and `figma.map.json` lists `controlled: ["open"]`, but a native
- * select's menu cannot be opened programmatically, and `Open` binds tokens
- * identical to Focus — because the control is always focused while its menu is up.
- * Tabbing to any field below shows exactly what the Figma `Open` variant depicts.
+ * Browser-owned popup with a consistently inset indicator. Test the actual platform popup manually;
+ * Jake UI has no controlled open prop.
+ * Consumer contract: docs/agent/components/native-select.md.
  */
 
 const OPTIONS: NativeSelectOption[] = [
-  { value: 'general', label: 'General check-up' },
-  { value: 'cleaning', label: 'Cleaning' },
-  { value: 'ortho', label: 'Orthodontic consult' },
-  { value: 'emergency', label: 'Emergency' },
+  { value: "general", label: "General check-up" },
+  { value: "cleaning", label: "Cleaning" },
+  { value: "ortho", label: "Orthodontic consult" },
+  { value: "emergency", label: "Emergency" },
 ];
 
 /** Controlled wrapper so the select is actually operable in the canvas. */
 function Field({
-  initial = '',
+  label = "Appointment type",
+  initial = "",
   options = OPTIONS,
   ...props
-}: Partial<NativeSelectProps> & { initial?: string }) {
+}: Partial<NativeSelectProps> & { initial?: string; label?: string }) {
   const [value, setValue] = useState(initial);
+  const id = useId();
   return (
-    <NativeSelect
-      {...(props as NativeSelectProps)}
-      options={options}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
+    <div className="flex min-w-0 flex-col gap-1.5">
+      <label htmlFor={id} className="text-label-md text-foreground">
+        {label}
+      </label>
+      <NativeSelect
+        {...(props as NativeSelectProps)}
+        id={id}
+        options={options}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+    </div>
   );
 }
 
 const meta = {
-  title: 'Primitives/NativeSelect',
+  title: "Primitives/NativeSelect",
   component: NativeSelect,
-  args: { value: '', options: OPTIONS, onChange: () => {} },
+  args: { value: "", options: OPTIONS, onChange: () => {} },
   parameters: {
     docs: {
       description: {
         component:
-          'Native select styled with Jake UI semantics. The Figma `State` enum decomposes three ways: ' +
-          '`Focused` is browser-owned, `Error`/`Disabled` are independent booleans, and `Open` becomes ' +
-          'nothing at all — the platform owns the menu. See docs/components/native-select.md Table 2.',
+          "Native select styled with Jake UI semantics. The Figma `State` enum decomposes three ways: " +
+          "`Focused` is browser-owned, `Error`/`Disabled` are independent booleans, and `Open` becomes " +
+          "nothing at all — the platform owns the menu. See docs/agent/components/native-select.md.",
       },
     },
   },
@@ -82,7 +83,11 @@ export const Selected: Story = {
 export const Invalid: Story = {
   render: () => (
     <div className="max-w-sm">
-      <Field placeholder="Select an appointment type" invalid errorMessage="Choose an appointment type." />
+      <Field
+        placeholder="Select an appointment type"
+        invalid
+        errorMessage="Choose an appointment type."
+      />
     </div>
   ),
 };
@@ -104,17 +109,22 @@ export const Disabled: Story = {
  * from invalid. This story is the only place it can be reviewed.
  */
 export const InvalidAndDisabled: Story = {
-  name: 'Invalid + Disabled (no Figma variant)',
+  name: "Invalid + Disabled (no Figma variant)",
   render: () => (
     <div className="max-w-sm">
-      <Field placeholder="Select an appointment type" invalid disabled errorMessage="Choose an appointment type." />
+      <Field
+        placeholder="Select an appointment type"
+        invalid
+        disabled
+        errorMessage="Choose an appointment type."
+      />
     </div>
   ),
 };
 
 /** Individual options can be disabled independently of the control. */
 export const WithDisabledOption: Story = {
-  name: 'With a disabled option',
+  name: "With a disabled option",
   render: () => (
     <div className="max-w-sm">
       <NativeSelectDisabledOptionDemo />
@@ -123,19 +133,32 @@ export const WithDisabledOption: Story = {
 };
 
 function NativeSelectDisabledOptionDemo() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   return (
-    <NativeSelect
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      placeholder="Select an appointment type"
-      options={[
-        { value: 'general', label: 'General check-up' },
-        { value: 'cleaning', label: 'Cleaning' },
-        { value: 'ortho', label: 'Orthodontic consult — fully booked', disabled: true },
-        { value: 'emergency', label: 'Emergency' },
-      ]}
-    />
+    <div className="flex flex-col gap-1.5">
+      <label
+        htmlFor="disabled-option-select"
+        className="text-label-md text-foreground"
+      >
+        Appointment type
+      </label>
+      <NativeSelect
+        id="disabled-option-select"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Select an appointment type"
+        options={[
+          { value: "general", label: "General check-up" },
+          { value: "cleaning", label: "Cleaning" },
+          {
+            value: "ortho",
+            label: "Orthodontic consult — fully booked",
+            disabled: true,
+          },
+          { value: "emergency", label: "Emergency" },
+        ]}
+      />
+    </div>
   );
 }
 
@@ -149,32 +172,115 @@ function NativeSelectDisabledOptionDemo() {
  * re-implemented.
  */
 export const AllStates: Story = {
-  name: 'All states',
+  name: "All states",
   render: () => (
     <div className="flex max-w-sm flex-col gap-4">
       {[
-        ['Default (placeholder)', { placeholder: 'Select an appointment type' }],
-        ['Selected', { initial: 'cleaning' }],
         [
-          'Invalid',
-          { placeholder: 'Select an appointment type', invalid: true, errorMessage: 'Choose an appointment type.' },
+          "Default (placeholder)",
+          { placeholder: "Select an appointment type" },
         ],
-        ['Disabled', { initial: 'ortho', disabled: true }],
+        ["Selected", { initial: "cleaning" }],
         [
-          'Invalid + Disabled',
+          "Invalid",
           {
-            placeholder: 'Select an appointment type',
+            placeholder: "Select an appointment type",
+            invalid: true,
+            errorMessage: "Choose an appointment type.",
+          },
+        ],
+        ["Disabled", { initial: "ortho", disabled: true }],
+        [
+          "Invalid + Disabled",
+          {
+            placeholder: "Select an appointment type",
             invalid: true,
             disabled: true,
-            errorMessage: 'Choose an appointment type.',
+            errorMessage: "Choose an appointment type.",
           },
         ],
       ].map(([label, props]) => (
         <div key={label as string} className="flex flex-col gap-1">
-          <span className="text-label-xs text-muted-foreground">{label as string}</span>
-          <Field {...(props as Partial<NativeSelectProps>)} />
+          <Field
+            label={label as string}
+            {...(props as Partial<NativeSelectProps>)}
+          />
         </div>
       ))}
     </div>
   ),
 };
+
+export const EdgeCases: Story = {
+  render: () => (
+    <div className="flex max-w-sm flex-col gap-4">
+      <Field
+        label="Long selected value"
+        initial="long"
+        options={[
+          {
+            value: "long",
+            label:
+              "A very long appointment type that should not collide with the indicator or overflow the field",
+          },
+        ]}
+      />
+      <div dir="rtl">
+        <Field
+          label="نوع الموعد"
+          placeholder="اختر نوع الموعد"
+          options={[
+            { value: "general", label: "فحص عام" },
+            { value: "followup", label: "موعد متابعة" },
+          ]}
+        />
+      </div>
+      <Field label="Empty options" options={[]} />
+    </div>
+  ),
+};
+export const Form: Story = {
+  render: () => <NativeForm />,
+};
+function NativeForm() {
+  const [value, setValue] = useState("");
+  const [saved, setSaved] = useState("");
+  return (
+    <form
+      className="flex max-w-sm flex-col gap-4"
+      onSubmit={(event) => {
+        event.preventDefault();
+        setSaved(String(new FormData(event.currentTarget).get("appointment")));
+      }}
+      onReset={() => {
+        setValue("");
+        setSaved("");
+      }}
+    >
+      <label
+        htmlFor="native-appointment"
+        className="text-label-md text-foreground"
+      >
+        Appointment type
+      </label>
+      <NativeSelect
+        id="native-appointment"
+        name="appointment"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        required
+        placeholder="Select an appointment type"
+        options={OPTIONS}
+      />
+      <div className="flex gap-2">
+        <Button type="submit">Save appointment</Button>
+        <Button type="reset" style="outline">
+          Reset
+        </Button>
+      </div>
+      <p role="status" className="text-body-sm text-muted-foreground">
+        {saved ? `Saved: ${saved}` : "Choose an option, then save."}
+      </p>
+    </form>
+  );
+}

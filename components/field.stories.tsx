@@ -7,7 +7,7 @@ import { NativeSelect } from './native-select.js';
 
 /**
  * Stories for `Field`.
- * Contract: docs/components/field.md
+ * Contract: docs/agent/components/field.md
  *
  * Field owns the accessibility wiring. Inspect any field below in the DOM and the
  * `<label for>`, `aria-describedby`, `aria-invalid` and `id` all line up without
@@ -58,10 +58,7 @@ function NameField() {
   );
 }
 
-/**
- * Invalid. Helper text and error are shown **together** — the record's dont:
- * "Do not replace helper text with the error, a user often needs both."
- */
+/** Invalid fields retain helper text alongside the error; both can be needed to complete the field. */
 export const Invalid: Story = {
   args: { label: 'Email', children: () => null },
   render: () => <EmailField />,

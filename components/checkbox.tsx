@@ -3,21 +3,10 @@ import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 
 /**
- * Checkbox — labelled tri-state checkbox.
- *
- * Figma: `Checkbox`, node 78:0, 9 variants.
- * Contract: docs/components/checkbox.md
- *
- * RECOVERED FROM THE 8-ROW CAP. 9 variants = Value(3) x State(3); 4 rows present.
- * All three Disabled rows are IDENTICAL, so Value carries no text delta — three
- * observations, no exceptions — and the two missing Default rows match
- * Unchecked/Default. The three missing Focused rows have zero observations, but
- * this record is text-only and focus is drawn on the box, which it does not bind.
- *
- * 🛑 THE BOX HAS NO TOKENS AT ALL, exactly as Switch's track has none — and unlike
- * Switch there is no sibling asset holding it (there is no Checkbox / Indicator in
- * the map). Asserted on the established precedent: `input` for the resting border,
- * `primary` / `primary-foreground` for the checked fill and mark.
+ * Labelled controlled tri-state choice. Indeterminate is supplied by the caller
+ * and resolves to a boolean on activation. The decorative 10px glyph is scoped
+ * in scripts/computed-type-exceptions.json, not a consumer typography allowance.
+ * Consumer contract: docs/agent/components/checkbox.md.
  */
 export interface CheckboxProps {
   label: string;
@@ -48,7 +37,7 @@ export function Checkbox({
 
   return (
     // gap is `space/2-5` (10px) in the file, not `space/2` (8px).
-    <div className="flex items-start gap-2.5">
+    <label className="flex cursor-pointer items-start gap-2.5" htmlFor={id}>
       <span className="relative mt-0.5 inline-flex">
         <input
           ref={ref}
@@ -67,8 +56,9 @@ export function Checkbox({
           className={cn(
             'inline-flex h-4 w-4 items-center justify-center rounded border text-[10px]',
             MOTION.colors,
-            // 🛑 ASSERTED — no box tokens are recorded anywhere for this component.
-            checked === false ? 'border-input bg-card' : 'border-primary bg-primary text-primary-foreground',
+            checked === false
+              ? 'border-input bg-card'
+              : 'border-primary bg-primary text-primary-foreground',
             'peer-focus-visible:ring-1 peer-focus-visible:ring-ring',
             disabled && 'opacity-50',
           )}
@@ -77,8 +67,10 @@ export function Checkbox({
         </span>
       </span>
 
-      <label htmlFor={id} className="flex flex-col gap-0.5">
-        <span className={cn('text-label-lg', disabled ? 'text-muted-foreground' : 'text-foreground')}>
+      <span className="flex flex-col gap-0.5">
+        <span
+          className={cn('text-label-lg', disabled ? 'text-muted-foreground' : 'text-foreground')}
+        >
           {label}
         </span>
         {description ? (
@@ -86,7 +78,7 @@ export function Checkbox({
             {description}
           </span>
         ) : null}
-      </label>
-    </div>
+      </span>
+    </label>
   );
 }

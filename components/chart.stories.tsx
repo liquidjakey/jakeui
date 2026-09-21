@@ -2,12 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Chart } from './chart.js';
 
 /**
- * Stories for `Chart`.
- * Contract: docs/components/chart.md
- *
- * 🛑 **Five tokens, all of them the container.** No series colour, no axis, no
- * gridline. It is a titled frame that a chart renders *into*; supplying a palette
- * would mean inventing one, which the repo rule forbids.
+ * Caller-rendered visualization in a titled frame. The bars are illustrative
+ * fixtures; product charts own data, accessible takeaways and approved chart-role mapping.
+ * Consumer contract: docs/agent/components/chart.md.
  */
 
 const meta = {
@@ -27,10 +24,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `Chart` — a container, deliberately. The bars below are supplied by the caller,
- * because there is no series palette in the file to draw them from.
- */
+/** Illustrative bars supplied through children; Chart does not render data itself. */
 export const Charts: Story = {
   args: { title: 'Chart', children: null },
   render: () => (

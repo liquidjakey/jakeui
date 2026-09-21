@@ -3,7 +3,7 @@ import { SegmentedTab } from './segmented-tab.js';
 
 /**
  * Stories for `SegmentedTab`.
- * Contract: docs/components/segmented-tab.md
+ * Contract: docs/agent/components/segmented-tab.md
  *
  * The item half of the segmented control, exported for callers who compose the tab
  * list themselves rather than letting `Tabs` render it.
@@ -29,16 +29,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `SegmentedTab` standalone — the item half, exported for callers who compose the
- * tab list themselves rather than letting `Tabs` render it.
- *
- * **Note the inversion**: the *selected* tab takes the lighter `card` fill and lifts
- * out of the muted track, rather than being highlighted. That only reads correctly
- * inside a `muted` container, which is why the two records must be read together —
- * `Tabs` binds the container and no selected state; this binds the selected state
- * and no container.
- */
+/** SegmentedTab is a single item, not a complete tablist. Its selected card surface belongs inside the muted Tabs container. Prefer Tabs for keyboard navigation and linked panels. */
 export const SegmentedTabs: Story = {
   name: 'SegmentedTab — standalone',
   args: { label: 'Tab', onSelect: () => {} },

@@ -3,24 +3,10 @@ import { Toggle } from './toggle.js';
 import { cn } from '../lib/cn.js';
 
 /**
- * ToggleGroup — grouped toggle buttons.
- *
- * Figma: `Toggle Group`, 4 variants.
- * Contract: docs/components/toggle-group.md
- *
- * THE RECORD IS ALMOST EMPTY: one state row and two tokens (accent-foreground,
- * size/14) for four variants. And accent-foreground looks like a stray binding —
- * it is the FOREGROUND for the accent fill, but the group binds no fill of its own,
- * so it is a foreground token with nothing to sit on. The items (Toggle) already
- * carry accent/accent-foreground for their pressed state.
- *
- * So this is implemented as a LAYOUT-ONLY container and each Toggle owns its
- * appearance, which is what the tokens actually support. Figma owes either a real
- * container treatment or the removal of that binding.
- *
- * role="group", NOT radiogroup — even in single mode. The members are toggle
- * buttons with aria-pressed, not radios with aria-checked, so Tab moves between
- * them and arrow keys are not used.
+ * Controlled group of Toggle buttons; each item owns its appearance.
+ * Uses role=group and aria-pressed, including single mode. Tab moves between
+ * buttons; single selection can still be cleared so all buttons are off.
+ * Consumer contract: docs/agent/components/toggle-group.md.
  */
 export interface ToggleGroupItem {
   id: string;

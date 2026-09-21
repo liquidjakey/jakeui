@@ -2,28 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SwitchRoot, SwitchThumb } from './switch.js';
 
 /**
- * `SwitchRoot` — the track that `Switch` composes, read directly from live bindings
- * after the description cap blocked it.
- *
- * ✅ **CORRECTED 10 Aug 2026.** This file used to claim that `Disabled` was
- * indistinguishable from `Default` because the two bind the same COLOUR tokens.
- * That conclusion was wrong: re-reading the set showed the disabled treatment is
- * an **opacity** binding, which the original pass never looked at. Every disabled
- * variant binds `opacity/50` and every read-only variant binds `opacity/80`, on
- * all eight size×value combinations. That is the same convention this component
- * applies in code, so the file and the system already agreed.
- *
- * ✅ Two real defects came out of checking it, and BOTH ARE NOW FIXED.
- *
- * `switch.tsx` applied `opacity-50` to `disabled || readOnly` in one expression,
- * so a read-only switch rendered at 50% where the file binds 80%. The branch is
- * split and both values reference the tokens — see `lib/opacity.ts`.
- *
- * `Switch / Thumb`'s disabled variants carried a raw 0.75 with no variable to
- * bind. `opacity/75` was added to the Interaction collection and bound on both
- * variants, and the thumb now applies it in code. The dimmings COMPOUND, exactly
- * as the file composes them: a disabled switch below renders its track at
- * opacity/50 and its thumb at a further 75% of that, an effective 0.375.
+ * Visual track previews, not interactive controls. Disabled uses opacity/50;
+ * readOnly uses opacity/80. SwitchThumb adds its own disabled opacity.
+ * Consumer contract: docs/agent/components/switch-root.md.
  */
 
 const meta = {
@@ -33,8 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Reading this directly also collapsed its axes to pure geometry — a result that ' +
-          'could not have been inferred from the record.',
+          "Decorative switch track with independent visual disabled and read-only treatments. This anatomy does not implement focus or interaction; use Switch for application controls.",
       },
     },
   },

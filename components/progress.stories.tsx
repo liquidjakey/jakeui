@@ -2,13 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Progress } from './progress.js';
 
 /**
- * Stories for `Progress`.
- * Contract: docs/components/progress.md
- *
- * 🛑 **Its bar is asserted** — no fill is recorded at all. It asserts `primary` on
- * the same precedent as `Switch` and `RadioGroup`: `Radio Group / Indicator` binds
- * `fill primary` for its checked dot, the only recorded checked-state colour in the
- * system. Re-verify when the row cap is raised.
+ * Determinate and indeterminate progress. Undefined value means unknown;
+ * zero remains determinate.
+ * Consumer contract: docs/agent/components/progress.md.
  */
 
 const meta = {

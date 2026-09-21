@@ -1,24 +1,6 @@
-import { cn } from '../lib/cn.js';
-import { MOTION } from '../lib/motion.js';
+import { cn } from "../lib/cn.js";
+import { MOTION } from "../lib/motion.js";
 
-/**
- * Pagination — navigate paged datasets.
- *
- * Figma: `Pagination`, 4 variants.
- * Contract: docs/components/pagination.md
- *
- * `Viewport` is kind: responsive-fixture and would normally be dropped — it was for
- * Table / Container and Sidebar. THIS IS THE EXCEPTION, because the record
- * describes a STRUCTURAL difference rather than a breakpoint: "Desktop exposes page
- * numbers; Compact uses a concise page summary." Different content, not the same
- * content reflowed, and a caller in a narrow column needs it regardless of viewport.
- *
- * `State=Disabled` is NOT a prop: previous is disabled at page 1 and next at the
- * last page. That is arithmetic, and a prop would let a caller contradict it.
- *
- * The record binds three tokens and no state distinctions at all — no current page,
- * no disabled, no hover, no focus, and no radius. All asserted from convention.
- */
 export interface PaginationProps {
   page: number;
   pageCount: number;
@@ -32,55 +14,80 @@ export function Pagination({
   pageCount,
   onPageChange,
   compact = false,
-  label = 'Pagination',
+  label = "Pagination",
 }: PaginationProps) {
-  const atStart = page <= 1;
-  const atEnd = page >= pageCount;
-
+  const count = Number.isFinite(pageCount)
+    ? Math.max(0, Math.floor(pageCount))
+    : 0;
+  const current = count
+    ? Math.max(1, Math.min(count, Number.isFinite(page) ? Math.floor(page) : 1))
+    : 0;
+  const pages = [...new Set([1, current - 1, current, current + 1, count])]
+    .filter((n) => n >= 1 && n <= count)
+    .sort((a, b) => a - b);
   const btn = (extra?: string) =>
     cn(
-      // Items bind Label/MD (13/18 medium), not Body/SM (13/18 regular).
-      'rounded-lg px-3 py-1.5 text-label-md text-foreground',
-      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+      "min-h-10 min-w-10 rounded-lg px-3 py-1.5 text-label-md tabular-nums text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring enabled:hover:bg-accent enabled:active:bg-accent-hover disabled:cursor-not-allowed disabled:text-muted-foreground",
       MOTION.colors,
-      // The archetype: "Disable rather than hide the controls at the first and last
-      // page." Disabled buttons stay announced. No token recorded; muted asserted.
-      'disabled:cursor-not-allowed disabled:text-muted-foreground',
       extra,
     );
-
   return (
-    <nav aria-label={label} className="flex items-center gap-2 rounded-lg bg-card px-2 py-1.5">
-      <button type="button" className={btn()} disabled={atStart} onClick={() => onPageChange(page - 1)}>
-        Previous
-      </button>
-
-      {compact ? (
-        // Real text, so it is announced as-is.
-        <span className="px-2 text-label-md text-foreground">
-          Page {page} of {pageCount}
+    <div className="@container w-full">
+      <nav
+        aria-label={label}
+        className="flex max-w-full flex-wrap items-center justify-center gap-1 rounded-lg bg-card px-2 py-1.5"
+      >
+        <button
+          type="button"
+          className={btn()}
+          disabled={current <= 1}
+          onClick={() => onPageChange(current - 1)}
+        >
+          Previous
+        </button>
+        <span
+          className={cn(
+            "px-2 text-label-md tabular-nums text-foreground",
+            !compact && "@min-[32rem]:hidden",
+          )}
+        >
+          Page {current} of {count}
         </span>
-      ) : (
-        <ol className="flex items-center gap-2">
-          {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => (
-            <li key={n}>
-              <button
-                type="button"
-                // aria-current, never colour alone.
-                aria-current={n === page ? 'page' : undefined}
-                onClick={() => onPageChange(n)}
-                className={btn(n === page ? 'bg-accent text-accent-foreground' : undefined)}
-              >
-                {n}
-              </button>
-            </li>
-          ))}
-        </ol>
-      )}
-
-      <button type="button" className={btn()} disabled={atEnd} onClick={() => onPageChange(page + 1)}>
-        Next
-      </button>
-    </nav>
+        {!compact ? (
+          <ol className="hidden items-center gap-1 @min-[32rem]:flex">
+            {pages.map((n, i) => (
+              <li key={n} className="flex items-center gap-1">
+                {i > 0 && n > pages[i - 1]! + 1 ? (
+                  <span aria-hidden="true" className="px-1 text-body-sm">
+                    …
+                  </span>
+                ) : null}
+                <button
+                  type="button"
+                  aria-label={`Page ${n}`}
+                  aria-current={n === current ? "page" : undefined}
+                  onClick={() => onPageChange(n)}
+                  className={btn(
+                    n === current
+                      ? "bg-accent text-accent-foreground"
+                      : undefined,
+                  )}
+                >
+                  {n}
+                </button>
+              </li>
+            ))}
+          </ol>
+        ) : null}
+        <button
+          type="button"
+          className={btn()}
+          disabled={current === 0 || current >= count}
+          onClick={() => onPageChange(current + 1)}
+        >
+          Next
+        </button>
+      </nav>
+    </div>
   );
 }

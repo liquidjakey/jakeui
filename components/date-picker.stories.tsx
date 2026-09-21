@@ -3,11 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DatePicker } from './date-picker.js';
 
 /**
- * Stories for `DatePicker`.
- * Contract: docs/components/date-picker.md
- *
- * Its live read is what settled **Calendar's day states** — the ones Calendar's own
- * record names in prose and binds nowhere.
+ * Single-date field states with calendar selection and native date entry.
+ * Consumer contract: docs/agent/components/date-picker.md.
  */
 
 const meta = {
@@ -17,9 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Four of five asserted Calendar states were confirmed correct by reading this ' +
-          'component live. The exception: `today` is a `primary` stroke, not the ring outline ' +
-          'that had been asserted, and calendar.tsx was corrected on the strength of it.',
+          "Controlled single-date or tuple-range selection with a calendar popup and native date-entry fields. Test both entry paths, keyboard navigation, invalid and disabled states.",
       },
     },
   },
@@ -28,18 +23,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `DatePicker`. Its live read is what settled **Calendar's day states** — the ones
- * Calendar's own record names in prose and binds nowhere.
- *
- * Four of five asserted states were correct. The exception: **`today` is a `primary`
- * stroke, not the ring outline that had been asserted** — `calendar.tsx` was
- * corrected on the strength of this read. Open the picker and look at today's date.
- *
- * ⚠️ The archetype asks that a date be *typeable* as well as pickable. This asset
- * records only a button trigger, so typing is not implemented — a real gap against
- * the archetype, recorded rather than invented.
- */
+/** Check calendar selection and native date entry, including invalid and disabled fields. */
 export const DatePickers: Story = {
   name: 'DatePicker — field states',
   args: { value: undefined, onChange: () => {}, label: 'Date' },

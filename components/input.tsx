@@ -7,7 +7,7 @@ import { MOTION } from '../lib/motion.js';
  * Input — single-line text input primitive.
  *
  * Figma: `Input`, node 70:51, 4 variants.
- * Contract: docs/components/input.md · docs/state-decomposition.md
+ * Contract: docs/agent/components/input.md · docs/agent/figma-sync.md
  *
  * The Figma `State` axis (Default · Focused · Error · Disabled) is NOT a prop.
  * It decomposes into:
@@ -29,7 +29,7 @@ export interface InputProps {
   trailingIcon?: ReactNode;
   /** Applies the error border. Independent of `disabled`. */
   invalid?: boolean;
-  /** Announced to assistive tech. Required when `invalid` is true. */
+  /** Standalone invalid controls need an error message. Inside Field, pass it to Field only. */
   errorMessage?: string;
   /** Blocks input. Independent of `invalid`. */
   disabled?: boolean;
@@ -43,10 +43,12 @@ export interface InputProps {
   required?: boolean;
   /** Required only when no visible `<label>` exists. */
   'aria-label'?: string;
+  'aria-describedby'?: string;
+  'aria-invalid'?: boolean | 'true' | 'false' | 'grammar' | 'spelling';
 }
 
 /**
- * Container tokens, per docs/components/input.md Table 3.
+ * Container token pairing.
  *
  * `py` is `space/2-25` (9px) — a half-step ramp member, written as an explicit
  * calc against `--spacing` so it resolves identically in any Tailwind v4 setup
@@ -69,11 +71,8 @@ const BASE = [
  * Keyed on `has-[:focus-visible]` because the ring belongs on the container while
  * focus lands on the inner `<input>`.
  *
- * Note for anyone extending this: for a **text input** `:focus-visible` matches on
- * mouse click too — browsers always match it where keyboard input is expected — so
- * `focus-within` would look identical here. `:focus-visible` is still the right
- * primitive, and the difference becomes real the moment this container holds a
- * button or another non-text control. Verified rendered in Storybook.
+ * Text inputs can match focus-visible on pointer focus too. Browser heuristics
+ * own this state; check pointer and keyboard focus when extending the wrapper.
  *
  * Do not remove: this is the only focus affordance.
  */
@@ -101,6 +100,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     type = 'text',
     required = false,
     'aria-label': ariaLabel,
+    'aria-describedby': externalDescription,
+    'aria-invalid': externalInvalid,
   },
   ref,
 ) {
@@ -109,19 +110,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const errorId = `${inputId}-error`;
 
   const showError = invalid && Boolean(errorMessage);
+  const isInvalid =
+    invalid ||
+    (externalInvalid !== undefined && externalInvalid !== false && externalInvalid !== 'false');
 
   return (
     <>
       <div
-        data-invalid={invalid || undefined}
+        data-invalid={isInvalid || undefined}
         data-disabled={disabled || undefined}
         className={cn(
           BASE,
           !disabled && FOCUS,
           // Error and Disabled are independent and may co-occur. The combined
           // visual (muted fill + destructive border) has no Figma variant —
-          // decided here and recorded in docs/components/input.md Table 3.
-          invalid && 'border-destructive',
+          // owned by the control implementation.
+          isInvalid && 'border-destructive',
           disabled && 'bg-muted text-muted-foreground cursor-not-allowed',
         )}
       >
@@ -141,8 +145,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           disabled={disabled}
           required={required}
           aria-label={ariaLabel}
-          aria-invalid={invalid || undefined}
-          aria-describedby={showError ? errorId : undefined}
+          aria-invalid={externalInvalid ?? (invalid || undefined)}
+          aria-describedby={
+            [externalDescription, showError ? errorId : null].filter(Boolean).join(' ') || undefined
+          }
           onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -163,10 +169,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       {showError ? (
         <p
           id={errorId}
-          // aria-live="polite", NOT role="alert". Aligned across every control on
-          // 9 Aug 2026 to Field's recorded contract: the error "is announced
-          // politely; it is not a role='alert' per keystroke." An assertive region
-          // interrupts the user mid-keystroke on every validation pass.
+          // Polite feedback avoids interrupting typing on every validation pass.
           aria-live="polite"
           className="mt-1 text-caption-sm text-destructive"
         >

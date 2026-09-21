@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Jake UI design-to-code correspondence (not a public prop registry)",
+  "type": "object",
+  "required": ["schemaVersion", "components"],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "components": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["figmaNodeId", "codePath", "codeExport", "props"],
+        "properties": {
+          "figmaNodeId": { "type": "string" },
+          "codePath": { "type": ["string", "null"] },
+          "codeExport": { "type": ["string", "null"] },
+          "props": {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": ["kind", "code", "type"],
+                  "properties": {
+                    "kind": { "enum": ["prop", "slot", "slot-toggle"] },
+                    "code": { "type": "string" },
+                    "type": { "type": "string" }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["kind", "targets", "reason", "reference"],
+                  "properties": {
+                    "kind": { "const": "transform" },
+                    "targets": { "type": "array", "items": { "type": "string" } },
+                    "reason": { "type": "string" },
+                    "reference": { "type": "string" }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["kind"],
+                  "properties": {
+                    "kind": {
+                      "enum": ["decompose", "responsive-fixture", "story-only", "unclassified"]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

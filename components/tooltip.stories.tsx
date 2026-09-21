@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Button } from './button.js';
 import { Tooltip } from './tooltip.js';
 
 /**
  * Stories for `Tooltip`.
- * Contract: docs/components/tooltip.md
+ * Contract: docs/agent/components/tooltip.md
  */
 
 const meta = {
@@ -24,16 +25,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function TriggerButton({ children }: { children: React.ReactNode }) {
-  return (
-    <button
-      type="button"
-      className="rounded-lg border border-input bg-card px-3 py-2 text-body-sm text-foreground"
-    >
-      {children}
-    </button>
-  );
-}
+const TriggerButton = Button;
 
 /**
  * `Tooltip` — describes, never names.
@@ -47,7 +39,7 @@ export const Tooltips: Story = {
   name: 'Tooltip — four sides',
   args: { label: 'Tooltip', children: <span /> },
   render: () => (
-    <div className="flex gap-6 p-16">
+    <div className="flex flex-wrap gap-6 p-4 sm:p-16">
       {(['top', 'bottom', 'left', 'right'] as const).map((s) => (
         <Tooltip key={s} side={s} label={`Placed on the ${s}`}>
           <TriggerButton>{s}</TriggerButton>

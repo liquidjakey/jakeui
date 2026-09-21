@@ -1,28 +1,12 @@
-import type { Preview, Decorator } from '@storybook/react-vite';
-import { createElement } from 'react';
+import type { Preview, Decorator } from "@storybook/react-vite";
+import { createElement } from "react";
 
-/**
- * Inter, self-hosted, at exactly the four weights the Figma text styles bind:
- * 400 regular, 500 medium, 600 semibold, 700 bold.
- *
- * WHY THIS IS NOT OPTIONAL. `--font-sans` has always asked for "Inter", but no
- * @font-face ever declared it — the stack simply fell through to ui-sans-serif.
- * It LOOKED correct in this repo only because Inter happens to be installed on
- * the author's machine, so the OS resolved it. On CI, or on any machine without
- * Inter installed, every component silently rendered in the system UI face with
- * different metrics from Figma. `@fontsource/inter` declares the family as plain
- * `Inter`, which is why it is used here rather than the Variable package: it
- * matches the generated font stack exactly, so tokens/globals.css — which is
- * generated from Figma and must never be hand-edited — needs no change.
- */
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
-import '@fontsource/inter/700.css';
+/** Load self-hosted Inter at 400, 500, 600 and 700; never rely on a locally installed font. */
+import "../tokens/fonts.css";
 
 // The whole point: this import puts tokens/globals.css through a real Tailwind v4
 // build. Everything in the library resolves from these variables.
-import '../tokens/globals.css';
+import "../tokens/index.css";
 
 /**
  * Dark mode is a `.dark` ancestor class — globals.css declares
@@ -31,56 +15,57 @@ import '../tokens/globals.css';
  * also lets both themes render side by side in one story.
  */
 const withTheme: Decorator = (Story, context) => {
-  const theme = context.globals.theme ?? 'light';
+  const theme = context.globals.theme ?? "light";
 
-  const panel = (mode: 'light' | 'dark') =>
+  const panel = (mode: "light" | "dark") =>
     createElement(
-      'div',
+      "div",
       {
         key: mode,
-        className: mode === 'dark' ? 'dark' : undefined,
+        className: mode === "dark" ? "dark" : undefined,
         style: {
-          background: 'var(--background)',
-          color: 'var(--foreground)',
-          padding: '2rem',
+          background: "var(--background)",
+          color: "var(--foreground)",
+          padding: "2rem",
           flex: 1,
           minWidth: 0,
+          minHeight: context.viewMode === "story" ? "100dvh" : undefined,
         },
       },
       createElement(Story as never),
     );
 
-  if (theme === 'both') {
+  if (theme === "both") {
     return createElement(
-      'div',
-      { style: { display: 'flex', gap: 0, alignItems: 'stretch' } },
-      panel('light'),
-      panel('dark'),
+      "div",
+      { style: { display: "flex", gap: 0, alignItems: "stretch" } },
+      panel("light"),
+      panel("dark"),
     );
   }
-  return panel(theme as 'light' | 'dark');
+  return panel(theme as "light" | "dark");
 };
 
 const preview: Preview = {
   decorators: [withTheme],
   globalTypes: {
     theme: {
-      description: 'Light / Dark / both. Dark is a `.dark` ancestor class.',
-      defaultValue: 'light',
+      description: "Light / Dark / both. Dark is a `.dark` ancestor class.",
+      defaultValue: "light",
       toolbar: {
-        title: 'Theme',
-        icon: 'contrast',
+        title: "Theme",
+        icon: "contrast",
         items: [
-          { value: 'light', title: 'Light' },
-          { value: 'dark', title: 'Dark' },
-          { value: 'both', title: 'Side by side' },
+          { value: "light", title: "Light" },
+          { value: "dark", title: "Dark" },
+          { value: "both", title: "Side by side" },
         ],
         dynamicTitle: true,
       },
     },
   },
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     controls: { expanded: true },
   },
 };

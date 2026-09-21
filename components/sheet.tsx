@@ -3,19 +3,9 @@ import type { ReactNode } from 'react';
 import { ModalSurface } from './modal-surface.js';
 
 /**
- * Sheet — edge-attached overlay for secondary workflows.
- *
- * Figma: `Sheet`, node 111:*, 4 variants.
- * Contract: docs/components/sheet.md
- *
- * ⚠️ See the duplication warning in drawer.tsx: Sheet and Drawer are identical in
- * every recorded respect except the name of the placement axis (`Side` here,
- * `Placement` there). They share ModalSurface deliberately.
- *
- * Note also: the description calls this the "persistent" side surface, but it is
- * still a modal <dialog> and still traps focus. If a genuinely persistent,
- * non-blocking panel is wanted, this is the wrong component — that is a layout
- * region, not an overlay.
+ * Modal edge-attached surface sharing ModalSurface with Drawer. side selects
+ * a viewport edge. Use an application layout region for persistent nonblocking content.
+ * Consumer contract: docs/agent/components/sheet.md.
  */
 export interface SheetProps {
   open: boolean;
@@ -23,16 +13,9 @@ export interface SheetProps {
   title: string;
   description?: string;
   children?: ReactNode;
-  /**
-   * Figma axis `Side`. Attaching edge.
-   *
-   * The shared `side` vocabulary in archetypes.json reads "opens to the left/right
-   * OF THE TRIGGER", written for anchored surfaces like Popover. A Sheet has no
-   * trigger anchor — it attaches to the VIEWPORT edge. The generic vocabulary is
-   * wrong here; this component's own description is the accurate source.
-   */
+  /** Viewport edge to attach to; this surface is not anchored to a trigger. */
   side?: 'left' | 'right';
-  /** Figma axis `Width`. NO token backing — see the props table. */
+  /** Existing overlay width preset; geometry is scoped in agent/exceptions.json. */
   width?: 'compact' | 'wide';
 }
 

@@ -1,76 +1,18 @@
 /**
- * THE COMPUTED-OUTPUT GATE.
+ * Verify rendered typography, not just source class names.
  *
- * WHY THIS EXISTS — read this before changing anything here.
+ * Every directly owned text node must compute to a generated semantic ramp
+ * step, even if class merging removed its expected typography class. A surviving
+ * ramp class must also agree with its computed metrics. Load Inter at all
+ * declared weights; document.fonts.ready alone cannot detect an absent face.
  *
- * Every other gate in this repo compares NAMES. `map:check` compares Figma node
- * names to code paths, `docs:check` compares record fields to adopted surfaces,
- * `props-table-check` compares interface members to a documented table. All three
- * read source, and all three stayed green while `tailwind-merge` silently deleted
- * the typography from 38 components and 130 class occurrences at RUNTIME.
+ * Native option/optgroup and sr-only text are structurally excluded. Classless
+ * inherited text is reported separately. Exact-class/exact-metric exceptions
+ * require their expected match counts; stale permissions fail the gate.
  *
- * The mechanism is worth restating, because it defines what this gate must do.
- * Stock twMerge classifies any unrecognised `text-*` as a text-COLOUR utility. The
- * ramp steps are custom, so `text-label-lg` and `text-primary-foreground` landed in
- * one conflict group, and twMerge resolves a conflict by keeping the last class:
- *
- *     cn('text-label-lg', 'text-primary-foreground')  ->  'text-primary-foreground'
- *
- * Note what that does to the DOM: the ramp class is not overridden, it is ABSENT.
- * So a gate that scans the DOM for `text-label-lg` and checks its metrics finds
- * nothing to check and passes vacuously. That is the trap, and it is why this gate
- * asserts the CONVERSE:
- *
- *     every element that renders text must compute to a triple that EXISTS in the
- *     ramp — regardless of which classes survived to the DOM.
- *
- * When typography is deleted the element falls back to the browser default of
- * 16px / normal / 400. No ramp step is 16px at weight 400 (heading-md is 16px but
- * 600), and `normal` leading is no ramp leading at all. So the deletion surfaces as
- * an un-ramped triple on the very elements that lost their class, and the report
- * names the components.
- *
- * The ramp is parsed from the GENERATED tokens/globals.css rather than hardcoded,
- * so a step added in Figma is covered the moment it is exported.
- *
- * WHAT IS MEASURED
- * An element qualifies when it DIRECTLY owns non-whitespace text — only the element
- * holding the text node, never its ancestors, so a wrapper is not blamed for its
- * children's metrics. Three structural exclusions apply, none of them a judgement
- * call about correctness:
- *
- *   · <option> / <optgroup> — drawn by the platform inside the native select popup.
- *     Chrome forces `line-height: normal` on them and authors cannot change it.
- *   · anything inside `.sr-only` — clipped to a 1px box; its metrics are never seen.
- *   · elements carrying no class at all — story scaffolding (a bare <th> in a demo
- *     table, a glyph <span>). These express no typographic intent and merely inherit.
- *     They are still REPORTED, as warnings, so an inherited fallback stays visible
- *     without failing the gate. `Navigation/Sidebar` is one today; see the warning
- *     in any run and the note in scripts/computed-type-exceptions.json.
- *
- * DOCUMENTED DIVERGENCES
- * A handful of components deliberately compose off-ramp, every one of them tracing
- * to a text node that carries no text style in Figma. They are listed in
- * scripts/computed-type-exceptions.json with their source and rationale, and each
- * entry is keyed on BOTH the classes that must be present AND the exact triple —
- * so if twMerge deletes the ramp class, the class no longer matches, the exception
- * no longer applies, and the element fails like any other. Excepting a divergence
- * cannot hide a deletion.
- *
- * THREE CHECKS
- *   1. font-face loading — Inter is genuinely loaded, asserted with
- *      `document.fonts.check()`, not merely asked for in the cascade. Defect #2 of
- *      the same session was `--font-sans` naming Inter with no @font-face anywhere,
- *      which looked correct only on a machine that had Inter installed.
- *   2. ramp conformance — every measured element computes to a step in the ramp.
- *   3. class agreement — where a ramp class DID survive to the DOM, the computed
- *      triple must be that step's. Catches a token edit that breaks a binding
- *      without removing the class.
- *
- * USAGE
- *   node scripts/computed-type-check.mjs                  # build, then gate
- *   node scripts/computed-type-check.mjs --explore        # dump distributions, never fails
- *   node scripts/computed-type-check.mjs --static <dir>   # reuse an existing build
+ * node scripts/computed-type-check.mjs                 # build, then verify
+ * node scripts/computed-type-check.mjs --explore       # inspect, not a gate
+ * node scripts/computed-type-check.mjs --static <dir>  # reuse a build
  */
 
 import { createServer } from 'node:http';
@@ -91,19 +33,29 @@ const STATIC_ARG = (() => {
 })();
 
 const MIME = {
-  '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript',
-  '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml',
-  '.woff2': 'font/woff2', '.woff': 'font/woff', '.ttf': 'font/ttf',
-  '.png': 'image/png', '.jpg': 'image/jpeg', '.map': 'application/json',
+  '.html': 'text/html',
+  '.js': 'text/javascript',
+  '.mjs': 'text/javascript',
+  '.css': 'text/css',
+  '.json': 'application/json',
+  '.svg': 'image/svg+xml',
+  '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+  '.ttf': 'font/ttf',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.map': 'application/json',
 };
 
-function serve(dir) {
+export function serve(dir) {
   const server = createServer((req, res) => {
     const urlPath = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     let file = join(dir, urlPath === '/' ? 'index.html' : urlPath);
     if (existsSync(file) && statSync(file).isDirectory()) file = join(file, 'index.html');
     if (!file.startsWith(dir) || !existsSync(file)) {
-      res.writeHead(404); res.end('not found'); return;
+      res.writeHead(404);
+      res.end('not found');
+      return;
     }
     res.writeHead(200, { 'content-type': MIME[extname(file)] ?? 'application/octet-stream' });
     res.end(readFileSync(file));
@@ -113,11 +65,12 @@ function serve(dir) {
   });
 }
 
-function buildStorybook() {
+export function buildStorybook() {
   const out = mkdtempSync(join(tmpdir(), 'jakeui-sb-'));
   process.stderr.write('Building Storybook for the computed-output gate…\n');
   execFileSync('npx', ['storybook', 'build', '-o', out], {
-    cwd: ROOT, stdio: ['ignore', 'ignore', 'pipe'],
+    cwd: ROOT,
+    stdio: ['ignore', 'ignore', 'pipe'],
   });
   return out;
 }
@@ -157,6 +110,9 @@ const COLLECT = `(() => {
     for (const c of el.children) walk(c, srOnly);
   };
   walk(root, false);
+  for (const portal of document.querySelectorAll('[data-floating-ui-portal]')) {
+    if (!root.contains(portal) && !portal.parentElement?.closest('[data-floating-ui-portal]')) walk(portal, false);
+  }
   return out;
 })()`;
 
@@ -176,25 +132,16 @@ function loadExceptions() {
 /** An exception applies only if EVERY required class is still on the element. */
 function exceptionFor(exceptions, node, triple) {
   const have = classSet(node.cls);
-  return exceptions.find(
-    (e) => e.triple === triple && e.requireClasses.every((c) => have.has(c)),
-  );
+  return exceptions.find((e) => e.triple === triple && e.requireClasses.every((c) => have.has(c)));
 }
 
-/**
- * A `documented` entry that excuses nothing is a FAILURE, not a leftover.
- *
- * An exception is a standing permission to be wrong in one exact way. Once the
- * element it was excusing is gone, the permission has to go with it — otherwise
- * the file accumulates dormant rules, and a dormant rule is a loaded gun pointed
- * at whichever future element happens to compute the same triple. It would excuse
- * a real regression silently, which is the precise failure mode this whole gate
- * exists to prevent.
- */
+/** Unused exceptions or changed match counts fail; do not widen stale rules. */
 function deadRules(exceptions, hits) {
   return exceptions
     .map((e) => ({ e, n: hits.get(e) ?? 0 }))
-    .filter(({ e, n }) => n === 0 || (typeof e.expectedElements === 'number' && n !== e.expectedElements));
+    .filter(
+      ({ e, n }) => n === 0 || (typeof e.expectedElements === 'number' && n !== e.expectedElements),
+    );
 }
 
 async function main() {
@@ -232,7 +179,8 @@ async function main() {
     await page.goto(url, { waitUntil: 'load' });
     await page.waitForFunction(
       "document.querySelector('#storybook-root') && document.querySelector('#storybook-root').children.length > 0",
-      null, { timeout: 20000 },
+      null,
+      { timeout: 20000 },
     );
     await page.evaluate('document.fonts.ready');
 
@@ -257,7 +205,9 @@ async function main() {
       })()`);
       if (!loaded) {
         failures.push({
-          story, node: { tag: '—', cls: '', text: '' }, kind: 'font-face',
+          story,
+          node: { tag: '—', cls: '', text: '' },
+          kind: 'font-face',
           detail: `tokens/globals.css names "${wantFamily}" in --font-sans, but the browser reports it is NOT loaded at all four weights. No @font-face is reaching the preview.`,
         });
       }
@@ -266,7 +216,10 @@ async function main() {
     for (const n of await page.evaluate(COLLECT)) {
       const triple = tripleOf(n);
 
-      if (n.platformDrawn || n.srOnly) { skipped += 1; continue; }
+      if (n.platformDrawn || n.srOnly) {
+        skipped += 1;
+        continue;
+      }
 
       measured += 1;
       seenTriples.set(triple, (seenTriples.get(triple) ?? 0) + 1);
@@ -275,14 +228,17 @@ async function main() {
         if (!examples.has(triple)) examples.set(triple, []);
         const bucket = examples.get(triple);
         const sig = `${n.tag}|${n.cls}`;
-        if (bucket.length < 6 && !bucket.some((b) => b.sig === sig)) bucket.push({ sig, story, node: n });
+        if (bucket.length < 6 && !bucket.some((b) => b.sig === sig))
+          bucket.push({ sig, story, node: n });
         continue;
       }
 
       const onRamp = steps.find(
-        (s) => near(s.fontSize, n.fontSize)
-          && n.lineHeight !== 'normal' && near(s.lineHeight, parseFloat(n.lineHeight))
-          && s.fontWeight === n.fontWeight,
+        (s) =>
+          near(s.fontSize, n.fontSize) &&
+          n.lineHeight !== 'normal' &&
+          near(s.lineHeight, parseFloat(n.lineHeight)) &&
+          s.fontWeight === n.fontWeight,
       );
 
       // Classless elements express no typographic intent — they inherit. Report an
@@ -292,10 +248,15 @@ async function main() {
         continue;
       }
 
-      const firstFamily = n.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, '');
+      const firstFamily = n.fontFamily
+        .split(',')[0]
+        .trim()
+        .replace(/^["']|["']$/g, '');
       if (wantFamily && firstFamily !== wantFamily) {
         failures.push({
-          story, node: n, kind: 'font-family',
+          story,
+          node: n,
+          kind: 'font-family',
           detail: `resolves "${firstFamily}"; tokens/globals.css asks for "${wantFamily}"`,
         });
         continue;
@@ -309,7 +270,9 @@ async function main() {
           continue;
         }
         failures.push({
-          story, node: n, kind: 'off-ramp',
+          story,
+          node: n,
+          kind: 'off-ramp',
           detail: `computes ${triple}, which is no step in the ramp`,
         });
         continue;
@@ -321,7 +284,9 @@ async function main() {
         .find((c) => stepByName.has(c));
       if (declared && declared !== onRamp.name) {
         failures.push({
-          story, node: n, kind: 'class-disagreement',
+          story,
+          node: n,
+          kind: 'class-disagreement',
           detail: `carries text-${declared} (${fmtStep(stepByName.get(declared))}) but computes ${fmtStep(onRamp)}`,
         });
       }
@@ -332,12 +297,16 @@ async function main() {
   server.close();
 
   if (EXPLORE) {
-    console.log(`\nExplored ${stories.length} stories — ${measured} measured, ${skipped} structurally skipped.\n`);
+    console.log(
+      `\nExplored ${stories.length} stories — ${measured} measured, ${skipped} structurally skipped.\n`,
+    );
     console.log('Computed triples, by frequency (✓ = a step in the ramp):');
     const sorted = [...seenTriples.entries()].sort((a, b) => b[1] - a[1]);
     for (const [k, count] of sorted) {
       const s = rampByTriple.get(k);
-      console.log(`  ${s ? '✓' : '✗'} ${k.padEnd(16)} ${String(count).padStart(4)}  ${s ? s.name : ''}`);
+      console.log(
+        `  ${s ? '✓' : '✗'} ${k.padEnd(16)} ${String(count).padStart(4)}  ${s ? s.name : ''}`,
+      );
     }
     console.log('\nOff-ramp triples, with examples:');
     for (const [k, count] of sorted) {
@@ -351,13 +320,22 @@ async function main() {
     return;
   }
 
-  report({ failures, warnings, stories, measured, skipped, excepted, steps, dead: deadRules(exceptions, exceptionHits) });
+  report({
+    failures,
+    warnings,
+    stories,
+    measured,
+    skipped,
+    excepted,
+    steps,
+    dead: deadRules(exceptions, exceptionHits),
+  });
 }
 
 function report({ failures, warnings, stories, measured, skipped, excepted, steps, dead }) {
   const header =
-    `Jake UI computed type — ${stories.length} stories, ${measured} measured element(s), `
-    + `${skipped} platform-drawn/hidden, ${excepted} documented divergence(s), ${steps.length}-step ramp.`;
+    `Jake UI computed type — ${stories.length} stories, ${measured} measured element(s), ` +
+    `${skipped} platform-drawn/hidden, ${excepted} documented divergence(s), ${steps.length}-step ramp.`;
   console.log(header);
 
   if (warnings.length > 0) {
@@ -369,13 +347,19 @@ function report({ failures, warnings, stories, measured, skipped, excepted, step
     console.log(`\n${uniq.size} inherited off-ramp warning(s) — classless text, not a failure:`);
     for (const w of uniq.values()) {
       console.log(`  ~ ${w.story.title} — <${w.node.tag}> "${w.node.text}" computes ${w.triple}`);
-      console.log(`      inherits from <${w.node.ownerTag}> ${w.node.ownerCls.slice(0, 90) || '(root)'}`);
-      console.log('      that element sets no ramp step, so the glyph falls to the inherited size.');
+      console.log(
+        `      inherits from <${w.node.ownerTag}> ${w.node.ownerCls.slice(0, 90) || '(root)'}`,
+      );
+      console.log(
+        '      that element sets no ramp step, so the glyph falls to the inherited size.',
+      );
     }
   }
 
   if (dead && dead.length > 0) {
-    console.error(`\nFAIL — ${dead.length} stale entr(y/ies) in scripts/computed-type-exceptions.json.\n`);
+    console.error(
+      `\nFAIL — ${dead.length} stale entr(y/ies) in scripts/computed-type-exceptions.json.\n`,
+    );
     for (const { e, n } of dead) {
       const want = typeof e.expectedElements === 'number' ? e.expectedElements : 'at least 1';
       console.error(`  ${e.component} — excused ${n} element(s), expected ${want}`);
@@ -385,7 +369,10 @@ function report({ failures, warnings, stories, measured, skipped, excepted, step
           ? '    Nothing matches it any more. Delete the entry — an exception that excuses'
           : '    The count moved. Confirm the change was intended, then update expectedElements.',
       );
-      if (n === 0) console.error('    nothing will silently excuse the next element that computes this triple.');
+      if (n === 0)
+        console.error(
+          '    nothing will silently excuse the next element that computes this triple.',
+        );
     }
     process.exit(1);
   }
@@ -401,7 +388,9 @@ function report({ failures, warnings, stories, measured, skipped, excepted, step
     byComponent.get(f.story.title).push(f);
   }
 
-  console.error(`\nFAIL — ${failures.length} element(s) across ${byComponent.size} component(s) do not compute to a ramp step.\n`);
+  console.error(
+    `\nFAIL — ${failures.length} element(s) across ${byComponent.size} component(s) do not compute to a ramp step.\n`,
+  );
   for (const [comp, list] of [...byComponent.entries()].sort((a, b) => b[1].length - a[1].length)) {
     console.error(`  ${comp} — ${list.length} element(s)`);
     for (const f of list.slice(0, 3)) {
@@ -421,7 +410,8 @@ function report({ failures, warnings, stories, measured, skipped, excepted, step
   process.exit(1);
 }
 
-main().catch((err) => {
-  console.error('computed-type-check crashed:', err);
-  process.exit(1);
-});
+if (process.argv[1] && resolvePath(process.argv[1]) === fileURLToPath(import.meta.url))
+  main().catch((err) => {
+    console.error('computed-type-check crashed:', err);
+    process.exit(1);
+  });

@@ -1,18 +1,11 @@
 import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 /**
- * Breadcrumb — hierarchical location trail.
- *
- * Figma: `Breadcrumb`, node 88:*, 2 variants.
- * Contract: docs/components/breadcrumb.md
- *
- * Figma models a FIXED three-level trail (Home label / Parent label / Current
- * label), because a design file cannot express a variable-length list. Those three
- * properties are one EXAMPLE of the array, not the API. Real trails are 2, 4 or 6
- * deep, so code takes items[].
- *
- * The LAST item is the current page and is never a link.
+ * Hierarchical location trail from items. The last item is the current page,
+ * not a link; collapsed ancestors remain reachable through the reveal control.
+ * Consumer contract: docs/agent/components/breadcrumb.md.
  */
 export interface BreadcrumbItem {
   label: string;
@@ -26,6 +19,11 @@ export interface BreadcrumbProps {
 }
 
 export function Breadcrumb({ items, collapsed = false, label = 'Breadcrumb' }: BreadcrumbProps) {
+  const [expanded, setExpanded] = useState(false);
+  const nav = useRef<HTMLElement>(null);
+  useLayoutEffect(() => {
+    if (expanded) nav.current?.querySelector<HTMLElement>('li:nth-child(2) a')?.focus();
+  }, [expanded]);
   // An empty trail is not a breadcrumb. Rendering an empty <nav> would leave a
   // labelled landmark with nothing in it, which is noise for screen-reader users.
   if (items.length === 0) return null;
@@ -33,12 +31,18 @@ export function Breadcrumb({ items, collapsed = false, label = 'Breadcrumb' }: B
   // Collapsing folds the MIDDLE, keeping the root and the current page — those are
   // the two a user orients by. Never applied below four levels, where it would
   // hide more than it saves.
-  const showOverflow = collapsed && items.length > 3;
-  const visible: BreadcrumbItem[] = showOverflow ? [...items.slice(0, 1), ...items.slice(-2)] : items;
+  const showOverflow = collapsed && !expanded && items.length > 3;
+  const visible: BreadcrumbItem[] = showOverflow
+    ? [...items.slice(0, 1), ...items.slice(-2)]
+    : items;
 
   return (
-    // The record: "Wrap in a nav with an accessible name such as 'Breadcrumb'."
-    <nav aria-label={label} className="rounded-lg border border-border bg-card px-3 py-2.5">
+    // Provide a named navigation landmark.
+    <nav
+      ref={nav}
+      aria-label={label}
+      className="rounded-lg border border-border bg-card px-3 py-2.5"
+    >
       {/* gap is `space/2` (8px) in the file, not `space/1` (4px). */}
       <ol className="flex flex-wrap items-center gap-2 text-body-sm text-muted-foreground">
         {visible.map((item, i) => {
@@ -64,6 +68,8 @@ export function Breadcrumb({ items, collapsed = false, label = 'Breadcrumb' }: B
                   <button
                     type="button"
                     aria-label={`Show ${items.length - 3} hidden levels`}
+                    aria-expanded={false}
+                    onClick={() => setExpanded(true)}
                     className="rounded px-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                   >
                     …
@@ -78,9 +84,7 @@ export function Breadcrumb({ items, collapsed = false, label = 'Breadcrumb' }: B
                 // The current page: plain text with aria-current, never a link —
                 // you do not link to where you already are.
                 //
-                // `foreground` here is ASSERTED, not transcribed: the record binds
-                // everything to muted-foreground, which would make the current page
-                // indistinguishable from its ancestors. Figma owes a binding.
+                // Foreground distinguishes the current page from muted ancestor links.
                 <span aria-current="page" className={cn('text-foreground')}>
                   {item.label}
                 </span>

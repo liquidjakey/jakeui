@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from './button.js';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Popover, PopoverClose } from './popover.js';
 import { Input } from './input.js';
@@ -6,27 +7,16 @@ import { Field } from './field.js';
 
 /**
  * Stories for `Popover`.
- * Contracts: docs/components/popover.md · popover-backdrop.md · popover-close.md
+ * Contracts: docs/agent/components/popover.md · popover-backdrop.md · popover-close.md
  *
  * **These stories are `Popover / Root Composition`** — that asset's `Pattern` axis
  * is `kind: story-only` ("Storybook story, never a prop"), so its four patterns
  * (Basic, Align, Form, RTL) ship here rather than as a component.
  *
- * ⚠️ **Placement is not collision-aware.** These place on the requested side and
- * stay there. Flipping near a viewport edge needs a positioning library, which is
- * out of scope for a token-level component — recorded rather than half-built.
+ * Placement flips and shifts at viewport edges while preserving the scoped theme.
  */
 
-function TriggerButton({ children }: { children: React.ReactNode }) {
-  return (
-    <button
-      type="button"
-      className="rounded-lg border border-input bg-card px-3 py-2 text-body-sm text-foreground"
-    >
-      {children}
-    </button>
-  );
-}
+const TriggerButton = Button;
 
 const meta = {
   title: 'Overlays/Popover',
@@ -46,7 +36,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Pattern = Basic. Non-modal: focus is NOT trapped, per the record. */
+/** Nonmodal popover: focus is not trapped. */
 export const Basic: Story = {
   args: { open: false, onOpenChange: () => {}, trigger: null },
   render: () => <BasicDemo />,
@@ -80,7 +70,7 @@ export const Sides: Story = {
 function SidesDemo() {
   const [side, setSide] = useState<'top' | 'right' | 'bottom' | 'left' | null>(null);
   return (
-    <div className="flex gap-4 p-24">
+    <div className="flex flex-wrap gap-4 p-4 sm:p-24">
       {(['top', 'right', 'bottom', 'left'] as const).map((s) => (
         <Popover
           key={s}
@@ -96,17 +86,7 @@ function SidesDemo() {
   );
 }
 
-/**
- * Pattern = Form. **This one is modal**, so focus IS trapped and a backdrop appears.
- *
- * The record draws the line precisely: *"A popover holding a form should trap focus;
- * a non-modal one should not."* That is what the `modal` prop is — a behaviour
- * choice, not decoration.
- *
- * ⚠️ Look at the backdrop in **dark mode**. It binds `foreground`, which inverts —
- * near-black in Light, near-**white** in Dark. It is the only scrim token in the
- * system and it is the wrong kind of token.
- */
+/** Modal form popover: focus is contained and the scrim stays dark in both themes. Modality is behavior, not decoration. */
 export const FormPopover: Story = {
   name: 'Pattern = Form (modal, traps focus)',
   args: { open: false, onOpenChange: () => {}, trigger: null },

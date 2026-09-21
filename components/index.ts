@@ -4,6 +4,9 @@ export type { InputProps } from './input.js';
 export { Textarea } from './textarea.js';
 export type { TextareaProps } from './textarea.js';
 
+export { Select } from './select.js';
+export type { SelectProps, SelectOption } from './select.js';
+
 export { NativeSelect } from './native-select.js';
 export type { NativeSelectOption, NativeSelectProps } from './native-select.js';
 
@@ -172,7 +175,7 @@ export { PopoverArrow } from './popover-arrow.js';
 export type { PopoverArrowProps } from './popover-arrow.js';
 
 export { DatePicker } from './date-picker.js';
-export type { DatePickerProps } from './date-picker.js';
+export type { DatePickerProps, DateRange } from './date-picker.js';
 
 export { SwitchRoot } from './switch.js';
 export type { SwitchRootProps } from './switch.js';

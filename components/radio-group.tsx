@@ -4,26 +4,16 @@ import { MOTION } from '../lib/motion.js';
 import { OPACITY_DISABLED, OPACITY_READONLY } from '../lib/opacity.js';
 
 /**
- * RadioGroup — labelled exclusive-choice group.
- *
- * Figma: `Radio Group` (78:*) and `Radio Group / Indicator`.
- * Contracts: docs/components/radio-group.md · radio-group-indicator.md
- *
- * Same shape of gap as Switch: this asset's tokensUsed is three TEXT tokens. The
- * outer circle lives on Radio Group / Root, which is BLOCKED (24 variants). The
- * circle border is asserted as `input`.
- *
- * Unlike Switch, the SELECTED half is real — Radio Group / Indicator records
- * `fill primary` — so only the ring is asserted, not the state colour. That record
- * is also the precedent that made Switch's track assertion defensible.
- *
- * Radio Group / Field Composition is NOT bound: kind: story-only.
+ * Controlled exclusive choice using native radio inputs.
+ * RadioGroupRoot, RadioGroupItem and RadioGroupIndicator are visual anatomy;
+ * use RadioGroup for labels, grouping and keyboard behavior.
+ * Consumer contract: docs/agent/components/radio-group.md.
  */
 
 export interface RadioGroupIndicatorProps {
   checked?: boolean;
   disabled?: boolean;
-  /** The record: "Runtime may force-mount the indicator for animation or measurement." */
+  /** Keeps the decorative indicator mounted when unchecked for animation or measurement. */
   forceMount?: boolean;
 }
 
@@ -97,12 +87,8 @@ export function RadioGroup({
                 <span
                   aria-hidden="true"
                   className={cn(
-                    // 20x20 in `Radio Group / Item`; it was 16x16.
                     'inline-flex size-5 items-center justify-center rounded-full border',
                     MOTION.colors,
-                    // ✅ CONFIRMED, no longer asserted. `Radio Group / Item` reads
-                    // fill `card` + stroke `input` at 1px, hover fill `accent`,
-                    // focus stroke `ring` at 2px. The assertion was correct.
                     'border-input bg-card',
                     'peer-focus-visible:ring-2 peer-focus-visible:ring-ring',
                     itemDisabled && OPACITY_DISABLED,
@@ -143,25 +129,14 @@ export interface RadioGroupItemProps {
 }
 
 /**
- * The circle. Read from LIVE BINDINGS — capped at 8 of 12 rows.
- *
- *   unchecked   card + input | hover accent + input | focused card + ring
- *               | invalid card + destructive
- *   checked     card + primary | hover accent + primary | focused card + ring
- *               | invalid card + destructive
- *   indicator   primary, on checked variants only
- *
- * ⚠️ THE ASSERTION MADE IN radio-group.tsx WAS CORRECT — `input` for the resting
- * border. Confirmed rather than assumed.
- *
- * ⚠️ Disabled and ReadOnly bind the same tokens as Default here too.
+ * Decorative circle: card/input at rest, accent on hover, ring on focus,
+ * destructive border when invalid. Disabled uses opacity/50, readOnly opacity/80.
  */
 export function RadioGroupItem({ checked = false, state = 'default' }: RadioGroupItemProps) {
   return (
     <span
       aria-hidden="true"
       className={cn(
-        // 20x20 in the file; it was 16x16.
         'inline-flex size-5 items-center justify-center rounded-full border',
         state === 'hover' ? 'bg-accent' : 'bg-card',
         state === 'invalid'
@@ -171,9 +146,7 @@ export function RadioGroupItem({ checked = false, state = 'default' }: RadioGrou
             : checked
               ? 'border-primary'
               : 'border-input',
-        // Disabled and read-only are NOT the same dimming. The file binds
-        // opacity/50 for Disabled and opacity/80 for ReadOnly; these shared one
-        // branch at opacity-50 until 10 Aug 2026, so read-only rendered too faint.
+        // Read-only remains more visible than disabled.
         state === 'disabled' && OPACITY_DISABLED,
         state === 'readOnly' && OPACITY_READONLY,
       )}
@@ -187,16 +160,14 @@ export interface RadioGroupRootProps {
   children: React.ReactNode;
   orientation?: 'vertical' | 'horizontal';
   label: string;
+  /** Only disabled affects this wrapper; other states do not propagate to children. */
   state?: 'default' | 'disabled' | 'readOnly' | 'invalid';
 }
 
 /**
- * The group wrapper. Read from LIVE BINDINGS — capped at 7 of 24 rows, and the read
- * showed 24 variants collapse to just 9 distinct binding sets.
- *
- * ORIENTATION CARRIES NO COLOUR DELTA AT ALL — vertical and horizontal always pair
- * identically. Default and ReadOnly are identical. Disabled changes only the option
- * LABELS to muted-foreground. Invalid changes every item's stroke to destructive.
+ * Anatomy fieldset: orientation controls layout. Disabled disables descendant
+ * native controls and dims the legend; readOnly and invalid do not style children.
+ * Pass visual state to each RadioGroupItem when building anatomy previews.
  */
 export function RadioGroupRoot({
   children,

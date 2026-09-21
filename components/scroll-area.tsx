@@ -2,23 +2,9 @@ import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
 
 /**
- * ScrollArea — scrollable viewport primitive.
- *
- * Figma: `Scroll Area`, 2 variants.
- * Contract: docs/components/scroll-area.md
- *
- * 🛑 The record's own description promises anatomy it does not bind: "Scrollable
- * viewport primitive with VISIBLE TRACK AND THUMB ANATOMY." tokensUsed is five
- * entries and every one belongs to the viewport container — no track, no thumb.
- *
- * Rather than invent two colours, the NATIVE SCROLLBAR IS KEPT: the same decision,
- * for the same reason, as NativeSelect's chevron. Suppressing the platform's own
- * affordance would force inventing a token that does not exist, and it keeps native
- * scroll behaviour intact, which is the point of a scroll area.
- *
- * The focusable + named region is the important part: a region that scrolls but
- * cannot be focused is UNREACHABLE BY KEYBOARD, the single most common failure of
- * custom scroll areas.
+ * Named, focusable scroll region using native scrollbars. Preserve the platform
+ * scroll affordance and the visible keyboard focus ring.
+ * Consumer contract: docs/agent/components/scroll-area.md.
  */
 export interface ScrollAreaProps {
   children: ReactNode;

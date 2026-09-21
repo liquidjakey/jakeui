@@ -2,21 +2,9 @@ import type { ReactNode } from 'react';
 import { cn } from '../lib/cn.js';
 
 /**
- * ButtonGroup — groups related actions.
- *
- * Figma: `Button Group`, 4 variants.
- * Contract: docs/components/button-group.md
- *
- * ⚠️ ITS MEMBERS ARE BUTTONS, AND BUTTON IS STILL BLOCKED by the 8-row cap (32
- * variants, 8 rows — outline and ghost entirely unrecorded). This is the container;
- * callers supply their own buttons until Button can be built.
- *
- * The record binds two tokens and one of them is a LEAKED BINDING: the group has no
- * fill, so `primary-foreground` — the text colour FOR the primary fill — sits on
- * whatever is beneath. It almost certainly belongs to the nested Button instances
- * the record describes. Identical in shape to Toggle Group's stray
- * accent-foreground, and given the identical treatment: LAYOUT-ONLY, with each
- * member owning its appearance.
+ * Layout-only group of related Button controls; each member owns its appearance.
+ * Attached edges are visual: buttons remain independently operable.
+ * Consumer contract: docs/agent/components/button-group.md.
  */
 export interface ButtonGroupProps {
   children: ReactNode;
@@ -39,9 +27,7 @@ export function ButtonGroup({
       className={cn(
         'inline-flex',
         orientation === 'vertical' ? 'flex-col' : 'flex-row',
-        // No border or radius tokens exist for the attached treatment, so the
-        // shared-edge rules are raw. Attached is VISUAL ONLY — joining buttons must
-        // not imply to assistive technology that they are one control.
+        // Shared edges join the visuals, not the buttons' semantics or focus stops.
         attached
           ? orientation === 'horizontal'
             ? '[&>*]:rounded-none [&>*:first-child]:rounded-l-lg [&>*:last-child]:rounded-r-lg [&>*+*]:-ml-px'

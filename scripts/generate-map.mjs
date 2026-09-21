@@ -1,34 +1,15 @@
 #!/usr/bin/env node
 /**
- * Jake UI — Code Connect replacement, step 1 of 2: generate the manifest.
- *
- * WHY THIS EXISTS
- * Figma Code Connect requires a Dev or Full seat on an Org/Enterprise plan.
- * This account has neither, so the Figma↔code binding cannot be automated by
- * Figma. `figma.map.json` is the hand-owned substitute: a committed, diffable,
- * CI-checkable manifest of the same information.
- *
- * HOW TO REGENERATE
- * This script does not call the Figma REST API (that needs a token). It reads
- * a raw dump produced by the Figma MCP `use_figma` tool, so the source of truth
- * stays the live file:
- *
- *   1. Run the script in ./figma-dump-query.js through `use_figma`
- *      against file ovnLtL9xbX8SG5xDw673Un.
- *   2. Save its JSON output to design-system/.figma-dump.json
- *   3. node design-system/scripts/generate-map.mjs
- *   4. node design-system/scripts/validate-map.mjs
- *
- * Classification rules mirror the Governance page:
- *   "State is visual QA unless the implementation exposes controlled state;
- *    Viewport is a responsive fixture unless code exposes a breakpoint prop;
- *    Pattern is story/composition-only. Never infer a public code prop from a
- *    Figma axis without API review."
+ * Generate correspondence from .figma-dump.json and preserve maintained code
+ * bindings. Read docs/agent/figma-sync.md before refreshing generation inputs.
+ * Figma state, viewport and pattern axes are not automatically public props.
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readPublicApi } from './lib/public-api.mjs';
+import { reconcileMap } from './lib/figma-contract.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DUMP = resolve(ROOT, '.figma-dump.json');
@@ -120,7 +101,7 @@ function main() {
     try {
       previous = JSON.parse(readFileSync(OUT, 'utf8')).components ?? {};
     } catch {
-      console.warn(`Could not parse existing ${OUT}; hand-owned codePaths cannot be preserved.`);
+      throw new Error(`Could not parse existing ${OUT}; refusing to discard hand-owned code bindings.`);
     }
   }
 
@@ -150,30 +131,26 @@ function main() {
     if (c.codePath && !components[name]) dropped.push(`${name} → ${c.codePath}`);
   }
 
-  const manifest = {
+  if (dropped.length) throw new Error(`Implemented assets disappeared from the dump. Review renames/deletions before regeneration: ${dropped.join(', ')}`);
+  const manifest = reconcileMap({
     $schema: './figma.map.schema.json',
     fileKey: dump.fileKey ?? 'ovnLtL9xbX8SG5xDw673Un',
     generatedAt: new Date().toISOString(),
-    note: 'Code Connect substitute — this plan has no Dev/Full seat. Hand-owned; CI-checked by validate-map.mjs.',
+    note: 'Figma correspondence; validated against public interfaces.',
     components,
-  };
+  }, readPublicApi().components);
 
   writeFileSync(OUT, JSON.stringify(manifest, null, 2) + '\n');
 
   const tally = { prop: 0, slot: 0, 'slot-toggle': 0, decompose: 0, 'story-only': 0,
     'responsive-fixture': 0, unclassified: 0 };
-  for (const c of Object.values(components)) {
+  for (const c of Object.values(manifest.components)) {
     for (const p of Object.values(c.props)) tally[p.kind] = (tally[p.kind] ?? 0) + 1;
   }
   console.log(`Wrote ${OUT}`);
   console.log(`  components: ${Object.keys(components).length}`);
   console.log(`  codePaths preserved: ${carried}`);
   for (const [k, v] of Object.entries(tally)) console.log(`  ${k.padEnd(20)} ${v}`);
-  if (dropped.length) {
-    console.warn(`\n⚠ ${dropped.length} implemented component(s) no longer in the Figma dump —`);
-    console.warn('  renamed or deleted in Figma. Their code bindings were NOT carried over:');
-    for (const d of dropped) console.warn(`    · ${d}`);
-  }
 }
 
 main();

@@ -1,14 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Skeleton } from './skeleton.js';
 
-/**
- * Stories for `Skeleton`.
- * Contract: docs/components/skeleton.md
- *
- * Built from live bindings: its token contract existed **only on child nodes**, so
- * the generator — which reads the root — could only ever report "no root-level
- * bindings" for it. `Slider` and `Popover / Arrow` had the same shape of gap.
- */
+/** Skeleton loading-shape examples. Use one meaningful loading announcement per region. */
 
 const meta = {
   title: 'Feedback/Skeleton',

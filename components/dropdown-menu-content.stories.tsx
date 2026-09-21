@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel } from './dropdown-menu.js';
 
-/**
- * `DropdownMenuContent` — the surface `DropdownMenu` composes, read directly from
- * live bindings after the description cap blocked it.
- */
+/** Unanchored menu-surface anatomy. Side and align are metadata, not automatic positioning. Use DropdownMenu for a linked, anchored popup. */
 
 const meta = {
   title: 'Anatomy/DropdownMenuContent',
@@ -23,19 +20,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `DropdownMenuContent`. Its description showed **1 of 24 rows** — nothing could be
- * inferred, and the read settled it in one line: **Side and Align carry no colour
- * delta**. All 24 variants are three binding sets differing only by the arrow.
- *
- * ✅ It also confirmed the `muted-foreground` shortcut colour that
- * `dropdown-menu-item.md` had to assert.
- */
+/** Unanchored menu-surface anatomy. Side and align are metadata, not automatic positioning. Use DropdownMenu for a linked, anchored popup. */
 export const MenuContent: Story = {
   name: 'DropdownMenuContent — geometry only',
   args: { children: null },
   render: () => (
-    <div className="flex gap-6">
+    <div className="flex flex-wrap gap-6">
       {([false, true] as const).map((arrow) => (
         <DropdownMenuContent key={String(arrow)} arrow={arrow} label={`arrow=${arrow}`}>
           <DropdownMenuLabel>Row actions</DropdownMenuLabel>

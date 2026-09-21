@@ -1,17 +1,9 @@
 import { cn } from '../lib/cn.js';
 
 /**
- * PopoverArrow — the pointer on an anchored surface.
- *
- * Figma: `Popover / Arrow`, 4 variants.
- * Contract: docs/components/popover-arrow.md
- *
- * Third of the "no root-level bindings" records: the fill lives on a child Arrow
- * node. Read from live bindings — `popover` fill with a `border` stroke on every
- * variant, so Side is pure geometry with no colour delta.
- *
- * That also fills the gap flagged in popover.md, which had to draw its own arrow
- * with no recorded token. This is the token.
+ * Decorative arrow using popover fill and border stroke. side controls geometry.
+ * Anchored Popover owns its positioning-engine arrow; this export is anatomy.
+ * Consumer contract: docs/agent/components/popover-arrow.md.
  */
 export interface PopoverArrowProps {
   side?: 'top' | 'right' | 'bottom' | 'left';

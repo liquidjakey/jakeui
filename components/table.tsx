@@ -1,27 +1,17 @@
 import type { ReactNode } from 'react';
+import { createContext, useContext } from 'react';
 import { cn } from '../lib/cn.js';
 import { MOTION } from '../lib/motion.js';
 
 /**
- * The Table family — eight Figma assets, seven code exports, one file.
- *
- * Figma: `Table` (130:*) plus `Table / *`.
- * Contracts: docs/components/table.md · table-row.md · table-cell.md ·
- *            table-head.md · table-caption.md · table-container.md ·
- *            table-action-trigger.md
- *
- * `Table / Root Composition` is deliberately NOT bound to code. Its map entry has
- * no real properties — Pattern is `kind: story-only` ("Storybook story, never a
- * prop") and Viewport is `kind: responsive-fixture`. It is a set of composition
- * examples, so it ships as stories. Binding it would claim it is a component.
- *
- * DENSITY CARRIES NO TOKEN DELTA anywhere in this family, and that is verified
- * rather than assumed: Table / Row shows three Compact/Comfortable pairs and all
- * three bind identical tokens. Density changes row height only, which is spacing,
- * and no spacing token exists in any record here. Row height is therefore raw.
+ * Native table family with an overflow wrapper and shared row density.
+ * Use semantic thead/tbody/tfoot plus TableRow, TableHead and TableCell.
+ * Density changes row height. Existing geometry is scoped in agent/exceptions.json.
+ * Consumer contracts: docs/agent/components/table.md and sibling part references.
  */
 
 export type TableDensity = 'compact' | 'comfortable';
+const DensityContext = createContext<TableDensity>('compact');
 export type TableAlignment = 'left' | 'center' | 'right';
 
 const ALIGN: Record<TableAlignment, string> = {
@@ -37,14 +27,7 @@ export interface TableContainerProps {
   label?: string;
 }
 
-/**
- * The overflow wrapper. Figma's `Viewport` axis is a responsive fixture, not a
- * prop — the map says so itself — so overflow is plain CSS and takes no input.
- *
- * The record binds size/10 here, the smallest type size in the file, on a wrapper
- * that renders no text of its own. Almost certainly inherited from a nested
- * example; deliberately not applied.
- */
+/** Overflow wrapper only. Viewport is a responsive fixture, not a prop. This container has no independent text style. */
 export function TableContainer({ children, label = 'Table' }: TableContainerProps) {
   return (
     <div
@@ -70,17 +53,12 @@ export interface TableCaptionProps {
   position?: 'top' | 'bottom';
 }
 
-/**
- * The record: "Position is visual; code should preserve caption semantics and
- * reading order." A <caption> must be the FIRST CHILD of <table> wherever it
- * appears, so bottom placement uses caption-side and never DOM reordering —
- * moving it would break the naming relationship.
- */
+/** Keep caption first inside the native table. Visual bottom placement uses caption-side, never DOM reordering. */
 export function TableCaption({ children, position = 'top' }: TableCaptionProps) {
   return (
     <caption
       className={cn(
-        // Head binds 12px Medium -> Label/SM (12/16); it was Body/XS (12/18 regular).
+        // Table headings use Label/SM (12/16 Medium).
         'px-4 py-2 text-left text-label-sm text-muted-foreground',
         position === 'bottom' ? 'caption-bottom' : 'caption-top',
       )}
@@ -95,7 +73,7 @@ export function TableCaption({ children, position = 'top' }: TableCaptionProps) 
 export interface TableHeadProps {
   children: ReactNode;
   alignment?: TableAlignment;
-  /** Required by the record's prose: "use scope/row-header semantics in code." */
+  /** Header association; defaults to col. Use row for a row header. */
   scope?: 'col' | 'row';
 }
 
@@ -118,20 +96,12 @@ export interface TableCellProps {
   emphasis?: 'default' | 'strong';
 }
 
-/**
- * EMPHASIS CHANGES COLOUR, NOT WEIGHT — despite its name, and despite the shared
- * vocabulary calling it "heavier weight". The record binds foreground vs
- * muted-foreground and no weight token. Transcribed as bound, not as named.
- *
- * Consequence worth knowing: a DEFAULT cell is muted-foreground, so ordinary table
- * data renders muted and only "strong" cells get full contrast. That is backwards
- * from the usual convention. Faithful to the record; flagged for design review.
- */
+/** Emphasis changes text colour, not weight: strong uses foreground, default muted-foreground. */
 export function TableCell({ children, alignment = 'left', emphasis = 'default' }: TableCellProps) {
   return (
     <td
       className={cn(
-        // Cells bind Body/SM; Emphasis=Strong binds Value/Strong (handled by caller).
+        // Both emphasis values keep the complete Body/SM type style.
         'px-4 py-2 text-body-sm',
         emphasis === 'strong' ? 'text-foreground' : 'text-muted-foreground',
         ALIGN[alignment],
@@ -152,31 +122,34 @@ export interface TableRowProps {
   density?: TableDensity;
 }
 
-/**
- * Recovered from the 8-row cap by inference, not guesswork: the two missing
- * variants are Header/Comfortable and Footer/Comfortable, and every
- * Compact/Comfortable pair that IS present binds identical tokens (three pairs,
- * three matches). Density is proven inert here. See docs/components/table-row.md.
- */
+/** Density changes row height while row type controls header/footer styling. */
 export function TableRow({
   children,
   type = 'body',
   selected = false,
   onSelect,
-  density = 'compact',
+  density: densityOverride,
 }: TableRowProps) {
+  const inheritedDensity = useContext(DensityContext);
+  const density = densityOverride ?? inheritedDensity;
   const selectable = Boolean(onSelect);
   return (
     <tr
       aria-selected={selectable ? selected : undefined}
-      onClick={onSelect}
+      onClick={(e) => {
+        if (!(e.target as Element).closest('button, a, input, select, textarea')) onSelect?.();
+      }}
+      onKeyDown={(e) => {
+        if (e.target === e.currentTarget && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          onSelect?.();
+        }
+      }}
       className={cn(
         density === 'comfortable' ? '[&>*]:py-3' : '[&>*]:py-2',
         type === 'header' && 'border-b border-border bg-muted',
         type === 'body' && 'bg-card',
-        // Recorded hover binds only text, identical to resting — a hover state
-        // that looks like rest is almost certainly an oversight, so a muted tint
-        // is ASSERTED here rather than transcribed.
+        // Selection-capable rows use a hover tint to expose their affordance.
         selectable && !selected && 'hover:bg-muted/50',
         MOTION.colors,
         selected && 'bg-accent',
@@ -193,7 +166,7 @@ export function TableRow({
 /* ─────────────────────── Action trigger ────────────────────────── */
 
 export interface TableActionTriggerProps {
-  /** REQUIRED. The record demands a name that identifies the context. */
+  /** Accessible action name that identifies the row or task context. */
   label: string;
   onClick: () => void;
   icon?: ReactNode;
@@ -201,13 +174,7 @@ export interface TableActionTriggerProps {
   expanded?: boolean;
 }
 
-/**
- * `label` is required in the type on purpose. The record's accessibility contract:
- * "icon-only row action trigger requires a programmatic accessible name that
- * identifies the action context (for example, 'Open row actions')". Making it
- * optional would make it forgettable, and an unnamed icon-only control is
- * unusable by screen reader.
- */
+/** Icon-only row actions require a context-specific accessible label. */
 export function TableActionTrigger({
   label,
   onClick,
@@ -229,11 +196,11 @@ export function TableActionTrigger({
         'inline-flex h-8 w-8 items-center justify-center rounded-lg bg-card',
         'hover:bg-accent',
         'focus-visible:bg-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
-        // No disabled tokens are recorded on this asset; shared convention asserted.
+        // Disabled actions use the shared disabled treatment.
         disabled && 'cursor-not-allowed text-muted-foreground hover:bg-card',
       )}
     >
-      {/* No icon colour is recorded either — inherits currentColor from the row. */}
+      {/* Icon inherits currentColor from the row. */}
       <span aria-hidden="true">{icon ?? '⋮'}</span>
     </button>
   );
@@ -265,16 +232,18 @@ export function Table({
   label,
 }: TableProps) {
   return (
-    <TableContainer label={label ?? caption ?? 'Table'}>
-      <table
-        // Named by its <caption> when there is one, by aria-label otherwise.
-        // Never unnamed.
-        aria-label={caption ? undefined : label}
-        className={cn('w-full border-collapse text-body-sm', density)}
-      >
-        {caption ? <TableCaption position={captionPosition}>{caption}</TableCaption> : null}
-        {children}
-      </table>
-    </TableContainer>
+    <DensityContext.Provider value={density}>
+      <TableContainer label={label ?? caption ?? 'Table'}>
+        <table
+          // Named by its <caption> when there is one, by aria-label otherwise.
+          // Never unnamed.
+          aria-label={caption ? undefined : label}
+          className="w-full border-collapse text-body-sm"
+        >
+          {caption ? <TableCaption position={captionPosition}>{caption}</TableCaption> : null}
+          {children}
+        </table>
+      </TableContainer>
+    </DensityContext.Provider>
   );
 }

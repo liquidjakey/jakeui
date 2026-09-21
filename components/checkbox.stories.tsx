@@ -3,14 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Checkbox } from './checkbox.js';
 
 /**
- * Stories for `Checkbox`, recovered from the 8-row state cap by proof on 9 Aug 2026.
- *
- * Contract: docs/components/checkbox.md
- *
- * 🛑 No box tokens are recorded anywhere for this component — the border, fill and
- * check glyph are all ASSERTED in code, and the 10px glyph is the one raw size in
- * the system, kept raw because no ramp step is 10px and the repo rule is to flag
- * rather than invent. Carried in `scripts/computed-type-exceptions.json`.
+ * Boolean and indeterminate choice previews. The 10px decorative check glyph is
+ * scoped in scripts/computed-type-exceptions.json; it is not an application type style.
+ * Consumer contract: docs/agent/components/checkbox.md.
  */
 
 const meta = {

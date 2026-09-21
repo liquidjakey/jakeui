@@ -1,0 +1,6 @@
+@import './globals.css';
+@import './runtime.css';
+
+/* Installed packages are excluded from Tailwind's automatic discovery. */
+@source '../components';
+@source '../lib';

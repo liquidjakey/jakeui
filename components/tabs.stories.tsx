@@ -3,19 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Tabs } from './tabs.js';
 
 /**
- * Stories for `Tabs`.
- * Contract: docs/components/tabs.md
- *
- * **Tabs and Segmented Tab are two halves of one control.** Tabs binds only the
- * container fill (`muted`) and has no selected-state treatment; Segmented Tab binds
- * exactly that treatment and no container. Notice the inversion in the canvas: the
- * *selected* tab takes the lighter `card` fill and lifts out of the muted track,
- * rather than being highlighted.
- *
- * **Test with the keyboard** — this is what the tablist pattern is for:
- *   - Arrow keys move *within* the list; Tab moves *out of* it into the panel
- *   - Home and End jump to first and last
- *   - Only the selected tab is tabbable
+ * Controlled tablist and panels using SegmentedTab internally.
+ * Test orientation-aware arrows, Home/End and Tab exit; only the selected tab is tabbable.
+ * Consumer contract: docs/agent/components/tabs.md.
  */
 
 const meta = {
@@ -25,8 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Tabs is the container half; SegmentedTab is the item half. Neither is complete alone — ' +
-          'the container record carries no selected-state tokens at all.',
+          "Complete controlled tablist with linked panels, built from SegmentedTab items. Tabs owns keyboard navigation and selection; SegmentedTab alone needs a tablist owner.",
       },
     },
   },

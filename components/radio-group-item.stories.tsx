@@ -2,16 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RadioGroupItem, RadioGroupIndicator } from './radio-group.js';
 
 /**
- * `RadioGroupItem` — the circle that `RadioGroup` composes, read directly from live
- * bindings after the description cap blocked it.
- *
- * ✅ **CORRECTED 10 Aug 2026.** This file used to claim that `Disabled` was
- * indistinguishable from `Default`, on the grounds that both bind the same COLOUR
- * tokens. The disabled treatment is an **opacity** binding, which the original
- * pass never looked at: `Disabled` binds `opacity/50` and `ReadOnly` binds
- * `opacity/80` on both values, and `Radio Group / Indicator` binds `opacity/50`
- * for its disabled dot. `SwitchRoot` was wrong in the same way and for the same
- * reason. See the findings doc, item 5.
+ * Decorative circle previews. Disabled uses opacity/50, readOnly opacity/80;
+ * use RadioGroup for operable choices.
+ * Consumer contract: docs/agent/components/radio-group-item.md.
  */
 
 const meta = {
@@ -21,9 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Shown here with RadioGroupIndicator, the dot it contains — the indicator is the ' +
-          'only recorded checked-state colour in the system, and three other components ' +
-          'assert `primary` on its precedent.',
+          "Decorative radio-circle anatomy. Checked uses primary; disabled and read-only remain visually distinct. Use RadioGroup for interactive selection.",
       },
     },
   },

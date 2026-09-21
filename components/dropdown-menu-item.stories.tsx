@@ -3,13 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DropdownMenu, DropdownMenuItem, DropdownMenuCheckboxItem } from './dropdown-menu.js';
 
 /**
- * Stories for `DropdownMenuItem` and its checkbox variant, both recovered from the
- * 8-row state cap by proof on 9 Aug 2026.
- *
- * Contracts: docs/components/dropdown-menu-item.md · dropdown-menu-checkbox-item.md
- *
- * They share one title because they are one item family — the checkbox item is the
- * same row with an indicator, and the story exists to show them together.
+ * Action and checkbox item previews inside a menu keyboard scope.
+ * Checked and mixed indicators stay visible; checkbox toggles keep the menu open.
+ * Consumer contract: docs/agent/components/dropdown-menu-item.md.
  */
 
 const meta = {
@@ -19,8 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The shortcut colour binds `muted-foreground`, which the record had to assert ' +
-          'and the live read of Dropdown Menu / Content later confirmed.',
+          "Standard menu action item. Render inside a keyboard-owning menu. Shortcut text uses muted-foreground and does not register a keyboard shortcut.",
       },
     },
   },
@@ -29,13 +24,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * `DropdownMenuItem` and `DropdownMenuCheckboxItem`, both recovered from the cap.
- *
- * ⚠️ The checkbox item's checked indicator is **asserted** — `Value` being provably
- * inert is precisely the defect: the record gives no way to distinguish checked from
- * unchecked.
- */
+/** Check action activation and independent checkbox toggling without dismissal. */
 export const MenuItems: Story = {
   name: 'Menu Items',
   args: { children: null, onSelect: () => {} },

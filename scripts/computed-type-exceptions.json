@@ -1,150 +1,37 @@
 {
-  "_why": [
-    "Two different things live in this file, and conflating them would break the gate.",
-    "",
-    "`documented` is a list of GATE RULES. Each one excuses a RENDERED element that",
-    "computes off the type ramp. computed-type-check.mjs consults these, and a rule",
-    "that matches nothing is a FAILURE, not a harmless leftover — see `_deadRules`",
-    "below. Only add an entry here when a real element really does compute off-ramp.",
-    "",
-    "`figmaUnbindable` is a RECORD, not a rule. It documents every text node in the",
-    "Figma file that cannot be bound to a ramp step, whether or not code renders it",
-    "off-ramp. Nothing in it affects the gate. It exists because the ramp question",
-    "was decided Option B on 10 Aug 2026 — keep the 14-step ramp, bind the nodes to",
-    "it — and these 31 nodes are the residue that decision leaves behind.",
-    "",
-    "WHY THE TWO LISTS ARE DIFFERENT LENGTHS",
-    "31 Figma nodes cannot be bound. Only 8 rendered elements actually compute",
-    "off-ramp, because for most of the 31 the code already snapped to a ramp step",
-    "(a code/Figma divergence, recorded per entry) or renders no text at all. Adding",
-    "a gate rule for those would create a rule matching nothing, which is worse than",
-    "useless: it would sit dormant until some unrelated element happened to match its",
-    "triple, and then silently excuse a real regression.",
-    "",
-    "HOW A `documented` ENTRY IS KEYED, AND WHY IT CANNOT HIDE A DELETION",
-    "Each entry requires BOTH an exact computed triple AND the continued presence of",
-    "every class in `requireClasses`. tailwind-merge deleting a ramp class removes it",
-    "from the DOM, so `requireClasses` stops matching, the exception stops applying,",
-    "and the element fails like any other. An exception can only ever excuse the exact",
-    "composition it names.",
-    "",
-    "NOT IN THIS FILE, and deliberately so: <option>/<optgroup> (drawn by the platform",
-    "inside the native select popup, where Chrome forces line-height:normal), anything",
-    "inside .sr-only (clipped to 1px, never seen), and classless text (which merely",
-    "inherits). Those are structural exclusions in computed-type-check.mjs, reported",
-    "as warnings rather than silently dropped."
-  ],
-  "_deadRules": [
-    "A `documented` entry that matches zero rendered elements fails the gate.",
-    "",
-    "This is deliberate and it is the whole reason this file can be trusted over time.",
-    "An exception is a standing permission to be wrong in one exact way; once the",
-    "thing it was excusing is gone, the permission has to go too. Without this check",
-    "the file would accumulate stale rules, and a stale rule is a loaded gun pointed",
-    "at some future element that happens to compute the same triple.",
-    "",
-    "If the gate reports a dead rule, delete the entry — do not soften it."
-  ],
+  "$comment": "Exact rendered typography exceptions. A rule requires every listed class and the exact computed triple; zero matches or changed expected counts fail the gate. Remove rules when their scoped exceptions are retired. These are not consumer styles.",
   "documented": [
     {
       "component": "Avatar",
       "source": "components/avatar.tsx",
-      "figmaNode": "Avatar / Size=Small, Type=Initials -> Initials (111:694)",
-      "figmaMetrics": "11/14 Semi Bold, no text style",
-      "requireClasses": ["text-label-xs", "font-semibold"],
+      "requireClasses": [
+        "text-label-xs",
+        "font-semibold"
+      ],
       "triple": "11/16/600",
-      "expectedElements": 1,
-      "reason": "The ramp has no 11px semibold step — Label/XS is 11/16 MEDIUM — so the component takes the nearest step and overrides the weight. Size matches the file, leading is 2px looser, weight matches by override rather than by binding. Medium and large initials WERE bound on 10 Aug 2026 (Heading/XS, Heading/LG); small is the one that could not be."
+      "expectedElements": 2,
+      "reason": "Small initials use Label/XS with semibold weight: 11/16/600. Keep both classes; other Avatar sizes use complete semantic steps."
     },
     {
       "component": "Dropdown Menu / Label",
       "source": "components/dropdown-menu.tsx",
-      "figmaNode": "Dropdown Menu / Label -> Label (144:2200)",
-      "figmaMetrics": "12/18 Semi Bold, no text style",
-      "requireClasses": ["text-body-xs", "font-semibold"],
+      "requireClasses": [
+        "text-body-xs",
+        "font-semibold"
+      ],
       "triple": "12/18/600",
       "expectedElements": 5,
-      "reason": "The ramp has no 12px semibold step. Body/XS is 12/18 REGULAR, so size and leading match the file exactly and only the weight is an override — the closest any of these three get to the file. Snapping to Label/SM instead would have matched the weight and broken the leading."
+      "reason": "Menu labels use Body/XS with semibold weight: 12/18/600. The ramp has no complete step for these metrics."
     },
     {
       "component": "Checkbox",
       "source": "components/checkbox.tsx",
-      "figmaNode": "Checkbox / Control -> Mark (78:119)",
-      "figmaMetrics": "12/14 Semi Bold, no text style",
-      "requireClasses": ["text-[10px]"],
+      "requireClasses": [
+        "text-[10px]"
+      ],
       "triple": "10/15/400",
       "expectedElements": 2,
-      "reason": "The check glyph inside the 16px box. Marked ASSERTED in source: no box tokens are recorded anywhere for this component, and the ramp has no 10px step at all. The repo rule is to flag rather than invent a token, so the raw value stands and is flagged here. Note code renders 10px where the file draws 12px — this is the one entry where code and Figma disagree on SIZE, not just leading."
+      "reason": "The decorative check glyph uses an internal 10px size: 10/15/400. No semantic text style has these metrics; do not copy this raw size into consumer text."
     }
-  ],
-  "figmaUnbindable": {
-    "_decision": "Option B, 10 Aug 2026 — the 14-step ramp stays as it is. See docs/design-system/decisions/2026-08-10-figma-side-decision-memo.md item 1, and the ramp-additions proposal at 2026-08-10-ramp-additions-proposal.md for what it would take to retire these.",
-    "_total": 31,
-    "nodes": [
-      {
-        "figmaNode": "Dropdown Menu / Checkbox Item -> Spacer (144:2117)",
-        "figmaMetrics": "1/1 Regular",
-        "count": 9,
-        "unbindableBecause": "Not prose. A 1px text node used as a layout spacer to reserve the indicator column.",
-        "codeRenders": "Nothing — code reserves the column with padding, so no text element exists.",
-        "gateRule": false
-      },
-      {
-        "figmaNode": "Dropdown Menu / Radio Item -> Spacer (144:2169)",
-        "figmaMetrics": "1/1 Regular",
-        "count": 6,
-        "unbindableBecause": "Not prose. Same layout spacer as the checkbox item.",
-        "codeRenders": "Nothing — same as above.",
-        "gateRule": false
-      },
-      {
-        "figmaNode": "Popover / Content -> Title (111:568)",
-        "figmaMetrics": "15/22 Medium, no text style",
-        "count": 4,
-        "unbindableBecause": "Heading/SM is 15/22 — size and leading match exactly — but it is SEMI BOLD. There is no 15px medium step.",
-        "codeRenders": "text-heading-xs, 14/20/600. On-ramp, so no gate rule; but code has snapped a size AND a weight rather than match the file. This is a real code/Figma divergence, and the largest one left on the type axis.",
-        "gateRule": false
-      },
-      {
-        "figmaNode": "Dropdown Menu / Trigger -> Initials (144:2041)",
-        "figmaMetrics": "12/16 Semi Bold, no text style",
-        "count": 3,
-        "unbindableBecause": "No 12px semibold step. Label/SM is 12/16 MEDIUM — leading matches, weight does not.",
-        "codeRenders": "text-body-xs on the avatar-type trigger, 12/18/400. On-ramp, so no gate rule; code diverges from the file on both leading and weight.",
-        "gateRule": false
-      },
-      {
-        "figmaNode": "Checkbox / Control -> Mark (78:119)",
-        "figmaMetrics": "12/14 Semi Bold, no text style",
-        "count": 3,
-        "unbindableBecause": "No 12px semibold step, and no step at 14 leading.",
-        "codeRenders": "text-[10px], 10/15/400 — a raw size, ASSERTED. Has a gate rule.",
-        "gateRule": true
-      },
-      {
-        "figmaNode": "Table / Container -> Guidance (161:3479)",
-        "figmaMetrics": "10/16 Regular, no text style",
-        "count": 2,
-        "unbindableBecause": "The ramp has no 10px step at any weight.",
-        "codeRenders": "Nothing. This is an annotation node in the Figma file explaining the overflow behaviour to designers; it is not part of the component and has no code counterpart.",
-        "gateRule": false
-      },
-      {
-        "figmaNode": "Dropdown Menu / Label -> Label (144:2200)",
-        "figmaMetrics": "12/18 Semi Bold, no text style",
-        "count": 2,
-        "unbindableBecause": "No 12px semibold step. Body/XS matches 12/18 but is Regular.",
-        "codeRenders": "text-body-xs + font-semibold, 12/18/600. Has a gate rule.",
-        "gateRule": true
-      },
-      {
-        "figmaNode": "Avatar / Size=Small, Type=Initials -> Initials (111:694)",
-        "figmaMetrics": "11/14 Semi Bold, no text style",
-        "count": 2,
-        "unbindableBecause": "No 11px semibold step. Label/XS is 11/16 Medium.",
-        "codeRenders": "text-label-xs + font-semibold, 11/16/600. Has a gate rule.",
-        "gateRule": true
-      }
-    ]
-  }
+  ]
 }

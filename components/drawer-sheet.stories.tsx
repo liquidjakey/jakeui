@@ -3,15 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Drawer } from './drawer.js';
 import { Sheet } from './sheet.js';
 
-/**
- * Stories for `Drawer` and `Sheet`.
- * Contracts: docs/components/drawer.md · sheet.md
- *
- * **These two share one title on purpose.** They are token-for-token identical in
- * the design file, and the single story below exists precisely to show that — it
- * cannot be split without destroying what it demonstrates. The title names both
- * components it hosts rather than pretending to be one of them.
- */
+/** Drawer and Sheet modal examples. See their current public references. */
 
 const meta = {
   title: 'Overlays/Drawer & Sheet',
@@ -20,10 +12,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Identical tokens, identical state rows, identical variants, identical props, ' +
-          'identical accessibility. The only difference is the axis name: Drawer calls it ' +
-          '`Placement`, Sheet calls it `Side`, with the same two values. Both were built as ' +
-          'specified rather than merged, because collapsing them is a design decision.',
+          "Drawer and Sheet share modal behavior and visual language. Drawer uses placement; Sheet uses side. Both need controlled open state and onClose.",
       },
     },
   },
@@ -44,17 +33,7 @@ function Trigger({ label, onClick }: { label: string; onClick: () => void }) {
   );
 }
 
-/**
- * **Drawer and Sheet, side by side — they are identical.**
- *
- * This story exists to make the duplication visible. Identical tokens, identical
- * state rows, identical variants, identical props, identical accessibility. The
- * only difference is the axis name: Drawer calls it `Placement`, Sheet calls it
- * `Side`, with the same two values.
- *
- * Both were built as specified rather than merged, because collapsing them is a
- * design decision. See docs/components/drawer.md for the full comparison.
- */
+/** Compare the placement and side interfaces on the shared modal surfaces. */
 export const DrawerVsSheet: Story = {
   name: 'Drawer vs Sheet (identical by design file)',
   args: { open: false, onClose: () => {}, title: 'Drawer' },

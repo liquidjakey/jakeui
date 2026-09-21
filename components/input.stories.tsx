@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MagnifyingGlass, X } from '@phosphor-icons/react';
 import { Input } from './input.js';
 import type { InputProps } from './input.js';
 
 /**
- * Stories for `Input`. Contract: docs/components/input.md
+ * Stories for `Input`. Contract: docs/agent/components/input.md
  *
  * Input is controlled — `value` and `onChange` are required — so every story
  * drives it through local state rather than passing a static value. That also
@@ -16,7 +16,19 @@ import type { InputProps } from './input.js';
 /** Controlled wrapper so the field is actually typeable in the canvas. */
 function Field({ initial = '', ...props }: Partial<InputProps> & { initial?: string }) {
   const [value, setValue] = useState(initial);
-  return <Input {...(props as InputProps)} value={value} onChange={(e) => setValue(e.target.value)} />;
+  const id = useId();
+  return (
+    <div className="flex flex-col gap-1">
+      <label htmlFor={id} className="text-label-md">
+        {props.invalid
+          ? 'Email address'
+          : props.placeholder?.includes('Search')
+            ? 'Search patients'
+            : 'Patient name'}
+      </label>
+      <Input {...props} id={id} value={value} onChange={(e) => setValue(e.target.value)} />
+    </div>
+  );
 }
 
 const meta = {
@@ -32,7 +44,7 @@ const meta = {
         component:
           'Single-line text input. The Figma `State` enum (Default · Focused · Error · Disabled) ' +
           'is decomposed: `invalid` and `disabled` are independent booleans and focus is browser-owned. ' +
-          'See docs/state-decomposition.md.',
+          'See docs/agent/figma-sync.md.',
       },
     },
   },
@@ -117,7 +129,7 @@ export const WithIcons: Story = {
  * Switch the toolbar Theme to "Side by side" to check Light and Dark together.
  * Tab into the fields to verify the focus ring: it is 1px `border-ring` plus a
  * 1px inset `ring-ring`, keyed on `has-[:focus-visible]` so it appears on
- * keyboard focus but not on mouse click.
+ * browser-determined focus-visible, including pointer focus on text inputs.
  */
 export const AllStates: Story = {
   name: 'All states',
@@ -126,11 +138,19 @@ export const AllStates: Story = {
       {[
         ['Default (placeholder)', { placeholder: 'Search patients' }],
         ['Filled', { initial: 'Ada Lovelace' }],
-        ['Invalid', { initial: 'ada@', invalid: true, errorMessage: 'Enter a valid email address.' }],
+        [
+          'Invalid',
+          { initial: 'ada@', invalid: true, errorMessage: 'Enter a valid email address.' },
+        ],
         ['Disabled', { initial: 'Cannot edit this', disabled: true }],
         [
           'Invalid + Disabled',
-          { initial: 'ada@', invalid: true, disabled: true, errorMessage: 'Enter a valid email address.' },
+          {
+            initial: 'ada@',
+            invalid: true,
+            disabled: true,
+            errorMessage: 'Enter a valid email address.',
+          },
         ],
       ].map(([label, props]) => (
         <div key={label as string} className="flex flex-col gap-1">

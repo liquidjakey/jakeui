@@ -1,26 +1,16 @@
 import { cn } from '../lib/cn.js';
 
 /**
- * Progress — linear progress primitive.
- *
- * Figma: `Progress`, 2 variants.
- * Contract: docs/components/progress.md
- *
- * 🛑 tokensUsed is `muted` and `radius/lg` — two entries, and BOTH belong to the
- * track. The filled portion, the only part that conveys progress, has no colour.
- * Asserted as `primary`, on the same precedent as Switch's track: Radio Group /
- * Indicator binds `fill primary` for its checked state.
- *
- * `Type` deliberately did NOT become an enum. A determinate bar with no value is
- * meaningless and an indeterminate one with a value contradicts itself; an enum
- * lets both be expressed. Deriving the type from `value`'s presence makes the
- * invalid pair unrepresentable — the same move as Card's `media` slot.
+ * Linear progress with a muted track and primary fill. Omitting value means
+ * indeterminate; value=0 means known zero progress. Supply an accessible label.
+ * Consumer contract: docs/agent/components/progress.md.
  */
 export interface ProgressProps {
-  /** 0–100. Omitting it is what makes the bar indeterminate. */
+  /** Finite value from 0 to max. Omit for indeterminate progress; 0 is determinate. */
   value?: number;
   /** Required: an unnamed progress bar announces a number with no subject. */
   label: string;
+  /** Positive finite upper bound for determinate progress. */
   max?: number;
 }
 
@@ -38,14 +28,10 @@ export function Progress({ value, label, max = 100 }: ProgressProps) {
       aria-valuenow={determinate ? value : undefined}
       aria-valuemin={determinate ? 0 : undefined}
       aria-valuemax={determinate ? max : undefined}
-      // radius/lg on a thin bar reads as nearly square; radius/full would be the
-      // usual choice. Transcribed as recorded.
-      // The bar is 12px tall in the file (320x12), not 8.
       className="h-3 w-full overflow-hidden rounded-lg bg-muted"
     >
       <div
         className={cn(
-          // 🛑 ASSERTED — no fill is recorded for the filled portion.
           'h-full bg-primary',
           determinate
             ? 'motion-safe:transition-[width]'

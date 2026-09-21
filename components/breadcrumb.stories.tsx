@@ -1,25 +1,21 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Breadcrumb } from './breadcrumb.js';
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { PreviewNavigation } from "../.storybook/preview-navigation.js";
+import { Breadcrumb } from "./breadcrumb.js";
 
 /**
- * Stories for `Breadcrumb`.
- * Contract: docs/components/breadcrumb.md
- *
- * ✅ Both its text nodes were **unbound in Figma** — all items 13/20 Regular, the
- * current item 13/20 Medium. The ramp question was decided Option B on 10 Aug 2026
- * and they now carry `Body/SM` and `Label/MD`, both 13/18, which is what this code
- * already used.
+ * Hierarchical navigation with muted ancestor links and a stronger current page.
+ * Consumer contract: docs/agent/components/breadcrumb.md.
  */
 
 const meta = {
-  title: 'Navigation/Breadcrumb',
+  title: "Navigation/Breadcrumb",
   component: Breadcrumb,
   parameters: {
     docs: {
       description: {
         component:
-          'Figma models a fixed three-level trail; code takes an array, because real trails ' +
-          'are 2, 4 or 6 deep.',
+          "Figma models a fixed three-level trail; code takes an array, because real trails " +
+          "are 2, 4 or 6 deep.",
       },
     },
   },
@@ -28,36 +24,33 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * Breadcrumb. Figma models a fixed three-level trail; code takes an array, because
- * real trails are 2, 4 or 6 deep.
- *
- * ⚠️ The current page renders in `foreground` — **asserted, not transcribed.** The
- * record binds everything to `muted-foreground`, which would make the current page
- * indistinguishable from its ancestors.
- */
+/** Breadcrumb accepts a variable-length trail. The current page uses foreground and ancestors use muted-foreground. */
 export const BreadcrumbDemo: Story = {
-  name: 'Breadcrumb',
+  name: "Breadcrumb",
   args: { items: [] },
   render: () => (
-    <div className="flex flex-col gap-4">
-      <Breadcrumb
-        items={[
-          { label: 'Home', href: '#' },
-          { label: 'Patients', href: '#' },
-          { label: 'Ada Lovelace' },
-        ]}
-      />
-      <Breadcrumb
-        collapsed
-        items={[
-          { label: 'Home', href: '#' },
-          { label: 'Clinics', href: '#' },
-          { label: 'Seoul', href: '#' },
-          { label: 'Patients', href: '#' },
-          { label: 'Ada Lovelace' },
-        ]}
-      />
-    </div>
+    <PreviewNavigation initial="/patients/ada">
+      {() => (
+        <div className="flex flex-col gap-4">
+          <Breadcrumb
+            items={[
+              { label: "Home", href: "/home" },
+              { label: "Patients", href: "/patients" },
+              { label: "Ada Lovelace" },
+            ]}
+          />
+          <Breadcrumb
+            collapsed
+            items={[
+              { label: "Home", href: "/home" },
+              { label: "Clinics", href: "/clinics" },
+              { label: "Seoul", href: "/clinics/seoul" },
+              { label: "Patients", href: "/patients" },
+              { label: "Ada Lovelace" },
+            ]}
+          />
+        </div>
+      )}
+    </PreviewNavigation>
   ),
 };

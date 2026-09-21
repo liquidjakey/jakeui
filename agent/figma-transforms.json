@@ -1,0 +1,56 @@
+{
+  "Sidebar Navigation Item": { "label": ["children"], "state": ["active"] },
+  "Command": { "label": ["children"] },
+  "Field": { "value": ["children"] },
+  "Label": { "label": ["children"], "type": ["requirement"], "state": ["disabled"] },
+  "Progress": { "type": ["value"] },
+  "Button": { "label": ["children"] },
+  "Checkbox": { "value": ["checked"] },
+  "Switch": { "value": ["checked"] },
+  "Switch / Thumb": { "state": ["disabled"] },
+  "Switch / Root": { "value": ["checked"] },
+  "Radio Group / Indicator": { "state": ["disabled"] },
+  "Radio Group / Item": { "value": ["checked"] },
+  "Radio Group / Root": {
+    "option1": ["children"],
+    "option2": ["children"],
+    "option3": ["children"],
+    "selection": ["children"]
+  },
+  "Accordion": {
+    "title": ["items"],
+    "content": ["items"],
+    "state": ["openIds"],
+    "disabled": ["items"]
+  },
+  "Breadcrumb": { "homeLabel": ["items"], "parentLabel": ["items"], "currentLabel": ["items"] },
+  "Collapsible": { "content": ["children"], "state": ["open"] },
+  "Pagination": { "state": ["page", "pageCount"] },
+  "Sidebar": { "state": ["collapsed"] },
+  "Dropdown Menu": { "primaryItemLabel": ["children"], "primaryShortcut": ["children"] },
+  "Dropdown Menu / Item": { "label": ["children"] },
+  "Dropdown Menu / Checkbox Item": { "label": ["children"], "value": ["checked"] },
+  "Dropdown Menu / Radio Item": { "label": ["children"], "value": ["checked"] },
+  "Dropdown Menu / Label": { "label": ["children"] },
+  "Dropdown Menu / Sub Trigger": { "label": ["children"] },
+  "Popover / Backdrop": { "state": ["open"] },
+  "Popover / Viewport": { "state": ["children", "previous"] },
+  "Popover / Content": {
+    "bodyText": ["children"],
+    "header": ["title", "description"],
+    "close": ["onClose"]
+  },
+  "Avatar": { "type": ["src", "initials", "status"] },
+  "Badge": { "label": ["children"] },
+  "Card": { "type": ["media"], "state": ["href"] },
+  "Table": {
+    "firstRowLabel": ["children"],
+    "secondRowLabel": ["children"],
+    "selection": ["children"]
+  },
+  "Table / Caption": { "caption": ["children"] },
+  "Table / Head": { "label": ["children"] },
+  "Table / Cell": { "value": ["children"] },
+  "Date Picker": { "open": [] },
+  "Data Table": { "state": ["empty", "loading", "error", "children"] }
+}

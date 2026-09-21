@@ -10,18 +10,9 @@ import {
 } from './dropdown-menu.js';
 
 /**
- * Stories for the Dropdown Menu family — six of its eleven Figma assets.
- * Contracts: docs/components/dropdown-menu.md and the five `dropdown-menu-*` pages.
- *
- * **Blocked by the 8-row cap:** `/ Content` (24 variants, **1** state row),
- * `/ Item` (12, 8), `/ Root Composition` (24, 8). Nothing can be inferred from 1 of
- * 24 — unlike `Table / Row`, whose missing rows sat on a provably inert axis.
- *
- * ⚠️ **Two recorded gaps are visible here.** The checked radio item has **no
- * recorded visual** — both "Checked" rows in the record are Highlighted rows and
- * are identical to the unchecked one — so the bullet indicator is asserted, not
- * transcribed. And a sub trigger's **Open and Highlighted states bind identical
- * tokens**, so hovering looks the same as having opened the submenu.
+ * Linked command-menu and submenu examples. Match trigger controls to menu ids.
+ * Radio indicators show caller-owned exclusive selection; checkbox items stay open.
+ * Consumer contract: docs/agent/components/dropdown-menu.md.
  */
 
 const meta = {
@@ -31,9 +22,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Note the contrast with NativeSelect: both maps annotate State with a `controlled` open ' +
-          'state, but there it was deliberately not emitted (the platform owns that menu) and here ' +
-          'it is a real prop (we own this one). Same annotation, opposite conclusion.',
+          "Share open state between the trigger and conditional menu mounting. Match controls/id to enable anchored placement and focus handling. NativeSelect instead uses a browser-owned popup.",
       },
     },
   },
@@ -147,19 +136,14 @@ function SubmenuDemo() {
       <DropdownMenu label="Actions">
         <DropdownMenuLabel inset>Row actions</DropdownMenuLabel>
         <DropdownMenuRadioItem onSelect={() => {}}>Edit</DropdownMenuRadioItem>
-        <DropdownMenuSubTrigger
-          open={openSub}
-          onOpenChange={setOpenSub}
-          controls="submenu-1"
-          inset
-        >
+        <DropdownMenuSubTrigger open={openSub} onOpenChange={setOpenSub} controls="submenu-1" inset>
           Move to…
         </DropdownMenuSubTrigger>
         <DropdownMenuRadioItem onSelect={() => {}}>Delete</DropdownMenuRadioItem>
       </DropdownMenu>
 
       {openSub ? (
-        <DropdownMenuSubContent label="Move to">
+        <DropdownMenuSubContent id="submenu-1" label="Move to">
           <DropdownMenuRadioItem onSelect={() => {}}>Archive</DropdownMenuRadioItem>
           <DropdownMenuRadioItem onSelect={() => {}}>Another clinic</DropdownMenuRadioItem>
         </DropdownMenuSubContent>
@@ -168,7 +152,7 @@ function SubmenuDemo() {
   );
 }
 
-/** Comfortable density. No token delta is recorded, so only spacing changes. */
+/** Comfortable density changes spacing, not color. */
 export const Comfortable: Story = {
   name: 'Density = comfortable',
   args: { children: null },

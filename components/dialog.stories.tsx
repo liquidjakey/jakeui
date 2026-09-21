@@ -4,7 +4,7 @@ import { Dialog } from './dialog.js';
 
 /**
  * Stories for `Dialog`.
- * Contract: docs/components/dialog.md
+ * Contract: docs/agent/components/dialog.md
  *
  * Dialog, AlertDialog, Drawer and Sheet all share `modal-surface.tsx`, a native
  * `<dialog>` driven by `showModal()`.
@@ -37,9 +37,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Native <dialog> surface. Focus trap, Escape and focus return come from the platform. ' +
-          'Note that `Size` and `Width` have no token backing — there are no width tokens in the ' +
-          'file at all — so those values are raw and flagged in the props tables.',
+          "Native modal surface with focus containment, Escape dismissal and focus return. size selects existing internal geometry; type classifies content without changing title typography.",
       },
     },
   },
@@ -66,13 +64,13 @@ function DialogDemo() {
         description="Pick a new time. The patient is notified automatically."
         footer={<Trigger label="Done" onClick={() => setOpen(false)} />}
       >
-        <p>Body content is a slot, not a typed prop — see the props table Table 2.</p>
+        <p>Body content is a slot, not a typed prop — see the props table.</p>
       </Dialog>
     </>
   );
 }
 
-/** `type="form"` binds the smaller title size (`size/13` vs `size/18`). */
+/** type="form" preserves Heading/LG; size="large" changes content width. */
 export const FormType: Story = {
   name: 'Type = form',
   args: { open: false, onClose: () => {}, title: 'Dialog' },
@@ -90,9 +88,9 @@ function FormDemo() {
         type="form"
         size="large"
         title="Edit patient record"
-        description="Title renders at size/13 here rather than size/18."
+        description="Form and standard dialogs share Heading/LG title typography."
       >
-        <p>Large size — a raw width, because no width tokens exist in the file.</p>
+        <p>Large size uses the existing overlay geometry; see the scoped exception registry.</p>
       </Dialog>
     </>
   );

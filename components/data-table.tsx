@@ -1,24 +1,17 @@
 import type { ReactNode } from 'react';
+import { Children, isValidElement, Fragment } from 'react';
 
 /**
  * DataTable — data-management composition.
  *
  * Figma: `Data Table`, node 136:0, 4 variants.
- * Contract: docs/components/data-table.md
+ * Contract: docs/agent/components/data-table.md
  *
- * `State=Populated | Empty` is NOT a prop. A "populated" data table with no rows
- * contradicts itself; deriving the state from whether there is anything to show
- * makes that unrepresentable — the same move as Progress's Type and Card's media.
- *
- * ⚠️ THIS COMPOSITION NAMES FOUR COMPONENTS AND ONE OF THEM IS BLOCKED. The record:
- * "built from Input, Button, Table, and Pagination." Input, Table and Pagination are
- * all built; BUTTON IS NOT — 32 variants, 8 state rows, so its outline and ghost
- * bindings are unreadable. The toolbar is therefore a SLOT left to the caller rather
- * than pre-composed with a Button that does not exist yet.
- *
- * The empty state changes only the type size in the record — no muted colour, no
- * distinct treatment. muted-foreground is asserted for the message; the rest is a
- * design gap, and there is no loading or error state at all.
+ * Caller owns data operations and composes Input, Button, Table and Pagination.
+ * All four are implemented. Slots allow application-specific controls.
+ * Set `empty` explicitly for opaque children such as <Table>; React children
+ * cannot reveal the row count inside another component. Loading and error are
+ * explicit runtime loading, error and empty states.
  */
 export interface DataTableProps {
   title: string;
@@ -26,6 +19,17 @@ export interface DataTableProps {
   toolbar?: ReactNode;
   pagination?: ReactNode;
   emptyMessage?: string;
+  empty?: boolean;
+  loading?: boolean;
+  error?: ReactNode;
+}
+
+function hasContent(node: ReactNode): boolean {
+  return Children.toArray(node).some((child) =>
+    isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment
+      ? hasContent(child.props.children)
+      : true,
+  );
 }
 
 export function DataTable({
@@ -34,13 +38,17 @@ export function DataTable({
   toolbar,
   pagination,
   emptyMessage = 'No results.',
+  empty: explicitlyEmpty,
+  loading = false,
+  error,
 }: DataTableProps) {
-  const empty = !children;
+  const empty = explicitlyEmpty ?? !hasContent(children);
 
   return (
     <section
       aria-label={title}
-      // padding and gap are both `space/5` (20px); they were 16 and 12.
+      aria-busy={loading || undefined}
+      // Padding and gap both use space/5 (20px).
       className="flex flex-col gap-5 rounded-lg border border-border bg-card p-5 text-foreground"
     >
       {/* Title binds Heading/LG (18/26) in the file, not Heading/SM (15/22). */}
@@ -50,7 +58,15 @@ export function DataTable({
           filters before results. */}
       {toolbar ? <div>{toolbar}</div> : null}
 
-      {empty ? (
+      {error ? (
+        <div role="alert" className="text-body-md text-destructive-readable">
+          {error}
+        </div>
+      ) : loading ? (
+        <p role="status" className="py-8 text-center text-body-md text-muted-foreground">
+          Loading results…
+        </p>
+      ) : empty ? (
         <p className="py-8 text-center text-body-md text-muted-foreground">{emptyMessage}</p>
       ) : (
         children

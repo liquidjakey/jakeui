@@ -3,7 +3,7 @@ import { Command } from './command.js';
 
 /**
  * Stories for `Command`.
- * Contract: docs/components/command.md
+ * Contract: docs/agent/components/command.md
  */
 
 const meta = {
